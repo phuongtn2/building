@@ -17,6 +17,12 @@ public class BookServiceDto extends DefaultObjectDto {
     private String servicePrice;
     private String memo;
 
+    public int getId(){
+        return Integer.valueOf(t_bookServiceCode.toString());
+    }
+    public String getText(){
+        return memo;
+    }
     public Date getStart_date(){
         return bookFrom;
     }

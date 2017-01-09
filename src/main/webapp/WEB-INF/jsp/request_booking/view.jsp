@@ -27,9 +27,9 @@
     <spring:url value="/resources/WebContent/codebase/schedule.js" var="scheduleJs" />
     <script src="${scheduleJs}" type="text/javascript" charset="utf-8"></script>
     <spring:url value="/resources/WebContent/codebase/locale/locale_en.js" var="localeJs" />
-    <spring:url value="/resources/WebContent/codebase/ext/dhtmlxscheduler_tooltip.js" var="dhtmlxschedulerJs" />
+    <spring:url value="/resources/WebContent/codebase/ext/dhtmlxscheduler_tooltip.js" var="dhtmlxschedulerTooltipJs" />
     <script src="${localeJs}"></script>
-    <script src="${dhtmlxschedulerJs}"></script>
+    <script src="${dhtmlxschedulerTooltipJs}"></script>
     <script>
         function change(id) {
             var listId = ["news", "complaint", "request", "building" , "service", "user"
