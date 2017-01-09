@@ -17,7 +17,6 @@
     <link href="${awesomeFontCss}" rel="stylesheet" type="text/css"/>
     <link href="${animateCss}" rel="stylesheet" type="text/css"/>
     <link href="${styleCss}" rel="stylesheet" type="text/css"/>
-
 </head>
 <body>
     <jsp:include page="WEB-INF/jsp/login.jsp"/>
@@ -26,6 +25,5 @@
     <spring:url value="/resources/js/bootstrap.min.js" var="bootstrapJs" />
     <script src="${jqueryJs}"></script>
     <script src="${bootstrapJs}"></script>
-
 </body>
 </html>
