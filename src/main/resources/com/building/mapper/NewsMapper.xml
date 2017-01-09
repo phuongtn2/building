@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.building.mapper.NewsMapper">
+
+	<insert id="insertNews" useGeneratedKeys="true" keyProperty="dto.newCode">
+		INSERT INTO M_NEWS(
+		newType
+		, newHeader
+		, newShorter
+		, newContent
+		, refNewCode
+		, created
+		, lastUpdate
+		, createId
+		, updateId
+		)VALUES(
+		#{dto.newType}
+		, #{dto.newHeader}
+		, #{dto.newShorter}
+		, #{dto.newContent}
+		, #{dto.refNewCode}
+		,  NOW()
+		,  NOW()
+		, #{dto.createId}
+		, #{dto.updateId}
+		)
+	</insert>
+
+	<select id="findAll" resultType="news">
+		SELECT * FROM M_NEWS ORDER BY created
+	</select>
+
+	<select id="findById" resultType="news">
+		SELECT * FROM M_NEWS WHERE newCode=#{id}
+	</select>
+
+	<update id="update">
+		UPDATE M_NEWS SET
+		newType = #{dto.newType}
+		,newHeader = #{dto.newHeader}
+		,newShorter = #{dto.newShorter}
+		,newContent = #{dto.newContent}
+		,refNewCode = #{dto.refNewCode}
+		,updateId = #{dto.updateId}
+		,lastUpdate= NOW()
+		WHERE newCode= #{dto.newCode}
+	</update>
+	<delete id="deleteById">
+		DELETE FROM M_NEWS WHERE newCode = #{id}
+	</delete>
+
+
+</mapper>

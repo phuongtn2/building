@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.building.mapper.ManagerBuildingMapper">
+
+	<insert id="insertBuilding" useGeneratedKeys="true" keyProperty="dto.buildingCode">
+		INSERT INTO M_BUILDING(
+		buildingName
+		, totalFloor
+		, totalRoom
+		, description
+		, created
+		, lastUpdate
+		, createId
+		, updateId
+		)VALUES(
+		#{dto.buildingName}
+		, #{dto.totalFloor}
+		, #{dto.totalRoom}
+		, #{dto.description}
+		,  NOW()
+		,  NOW()
+		, #{dto.createId}
+		, #{dto.updateId}
+		)
+	</insert>
+
+	<select id="findAll" resultType="building">
+		SELECT * FROM M_BUILDING ORDER BY created DESC
+	</select>
+
+	<select id="findById" resultType="building">
+		SELECT * FROM M_BUILDING WHERE buildingCode=#{id}
+	</select>
+
+	<update id="update">
+		UPDATE M_BUILDING SET
+		buildingName = #{dto.buildingName}
+		, totalFloor = #{dto.totalFloor}
+		, totalRoom = #{dto.totalRoom}
+		, description = #{dto.description}
+		, updateId = #{dto.updateId}
+		, lastUpdate= NOW()
+		WHERE buildingCode= #{dto.buildingCode}
+	</update>
+	<delete id="deleteById">
+		DELETE FROM M_BUILDING WHERE buildingCode = #{id}
+	</delete>
+
+
+	<select id="findAllFloorByBuildingId" resultType="floor">
+		SELECT * FROM M_FLOOR WHERE buildingCode = #{id} ORDER BY floorCode
+	</select>
+
+	<insert id="insertFloor" useGeneratedKeys="true" keyProperty="dto.floorCode">
+		INSERT INTO M_FLOOR(
+		  floorSeq
+		, floorAlias
+		, floorType
+		, buildingCode
+		, totalRoom
+		, created
+		, lastUpdate
+		, createId
+		, updateId
+		)VALUES(
+		#{dto.floorSeq}
+		, #{dto.floorAlias}
+		, #{dto.floorType}
+		, #{dto.buildingCode}
+		, #{dto.totalRoom}
+		,  NOW()
+		,  NOW()
+		, #{dto.createId}
+		, #{dto.updateId}
+		)
+	</insert>
+
+	<select id="findFloorById" resultType="floor">
+		SELECT * FROM M_FLOOR WHERE floorCode = #{id}
+	</select>
+
+	<select id="findAllFloorIdByBuildingId" resultType="Long">
+		SELECT floorCode FROM M_FLOOR WHERE  buildingCode = #{id}
+	</select>
+
+	<update id="updateFloor">
+		UPDATE M_FLOOR SET
+			floorSeq = #{dto.floorSeq}
+			, floorAlias = #{dto.floorAlias}
+			, floorType = #{dto.floorType}
+			, totalRoom = #{dto.totalRoom}
+			, updateId = #{dto.updateId}
+			, lastUpdate = NOW()
+		WHERE floorCode = #{dto.floorCode}
+	</update>
+	<delete id="deleteFloorById">
+		DELETE FROM M_FLOOR WHERE floorCode = #{id}
+	</delete>
+
+	<delete id="deleteFloorByBuildingId">
+		DELETE FROM M_FLOOR WHERE buildingCode = #{id}
+	</delete>
+
+	<select id="findAllRoomByFloorId" resultType="room">
+		SELECT * FROM M_ROOM WHERE floorCode = #{id} ORDER BY created
+	</select>
+	<insert id="insertRoom" useGeneratedKeys="true" keyProperty="dto.roomCode">
+		INSERT INTO M_ROOM (
+			roomAlias
+			, floorCode
+			, count
+			, status
+			, created
+			, lastUpdate
+			, createId
+			, updateId
+		)VALUES (
+			#{dto.roomAlias}
+			, #{dto.floorCode}
+			, #{dto.count}
+			, #{dto.status}
+			, NOW()
+			, NOW()
+			, #{dto.createId}
+			, #{dto.updateId}
+		)
+	</insert>
+	<select id="findRoomById" resultType="room">
+		SELECT * FROM M_ROOM WHERE roomCode = #{id}
+	</select>
+	<update id="updateRoom">
+		UPDATE M_ROOM SET
+		roomAlias = #{dto.roomAlias}
+		, count = #{dto.count}
+		, status = #{dto.status}
+		, updateId = #{dto.updateId}
+		, lastUpdate = NOW()
+		WHERE roomCode = #{dto.roomCode}
+	</update>
+	<delete id="deleteRoomById">
+		DELETE FROM M_ROOM WHERE roomCode = #{id}
+	</delete>
+
+	<delete id="deleteRoomByFloorId">
+		DELETE FROM M_ROOM WHERE
+		<foreach item="id" collection="listId"
+				 open="floorCode IN ( " separator="," close=" ) ">
+			#{id}
+		</foreach>
+	</delete>
+</mapper>
+
+
+
+
+

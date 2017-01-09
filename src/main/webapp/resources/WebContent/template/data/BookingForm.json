@@ -1,0 +1,31 @@
+[
+  {"type": "settings", "position": "label-left", "width": 650},
+  {"type": "hidden", "name": "serviceCode"},
+  {"type": "hidden", "name": "assetCode"},
+  {"type": "hidden", "name": "serviceName"},
+  {"type": "fieldset", "label": "１．booking date", "inputWidth": "auto", "position": "label-left", "list": [
+    {"name": "bookFrom", "type": "calendar", "value": "", "label": " ", "width": 130, "offsetLeft": 10, "dateFormat": "%Y/%m/%d %H:%i", "serverDateFormat": "%Y/%m/%d %H:%i:%s", "calendarPosition": "bottom", "validate": "NotEmpty", "enableTime": true, "minutesInterval": 15, "required":true},
+    {"type": "newcolumn"},
+    {"name": "bookTo", "type": "calendar", "value": "", "label": "～", "width": 130, "offsetLeft": 10, "dateFormat": "%Y/%m/%d %H:%i", "serverDateFormat": "%Y/%m/%d %H:%i:%s", "calendarPosition": "bottom", "validate": "NotEmpty", "enableTime": true, "minutesInterval": 15, "required":true}
+  ]},
+  {"type": "fieldset", "label": "２．user info", "inputWidth": "auto", "list": [
+    {"type": "block", "inputWidth": "auto", "list": [
+      {"type": "template", "label": "user name", "value": "", "name": "fullName"},
+      {"type": "template", "label": "status"},
+      {"type": "newcolumn"},
+      {"type": "radio", "name": "status", "label": "new", "offsetLeft": 2, "value": 1, "position": "label-right"},
+      {"type": "newcolumn"},
+      {"type": "radio", "name": "status", "label": "cancel", "offsetLeft": 2, "value": 2, "position": "label-right"},
+      {"type": "newcolumn"},
+      {"type": "radio", "name": "status", "label": "accept", "offsetLeft": 2, "value": 3, "position": "label-right"}
+    ]}
+  ]},
+  {"type": "fieldset", "label": "３．Gi chu", "inputWidth": "auto", "position": "label-left", "list": [
+    {"type": "input", "name": "memo", "inputWidth": 450, "rows": 5}
+  ]},
+  {"type": "block", "inputWidth": "auto", "list": [
+    {"type": "button", "name": "deleteBookBtn", "value": "Delete", "width": 100, "offsetLeft": 0},
+    {"type": "newcolumn"},
+    {"type": "button", "name": "saveBookBtn", "value": "Save", "width": 200, "offsetLeft": 150}
+  ]}
+]

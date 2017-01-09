@@ -1,0 +1,32 @@
+[
+    {"type": "settings", "position": "label-left", "labelWidth": "auto", "inputWidth": 150},
+    {"type": "block", "inputWidth": "auto", "blockOffset": 0, "offsetTop": 0, "offsetLeft": 0, "list": [
+        {"type": "container", "name": "miniCalendarContainer", "label": "", "inputWidth": 285, "inputHeight": 220}
+    ]},
+    {"type": "fieldset", "label": "スケジュール絞込", "offsetLeft": 5, "offsetTop": 10, "inputWidth": 290, "position": "label-left", "list": [
+        {"type": "block", "inputWidth": "auto", "blockOffset": 0, "offsetTop": 0, "offsetLeft": 0, "list": [
+            {"type": "label", "label": "採用担当", "labelWidth": 60},
+            {"type": "newcolumn"},
+            {"type": "input", "name": "buildingInput", "labelWidth": 50, "inputWidth": 170}
+        ]},
+        {"type": "block", "inputWidth": "auto", "blockOffset": 0, "offsetTop": 0, "offsetLeft": 0, "list": [
+            {"type": "label", "label": "ステータス", "labelWidth": 60},
+            {"type": "newcolumn"},
+            {"type": "select", "name": "statusFrom", "labelWidth": 50, "inputWidth": 75},
+            {"type": "newcolumn"},
+            {"type": "select", "name": "statusTo", "label": "～", "offsetLeft": 5, "labelWidth": 10, "inputWidth": 75}
+        ]},
+        {"type": "block", "inputWidth": "auto", "blockOffset": 0, "offsetTop": 0, "offsetLeft": 0, "list": [
+            {"type": "button", "name": "filteringResetBtn", "value": "絞り込みをリセット", "offsetTop": 0, "width": 120, "offsetLeft": 52}
+        ]}
+    ]},
+    {"type": "fieldset", "name":"showAllSched", "label": "全スケジュールを表示します", "offsetLeft": 5, "offsetTop": 0, "hidden": true, "list": [
+        {"type": "button", "name": "showAllSchedBtn", "value": "全スケジュール表示", "width": 195}
+    ]},
+    {"type": "fieldset", "label": "印刷", "offsetLeft": 5, "offsetTop": 0, "list": [
+        {"type": "button", "name": "printPDFBtn", "value": "PDF出力", "width": 195}
+    ]},
+    {"type": "fieldset", "label": "イベントのラベル", "offsetLeft": 5, "offsetTop": 0, "list": [
+        {"type": "container", "name": "eventLabelContainer", "label": "", "inputWidth": 238, "inputHeight": 350}
+    ]}
+]

@@ -1,0 +1,38 @@
+@CHARSET "UTF-8";
+html,body{height:100%;padding:0px;margin:0px;overflow:hidden;background-color: #EBEBEB;}
+table.tableTop {
+font-size: 15px;
+border-collapse: collapse;
+}
+table.tableTop,
+table.tableTop th,
+table.tableTop td {
+border: 1px #000000 solid;
+}
+/* enabled, not checked */
+    .dhxform_obj_dhx_skyblue div.dhxform_img.btn2state_0 {
+      background-image: url("./imgs/toggle_off.png");
+      width: 42px;
+      height: 20px;
+    }
+    /* enabled, checked */
+    .dhxform_obj_dhx_skyblue div.dhxform_img.btn2state_1 {
+      background-image: url("./imgs/toggle_on.png");
+      width: 42px;
+      height: 20px;
+    }
+/* Dhtmlx formのfieldsetのパディングを上書き */
+div.fs_dhxform_item_label_left {
+padding: 1px 0 1px 0;
+clear: none;
+padding-top: 1px;
+}
+.dhxform_obj_dhx_skyblue fieldset.dhxform_fs {
+ padding: 1px 0 3px 0;
+}
+
+/* メッセージボックスを真ん中に出す */
+.dhtmlx_message_area{
+  left:50%;
+  margin-left:-125px;
+}

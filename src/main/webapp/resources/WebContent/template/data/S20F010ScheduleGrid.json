@@ -1,0 +1,18 @@
+{
+    "head":[
+        {"id":"id","width":"25","type":"ro","align":"left","sort":"int","value":"ID"}
+        ,{"id":"member_id","width":"80","type":"ro","align":"left","sort":"date","value":"会員番号"}
+        ,{"id":"created","width":"115","type":"ro","align":"left","sort":"date","value":"日時"}
+        ,{"id":"bukken_code","width":"65","type":"link","align":"center","sort":"str","value":"レジスタ"}
+        ,{"id":"buildingType","width":"80","type":"ro","align":"center","sort":"str","value":"種別"}
+        ,{"id":"address","width":"150","type":"ro","align":"center","sort":"str","value":"物件住所"}
+        ,{"id":"infoServiceCompany","width":"120","type":"ro","align":"center","sort":"str","value":"情報提供会社"}
+        ,{"id":"price","width":"80","type":"ro","align":"left","sort":"str","value":"価格(万円)"}
+        ,{"id":"sales_name","width":"80","type":"ro","align":"center","sort":"str","value":"担当者"}
+        ,{"id":"entry_date_apl1","width":"100","type":"ro","align":"center","sort":"str","value":"第1希望日付"}
+        ,{"id":"entry_date_apl1_text","width":"150","type":"ro","align":"center","sort":"str","value":"フリー入力"}
+        ,{"id":"entry_date_apl2","width":"100","type":"ro","align":"center","sort":"str","value":"第2希望日付"}
+        ,{"id":"entry_date_apl2_text","width":"150","type":"ro","align":"center","sort":"str","value":"フリー入力"}
+     ],
+"rows":[]
+}

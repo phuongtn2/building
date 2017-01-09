@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.building.mapper.ManagerUserMapper">
+
+    <insert id="insertUser" useGeneratedKeys="true" keyProperty="dto.userId">
+        INSERT INTO T_USER(
+        adId
+        , password
+        , userStatus
+        , fullName
+        , mail
+        , tel
+        , startDay
+        , endDay
+        , hideFlg
+        , gender
+        , birthday
+        , memo
+        , address
+        , logo
+        , idCard
+        , created
+        , lastUpdate
+        , createId
+        , updateId
+        )VALUES(
+        #{dto.adId}
+        , #{dto.password}
+        , #{dto.userStatus}
+        , #{dto.fullName}
+        , #{dto.mail}
+        , #{dto.tel}
+        , #{dto.startDay}
+        , #{dto.endDay}
+        , #{dto.hideFlg}
+        , #{dto.gender}
+        , #{dto.birthday}
+        , #{dto.memo}
+        , #{dto.address}
+        , #{dto.logo}
+        , #{dto.idCard}
+        ,NOW()
+        ,NOW()
+        ,#{dto.createId}
+        ,#{dto.updateId}
+        )
+    </insert>
+
+    <insert id="insertUserRoleGroup" useGeneratedKeys="true" keyProperty="dto.userRoleGroupId">
+        INSERT INTO T_USERROLEGROUP(
+        userId
+        , roleGroupId
+        , created
+        , lastUpdate
+        , createId
+        , updateId
+        )VALUES(
+        #{dto.userId}
+        , #{dto.roleGroupId}
+        ,NOW()
+        ,NOW()
+        ,#{dto.createId}
+        ,#{dto.updateId}
+        )
+    </insert>
+
+    <insert id="insertUserRoom" useGeneratedKeys="true" keyProperty="dto.userRoomId">
+        INSERT INTO T_USER_ROOM(
+        userId
+        , roomCode
+        , floorCode
+        , buildingCode
+        )VALUES(
+        #{dto.userId}
+        , #{dto.roomCode}
+        ,#{dto.floorCode}
+        ,#{dto.buildingCode}
+        )
+    </insert>
+
+    <select id="findAllUser" resultType="user">
+        SELECT * FROM T_USER ORDER BY created DESC
+    </select>
+    <select id="findAllUserRoleGroup" resultType="userRoleGroup">
+        SELECT * FROM T_USERROLEGROUP ORDER BY created DESC
+    </select>
+    <select id="findAllUserRoom" resultType="userRoom">
+        SELECT * FROM T_USER_ROOM ORDER BY created DESC
+    </select>
+
+    <select id="findUserById" resultType="user">
+        SELECT * FROM T_USER WHERE userId=#{id}
+    </select>
+    <select id="findUserRoleGroupById" resultType="userRoleGroup">
+        SELECT * FROM T_USERROLEGROUP WHERE userRoleGroupId=#{id}
+    </select>
+    <select id="findUserRoleGroupByUserId" resultType="userRoleGroup">
+        SELECT * FROM T_USERROLEGROUP WHERE userId=#{id}
+    </select>
+    <select id="findUserRoomById" resultType="userRoom">
+        SELECT * FROM T_USER_ROOM WHERE userRoomId=#{id}
+    </select>
+    <select id="findUserRoomByUserId" resultType="userRoom">
+        SELECT * FROM T_USER_ROOM WHERE userId=#{id}
+    </select>
+
+    <update id="updateUser">
+        UPDATE T_USER SET
+        adId = #{dto.adId}
+        , userStatus = #{dto.userStatus}
+        , fullName = #{dto.fullName}
+        , mail = #{dto.mail}
+        , tel = #{dto.tel}
+        , startDay = #{dto.startDay}
+        , endDay = #{dto.endDay}
+        , hideFlg = #{dto.hideFlg}
+        , gender = #{dto.gender}
+        , birthday = #{dto.birthday}
+        , memo = #{dto.memo}
+        , address = #{dto.address}
+        , logo = #{dto.logo}
+        , idCard = #{dto.idCard}
+        , updateId = #{dto.updateId}
+        , lastUpdate= NOW()
+        WHERE userId= #{dto.userId}
+    </update>
+    <update id="updateUserRoleGroup">
+        UPDATE T_USERROLEGROUP SET
+         roleGroupId = #{dto.roleGroupId}
+        , updateId = #{dto.updateId}
+        , lastUpdate= NOW()
+        WHERE userRoleGroupId= #{dto.userRoleGroupId}
+    </update>
+
+    <update id="updateUserRoom">
+        UPDATE  T_USER_ROOM SET
+         roomCode =  #{dto.roomCode}
+        , floorCode =  #{dto.floorCode}
+        , buildingCode =  #{dto.buildingCode}
+        WHERE userRoomId= #{dto.userRoomId}
+    </update>
+
+    <delete id="deleteUserById">
+        DELETE FROM T_USER WHERE userId = #{id}
+    </delete>
+    <delete id="deleteUserRoleGroupByUserId">
+        DELETE FROM T_USERROLEGROUP WHERE userId = #{id}
+    </delete>
+    <delete id="deleteUserRoomByUserId">
+        DELETE FROM T_USER_ROOM WHERE userId = #{id}
+    </delete>
+
+    <delete id="deleteUserRoleGroupById">
+        DELETE FROM T_USERROLEGROUP WHERE userRoleGroupId = #{id}
+    </delete>
+    <delete id="deleteUserRoomById">
+        DELETE FROM T_USER_ROOM WHERE userRoomId = #{id}
+    </delete>
+
+</mapper>

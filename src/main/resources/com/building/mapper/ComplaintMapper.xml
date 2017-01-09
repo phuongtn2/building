@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.building.mapper.ComplaintMapper">
+
+	<insert id="insertComplaint" useGeneratedKeys="true" keyProperty="dto.complaintCode">
+		INSERT INTO M_COMPLAINT(
+		title
+		, followStatus
+		, serviceCode
+		, created
+		, lastUpdate
+		, createId
+		, updateId
+		)VALUES(
+		#{dto.title}
+		, #{dto.followStatus}
+		, #{dto.serviceCode}
+		,  NOW()
+		,  NOW()
+		, #{dto.createId}
+		, #{dto.updateId}
+		)
+	</insert>
+
+	<insert id="insertTComplaint" useGeneratedKeys="true" keyProperty="dto.complaintCode">
+		INSERT INTO T_COMPLAINT(
+		complaintCode
+		, userId
+		, tranSeq
+		, message
+		, parentComplaintCode
+		, userName
+		)VALUES(
+		#{dto.complaintCode}
+		, #{dto.userId}
+		, #{dto.tranSeq}
+		, #{dto.message}
+		, #{dto.parentComplaintCode}
+		, #{dto.userName}
+		)
+	</insert>
+
+	<select id="findAllComplaint" resultType="complaint">
+		SELECT * FROM M_COMPLAINT ORDER BY created
+	</select>
+
+	<select id="findAllComplaintHistory" resultType="complaint">
+		SELECT * FROM M_COMPLAINT <if test="!per" >WHERE createId = #{aui.createId} </if>
+		ORDER BY created
+	</select>
+
+	<select id="findAllTComplaint" resultType="tComplaint">
+		SELECT * FROM T_COMPLAINT
+		WHERE
+		tranSeq = 1
+		<foreach item="complaintCode" collection="complaintCodes"
+				 open="AND complaintCode IN ( " separator="," close=" ) ">
+			#{complaintCode}
+		</foreach>
+		ORDER BY complaintCode
+	</select>
+
+	<select id="findAllTReply" resultType="tReply">
+		SELECT * FROM T_COMPLAINT
+		WHERE
+		tranSeq = 2
+		<foreach item="parentComplaintCode" collection="parentComplaintCodes"
+				 open="AND parentComplaintCode IN ( " separator="," close=" ) ">
+			#{parentComplaintCode}
+		</foreach>
+		ORDER BY parentComplaintCode
+	</select>
+
+	<select id="findById" resultType="complaint">
+		SELECT * FROM M_COMPLAINT WHERE complaintCode=#{id}
+	</select>
+
+	<update id="updateFollowStatus">
+		UPDATE M_COMPLAINT SET
+		followStatus = #{dto.followStatus}
+		,updateId = #{dto.updateId}
+		,lastUpdate= NOW()
+		WHERE complaintCode= #{dto.complaintCode}
+	</update>
+	<!--
+	<delete id="deleteById">
+		DELETE FROM M_NEWS WHERE newCode = #{id}
+	</delete>-->
+
+</mapper>

@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.building.mapper.AuthorizedUserTokenMapper">
+
+	<sql id="empAuthColumns">
+		u.userId userId
+		, u.adId adId
+		, u.mail mail
+		, u.fullName fullName
+		, rg.roleGroupName roleGroupName
+	</sql>
+	<sql id="empAuthTables">
+		FROM T_USER u
+		LEFT OUTER JOIN T_USERROLEGROUP urg on
+		(urg.userId=u.userId)
+		LEFT OUTER JOIN T_ROLEGROUP rg on (rg.roleGroupId=urg.roleGroupId)
+	</sql>
+
+	<select id="findAuthorizedUserInfoByAdId" resultType="empAuth">
+		SELECT
+		<include refid="empAuthColumns" />
+		<include refid="empAuthTables" />
+		WHERE u.adId=#{loginName}
+	</select>
+
+	<select id="findAuthorizedUserInfoByAuth" resultType="empAuth">
+		SELECT
+		<include refid="empAuthColumns" />
+		<include refid="empAuthTables" />
+		WHERE u.adId=#{adId} AND u.password=#{password}
+	</select>
+
+	<select id="findUserRoleList" resultType="String">
+		SELECT
+		r.roleName roleName
+		FROM T_USERROLEGROUP urg
+		JOIN T_ROLEGROUP rg ON (rg.roleGroupId=urg.roleGroupId)
+		JOIN T_ROLEGROUPROLE rgr ON (rgr.roleGroupId=rg.roleGroupId)
+		JOIN T_ROLE r ON (r.roleId=rgr.roleId)
+		WHERE urg.userId=#{employeeId}
+	</select>
+
+	<select id="findAuthorizedUserInfoByEmail" resultType="empAuth">
+		SELECT
+		<include refid="empAuthColumns" />
+		<include refid="empAuthTables" />
+		WHERE u.mail=#{email}
+		LIMIT 1
+	</select>
+
+	<!-- 指定した社員IDで検索し、認証情報を取得 -->
+	<select id="findAuthorizedUserInfoByEmployeeId" resultType="empAuth">
+		SELECT
+		<include refid="empAuthColumns" />
+		<include refid="empAuthTables" />
+		WHERE u.user_id=#{employeeId}
+	</select>
+
+
+
+	<!-- 指定社員の管理組織 -->
+	<select id="findManageDivisionIdList" resultType="Integer">
+		select d.division_id divisionId from T_DIVISION d
+		WHERE d.lLV1ID IN (SELECT division_id FROM T_DIVISION WHERE
+		manager_id=#{employeeId})
+		OR d.lLV2ID IN (SELECT division_id FROM T_DIVISION WHERE
+		manager_id=#{employeeId})
+		OR d.lLV3ID IN (SELECT division_id FROM T_DIVISION WHERE
+		manager_id=#{employeeId})
+		OR d.lLV4ID IN (SELECT division_id FROM T_DIVISION WHERE
+		manager_id=#{employeeId})
+		OR d.lLV5ID IN (SELECT division_id FROM T_DIVISION WHERE
+		manager_id=#{employeeId})
+	</select>
+
+	<!-- ログイン時のログ書き込み -->
+	<insert id="registLogingLog" useGeneratedKeys="true"
+		keyProperty="dto.logId">
+		INSERT INTO LOG_LOGIN(
+		logtime
+		, lLoginUserID
+		, computerName
+		, userAccount
+		, ipAddress
+		, systemName
+		, authorityName
+		, createID
+		, updateID
+		)VALUES(
+		NOW()
+		, #{dto.lLoginUserId}
+		, #{dto.computerName}
+		, #{dto.userAccount}
+		, #{dto.ipAddress}
+		, #{dto.systemName}
+		, #{dto.authorityName}
+		, #{dto.lLoginUserId}
+		, #{dto.lLoginUserId}
+		)
+	</insert>
+
+</mapper>

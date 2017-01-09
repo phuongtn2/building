@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.building.mapper.MasterAssetMapper">
+
+	<insert id="insertMasterAsset" useGeneratedKeys="true" keyProperty="dto.assetCode">
+		INSERT INTO M_ASSET(
+		buildingCode
+		, assetType
+		, assetName
+		, dateFrom
+		, dateTo
+		, created
+		, lastUpdate
+		, createId
+		, updateId
+		)VALUES(
+		#{dto.buildingCode}
+		, #{dto.assetType}
+		, #{dto.assetName}
+		, #{dto.dateFrom}
+		, #{dto.dateTo}
+		,  NOW()
+		,  NOW()
+		, #{dto.createId}
+		, #{dto.updateId}
+		)
+	</insert>
+
+	<select id="findAll" resultType="m_asset">
+		SELECT * FROM M_ASSET ORDER BY created
+	</select>
+
+	<select id="findById" resultType="m_asset">
+		SELECT * FROM M_ASSET WHERE assetCode=#{id}
+	</select>
+
+	<update id="update">
+		UPDATE M_ASSET SET
+		buildingCode = #{dto.buildingCode}
+		, assetType = #{dto.assetType}
+		, assetName = #{dto.assetName}
+		, dateFrom = #{dto.dateFrom}
+		, dateTo = #{dto.dateTo}
+		, updateId = #{dto.updateId}
+		, lastUpdate= NOW()
+		WHERE assetCode= #{dto.assetCode}
+	</update>
+	<delete id="deleteById">
+		DELETE FROM M_ASSET WHERE assetCode = #{id}
+	</delete>
+
+</mapper>
