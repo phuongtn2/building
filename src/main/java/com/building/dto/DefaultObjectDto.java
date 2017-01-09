@@ -7,9 +7,9 @@ import java.util.Date;
  */
 public class DefaultObjectDto {
     private Date created;
-    private int createId;
+    private Integer createId;
     private Date lastUpdate;
-    private int updateId;
+    private Integer updateId;
 
     public Date getCreated() {
         return created;
@@ -19,11 +19,11 @@ public class DefaultObjectDto {
         this.created = created;
     }
 
-    public int getCreateId() {
+    public Integer getCreateId() {
         return createId;
     }
 
-    public void setCreateId(int createId) {
+    public void setCreateId(Integer createId) {
         this.createId = createId;
     }
 
@@ -35,11 +35,11 @@ public class DefaultObjectDto {
         this.lastUpdate = lastUpdate;
     }
 
-    public int getUpdateId() {
+    public Integer getUpdateId() {
         return updateId;
     }
 
-    public void setUpdateId(int updateId) {
+    public void setUpdateId(Integer updateId) {
         this.updateId = updateId;
     }
 }
