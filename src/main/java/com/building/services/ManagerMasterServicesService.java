@@ -1,5 +1,6 @@
 package com.building.services;
 
+import com.building.dto.BuildingDto;
 import com.building.dto.MasterServicesDto;
 import com.dropbox.core.ServerException;
 import org.springframework.stereotype.Service;
@@ -16,4 +17,5 @@ public interface ManagerMasterServicesService {
     MasterServicesDto findById(long id) throws ServerException;
     void update(MasterServicesDto masterServicesDto) throws ServerException;
     void deleteById(long id) throws ServerException;
+    List<BuildingDto> findAllBuilding() throws ServerException;
 }

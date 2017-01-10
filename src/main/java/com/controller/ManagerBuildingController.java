@@ -65,6 +65,9 @@ public class ManagerBuildingController {
 
 	@RequestMapping(method = RequestMethod.POST, params = "add")
 	public String addBuilding(@ModelAttribute("buildingDto") BuildingDto buildingDto) throws ServerException {
+		AuthorizedUserInfo aui = new AuthorizedUserInfo();
+		buildingDto.setCreateId(aui.getUserId());
+		buildingDto.setUpdateId(aui.getUserId());
 		managerBuildingService.insertBuilding(buildingDto);
 		return "redirect:/building";
 	}

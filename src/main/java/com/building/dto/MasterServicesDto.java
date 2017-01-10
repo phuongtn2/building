@@ -7,11 +7,14 @@ import java.util.Date;
  */
 public class MasterServicesDto extends DefaultObjectDto{
     private String serviceCode;
-    private byte serviceType;
+
+    private Byte serviceType;
     private String serviceName;
     private String servicePrice;
     private Date serviceStart;
     private Date serviceEnd;
+    private Integer buildingCode;
+
 
 
     public String getServiceCode() {
@@ -22,11 +25,11 @@ public class MasterServicesDto extends DefaultObjectDto{
         this.serviceCode = serviceCode;
     }
 
-    public byte getServiceType() {
+    public Byte getServiceType() {
         return serviceType;
     }
 
-    public void setServiceType(byte serviceType) {
+    public void setServiceType(Byte serviceType) {
         this.serviceType = serviceType;
     }
 
@@ -60,5 +63,13 @@ public class MasterServicesDto extends DefaultObjectDto{
 
     public void setServiceEnd(Date serviceEnd) {
         this.serviceEnd = serviceEnd;
+    }
+
+    public Integer getBuildingCode() {
+        return buildingCode;
+    }
+
+    public void setBuildingCode(Integer buildingCode) {
+        this.buildingCode = buildingCode;
     }
 }

@@ -1,5 +1,6 @@
 package com.building.services.impl;
 
+import com.building.dto.BuildingDto;
 import com.building.dto.MasterServicesDto;
 import com.building.mapper.ManagerMasterServicesMapper;
 import com.building.services.ManagerMasterServicesService;
@@ -42,5 +43,10 @@ public class ManagerMasterServicesImp implements ManagerMasterServicesService {
     @Override
     public void deleteById(long id) throws ServerException {
         managerMasterServicesMapper.deleteById(id);
+    }
+
+    @Override
+    public List<BuildingDto> findAllBuilding() throws ServerException {
+        return managerMasterServicesMapper.findAllBuilding();
     }
 }

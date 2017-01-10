@@ -1,5 +1,6 @@
 package com.controller;
 
+import com.building.dto.*;
 import com.building.dto.AuthorizedUserInfo;
 import com.building.dto.MasterServicesDto;
 import com.building.services.ManagerMasterServicesService;
@@ -66,6 +67,9 @@ public class ManagerMasterServicesController {
 
         @RequestMapping(method = RequestMethod.POST, params = "add")
         public String addMasterServices(@ModelAttribute("masterServiceDto") MasterServicesDto masterServicesDto) throws ServerException {
+            AuthorizedUserInfo aui = new AuthorizedUserInfo();
+            masterServicesDto.setCreateId(aui.getUserId());
+            masterServicesDto.setUpdateId(aui.getUserId());
             managerMasterServicesService.insertMasterServices(masterServicesDto);
             return "redirect:/service";
         }
@@ -91,4 +95,8 @@ public class ManagerMasterServicesController {
             return "redirect:/service";
         }
 
+        @ModelAttribute("buildingDtoList")
+        public List<BuildingDto> populateBuildingDtoList() throws ServerException {
+            return managerMasterServicesService.findAllBuilding();
+        }
 }

@@ -61,6 +61,9 @@ public class NewsController {
 	}
 	@RequestMapping(method = RequestMethod.POST, params = "add")
 	public String addNews(@ModelAttribute("newsDto") NewsDto newsDto) throws ServerException {
+		AuthorizedUserInfo aui = new AuthorizedUserInfo();
+		newsDto.setCreateId(aui.getUserId());
+		newsDto.setUpdateId(aui.getUserId());
 		newsService.insertNews(newsDto);
 		return "redirect:/news";
 	}

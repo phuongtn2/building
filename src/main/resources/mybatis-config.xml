@@ -27,5 +27,7 @@
 		<typeAlias alias="room" type="com.building.dto.RoomDto"/>
 		<typeAlias alias="tComplaint" type="com.building.dto.TransferComplaintDto"/>
 		<typeAlias alias="tReply" type="com.building.dto.TransferReplyDto"/>
+		<typeAlias alias="bookingServiceService" type="com.building.dto.BookingServiceService"/>
+		<typeAlias alias="serviceAsset" type="com.building.dto.ServiceAsset"/>
 	</typeAliases>
 </configuration>
