@@ -31,10 +31,10 @@
     </insert>
 
     <select id="findAll" resultType="service">
-        SELECT * FROM M_SERVICE ORDER BY created DESC
+        SELECT * FROM M_SERVICE ORDER BY serviceName ASC
     </select>
     <select id="findAllBuilding" resultType="building">
-        SELECT * FROM M_BUILDING ORDER BY created DESC
+        SELECT * FROM M_BUILDING ORDER BY buildingName ASC
     </select>
     <select id="findById" resultType="service">
         SELECT * FROM M_SERVICE WHERE serviceCode=#{id}

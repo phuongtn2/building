@@ -7,12 +7,8 @@
             {"type": "fieldset", "label": "Condition", "offsetLeft": 5, "offsetTop": 10, "inputWidth": 290,"height": 204, "position": "label-left","list": [
                 {"type": "block", "inputWidth": "auto", "blockOffset": 0, "offsetTop": 0, "offsetLeft": 0, "list": [
                     {"type": "label", "label": "Building", "labelWidth": 60},
-                    {"type": "label", "label": "Assert", "labelWidth": 60},
-                    {"type": "label", "label": "Service", "labelWidth": 60},
                     {"type": "newcolumn"},
-                    {"type": "input", "name": "BuildingInput", "labelWidth": 50, "inputWidth": 170},
-                    {"type": "input", "name": "AssertInput", "labelWidth": 50, "inputWidth": 170},
-                    {"type": "input", "name": "ServiceInput", "labelWidth": 50, "inputWidth": 170}
+                    {"type": "input", "name": "buildingInput", "labelWidth": 50, "inputWidth": 170}
                 ]}
             ]},
             {"type": "newcolumn"},
@@ -21,9 +17,7 @@
                     {"type": "block", "inputWidth": "auto", "blockOffset": 0, "offsetTop": 0, "offsetLeft": 0, "list": [
                         {"type": "label", "label": "status", "labelWidth": 60},
                         {"type": "newcolumn"},
-                        {"type": "select", "name": "statusFrom", "labelWidth": 50, "inputWidth": 75},
-                        {"type": "newcolumn"},
-                        {"type": "select", "name": "statusTo", "label": "～", "offsetLeft": 5, "labelWidth": 10, "inputWidth": 75}
+                        {"type": "select", "name": "status", "labelWidth": 50, "inputWidth": 75}
                     ]}
                 ]},
                 {"type": "fieldset", "label": "Status color", "offsetLeft": 5, "offsetTop": 0,"inputWidth": 290, "list": [

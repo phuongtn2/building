@@ -164,7 +164,37 @@
      });
  });
 
+ function findFloorByBuildingCode(buildingCode){
+     $('#floorSelect').remove("option");
+     $.ajax({
+         type: "GET",
+         contentType: "application/json",
+         url: "/user/findFlorByBuildingCode/" + buildingCode,
+         dataType: 'json',
+         timeout: 600000,
+         success: function (data) {
+             var optionStr = "";
+             _.forEach(data , function(value, index){
+                 /*if(optionStr === ""){
+                     optionStr = "<option value="+value["floorCode"]+">"+value["floorAlias"]+"</option>";
+                 }else{
+                     optionStr = optionStr + "<option value="+value["floorCode"]+">"+value["floorAlias"]+"</option>";
+                 }*/
+                 do until rs.EOF
+                 for each x in rs.Fields
+                 response.write("<option value="+value["floorCode"]+">"+value["floorAlias"]+"</option>")
+                 next
+                 rs.MoveNext
+                 loop
+             });
 
+             $('#floorSelect').append(optionStr);
+         },
+         error: function (e) {
+             $('#floorSelect').append("");
+         }
+     });
+ }
 </script>
 
 

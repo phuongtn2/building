@@ -3,12 +3,12 @@
   {"type": "hidden", "name": "serviceCode"},
   {"type": "hidden", "name": "assetCode"},
   {"type": "hidden", "name": "serviceName"},
-  {"type": "fieldset", "label": "１．booking date", "inputWidth": "auto", "position": "label-left", "list": [
+  {"type": "fieldset", "label": "．booking date", "inputWidth": "auto", "position": "label-left", "list": [
     {"name": "bookFrom", "type": "calendar", "value": "", "label": " ", "width": 130, "offsetLeft": 10, "dateFormat": "%Y/%m/%d %H:%i", "serverDateFormat": "%Y/%m/%d %H:%i:%s", "calendarPosition": "bottom", "validate": "NotEmpty", "enableTime": true, "minutesInterval": 15, "required":true},
     {"type": "newcolumn"},
     {"name": "bookTo", "type": "calendar", "value": "", "label": "～", "width": 130, "offsetLeft": 10, "dateFormat": "%Y/%m/%d %H:%i", "serverDateFormat": "%Y/%m/%d %H:%i:%s", "calendarPosition": "bottom", "validate": "NotEmpty", "enableTime": true, "minutesInterval": 15, "required":true}
   ]},
-  {"type": "fieldset", "label": "２．user info", "inputWidth": "auto", "list": [
+  {"type": "fieldset", "label": "．user info", "inputWidth": "auto", "list": [
     {"type": "block", "inputWidth": "auto", "list": [
       {"type": "template", "label": "user name", "value": "", "name": "fullName"},
       {"type": "template", "label": "status"},
@@ -20,7 +20,11 @@
       {"type": "radio", "name": "status", "label": "accept", "offsetLeft": 2, "value": 3, "position": "label-right"}
     ]}
   ]},
-  {"type": "fieldset", "label": "３．Gi chu", "inputWidth": "auto", "position": "label-left", "list": [
+  {"type": "fieldset", "label": "．Services - Assets", "inputWidth": "auto", "position": "label-left", "list": [
+    {"type": "input", "name": "services", "inputWidth": 450},
+    {"type": "input", "name": "assets", "inputWidth": 450, "readonly": true}
+  ]},
+  {"type": "fieldset", "label": "．Gi chu", "inputWidth": "auto", "position": "label-left", "list": [
     {"type": "input", "name": "memo", "inputWidth": 450, "rows": 5}
   ]},
   {"type": "block", "inputWidth": "auto", "list": [

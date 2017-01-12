@@ -1,10 +1,12 @@
 package com.controller;
 
 import com.building.dto.*;
+import com.building.services.ManagerBuildingService;
 import com.building.services.ManagerUserService;
 import com.dropbox.core.ServerException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -28,6 +30,8 @@ import java.util.List;
 public class ManagerUserController {
     @Autowired
     private ManagerUserService managerUserService;
+    @Autowired
+    private ManagerBuildingService managerBuildingService;
     @InitBinder
     public void initBinder(WebDataBinder binder) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
@@ -137,8 +141,20 @@ public class ManagerUserController {
         model.addAttribute("userDto",managerUserService.findUserById(id));
         model.addAttribute("userRoleGroupDto",managerUserService.findUserRoleGroupById(id));
         model.addAttribute("userRoomDto",managerUserService.findUserRoomByUserId(id));
-
         return "user/view_detail";
+    }
+
+    //find building
+    @ModelAttribute("buildingDtoList")
+    public List<BuildingDto> populateBuildingList() throws ServerException {
+        return managerBuildingService.findAll();
+    }
+
+    //find Floor by buildingCode
+    @RequestMapping(value = "/findFlorByBuildingCode/{id}", method = RequestMethod.GET, headers = "Accept=application/json", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public List<FloorDto> findFlorByBuildingCode(@PathVariable long id)  throws ServerException{
+        return managerBuildingService.findAllFloorByBuildingId(id);
     }
 
 }

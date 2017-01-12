@@ -34,6 +34,10 @@ module.exports = {
                 test: require.resolve('jquery'),
                 loader: 'expose?$!expose?jQuery!imports?define=>false'
             },
+            /*{
+                test: /ServicesAssetsWindow\.js$/,
+                loader: 'exports?ServicesAssetsWindow'
+            },*/
             {
                 test: /dhtmlx\.js$/,
                 loader: 'script'
@@ -108,6 +112,7 @@ module.exports = {
             gh_message:  path.resolve('WebContent/js/src/gh.message.js'),
             gh_util:     path.resolve('WebContent/js/src/gh.util.js'),
             gh_wins:     path.resolve('WebContent/js/src/gh.wins.js')
+            //services_asset:     path.resolve('WebContent/js/src/class/window/ServicesAssetsWindow.js')
         }
     }
 };

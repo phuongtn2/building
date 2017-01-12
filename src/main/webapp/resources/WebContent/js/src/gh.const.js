@@ -48,7 +48,9 @@ var _GH = (function(){
         // データファイル名
         DATA_PATH : {
             SCHD_FORM_JSON : {filename: "FilterRequest.json", common: true},
-            SCHD_LIGHT_FORM_JSON : {filename: "BookingForm.json", common: true}
+            SCHD_LIGHT_FORM_JSON : {filename: "BookingForm.json", common: true},
+            SERVICES_ASSETS_WIN : {filename: "ServicesAssetsWin.json", common: true},
+            SERVICES_ASSETS_GRID : {filename: "ServicesAssetsGrid.json", common: true}
         },
         FORMAT : {
             YMD : "%Y/%m/%d",
