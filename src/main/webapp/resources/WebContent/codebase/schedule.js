@@ -54,52 +54,15 @@
 	__webpack_require__(18);
 	__webpack_require__(20);
 	__webpack_require__(22);
+	//require('services_asset');
+	var ServicesAssetsWindow = __webpack_require__(46);
 
-	/**
-	 * ohgHIRE スケジュールオブジェクトの定義
-	 * @constructor
-	 */
 	function ohgHIREScheduleObject() {
 	    "use strict";
 	    var that = this;
 	    var _CONST = _GH.S07F010Sche;
 
-	    // read/unread timeout/time
-	    this._unreadTM = null;
-	    this._unreadTMTime = 1000;
-
 	    window.onerror = function (msg, file, line, column, err) {
-	        /*try{
-	            var errJson = JSON.parse(err.message);
-	        } catch(e){
-	            //エラーメッセージを表示
-	            dhtmlx.message({ type:"error", text: "エラーが発生しました。操作できない場合、お手数ですが管理者にお問い合わせください。"});
-	            // TODO ローカルストレージにメッセージ、ファイル、行番号などのデータを残し、後で参照できるようにする。
-	            return false;
-	        }*/
-	       /* if (204 === errJson.params.status) {
-	            return false;
-	        } else if (401 === errJson.params.status) {
-	//            location.href = "login_error.html";
-	//            window.onbeforeunload = null;
-	            //_ghWins.doGoogleLoginWin(_ohgHire);
-	            return false;
-	        } else if (401 < errJson.params.status && errJson.params.status < 500) {
-	            //エラーメッセージを表示
-	            dhtmlx.message({type:"error", text: errJson.message});
-	            // TODO ローカルストレージにメッセージ、ファイル、行番号などのデータを残し、後で参照できるようにする。
-	            return false;
-	        } else if (errJson.params.status >= 300 || errJson.params.status >= 500) {
-	            //エラーメッセージを表示
-	            dhtmlx.message({type:"error", text: errJson.message});
-	            //_ghWins.doGoogleLoginWin(_ohgHire);
-	            return false;
-	        } else {
-	            //エラーメッセージを表示
-	            dhtmlx.message({type:"error", text: errJson.message});
-	            // TODO ローカルストレージにメッセージ、ファイル、行番号などのデータを残し、後で参照できるようにする。
-	            return false;
-	        }*/
 	        return true;
 	    };
 
@@ -154,14 +117,17 @@
 	        // スケジュールの設定
 	        var def = that.setConfig();
 	        // Lightboxの設定
+	        //scheduler.init('scheduler_here',new Date(),"day");
 	        scheduler.showLightbox = function(id) {
+	            that.setEvent();
 	            var ev = scheduler.getEvent(id);
 	            that.doScheduleWindow(ev);
 	        };
+
 	        // インターバル（定期実行）処理
 	        def.done(function(){
 	            intervalID = setInterval(that.refresh, INTERVAL_TIME);
-	            resetDhxFormItemValues(schdForm);
+	            //resetDhxFormItemValues(schdForm);
 	        });
 	    };
 	    /**
@@ -190,7 +156,7 @@
 	     */
 	    this.setConfig = function() {
 	        // 複数日にまたがるイベントは禁止
-	        scheduler.config.multi_day = false;
+	        scheduler.config.multi_day = true;
 
 	        scheduler.config.event_duration = _GH.FORMAT.SCHD_INTERVAL * 60;
 	        scheduler.config.auto_end_date = true;
@@ -208,6 +174,8 @@
 	        scheduler.config.week_date = "%D"; // 日付表示
 	        scheduler.config.day_date = "%M%j"; // 年月表示のデフォルト
 	        scheduler.config.default_date = "%Y %M %j"; // 年月日表示のデフォルト
+	        scheduler.config.api_date="%Y/%m/%d %H:%i";
+	        scheduler.config.dblclick_create = true;
 
 	        // イベントの編集バーは詳細ウィンドウだけ必要
 	        scheduler.config.icons_select = ["icon_details"];
@@ -217,11 +185,12 @@
 	            // ビュー変更イベントの設定
 	            that.setEvent();
 	            // イベントのフィルタリング設定
-	            that.setEventFilter();
+	           // that.setEventFilter();
 	        });
 	        // ツールチップの設定
 	        scheduler.templates.tooltip_text = function(start, end, event) {
-	            return that.getEventText(_CONST.VIEW_MODE.DAY, event);
+	            //return that.getEventText(_CONST.VIEW_MODE.DAY, event);
+	            return event.text;
 	        };
 	        return def;
 	    };
@@ -239,28 +208,23 @@
 	        // ビューの変更イベント。それぞれで異なる表示をするように設定する。
 	        scheduler.attachEvent("onViewChange", function (new_mode , new_date){
 	            console.log("onViewChange", new_mode , new_date);
-	            // templates.event_textでは「月」表示は変更できない。
 	            switch(new_mode) {
-	                case "day": // 「日」表示
+	                case "day":
 	                    scheduler.templates.event_text = function(start, end, event){
-	                        return that.getEventText(_CONST.VIEW_MODE.DAY, event);
-	                        //return "date";
+	                        return event.text;
 	                    };
 	                    break;
 	                case "week": // 「週」表示
 	                    scheduler.templates.event_text = function(start, end, event){
-	                        //return "week";
-	                        return that.getEventText(_CONST.VIEW_MODE.WEEK, event);
+	                        return event.text;
 	                    };
 	                    break;
 	                case "month":
 	                    scheduler.templates.event_text = function(start, end, event){
-	                        return that.getEventText(_CONST.VIEW_MODE.MONTH, event);
-	                        //return "date";
+	                        return event.text;
 	                    };
 	                    break;
 	            }
-	            // 表示内容をリフレッシュする。
 	            scheduler.updateView();
 	        });
 
@@ -269,10 +233,11 @@
 	            // すでに同じイベントが存在するかをチェックする。
 	            if (_.find(scheduler.getEvents(), function(e) { return e.t_bookServiceCode === ev.t_bookServiceCode})) {
 	                // 同じイベントが存在するため、画面にセットしない。
+	                scheduler.updateView();
 	                return false;
 	            } else {
 	                // 表示テキストの設定（月表示用）
-	                ev.text = that.getEventText(_CONST.VIEW_MODE.DAY, ev);
+	                //ev.text = that.getEventText(_CONST.VIEW_MODE.DAY, ev);
 	                // イベントのカラー設定
 	                that.setEventColor(ev, mappingArray);
 	                // 色ラベルを作る
@@ -310,24 +275,32 @@
 	                return true;
 	            }
 	        });
+	        scheduler.attachEvent("onDblClick", function (id, e){
+	            that.doScheduleWindow(e);
+	        });
 
+	        scheduler.attachEvent("onEmptyClick", function (date, e){
+	            that.doScheduleWindow(e);
+	        });
 	        // イベントをドラッグする前に、操作できるかどうかチェックする。
-	        scheduler.attachEvent("onBeforeDrag", that.canOperate);
+	        //scheduler.attachEvent("onBeforeDrag", that.canOperate);
 	    };
 	    /**
 	     * 該当イベントが操作可能かどうかを返す。
 	     */
-	    this.canOperate = function(eventId) {
+	    /*this.canOperate = function(eventId) {
 	        var event = scheduler.getEvent(eventId);
 	        if (!event) {
 	            // イベントがなければ、別段問題なしとして、trueを返す。（操作対象がないため）
+	            that.doScheduleWindow(event);
 	            return true;
 	        }else {
-	            dhtmlx.message("イベントを操作する権限がありません。");
-	            event.readonly = true;
+	            //dhtmlx.message("イベントを操作する権限がありません。");
+	            //event.readonly = true;
+	            that.doScheduleWindow(event);
 	            return false;
 	        }
-	    };
+	    };*/
 	    /**
 	     * イベントのフィルタリング設定を行います。
 	     */
@@ -388,6 +361,7 @@
 	        }
 	        this.dhxLayout = new dhtmlXLayoutObject("schedule", _GH.SCREEN_TYPE.SCHEDULE['pattern']);
 	        this.dhxLayout.setOffsets({top : 8, left : 8, right : 8, bottom : 8});
+	        this.dhxLayout.cells("a").setHeight(250);
 	        // ダブルクリックで開いたり、閉じたりさせる。
 	        this.dhxLayout.attachEvent("onDblClick", function(name){
 	            if (this.cells(name).isCollapsed()) {
@@ -412,13 +386,6 @@
 	        schdForm = layoutCell.attachForm();
 	        var def = $.Deferred();
 	        schdForm.loadStruct(getTemplatePath(_GH.DATA_PATH.SCHD_FORM_JSON), "json", function() {
-	            //schdForm.reloadOptions("statusFrom", _prop.getOptionsWithEmpty(_GH.CODE_DEF.STATUS));
-	            //schdForm.reloadOptions("statusTo", _prop.getOptionsWithEmpty(_GH.CODE_DEF.STATUS));
-	            // 全表示ボタンの表示設定
-	            //if (_ghUser.hasRole(_GH.ROLE.SCHEDULE_ALL_DEPT)) {
-	            //    schdForm.showItem("showAllSched");
-	            //}
-	            // ミニカレンダー
 	            that.setMiniCalendar(schdForm.getContainer("miniCalendarContainer"));
 	            def.resolve();
 	        });
@@ -502,11 +469,6 @@
 	        text = text.split("undefined").join("");
 	        return text;
 	    };
-	    /**
-	     * イベント内容に従って、背景色と文字色の設定を行う。
-	     * @param {Object} event DhtmlxSchedulerのイベントオブジェクト
-	     * @param {Array} mappingArray 配色マップに詰め込むためのキー配列
-	     */
 	    this.setEventColor = function(event, mappingArray) {
 	        that.initFilterWinForm(); // 絞り込みウィンドウの初期化
 
@@ -518,11 +480,6 @@
 	        event.color = colorSet.back;
 	        event.textColor = colorSet.text;
 	    };
-	    /**
-	     * イベントの配色ラベルを表示する。
-	     * @param {Object} schdForm ラベルを貼り付けるDhtmlxFormオブジェクト
-	     * @param {Array} mappingArray 配色マップに詰め込むためのキー配列
-	     */
 	    this.showEventLabel = function(schdForm, mappingArray) {
 	        var tableHtml = "<table border=1 rules='rows'><thead>";
 	        tableHtml += "<tr><th>採用ステータス</th><th>色</th></tr>";
@@ -533,21 +490,10 @@
 	            tableHtml += "<tr><td width='150px' height='20px'>" + _prop.getPropName(_GH.CODE_DEF.STATUS, mapArr) + "</td>"
 	                + "<td width='100px' bgcolor='" + colorSets.back + "' style='color:" + colorSets.text + "'></td>" + "</tr>";
 	        }
-	        /*for(var j=0;j<department.length;j++){
-	            // 絞込ウィンドウの設定
-	            FILTER_WIN_FORM[1].list.push({type: "checkbox", name: "filterName", labelWidth: 100, value: department[j], label: department[j], checked: true});
-	            FILTER_WIN_FORM[1].list.push({type: "newcolumn"});
-	        }*/
 	        tableHtml += "</tbody></table>";
 	        schdForm.getContainer("eventLabelContainer").innerHTML = tableHtml;
 	    };
-
-	    /**
-	     * 物件・組織選択ウィンドウ表示
-	     * @param {String} targetInput 入力するINPUTオブジェクト
-	     */
 	    this.doBuildingWin = function(targetInput) {
-	        // ウィンドウの初期化
 	        var win = _ghWins.ghWins.createWindow("buildingWin", 20, 30, 350, 450);
 	        win.setText("絞込ウィンドウ");
 	        win.button("park").hide();
@@ -556,7 +502,6 @@
 	            win.setModal(false);
 	            win.close();
 	        });
-	        // ウィンドウを閉じるときに、画面を更新する。
 	        win.attachEvent("onClose", function(win){
 	            scheduler.updateView();
 	            return true;
@@ -581,8 +526,6 @@
 	        // ボタンクリック
 	        buildingForm.attachEvent("onButtonClick", function(name){
 	            if (name == "selectBtn") {
-	                // 選択ボタンクリック
-	                // 選択した地域をカンマでつなげて、Inputに登録する。
 	                var text = "";
 	                _.forEach(buildingForm.getFormData(), function(value, key, object) {
 	                    if (value != 0) {
@@ -612,11 +555,6 @@
 	        win.setModal(true);
 	        win.show();
 	    };
-
-	    /**
-	     * 案内・来場予約作成・編集ウィンドウ
-	     * @param {Object} event 顧客情報
-	     */
 	    this.doScheduleWindow = function(event) {
 	        if (_ghWins.ghWins.window("scheduleWin") == null) {
 	            var win = _ghWins.ghWins.createWindow("scheduleWin", 20, 30, 625, 660);
@@ -636,9 +574,9 @@
 	        var scheduleForm = win.attachForm();
 	        scheduleForm.loadStruct(getTemplatePath(_GH.DATA_PATH.SCHD_LIGHT_FORM_JSON), "json", function() {
 	            scheduleForm.setFormData(event);
-	            if (!that.canOperate(event.id)) {
-	                scheduleForm.lock();
-	            }
+	            //if (!that.canOperate(event.id)) {
+	            //    scheduleForm.lock();
+	            //}
 	        });
 	        scheduleForm.attachEvent('onButtonClick', function(name, command){
 	            scheduleForm.updateValues();
@@ -689,6 +627,21 @@
 	                    scheduleForm.setItemValue("bookFrom", fromTime);
 	                    break;
 	            };
+	        });
+	        scheduleForm.attachEvent("onFocus", function(name){
+	            switch(name) {
+	                case "services":
+	                    var servicesAssets = new ServicesAssetsWindow(
+	                        scheduleForm.getInput("serviceCode")
+	                        ,scheduleForm.getInput("serviceName")
+	                        ,scheduleForm.getInput("assetCode")
+	                        ,scheduleForm.getInput("assetName")
+	                        ,scheduleForm.getInput("assetPrice")
+	                        , null
+	                    );
+	                    servicesAssets.init();
+	                    break;
+	            }
 	        });
 	        scheduleForm.attachEvent("onValidateError", function (name, value, result){
 	            dhtmlx.message({
@@ -870,8 +823,9 @@
 	var EventMst_0 = __webpack_require__(43);
 	var SFAClassIF_1 = __webpack_require__(44);
 	var RegisterEventWindow_0 = __webpack_require__(45);
+	var ServicesAssetsWindow_1 = __webpack_require__(46);
 
-	__webpack_require__(3)(__webpack_require__(46))
+	__webpack_require__(3)(__webpack_require__(47))
 
 
 /***/ },
@@ -12757,7 +12711,7 @@
 /* 30 */
 /***/ function(module, exports) {
 
-	module.exports = "// テスト時は書き換えること。本番はnull, テストはその他\r\nvar _GH_MODE_LIST = [\"PROD\", \"TEST\", \"DEV\"];\r\nvar _GH_MODE = _GH_MODE_LIST[2];\r\nvar _GH_CONNS = {\r\n    PROD: \"\",\r\n    TEST: window.location.protocol + \"//\" + window.location.host + \"/GH_API/gh/\",\r\n    DEV : \"http://localhost:3000/\"\r\n};\r\n\r\n/**\r\n * API接続先情報\r\n * TODO モードによって切り替えたい\r\n */\r\nvar _GHAPI = {\r\n    SERVER : window.location.protocol + \"//\" + window.location.host + \"/\",\r\n    URL : {\r\n        AUTH : \"auth/login/\"\r\n    }\r\n};\r\nvar _GH = (function(){\r\n    \"use strict\"\r\n    return {\r\n        URL: function(url) {\r\n            return _GHAPI.URL[url];\r\n        },\r\n        FILE_ROOT: window.location.protocol + \"//\" + window.location.host + \"/\",\r\n        ICON_SIZE: 24,\r\n        SCREEN_TYPE : {\r\n            SCHEDULE: {pattern : \"2E\", name : \"Request Booking\", hash: \"#schedule\", useEntryTree: false, loginType: [1, 2]}\r\n        },\r\n        PATH_TYPE : {\r\n            TEMPLATE : \"/resources/WebContent/template/data/\",\r\n            DHX_ICONS : \"codebase/imgs/dhxtoolbar_skyblue\",\r\n            SKIN : \"dhx_skyblue\",\r\n            GRID_NAV: \"bricks\",\r\n            DHX_IMGS : \"/resources/WebContent/codebase/imgs/\",\r\n            CODE_DEF : \"/resources/WebContent/template/codeDef.json\"\r\n        },\r\n        // コード定義\r\n        CODE_DEF : {\r\n            STATUS: 1,\r\n            SCHED_DEL_REASON : 67,\r\n            SCHED_MS_PURPOSE : 69,\r\n            SCHED_COUNT   : 95,\r\n            SCHED_COND        : 96,\r\n            SCHED_MS_PLACE : 97\r\n        },\r\n        // データファイル名\r\n        DATA_PATH : {\r\n            SCHD_FORM_JSON : {filename: \"S07F010Sche.json\", common: true},\r\n            SCHD_LIGHT_FORM_JSON : {filename: \"BookingForm.json\", common: true}\r\n        },\r\n        FORMAT : {\r\n            YMD : \"%Y/%m/%d\",\r\n            YMD_HM : \"%Y/%m/%d %H:%i\",\r\n            YMD_HMS : \"%Y/%m/%d %H:%i:%s\",\r\n            YMDHMS : \"%Y%m%d%H%i%s\",\r\n            AREA_DELIMITER: \"/\",\r\n            SCHD_INTERVAL: 2,\r\n            GRID_NAV: {\r\n                records:\"レコード数&nbsp;&nbsp;\",\r\n                to:\" - \",\r\n                page:\"ページ\",\r\n                perpage:\"行 / ページ\",\r\n                of:\" / 全\",\r\n                notfound:\"該当データがありませんでした。\"\r\n            },\r\n            GRID_BORDER1: \"border-style: solid; border-width: 0px 0.5px; border-color: rgba(118, 118, 118, 0.5);\" /** 縦にGrayの罫線を引く */\r\n        },\r\n        // キーボードのキーコード\r\n        KEY_CODE : {\r\n            ENTER: 13\r\n        },\r\n        WINS : {\r\n            EVENT_MODE : {\r\n                // ウィンドウの幅、ウィンドウの高さ、物件専用フラグ、物件＋部屋フラグ\r\n                EVENT: {width: 360, height: 410, isEvent: true, isRoom: false}\r\n            }\r\n        },\r\n        // スケジュール\r\n        S07F010Sche : {\r\n            HTML: {\r\n                // カレンダー表示切り替えボタン用のソース\r\n                CAL_BTN : '<div class=\"dhx_cal_tab\" name=\"day_tab\" style=\"right:204px;\"></div>' // 日表示\r\n                + '<div class=\"dhx_cal_tab\" name=\"week_tab\" style=\"right:140px;\"></div>' // 週表示\r\n                + '<div class=\"dhx_cal_tab\" name=\"month_tab\" style=\"right:280px;\"></div>' // 月表示\r\n            },\r\n            // イベントのカラー定義\r\n            EVENT_COLOR: {\r\n                NORMAL: { // １つ目は薄い色、２つ目は濃い色。事業部によって定義が異なる。\r\n                    1: {back: \"#1D2088\", text: \"#000000\"},\r\n                    2: {back: \"#A3BCE2\", text: \"#000000\"},\r\n                    3: {back: \"#6C9BD2\", text: \"#000000\"}\r\n                }\r\n            },\r\n            // Calendar Viewの種別定義\r\n            VIEW_MODE: {\r\n                DAY : \"day\",\r\n                WEEK : \"week\",\r\n                MONTH : \"month\"\r\n            },\r\n            // 絞込ウィンドウ\r\n            FILTER_WIN_FORM : [\r\n                {type: \"settings\", position: \"label-right\"},\r\n                {type: \"fieldset\", label: \"表示させる項目を選んでください\", width: 300, offsetLeft: 15, list:[]},\r\n                {type: \"fieldset\", label: \"オプション\", width: 300, offsetLeft: 15, list:[\r\n                    {type: \"button\", name: \"allCheck\", value: \"すべてチェック\"},\r\n                    {type: \"newcolumn\"},\r\n                    {type: \"button\", name: \"allUncheck\", value: \"すべてはずす\", offsetLeft: 15}\r\n                ]},\r\n               {type: \"button\", name: \"selectBtn\", value: \"選択する\", offsetLeft: 200}\r\n           ],\r\n           TANTO_TYPE: {\r\n               // 案内者\r\n               1 : {id: \"organizer\", name: \"organizerFullName\"},\r\n               // 同行者\r\n               2 : {id: \"attendee1\", name: \"attendeeFullName1\"},\r\n               // 接客者\r\n               3 : {id: \"attendee2\", name: \"attendeeFullName2\"},\r\n               4 : {id: \"attendee3\", name: \"attendeeFullName3\"}\r\n           }\r\n        }\r\n    };\r\n}());\r\n"
+	module.exports = "// テスト時は書き換えること。本番はnull, テストはその他\r\nvar _GH_MODE_LIST = [\"PROD\", \"TEST\", \"DEV\"];\r\nvar _GH_MODE = _GH_MODE_LIST[2];\r\nvar _GH_CONNS = {\r\n    PROD: \"\",\r\n    TEST: window.location.protocol + \"//\" + window.location.host + \"/GH_API/gh/\",\r\n    DEV : \"http://localhost:3000/\"\r\n};\r\n\r\n/**\r\n * API接続先情報\r\n * TODO モードによって切り替えたい\r\n */\r\nvar _GHAPI = {\r\n    SERVER : window.location.protocol + \"//\" + window.location.host + \"/\",\r\n    URL : {\r\n        AUTH : \"auth/login/\"\r\n    }\r\n};\r\nvar _GH = (function(){\r\n    \"use strict\"\r\n    return {\r\n        URL: function(url) {\r\n            return _GHAPI.URL[url];\r\n        },\r\n        FILE_ROOT: window.location.protocol + \"//\" + window.location.host + \"/\",\r\n        ICON_SIZE: 24,\r\n        SCREEN_TYPE : {\r\n            SCHEDULE: {pattern : \"2E\", name : \"Request Booking\", hash: \"#schedule\", useEntryTree: false, loginType: [1, 2]}\r\n        },\r\n        PATH_TYPE : {\r\n            TEMPLATE : \"/resources/WebContent/template/data/\",\r\n            DHX_ICONS : \"/resources/WebContent/codebase/imgs/dhxtoolbar_skyblue\",\r\n            SKIN : \"dhx_skyblue\",\r\n            GRID_NAV: \"bricks\",\r\n            DHX_IMGS : \"/resources/WebContent/codebase/imgs/\",\r\n            CODE_DEF : \"/resources/WebContent/template/codeDef.json\"\r\n        },\r\n        // コード定義\r\n        CODE_DEF : {\r\n            STATUS: 1,\r\n            SCHED_DEL_REASON : 67,\r\n            SCHED_MS_PURPOSE : 69,\r\n            SCHED_COUNT   : 95,\r\n            SCHED_COND        : 96,\r\n            SCHED_MS_PLACE : 97\r\n        },\r\n        // データファイル名\r\n        DATA_PATH : {\r\n            SCHD_FORM_JSON : {filename: \"FilterRequest.json\", common: true},\r\n            SCHD_LIGHT_FORM_JSON : {filename: \"BookingForm.json\", common: true},\r\n            SERVICES_ASSETS_WIN : {filename: \"ServicesAssetsWin.json\", common: true},\r\n            SERVICES_ASSETS_GRID : {filename: \"ServicesAssetsGrid.json\", common: true}\r\n        },\r\n        FORMAT : {\r\n            YMD : \"%Y/%m/%d\",\r\n            YMD_HM : \"%Y/%m/%d %H:%i\",\r\n            YMD_HMS : \"%Y/%m/%d %H:%i:%s\",\r\n            YMDHMS : \"%Y%m%d%H%i%s\",\r\n            AREA_DELIMITER: \"/\",\r\n            SCHD_INTERVAL: 2,\r\n            GRID_NAV: {\r\n                records:\"レコード数&nbsp;&nbsp;\",\r\n                to:\" - \",\r\n                page:\"ページ\",\r\n                perpage:\"行 / ページ\",\r\n                of:\" / 全\",\r\n                notfound:\"該当データがありませんでした。\"\r\n            },\r\n            GRID_BORDER1: \"border-style: solid; border-width: 0px 0.5px; border-color: rgba(118, 118, 118, 0.5);\" /** 縦にGrayの罫線を引く */\r\n        },\r\n        // キーボードのキーコード\r\n        KEY_CODE : {\r\n            ENTER: 13\r\n        },\r\n        WINS : {\r\n            EVENT_MODE : {\r\n                // ウィンドウの幅、ウィンドウの高さ、物件専用フラグ、物件＋部屋フラグ\r\n                EVENT: {width: 360, height: 410, isEvent: true, isRoom: false}\r\n            }\r\n        },\r\n        // スケジュール\r\n        S07F010Sche : {\r\n            HTML: {\r\n                // カレンダー表示切り替えボタン用のソース\r\n                CAL_BTN : '<div class=\"dhx_cal_tab\" name=\"day_tab\" style=\"right:204px;\"></div>' // 日表示\r\n                + '<div class=\"dhx_cal_tab\" name=\"week_tab\" style=\"right:140px;\"></div>' // 週表示\r\n                + '<div class=\"dhx_cal_tab\" name=\"month_tab\" style=\"right:280px;\"></div>' // 月表示\r\n            },\r\n            // イベントのカラー定義\r\n            EVENT_COLOR: {\r\n                NORMAL: { // １つ目は薄い色、２つ目は濃い色。事業部によって定義が異なる。\r\n                    1: {back: \"#1D2088\", text: \"#000000\"},\r\n                    2: {back: \"#A3BCE2\", text: \"#000000\"},\r\n                    3: {back: \"#6C9BD2\", text: \"#000000\"}\r\n                }\r\n            },\r\n            // Calendar Viewの種別定義\r\n            VIEW_MODE: {\r\n                DAY : \"day\",\r\n                WEEK : \"week\",\r\n                MONTH : \"month\"\r\n            },\r\n            // 絞込ウィンドウ\r\n            FILTER_WIN_FORM : [\r\n                {type: \"settings\", position: \"label-right\"},\r\n                {type: \"fieldset\", label: \"表示させる項目を選んでください\", width: 300, offsetLeft: 15, list:[]},\r\n                {type: \"fieldset\", label: \"オプション\", width: 300, offsetLeft: 15, list:[\r\n                    {type: \"button\", name: \"allCheck\", value: \"すべてチェック\"},\r\n                    {type: \"newcolumn\"},\r\n                    {type: \"button\", name: \"allUncheck\", value: \"すべてはずす\", offsetLeft: 15}\r\n                ]},\r\n               {type: \"button\", name: \"selectBtn\", value: \"選択する\", offsetLeft: 200}\r\n           ],\r\n           TANTO_TYPE: {\r\n               // 案内者\r\n               1 : {id: \"organizer\", name: \"organizerFullName\"},\r\n               // 同行者\r\n               2 : {id: \"attendee1\", name: \"attendeeFullName1\"},\r\n               // 接客者\r\n               3 : {id: \"attendee2\", name: \"attendeeFullName2\"},\r\n               4 : {id: \"attendee3\", name: \"attendeeFullName3\"}\r\n           }\r\n        }\r\n    };\r\n}());\r\n"
 
 /***/ },
 /* 31 */
@@ -22572,6 +22526,124 @@
 
 /***/ },
 /* 46 */
+/***/ function(module, exports) {
+
+	module.exports = function ServicesAssetsWindow(
+	    serviceCode, serviceName,
+	    assetCode, assetName, assetPrice,
+	    afterSelectProc
+	){
+	    "use strict";
+	    var that = this;
+	    var servicesGird = null;
+	    var assetsGird = null;
+	    var _COL = {
+	        SELF: 0,
+	        SERVICE_NAME: 1,
+	        ASSET_NAME: 3,
+	        ASSET_PRICE: 4
+	    };
+	    var initWindow = function(){
+	        that.win = _ghWins.ghWins.createWindow("servicesAssetsWindow", 320, 30, 300, 260);
+	        that.win.setText("Services - Assets");
+	        that.win.setDimension(520, 400);
+	        that.win.button("minmax1").hide();
+	        that.win.button("park").hide();
+	        that.win.button("close").attachEvent("onClick", function(){
+	            that.win.setModal(false);
+	            that.win.close();
+	        });
+	        that.win.setModal(true);
+	    };
+	    var initForm = function(){
+	        var def = $.Deferred();
+	        that.subForm = that.win.attachForm();
+	        that.subForm.loadStruct(getTemplatePath(_GH.DATA_PATH.SERVICES_ASSETS_WIN), "json", function(){
+	            servicesGird = new dhtmlXGridObject(that.subForm.getContainer("services"));
+	            servicesGird.attachEvent("onDataReady",function(){
+	                _.forEach([0, 2, 3, 4], function(idx) { servicesGird.setColumnHidden(idx, true);});
+	            });
+	            assetsGird = new dhtmlXGridObject(that.subForm.getContainer("assets"));
+	            assetsGird.attachEvent("onDataReady",function(){
+	                _.forEach([0, 1, 2], function(idx) { assetsGird.setColumnHidden(idx, true);});
+	            });
+	            that.initGrid(servicesGird, 1, 0);
+	        });
+	        that.subForm.attachEvent('onButtonClick', function(name, command){
+	            switch(name) {
+	                case "selectBtn":
+	                    var selectServiceGird = (_.isEmpty(servicesGird))? null: servicesGird.getSelectedRowId();
+	                    //var originflg = false;
+	                    if (_.isEmpty(selectServiceGird)) {
+	                        dhtmlx.alert({
+	                            title : "Error",
+	                            type : "alert-error",
+	                            text : "Do not select item"
+	                        });
+	                        return;
+	                    } else {
+	                        if (!_.isNull(serviceCode)) serviceCode.value = servicesGird.cells(selectServiceGird, _COL.SELF).getValue();
+	                        if (!_.isNull(serviceName)) serviceName.value = servicesGird.cells(selectServiceGird, _COL.SERVICE_NAME).getValue();
+	                        /*var origin1 = servicesGird.cells(selectGird, _COL.ORIGIN).getValue();
+	                        if(origin1 === "1"){
+	                            originflg = true;
+	                        }*/
+	                    }
+	                    var selectAssetGird = (_.isEmpty(assetsGird))? null: assetsGird.getSelectedRowId();
+	                    if (!_.isEmpty(selectAssetGird)) {
+	                        if (!_.isNull(assetCode)) assetCode.value = assetsGird.cells(selectAssetGird, _COL.SELF).getValue();
+	                        if (!_.isNull(assetName)) assetName.value = assetsGird.cells(selectAssetGird, _COL.ASSET_NAME).getValue();
+	                        if (!_.isNull(assetPrice)) assetPrice.value = assetsGird.cells(selectAssetGird, _COL.ASSET_PRICE).getValue();
+	                        /*var origin2 = resTypeGrid2.cells(selectResType2, _COL.ORIGIN).getValue();
+	                        if(origin2 === "1"){
+	                            originflg = true;
+	                        }*/
+	                    } else {
+	                        if (!_.isNull(assetCode)) assetCode.value = "";
+	                        if (!_.isNull(assetName)) assetName.value = "";
+	                        if (!_.isNull(assetPrice)) assetPrice.value = "";
+	                    }
+	                    if(afterSelectProc && typeof afterSelectProc === "function"){
+	                        afterSelectProc(false);
+	                    }
+	                    that.win.close();
+	                    def.resolve();
+	                    break;
+	            }
+	        });
+	        return def.promise();
+	    };
+
+	    this.initGrid = function(grid, level, parentResTypeId) {
+	        var previousId;
+	        if (!_.isNull(grid)) grid.clearAll(true);
+	        grid.attachEvent("onRowSelect", function(selectId, ind){
+	            if (selectId === previousId) {
+	                return;
+	            } else {
+	                previousId = selectId;
+	            }
+	            var parentId = _.parseInt(grid.cells(selectId, _COL.SELF).getValue());
+	            if (level == 1) {
+	                that.initGrid(assetsGird, 2, parentId);
+	            } else{
+	                return;
+	            }
+	        });
+	        // get list services by buildingCode
+	        var uri = "";
+	        loadGridByGet(grid, _GH.DATA_PATH.SERVICES_ASSETS_GRID, uri, "serviceCode");
+	    };
+
+	    this.init = function(){
+	        initWindow();
+	        return initForm();
+	    };
+	};
+
+
+/***/ },
+/* 47 */
 /***/ function(module, exports) {
 
 	module.exports = "/**\r\n * データ通信用のスクリプト\r\n */\r\n// DHTMLX用のパラメータをつけない。\r\nwindow.dhx4.ajax.cache = true;\r\n\r\n// DHTMLX用のAJAXイベント失敗時のイベント\r\nwindow.dhx4.attachEvent(\"onAjaxError\", function(requestObject){\r\n    try{\r\n        var message = is(\"String\", requestObject.responseText)? JSON.parse(requestObject.responseText).message: \"サーバーエラーが発生しました。\";\r\n    } catch(e){\r\n        var message = \"サーバーエラーが発生しました。\";\r\n    }\r\n    var params = { 'status' : requestObject.status, 'errorMessage' :message};\r\n    if (requestObject.status == 204) {\r\n        // 204の場合は、何もしない\r\n        return;\r\n    }\r\n    throw new Error(JSON.stringify({message: message, params: params}));\r\n});\r\n\r\nfunction loadForm(dhxForm, uri, param) {\r\n    console.log(\"loadForm\", dhxForm, _GHAPI.SERVER + uri, param);\r\n    try {\r\n        window.dhx4.ajax.get(_GHAPI.SERVER + uri, function(r){\r\n            var t = null;\r\n            try { t = r.xmlDoc; } catch(e) {}\r\n            if (t != null && t.status.toString() == \"200\") {\r\n                // response is ok\r\n                dhxForm.setFormData(parseJSON(r.xmlDoc.responseText));\r\n            } else {\r\n                // error\r\n                console.log(\"loadFormでエラー\", \"status:\" + t.status, t.statusText);\r\n                dhtmlx.message({ type:\"error\", text:\"サーバ通信に失敗しました。しばらく時間を置いて再度試してください。<br>\"\r\n                    + \"status:\" + t.status + \"[\" + t.statusText + \"]\" });\r\n            }\r\n        });\r\n    } catch(e) {\r\n        console.log(\"フォームデータ取得時にエラーが発生！\", e);\r\n        dhtmlx.message({ type:\"error\", text:\"サーバとの接続ができませんでした。[\" + e.name + \"]\"});\r\n    }\r\n}\r\n\r\n/**\r\n * フォームデータを保存します。\r\n * @param {Object} dhxForm DHTMLXのFormオブジェクト\r\n * @param {String} uri APIのURL\r\n * @param {String] method HTTPメソッド\r\n * @param {Function} afterFunc 成功時に実行する関数\r\n */\r\nfunction saveForm(dhxForm, uri, afterFunc) {\r\n    dhxForm.updateValues();\r\n    console.log(\"saveForm\", dhxForm.getFormData(), uri);\r\n    dhxForm.send(_GHAPI.SERVER + uri, \"post\", function(loader, response){\r\n        var t = null;\r\n        try { t = loader.xmlDoc; } catch(e) {};\r\n        if (t != null && t.status.toString() == \"200\") {\r\n            // response is ok\r\n            console.log(\"saveForm response\", response);\r\n            dhtmlx.message({ type:\"info\", text: \"情報を保存しました。\"});\r\n            if(is(\"Function\", afterFunc)) {\r\n                afterFunc();\r\n            }\r\n        } else {\r\n            try{\r\n                var message = is(\"String\", t.responseText)? JSON.parse(t.responseText).message: \"サーバーエラーが発生しました。\";\r\n            } catch(e){\r\n                var message = \"サーバーエラーが発生しました。\";\r\n            }\r\n            var params = { 'status': t.status, 'errorMessage': message};\r\n            throw new Error(JSON.stringify({message: message, params: params}));\r\n        }\r\n    });\r\n};\r\n\r\n/**\r\n * save form, after save success, call afterFunc with response\r\n * @param {Object} dhxForm DHTMLXのFormオブジェクト\r\n * @param {String} uri APIのURL\r\n * @param {String] method HTTPメソッド\r\n * @param {Function} afterFunc 成功時に実行する関数\r\n */\r\nfunction saveFormAndCallbackWithResponse(dhxForm, uri, afterFunc) {\r\n    dhxForm.updateValues();\r\n    console.log(\"saveForm\", dhxForm.getFormData(), uri);\r\n    dhxForm.send(_GHAPI.SERVER + uri, \"post\", function(loader, response){\r\n        var t = null;\r\n        try { t = loader.xmlDoc; } catch(e) {};\r\n        if (t != null && t.status.toString() == \"200\") {\r\n            // response is ok\r\n            console.log(\"saveForm response\", response);\r\n            dhtmlx.message({ type:\"info\", text: \"情報を保存しました。\"});\r\n            if(is(\"Function\", afterFunc)) {\r\n                afterFunc(response);\r\n            }\r\n        } else {\r\n            try{\r\n                var message = is(\"String\", t.responseText)? JSON.parse(t.responseText).message: \"サーバーエラーが発生しました。\";\r\n            } catch(e){\r\n                var message = \"サーバーエラーが発生しました。\";\r\n            }\r\n            var params = { 'status': t.status, 'errorMessage': message};\r\n            throw new Error(JSON.stringify({message: message, params: params}));\r\n        }\r\n    });\r\n};\r\n\r\n/**\r\n * フォームを伴わないアクセス方法\r\n * (GET形式)\r\n * @param {String} uri URI\r\n * @param {Object} param パラメータ\r\n * @param {Boolean} isParse JSONテキストをオブジェクトにパースするかどうか\r\n * */\r\nfunction accesSyncURL(uri, param, isParse) {\r\n    console.log(\"accesURL\", _GHAPI.SERVER + uri, param);\r\n    var parseFlg = true;\r\n    if(is(\"Boolean\",isParse)){\r\n        parseFlg = isParse;\r\n    }\r\n    var queryString =\"\";\r\n    _.forEach(param, function(value, key, param) {\r\n\r\n        if(queryString == \"\"){\r\n            queryString = \"?\" + key + \"=\" + value;\r\n        }else{\r\n            queryString = queryString + \"&\" + key + \"=\" + value;\r\n        }\r\n        console.log(value + ' : ' + key);\r\n    });\r\n\r\n    var r = window.dhx4.ajax.getSync(_GHAPI.SERVER + uri + encodeURI(queryString));\r\n    var t = null;\r\n    try { t = r.xmlDoc; } catch(e) {};\r\n    if (t != null) {\r\n        // response is ok\r\n        //resJson = parseJSON(r.xmlDoc.responseText);\r\n        if(parseFlg){\r\n            return parseJSON(r.xmlDoc.responseText);\r\n\r\n        }else{\r\n            return r.xmlDoc.responseText;\r\n        }\r\n        console.log(\"HTTP:200 \" + r.xmlDoc.responseText);\r\n    } else {\r\n        var message = is(\"String\", t.responseText)? JSON.parse(t.responseText).message: \"サーバーエラーが発生しました。\";\r\n        var params = { 'status' : t.status, 'errorMessage' :message};\r\n        throw new Error(JSON.stringify({message: message, params: params}));\r\n    }\r\n};\r\n\r\n/**\r\n * フォームを伴わないアクセス方法\r\n * (POST形式)\r\n * @param {String} uri URI\r\n * @param {Object} param パラメータ\r\n * @param {Array} removeParamNames paramの中で対象外となる項目名の配列\r\n * @param {String} additionalQueryParam 追加でつけるクエリ。最後は必ず&で終わること。\r\n * */\r\nfunction postSyncURL(uri, param, removeParamNames, additionalQueryParam){\r\n    console.log(\"postSyncURL\", _GHAPI.SERVER + uri, param, additionalQueryParam);\r\n    try {\r\n        // 追加的なクエリパラメータがあれば、先に足しておく。\r\n        var queryString = additionalQueryParam? additionalQueryParam: \"\";\r\n        _.forEach(param, function(value, key, param) {\r\n            if(removeParamNames && _.indexOf(removeParamNames, key) >= 0) {\r\n                // 使用しないキーの場合は、何もしない\r\n            } else if(queryString == \"\"){\r\n                queryString = key + \"=\" + value;\r\n            }else{\r\n                queryString = queryString + \"&\" + key + \"=\" + value;\r\n            }\r\n        });\r\n        console.log(\"postSyncURLのクエリパラメータ\", queryString);\r\n\r\n        var r = window.dhx4.ajax.postSync(_GHAPI.SERVER + uri, encodeURI(queryString));\r\n        var t = null;\r\n        try { t = r.xmlDoc; } catch(e) {}\r\n        if (t != null && t.status.toString() == \"200\") {\r\n            console.log(\"HTTP:200 \", JSON.parse(r.xmlDoc.responseText));\r\n            return parseJSON(r.xmlDoc.responseText);\r\n        } else {\r\n            // error\r\n            console.log(\"sfa.data.postSyncURLでエラー\", \"status:\" + t.status, t.statusText);\r\n            dhtmlx.message({ type:\"error\", text:\"サーバ通信に失敗しました。しばらく時間を置いて再度試してください。<br>\"\r\n                + \"status:\" + t.status + \"[\" + t.statusText + \"]\" });\r\n            return {error: true,  status: t.status, text: t.statusText};\r\n        }\r\n    } catch(e) {\r\n        console.log(\"データ取得時にエラーが発生！\", e);\r\n        dhtmlx.message({ type:\"error\", text:JSON.parse(e[\"message\"])[\"message\"]});\r\n        return {error: true,  status: 500, text: e.name};\r\n    }\r\n}\r\n/**\r\n * 指定したURIで削除を実行する。（HTTPのDELETEメソッドを利用する）\r\n * @param uri URI\r\n * @param param パラメータ\r\n * @param callback コールバック\r\n */\r\nfunction delURL(uri, param, callback) {\r\n    console.log(\"削除実行API\", uri, param);\r\n    try {\r\n        window.dhx4.ajax.query({\r\n            method : \"DELETE\",\r\n            url : _GHAPI.SERVER + uri,\r\n            data : param,\r\n            async : false,\r\n            callback : callback,\r\n            headers:{\r\n                \"Content-Type\":\"application/x-www-form-urlencoded; charset=UTF-8\"\r\n            }\r\n        });\r\n    } catch(e) {\r\n        console.log(\"データ削除時にエラーが発生！\", e);\r\n        dhtmlx.message({ type:\"error\", text:JSON.parse(e[\"message\"])[\"message\"]});\r\n    }\r\n};\r\n/**\r\n * フォームを伴わないアクセス方法\r\n * (PUT形式)\r\n * @param {String} uri URI\r\n * @param {Object} param パラメータ\r\n * @param {Function} callbackFunc コールバックするファンクション\r\n * */\r\nfunction putURL(uri, param, callbackFunc){\r\n\r\n    console.log(\"putURL\", _GHAPI.SERVER + uri, param);\r\n    try {\r\n        var queryString =\"\";\r\n        _.forEach(param, function(value, key, param) {\r\n            if (_.isString(key)) {\r\n                queryString += key + \"=\" + value + \"&\";\r\n            }\r\n        });\r\n        console.log(\"PUTのクエリ\", queryString);\r\n\r\n      var url = _GHAPI.SERVER + uri;\r\n      var res = window.dhx4.ajax.query({\r\n          method : \"PUT\",\r\n          url : url,\r\n          data : queryString,\r\n          async : true,\r\n          callback : function(r){\r\n\r\n              var t = null;\r\n              try { t = r.xmlDoc; } catch(e) {};\r\n              if (t != null && t.status.toString() == \"200\") {\r\n                  if (is(\"Function\", callbackFunc)) {\r\n                      callbackFunc(parseJSON(r.xmlDoc.responseText));\r\n                  }\r\n                  console.log(\"HTTP:200 \" + r.xmlDoc.responseText);\r\n              } else {\r\n                  // error\r\n                  console.log(\"sfa.data.postSyncURLでエラー\", \"status:\" + t.status, t.statusText);\r\n                  dhtmlx.message({ type:\"error\", text:\"サーバ通信に失敗しました。しばらく時間を置いて再度試してください。<br>\"\r\n                      + \"status:\" + t.status + \"[\" + t.statusText + \"]\" });\r\n              }\r\n          },\r\n          headers:{\r\n              \"Content-Type\":\"application/x-www-form-urlencoded; charset=UTF-8\",\r\n              \"LOGIN_TYPE\": _ghUser.getLoginType()\r\n          }\r\n      });\r\n    } catch(e) {\r\n        console.log(\"データ更新時にエラーが発生\", e);\r\n        dhtmlx.message({ type:\"error\", text:JSON.parse(e[\"message\"])[\"message\"]});\r\n    }\r\n};\r\n/**\r\n * フォームを伴わないアクセス方法\r\n * (PUT形式)\r\n * @param {String} uri URI\r\n * @param {Object} param パラメータ（JSON文字列に変換する）\r\n * @param {Function} callbackFunc コールバックするファンクション\r\n * */\r\nfunction syncPutJSON(uri, param, afterFunc){\r\n\r\n    console.log(\"putURL\", _GHAPI.SERVER + uri, JSON.stringify(param));\r\n    try {\r\n        var res = window.dhx4.ajax.query({\r\n            method : \"PUT\",\r\n            url : _GHAPI.SERVER + uri,\r\n            data : JSON.stringify(param),\r\n            async : false,\r\n            callback: afterFunc,\r\n            headers:{\r\n                \"Content-Type\":\"application/json\"\r\n            }\r\n        });\r\n    } catch(e) {\r\n        console.log(\"データ更新時にエラーが発生\", e);\r\n        dhtmlx.message({ type:\"error\", text:JSON.parse(e[\"message\"])[\"message\"]});\r\n    }\r\n};\r\n\r\n/**\r\n * GETメソッドでAPIコールを行い、引数のグリッドにデータをロードする。\r\n *\r\n * @param {Object} dhxGrid データをロードさせるGridオブジェクト\r\n * @param {String} templateFileName テンプレートファイル名\r\n * @param {String} uri REST APIにアクセスするためのURI\r\n * @param {String} primaryColName 主キーになるカラム名。それで取得された値はNumberであること。nullの場合は行番号を使う。\r\n * @param {Function} logicFunc Grid表示用にデータを振り分けるロジック関数\r\n *               引数は１行分のデータオブジェクト（key:value), key, 行番号(0始まり)\r\n * @param {Function} afterFunc １行データ取得後の後処理を行う関数。nullの場合は実施しない。\r\n *               引数は１行分の配列[値1, 値2, ・・・]\r\n */\r\nfunction loadGridByGet(dhxGrid, templateFileName, uri, primaryColName, logicFunc, afterFunc) {\r\n    // テンプレートファイルの取得\r\n    var template = loadJSON(getTemplatePath(templateFileName));\r\n    try {\r\n        dhxGrid.clearAll(false); // 行を消す\r\n        // サーバ通信し、データを取得する。\r\n        var r = window.dhx4.ajax.getSync(_GHAPI.SERVER + uri);\r\n        var gridData = commonGridDataAsJSObject(template, r, primaryColName, logicFunc, afterFunc);\r\n        //TODO あとで、下記の処理分もCommonの方に寄せる。\r\n        if (gridData.rows.length === 0) {\r\n            console.log(\"データ取得件数が０件でした\");\r\n        }\r\n        dhxGrid.parse(gridData, \"json\");\r\n    } catch(e) {\r\n        console.log(\"データ取得時にエラーが発生！\", e);\r\n        dhtmlx.alert({ title: \"サーバ通信エラー\", type:\"alert-error\", text:JSON.parse(e[\"message\"])[\"message\"]});\r\n    }\r\n};\r\n\r\n/**\r\n * POSTメソッドでAPIコールを行い、引数のグリッドにデータをロードする。\r\n *\r\n * @param {Object} dhxGrid データをロードさせるGridオブジェクト\r\n * @param {String} templateFileName テンプレートファイル名\r\n * @param {String} uri REST APIにアクセスするためのURI\r\n * @param {String} primaryColName 主キーになるカラム名。それで取得された値はNumberであること。nullの場合は行番号を使う。\r\n * @param {Function} logicFunc Grid表示用にデータを振り分けるロジック関数\r\n *               引数は１行分のデータオブジェクト（key:value), key, 行番号(0始まり)\r\n * @param {Function} afterFunc １行データ取得後の後処理を行う関数。nullの場合は実施しない。\r\n *               引数は１行分の配列[値1, 値2, ・・・]\r\n */\r\nfunction loadGridByPost(dhxGrid, templateFileName, uri, primaryColName, logicFunc, afterFunc, postPram) {\r\n    // テンプレートファイルの取得\r\n    var template = loadJSON(getTemplatePath(templateFileName));\r\n    try {\r\n        // サーバ通信し、データを取得する。\r\n        var r = window.dhx4.ajax.postSync(_GHAPI.SERVER + uri, postPram);\r\n        var gridData = commonGridDataAsJSObject(template, r, primaryColName, logicFunc, afterFunc);\r\n        //TODO あとで、下記の処理分もCommonの方に寄せる。\r\n        if (gridData.rows.length === 0) {\r\n            console.log(\"データ取得件数が０件でした\");\r\n        }\r\n        dhxGrid.parse(gridData, \"json\");\r\n    } catch(e) {\r\n        console.log(\"データ取得時にエラーが発生！\", e);\r\n        dhtmlx.alert({ title: \"サーバ通信エラー\", type:\"alert-error\", text:JSON.parse(e[\"message\"])[\"message\"]});\r\n    }\r\n};\r\n\r\n/**\r\n * Gridに読み込ませるためのデータJSONオブジェクトを取得する。\r\n *\r\n * @param {String} templateFileName テンプレートファイル名\r\n * @param {String} uri REST APIにアクセスするためのURI\r\n * @param {String} primaryColName 主キーになるカラム名。それで取得された値はNumberであること。nullの場合は行番号を使う。\r\n * @param {Function} logicFunc Grid表示用にデータを振り分けるロジック関数\r\n *               引数は１行分のデータオブジェクト（key:value), key, 行番号(0始まり)\r\n * @param {Function} afterFunc １行データ取得後の後処理を行う関数。nullの場合は実施しない。\r\n *               引数は１行分の配列[値1, 値2, ・・・]\r\n * @return Grid表示用のJSONオブジェクト\r\n */\r\nfunction getGridDataAsJSObject(templateFileName, uri, primaryColName, logicFunc, afterFunc) {\r\n    // テンプレートファイルの取得\r\n    var template = loadJSON(getTemplatePath(templateFileName));\r\n    try {\r\n        // サーバ通信し、データを取得する。\r\n        var r = window.dhx4.ajax.getSync(_GHAPI.SERVER + uri);\r\n        return commonGridDataAsJSObject(template, r, primaryColName, logicFunc, afterFunc);\r\n    } catch(e) {\r\n        console.log(\"データ取得時にエラーが発生！\", e);\r\n        dhtmlx.alert({ title: \"サーバ通信エラー\", type:\"alert-error\", text:JSON.parse(e[\"message\"])[\"message\"]});\r\n    }\r\n};\r\n\r\n/**\r\n * Gridに読み込ませるためのデータJSONオブジェクトを取得する。\r\n *\r\n * @param {String} templateFileName テンプレートファイル名\r\n * @param {String} uri REST APIにアクセスするためのURI\r\n * @param {String} primaryColName 主キーになるカラム名。それで取得された値はNumberであること。nullの場合は行番号を使う。\r\n * @param {Function} logicFunc Grid表示用にデータを振り分けるロジック関数\r\n *               引数は１行分のデータオブジェクト（key:value), key, 行番号(0始まり)\r\n * @param {Function} afterFunc １行データ取得後の後処理を行う関数。nullの場合は実施しない。\r\n *               引数は１行分の配列[値1, 値2, ・・・]\r\n * @return Grid表示用のJSONオブジェクト\r\n */\r\nfunction commonGridDataAsJSObject(template, r, primaryColName, logicFunc, afterFunc, postPram) {\r\n    var t = null;\r\n    try { t = r.xmlDoc; } catch(e) {};\r\n    if (t != null && t.status.toString() == \"200\") {\r\n        // レスポンスをJSONオブジェクトにする。レスポンスは配列とする。\r\n        var responseData = parseJSON(t.responseText);\r\n\r\n        if(is(\"Array\",responseData)){\r\n            // １件ずつ処理する。\r\n            _.forEach(responseData, function(data, rowIdx) {\r\n                // Grid１行分のデータ構造のテンプレート\r\n                var primaryNo = (is(\"String\", primaryColName))? data[primaryColName]: rowIdx;\r\n                var row = {id: primaryNo, data:[]};\r\n                // テンプレートのHeaderカラムのIDを使って、dataから必要な値を取得する。\r\n                _.forEach(template.head, function(headData, colIdx) {\r\n                    // 振り分けロジックがない場合は、直接値を取得する。\r\n                    if (is(\"Function\", logicFunc)) {\r\n                        row.data.push(logicFunc(data, headData.id, rowIdx));\r\n                    } else {\r\n                        row.data.push(data[headData.id]);\r\n                    }\r\n                });\r\n                if(is(\"Function\", afterFunc)) {\r\n                    template.rows.push(afterFunc(row));\r\n                } else {\r\n                    template.rows.push(row);\r\n                }\r\n            });\r\n        }else{\r\n            // Grid１行分のデータ構造のテンプレート\r\n            var primaryNo = (is(\"String\", primaryColName))? responseData[primaryColName]: 0;\r\n            var row = {id: primaryNo, data:[]};\r\n            // テンプレートのHeaderカラムのIDを使って、dataから必要な値を取得する。\r\n            _.forEach(template.head, function(headData, colIdx) {\r\n                // 振り分けロジックがない場合は、直接値を取得する。\r\n                if (is(\"Function\", logicFunc)) {\r\n                    row.data.push(logicFunc(responseData, headData.id, 0));\r\n                } else {\r\n                    row.data.push(responseData[headData.id]);\r\n                }\r\n            });\r\n            if(is(\"Function\", afterFunc)) {\r\n                template.rows.push(afterFunc(row));\r\n            } else {\r\n                template.rows.push(row);\r\n            }\r\n        }\r\n        console.log(\"Gridに表示するデータ\", template);\r\n        return template;\r\n    } else {\r\n        // error\r\n        console.log(\"ohgHire.data.getGridDataJsonObjectで200以外のレスポンスが返る\", \"status:\" + t.status, t.statusText);\r\n        dhtmlx.alert({ title: \"サーバデータ取得エラー\", type:\"alert-error\", text:\"データ取得に失敗しました。しばらく時間を置いて再度試してください。<br>\"\r\n            + \"status:\" + t.status + \"[\" + t.statusText + \"]\" });\r\n    }\r\n};\r\n\r\n\r\n/**\r\n * GETメソッドでJSONオブジェクトを取得する。\r\n * TODO エラーハンドリング未実装\r\n *\r\n * @param uri {String} URI文字列\r\n * @returns JSON オブジェクト\r\n */\r\nfunction getJSONSync(uri) {\r\n    var r = window.dhx4.ajax.getSync(_GHAPI.SERVER + uri);\r\n    console.log(\"getJSONSync JSON\", r.xmlDoc);\r\n    return window.dhx4.s2j(r.xmlDoc.responseText);\r\n}\r\n\r\n/**\r\n * テンプレートフォルダ内にある内容を文字列として取得する。\r\n * @param {Object} dataPath _GH.DATA_PATHに設定されているオブジェクト\r\n * @returns {String} ファイル内容の文字列\r\n */\r\nfunction getTemplateText(dataPath) {\r\n    try {\r\n        var t = null;\r\n        try {t = window.dhx4.ajax.getSync(getTemplatePath(dataPath)).xmlDoc} catch(e) {};\r\n        if (t !== null && t.status.toString() === \"200\") {\r\n            return t.responseText;\r\n        } else {\r\n            return \"\";\r\n        }\r\n    } catch(e) {\r\n        return \"\";\r\n    }\r\n};\r\n\r\n/**\r\n * 担当者にメッセージを送る。\r\n */\r\nfunction sendMessageToEmployee(employeeIds, subject, body) {\r\n    var param = {};\r\n    // 不正な値を取り除く\r\n    _.remove(employeeIds, function(n) { return !(n > 0); });\r\n    _.forEach(employeeIds, function(value, index) {\r\n        if (!_.isNumber(value)) {\r\n            employeeIds[index] = _.parseInt(value);\r\n        }\r\n      });\r\n    // 重複を取り除く\r\n    employeeIds = _.uniq(employeeIds);\r\n    if (employeeIds.length === 0) {\r\n        alert(\"送信対象社員がいないため、メール送信することができませんでした。\");\r\n        return;\r\n    }\r\n    param[\"toEmployeeIdList\"] = employeeIds;\r\n    param[\"subject\"] = subject;\r\n    param[\"body\"] = body.split(\"\\n\").join(\"<BR>\");\r\n    syncPutJSON(\"sendmail/empMessage\", param);\r\n}\r\n\r\n/**\r\n * 対応履歴を直接登録する。\r\n */\r\nfunction registActHitoryByPost(personalId, employeeId, actType, actTypeDetail, actMemo) {\r\n    if (_.isString(personalId)) personalId = _.parseInt(personalId);\r\n    if (!(personalId > 0)) {\r\n        alert(\"顧客が指定されていないため、対応履歴を登録できません。\");\r\n        return;\r\n    }\r\n    if (!(employeeId > 0)) {\r\n        employeeId = _ghUser.getGhId();\r\n    }\r\n    if (!(actType > 0)) {\r\n        alert(\"対応種別が指定されていないため、対応履歴を登録できません。\");\r\n        return;\r\n    }\r\n    var actDate = window.dhx4.date2str(new Date(), \"%Y/%m/%d %H:%i:%s\");\r\n    var param = {\r\n            \"personalId\": personalId,\r\n            \"employeeId\": employeeId,\r\n            \"actType\": actType,\r\n            \"actTypeDetail\": actTypeDetail,\r\n            \"actMemo\": actMemo,\r\n            \"actDateTime\": actDate\r\n    };\r\n    return postSyncURL(\"act/regist\", param);\r\n}"

@@ -1,0 +1,15 @@
+[
+	{"type":"settings","position":"label-left"},
+	{"type":"block","width":500,"list":[
+		{"type":"label","label":"Services"},
+		{"type":"container","name":"services","inputWidth":100,"inputHeight":250},
+		{"type":"newcolumn"},
+		{"type":"label","label":"<i class='fa fa-arrow-circle-right fa-2x'></i>","offsetLeft":10},
+		{"type":"newcolumn"},
+		{"type":"label","label":"Assets","offsetLeft":10},
+		{"type":"container","name":"assets","inputWidth":100,"inputHeight":250,"offsetLeft":10}
+	]},
+	{"type":"block","inputWidth":"auto","list":[
+		{"type":"button","name":"selectBtn", "className": "selectBtn", "value":"Select","offsetLeft":300, "width": 80}
+	]}
+]

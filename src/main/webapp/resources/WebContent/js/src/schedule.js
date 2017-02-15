@@ -8,52 +8,15 @@ require('script!../../codebase/dhtmlxscheduler_timeline.js');
 require('script!./class/SFAClassIF.js');
 require('gh_wins');
 require('gh_data');
+//require('services_asset');
+var ServicesAssetsWindow = require('./class/window/ServicesAssetsWindow.js');
 
-/**
- * ohgHIRE スケジュールオブジェクトの定義
- * @constructor
- */
 function ohgHIREScheduleObject() {
     "use strict";
     var that = this;
     var _CONST = _GH.S07F010Sche;
 
-    // read/unread timeout/time
-    this._unreadTM = null;
-    this._unreadTMTime = 1000;
-
     window.onerror = function (msg, file, line, column, err) {
-        /*try{
-            var errJson = JSON.parse(err.message);
-        } catch(e){
-            //エラーメッセージを表示
-            dhtmlx.message({ type:"error", text: "エラーが発生しました。操作できない場合、お手数ですが管理者にお問い合わせください。"});
-            // TODO ローカルストレージにメッセージ、ファイル、行番号などのデータを残し、後で参照できるようにする。
-            return false;
-        }*/
-       /* if (204 === errJson.params.status) {
-            return false;
-        } else if (401 === errJson.params.status) {
-//            location.href = "login_error.html";
-//            window.onbeforeunload = null;
-            //_ghWins.doGoogleLoginWin(_ohgHire);
-            return false;
-        } else if (401 < errJson.params.status && errJson.params.status < 500) {
-            //エラーメッセージを表示
-            dhtmlx.message({type:"error", text: errJson.message});
-            // TODO ローカルストレージにメッセージ、ファイル、行番号などのデータを残し、後で参照できるようにする。
-            return false;
-        } else if (errJson.params.status >= 300 || errJson.params.status >= 500) {
-            //エラーメッセージを表示
-            dhtmlx.message({type:"error", text: errJson.message});
-            //_ghWins.doGoogleLoginWin(_ohgHire);
-            return false;
-        } else {
-            //エラーメッセージを表示
-            dhtmlx.message({type:"error", text: errJson.message});
-            // TODO ローカルストレージにメッセージ、ファイル、行番号などのデータを残し、後で参照できるようにする。
-            return false;
-        }*/
         return true;
     };
 
@@ -108,14 +71,17 @@ function ohgHIREScheduleObject() {
         // スケジュールの設定
         var def = that.setConfig();
         // Lightboxの設定
+        //scheduler.init('scheduler_here',new Date(),"day");
         scheduler.showLightbox = function(id) {
+            that.setEvent();
             var ev = scheduler.getEvent(id);
             that.doScheduleWindow(ev);
         };
+
         // インターバル（定期実行）処理
         def.done(function(){
             intervalID = setInterval(that.refresh, INTERVAL_TIME);
-            resetDhxFormItemValues(schdForm);
+            //resetDhxFormItemValues(schdForm);
         });
     };
     /**
@@ -144,7 +110,7 @@ function ohgHIREScheduleObject() {
      */
     this.setConfig = function() {
         // 複数日にまたがるイベントは禁止
-        scheduler.config.multi_day = false;
+        scheduler.config.multi_day = true;
 
         scheduler.config.event_duration = _GH.FORMAT.SCHD_INTERVAL * 60;
         scheduler.config.auto_end_date = true;
@@ -162,6 +128,8 @@ function ohgHIREScheduleObject() {
         scheduler.config.week_date = "%D"; // 日付表示
         scheduler.config.day_date = "%M%j"; // 年月表示のデフォルト
         scheduler.config.default_date = "%Y %M %j"; // 年月日表示のデフォルト
+        scheduler.config.api_date="%Y/%m/%d %H:%i";
+        scheduler.config.dblclick_create = true;
 
         // イベントの編集バーは詳細ウィンドウだけ必要
         scheduler.config.icons_select = ["icon_details"];
@@ -171,11 +139,12 @@ function ohgHIREScheduleObject() {
             // ビュー変更イベントの設定
             that.setEvent();
             // イベントのフィルタリング設定
-            that.setEventFilter();
+           // that.setEventFilter();
         });
         // ツールチップの設定
         scheduler.templates.tooltip_text = function(start, end, event) {
-            return that.getEventText(_CONST.VIEW_MODE.DAY, event);
+            //return that.getEventText(_CONST.VIEW_MODE.DAY, event);
+            return event.text;
         };
         return def;
     };
@@ -193,28 +162,23 @@ function ohgHIREScheduleObject() {
         // ビューの変更イベント。それぞれで異なる表示をするように設定する。
         scheduler.attachEvent("onViewChange", function (new_mode , new_date){
             console.log("onViewChange", new_mode , new_date);
-            // templates.event_textでは「月」表示は変更できない。
             switch(new_mode) {
-                case "day": // 「日」表示
+                case "day":
                     scheduler.templates.event_text = function(start, end, event){
-                        return that.getEventText(_CONST.VIEW_MODE.DAY, event);
-                        //return "date";
+                        return event.text;
                     };
                     break;
                 case "week": // 「週」表示
                     scheduler.templates.event_text = function(start, end, event){
-                        //return "week";
-                        return that.getEventText(_CONST.VIEW_MODE.WEEK, event);
+                        return event.text;
                     };
                     break;
                 case "month":
                     scheduler.templates.event_text = function(start, end, event){
-                        return that.getEventText(_CONST.VIEW_MODE.MONTH, event);
-                        //return "date";
+                        return event.text;
                     };
                     break;
             }
-            // 表示内容をリフレッシュする。
             scheduler.updateView();
         });
 
@@ -223,10 +187,11 @@ function ohgHIREScheduleObject() {
             // すでに同じイベントが存在するかをチェックする。
             if (_.find(scheduler.getEvents(), function(e) { return e.t_bookServiceCode === ev.t_bookServiceCode})) {
                 // 同じイベントが存在するため、画面にセットしない。
+                scheduler.updateView();
                 return false;
             } else {
                 // 表示テキストの設定（月表示用）
-                ev.text = that.getEventText(_CONST.VIEW_MODE.DAY, ev);
+                //ev.text = that.getEventText(_CONST.VIEW_MODE.DAY, ev);
                 // イベントのカラー設定
                 that.setEventColor(ev, mappingArray);
                 // 色ラベルを作る
@@ -264,24 +229,32 @@ function ohgHIREScheduleObject() {
                 return true;
             }
         });
+        scheduler.attachEvent("onDblClick", function (id, e){
+            that.doScheduleWindow(e);
+        });
 
+        scheduler.attachEvent("onEmptyClick", function (date, e){
+            that.doScheduleWindow(e);
+        });
         // イベントをドラッグする前に、操作できるかどうかチェックする。
-        scheduler.attachEvent("onBeforeDrag", that.canOperate);
+        //scheduler.attachEvent("onBeforeDrag", that.canOperate);
     };
     /**
      * 該当イベントが操作可能かどうかを返す。
      */
-    this.canOperate = function(eventId) {
+    /*this.canOperate = function(eventId) {
         var event = scheduler.getEvent(eventId);
         if (!event) {
             // イベントがなければ、別段問題なしとして、trueを返す。（操作対象がないため）
+            that.doScheduleWindow(event);
             return true;
         }else {
-            dhtmlx.message("イベントを操作する権限がありません。");
-            event.readonly = true;
+            //dhtmlx.message("イベントを操作する権限がありません。");
+            //event.readonly = true;
+            that.doScheduleWindow(event);
             return false;
         }
-    };
+    };*/
     /**
      * イベントのフィルタリング設定を行います。
      */
@@ -342,6 +315,7 @@ function ohgHIREScheduleObject() {
         }
         this.dhxLayout = new dhtmlXLayoutObject("schedule", _GH.SCREEN_TYPE.SCHEDULE['pattern']);
         this.dhxLayout.setOffsets({top : 8, left : 8, right : 8, bottom : 8});
+        this.dhxLayout.cells("a").setHeight(250);
         // ダブルクリックで開いたり、閉じたりさせる。
         this.dhxLayout.attachEvent("onDblClick", function(name){
             if (this.cells(name).isCollapsed()) {
@@ -366,13 +340,6 @@ function ohgHIREScheduleObject() {
         schdForm = layoutCell.attachForm();
         var def = $.Deferred();
         schdForm.loadStruct(getTemplatePath(_GH.DATA_PATH.SCHD_FORM_JSON), "json", function() {
-            //schdForm.reloadOptions("statusFrom", _prop.getOptionsWithEmpty(_GH.CODE_DEF.STATUS));
-            //schdForm.reloadOptions("statusTo", _prop.getOptionsWithEmpty(_GH.CODE_DEF.STATUS));
-            // 全表示ボタンの表示設定
-            //if (_ghUser.hasRole(_GH.ROLE.SCHEDULE_ALL_DEPT)) {
-            //    schdForm.showItem("showAllSched");
-            //}
-            // ミニカレンダー
             that.setMiniCalendar(schdForm.getContainer("miniCalendarContainer"));
             def.resolve();
         });
@@ -456,11 +423,6 @@ function ohgHIREScheduleObject() {
         text = text.split("undefined").join("");
         return text;
     };
-    /**
-     * イベント内容に従って、背景色と文字色の設定を行う。
-     * @param {Object} event DhtmlxSchedulerのイベントオブジェクト
-     * @param {Array} mappingArray 配色マップに詰め込むためのキー配列
-     */
     this.setEventColor = function(event, mappingArray) {
         that.initFilterWinForm(); // 絞り込みウィンドウの初期化
 
@@ -472,11 +434,6 @@ function ohgHIREScheduleObject() {
         event.color = colorSet.back;
         event.textColor = colorSet.text;
     };
-    /**
-     * イベントの配色ラベルを表示する。
-     * @param {Object} schdForm ラベルを貼り付けるDhtmlxFormオブジェクト
-     * @param {Array} mappingArray 配色マップに詰め込むためのキー配列
-     */
     this.showEventLabel = function(schdForm, mappingArray) {
         var tableHtml = "<table border=1 rules='rows'><thead>";
         tableHtml += "<tr><th>採用ステータス</th><th>色</th></tr>";
@@ -487,21 +444,10 @@ function ohgHIREScheduleObject() {
             tableHtml += "<tr><td width='150px' height='20px'>" + _prop.getPropName(_GH.CODE_DEF.STATUS, mapArr) + "</td>"
                 + "<td width='100px' bgcolor='" + colorSets.back + "' style='color:" + colorSets.text + "'></td>" + "</tr>";
         }
-        /*for(var j=0;j<department.length;j++){
-            // 絞込ウィンドウの設定
-            FILTER_WIN_FORM[1].list.push({type: "checkbox", name: "filterName", labelWidth: 100, value: department[j], label: department[j], checked: true});
-            FILTER_WIN_FORM[1].list.push({type: "newcolumn"});
-        }*/
         tableHtml += "</tbody></table>";
         schdForm.getContainer("eventLabelContainer").innerHTML = tableHtml;
     };
-
-    /**
-     * 物件・組織選択ウィンドウ表示
-     * @param {String} targetInput 入力するINPUTオブジェクト
-     */
     this.doBuildingWin = function(targetInput) {
-        // ウィンドウの初期化
         var win = _ghWins.ghWins.createWindow("buildingWin", 20, 30, 350, 450);
         win.setText("絞込ウィンドウ");
         win.button("park").hide();
@@ -510,7 +456,6 @@ function ohgHIREScheduleObject() {
             win.setModal(false);
             win.close();
         });
-        // ウィンドウを閉じるときに、画面を更新する。
         win.attachEvent("onClose", function(win){
             scheduler.updateView();
             return true;
@@ -535,8 +480,6 @@ function ohgHIREScheduleObject() {
         // ボタンクリック
         buildingForm.attachEvent("onButtonClick", function(name){
             if (name == "selectBtn") {
-                // 選択ボタンクリック
-                // 選択した地域をカンマでつなげて、Inputに登録する。
                 var text = "";
                 _.forEach(buildingForm.getFormData(), function(value, key, object) {
                     if (value != 0) {
@@ -566,11 +509,6 @@ function ohgHIREScheduleObject() {
         win.setModal(true);
         win.show();
     };
-
-    /**
-     * 案内・来場予約作成・編集ウィンドウ
-     * @param {Object} event 顧客情報
-     */
     this.doScheduleWindow = function(event) {
         if (_ghWins.ghWins.window("scheduleWin") == null) {
             var win = _ghWins.ghWins.createWindow("scheduleWin", 20, 30, 625, 660);
@@ -590,9 +528,9 @@ function ohgHIREScheduleObject() {
         var scheduleForm = win.attachForm();
         scheduleForm.loadStruct(getTemplatePath(_GH.DATA_PATH.SCHD_LIGHT_FORM_JSON), "json", function() {
             scheduleForm.setFormData(event);
-            if (!that.canOperate(event.id)) {
-                scheduleForm.lock();
-            }
+            //if (!that.canOperate(event.id)) {
+            //    scheduleForm.lock();
+            //}
         });
         scheduleForm.attachEvent('onButtonClick', function(name, command){
             scheduleForm.updateValues();
@@ -643,6 +581,21 @@ function ohgHIREScheduleObject() {
                     scheduleForm.setItemValue("bookFrom", fromTime);
                     break;
             };
+        });
+        scheduleForm.attachEvent("onFocus", function(name){
+            switch(name) {
+                case "services":
+                    var servicesAssets = new ServicesAssetsWindow(
+                        scheduleForm.getInput("serviceCode")
+                        ,scheduleForm.getInput("serviceName")
+                        ,scheduleForm.getInput("assetCode")
+                        ,scheduleForm.getInput("assetName")
+                        ,scheduleForm.getInput("assetPrice")
+                        , null
+                    );
+                    servicesAssets.init();
+                    break;
+            }
         });
         scheduleForm.attachEvent("onValidateError", function (name, value, result){
             dhtmlx.message({

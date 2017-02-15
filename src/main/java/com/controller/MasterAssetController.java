@@ -60,6 +60,9 @@ public class MasterAssetController {
 	}
 	@RequestMapping(method = RequestMethod.POST, params = "add")
 	public String addAsset(@ModelAttribute("masterAssetDto") MasterAssetDto masterAssetDto) throws ServerException {
+		AuthorizedUserInfo aui = new AuthorizedUserInfo();
+		masterAssetDto.setCreateId(aui.getUserId());
+		masterAssetDto.setUpdateId(aui.getUserId());
 		masterAssetService.insertMasterAsset(masterAssetDto);
 		return "redirect:/asset";
 	}

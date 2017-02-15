@@ -7,6 +7,7 @@
     <insert id="insertMasterServices" useGeneratedKeys="true" keyProperty="dto.serviceCode">
         INSERT INTO M_SERVICE (
         serviceType
+        , buildingCode
         , serviceName
         , servicePrice
         , serviceStart
@@ -17,6 +18,7 @@
 		, updateId
         ) VALUE (
         #{dto.serviceType}
+        ,#{dto.buildingCode}
         , #{dto.serviceName}
         , #{dto.servicePrice}
         , #{dto.serviceStart}
@@ -29,9 +31,11 @@
     </insert>
 
     <select id="findAll" resultType="service">
-        SELECT * FROM M_SERVICE ORDER BY created DESC
+        SELECT * FROM M_SERVICE ORDER BY serviceName ASC
     </select>
-
+    <select id="findAllBuilding" resultType="building">
+        SELECT * FROM M_BUILDING ORDER BY buildingName ASC
+    </select>
     <select id="findById" resultType="service">
         SELECT * FROM M_SERVICE WHERE serviceCode=#{id}
     </select>
@@ -39,6 +43,7 @@
     <update id="update">
         UPDATE M_SERVICE SET
         serviceType = #{dto.serviceType}
+        ,buildingCode = #{dto.buildingCode}
         , serviceName = #{dto.serviceName}
         , servicePrice = #{dto.servicePrice}
         , serviceStart = #{dto.serviceStart}

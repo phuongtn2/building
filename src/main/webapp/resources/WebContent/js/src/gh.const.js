@@ -30,7 +30,7 @@ var _GH = (function(){
         },
         PATH_TYPE : {
             TEMPLATE : "/resources/WebContent/template/data/",
-            DHX_ICONS : "codebase/imgs/dhxtoolbar_skyblue",
+            DHX_ICONS : "/resources/WebContent/codebase/imgs/dhxtoolbar_skyblue",
             SKIN : "dhx_skyblue",
             GRID_NAV: "bricks",
             DHX_IMGS : "/resources/WebContent/codebase/imgs/",
@@ -47,8 +47,10 @@ var _GH = (function(){
         },
         // データファイル名
         DATA_PATH : {
-            SCHD_FORM_JSON : {filename: "S07F010Sche.json", common: true},
-            SCHD_LIGHT_FORM_JSON : {filename: "BookingForm.json", common: true}
+            SCHD_FORM_JSON : {filename: "FilterRequest.json", common: true},
+            SCHD_LIGHT_FORM_JSON : {filename: "BookingForm.json", common: true},
+            SERVICES_ASSETS_WIN : {filename: "ServicesAssetsWin.json", common: true},
+            SERVICES_ASSETS_GRID : {filename: "ServicesAssetsGrid.json", common: true}
         },
         FORMAT : {
             YMD : "%Y/%m/%d",

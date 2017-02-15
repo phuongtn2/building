@@ -25,28 +25,24 @@
                     <div class="col-sm-4">
                         <div class="form-group">
                             <label class="control-label">Building</label>
-                            <select  class="form-control m-b" name="userRoomDto.buildingCode">
-                                <option value="1">Building 1</option>
-                                <option value="2">Building 2</option>
-                                <option value="3">Building 3</option>
-                                <option value="4">Building 4</option>
+                            <select  class="form-control m-b" name="userRoomDto.buildingCode"onchange="findFloorByBuildingCode(7);">
+                                <option value="0">Chọn tòa nhà</option>
+                                <c:forEach items="${buildingDtoList}" var="building">
+                                    <option value="${building.buildingCode}">${building.buildingName}</option>
+                                </c:forEach>
                             </select>
                         </div>
                     </div>
                     <div class="col-sm-4">
                         <div class="form-group">
-                            <label class="control-label" for="">Floor</label>
-                            <select  class="form-control m-b" name="userRoomDto.floorCode">
-                                <option value="1">Floor 1</option>
-                                <option value="2">Floor 2</option>
-                                <option value="3">Floor 3</option>
-                                <option value="4">Floor 4</option>
+                            <label class="control-label">Floor</label>
+                            <select  class="form-control m-b" name="userRoomDto.floorCode" onchange="" id="floorSelect">
                             </select>
                         </div>
                     </div>
                     <div class="col-sm-4">
                         <div class="form-group">
-                            <label class="control-label" for="">Room</label>
+                            <label class="control-label">Room</label>
                             <select  class="form-control m-b" name="userRoomDto.roomCode">
                                 <option value="1">Room 1</option>
                                 <option value="2">Room 2</option>
@@ -91,6 +87,7 @@
         </div>
     </div>
 </div>
+
 
 
 

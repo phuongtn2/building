@@ -27,7 +27,7 @@
 	</insert>
 
 	<select id="findAll" resultType="building">
-		SELECT * FROM M_BUILDING ORDER BY created DESC
+		SELECT * FROM M_BUILDING ORDER BY buildingName ASC
 	</select>
 
 	<select id="findById" resultType="building">
@@ -50,7 +50,7 @@
 
 
 	<select id="findAllFloorByBuildingId" resultType="floor">
-		SELECT * FROM M_FLOOR WHERE buildingCode = #{id} ORDER BY floorCode
+		SELECT * FROM M_FLOOR WHERE buildingCode = #{id} ORDER BY floorAlias ASC
 	</select>
 
 	<insert id="insertFloor" useGeneratedKeys="true" keyProperty="dto.floorCode">
@@ -82,7 +82,7 @@
 	</select>
 
 	<select id="findAllFloorIdByBuildingId" resultType="Long">
-		SELECT floorCode FROM M_FLOOR WHERE  buildingCode = #{id}
+		SELECT floorCode FROM M_FLOOR WHERE  buildingCode = #{id} ORDER BY floorAlias ASC
 	</select>
 
 	<update id="updateFloor">
@@ -104,7 +104,7 @@
 	</delete>
 
 	<select id="findAllRoomByFloorId" resultType="room">
-		SELECT * FROM M_ROOM WHERE floorCode = #{id} ORDER BY created
+		SELECT * FROM M_ROOM WHERE floorCode = #{id} ORDER BY roomAlias ASC
 	</select>
 	<insert id="insertRoom" useGeneratedKeys="true" keyProperty="dto.roomCode">
 		INSERT INTO M_ROOM (

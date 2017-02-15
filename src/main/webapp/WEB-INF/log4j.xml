@@ -11,7 +11,7 @@
 	</appender>
 
 	<logger name="com.building.mapper">
-		<level value="error"/>
+		<level value="debug"/>
 	</logger>
 	<logger name="org.springframework.transaction.interceptor">
 		<level value="info"/>

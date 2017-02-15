@@ -89,5 +89,4 @@ public class UserRoomHistoryController {
 		return "userRoomHistory/room/view";
 	}
 
-
 }

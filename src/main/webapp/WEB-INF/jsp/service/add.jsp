@@ -18,24 +18,36 @@
                         <div class="col-sm-4">
                             <div class="form-group">
                                 <label class="control-label">Tên dịch vụ</label>
-                                <input type="hidden" id="serviceCode" name="serviceCode" value="<c:if test="${masterServiceDto.serviceCode!= null}">${masterServiceDto.serviceCode}</c:if>"  class="form-control">
+                                <input type="hidden" id="serviceCode" name="serviceCode" value="<c:if test="${masterServiceDto.serviceCode!= null}">${masterServiceDto.serviceCode}</c:if>" class="form-control">
                                 <input type="text" id="serviceName" name="serviceName" value="<c:if test="${masterServiceDto.serviceName!= null}">${masterServiceDto.serviceName}</c:if>" placeholder="Tên dịch vụ" class="form-control">
                             </div>
                         </div>
-                        <div class="col-sm-4">
-                            <div class="form-group">
-                                <label class="control-label">Loại dịch vụ</label>
-                                <select name="serviceType" class="form-control m-b">
-                                    <option <c:if test="${masterServiceDto.serviceType==1}" >selected</c:if> value="1">serviceType 1</option>
-                                    <option <c:if test="${masterServiceDto.serviceType==2}" >selected</c:if> value="2">serviceType 2</option>
-                                    <option <c:if test="${masterServiceDto.serviceType==3}" >selected</c:if> value="3">serviceType 3</option>
-                                </select>
+                        <div class="col-sm-8">
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label class="control-label">Loại dịch vụ</label>
+                                    <select name="serviceType" class="form-control m-b">
+                                        <option <c:if test="${masterServiceDto.serviceType==1}" >selected</c:if> value="1">serviceType 1</option>
+                                        <option <c:if test="${masterServiceDto.serviceType==2}" >selected</c:if> value="2">serviceType 2</option>
+                                        <option <c:if test="${masterServiceDto.serviceType==3}" >selected</c:if> value="3">serviceType 3</option>
+                                    </select>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-sm-4">
-                            <div class="form-group">
-                                <label class="control-label"">Giá dịch vụ</label>
-                                <input  type="text" id="servicePrice" name="servicePrice" value="<c:if test="${masterServiceDto.servicePrice!= null}">${masterServiceDto.servicePrice}</c:if>" placeholder="Giá dịch vụ" class="form-control">
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label class="control-label"">Giá dịch vụ</label>
+                                    <input  type="text" id="servicePrice" name="servicePrice" value="<c:if test="${masterServiceDto.servicePrice!= null}">${masterServiceDto.servicePrice}</c:if>" placeholder="Giá dịch vụ" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label class="control-label">Tòa nhà</label>
+                                    <select name="buildingCode" class="form-control m-b" >
+                                        <c:forEach items="${buildingDtoList}" var="building">
+                                            <option value="${building.buildingCode}">${building.buildingName}</option>
+                                        </c:forEach>
+                                    </select>
+                                </div>
                             </div>
                         </div>
                     </div>
