@@ -4,7 +4,6 @@ import com.building.dto.AuthorizedUserInfo;
 import com.building.dto.NewsDto;
 import com.building.services.NewsService;
 import com.dropbox.core.ServerException;
-import com.sun.javafx.sg.prism.NGShape;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
