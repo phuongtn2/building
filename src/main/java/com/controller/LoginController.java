@@ -22,7 +22,7 @@ public class LoginController {
 	@Autowired
 	private AuthorizedUserTokenService authorizedUserTokenService;
 
-	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String initForm(ModelMap model) throws ServiceException {
 		return "login";
 	}

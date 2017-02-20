@@ -24,7 +24,7 @@ public class LoginBean implements Filter{
 		HttpSession session = req.getSession();
 		AuthorizedUserInfo aui = (AuthorizedUserInfo) session.getAttribute("aui");
 		if (aui == null && !req.getRequestURI().contains("/login")){
-			RequestDispatcher rd = req.getRequestDispatcher("WEB-INF/jsp/login.jsp");
+			RequestDispatcher rd = req.getRequestDispatcher("/");
 			rd.forward(servletRequest, servletResponse);
 			return;
 		}
