@@ -3,7 +3,7 @@ package com.building.services.impl;
 import com.building.dto.NewsDto;
 import com.building.mapper.NewsMapper;
 import com.building.services.NewsService;
-import com.dropbox.core.ServerException;
+import com.building.services.error.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,27 +17,27 @@ public class NewsServiceImpl implements NewsService {
     @Autowired
     private NewsMapper newsMapper;
     @Override
-    public long insertNews(NewsDto newsDto) throws ServerException {
+    public long insertNews(NewsDto newsDto) throws ServiceException {
         return newsMapper.insertNews(newsDto);
     }
 
     @Override
-    public List<NewsDto> findAll() throws ServerException {
+    public List<NewsDto> findAll() throws ServiceException {
         return newsMapper.findAll();
     }
 
     @Override
-    public NewsDto findById(long id) throws ServerException {
+    public NewsDto findById(long id) throws ServiceException {
         return newsMapper.findById(id);
     }
 
     @Override
-    public void update(NewsDto newsDto) throws ServerException {
+    public void update(NewsDto newsDto) throws ServiceException {
         newsMapper.update(newsDto);
     }
 
     @Override
-    public void deleteById(long id) throws ServerException {
+    public void deleteById(long id) throws ServiceException {
         newsMapper.deleteById(id);
     }
 

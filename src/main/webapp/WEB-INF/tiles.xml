@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+	<definition name="base.login"
+				template="/WEB-INF/jsp/template/layout_login.jsp">
+		<put-attribute name="title" value="" />
+		<put-attribute name="body" value="/WEB-INF/jsp/login.jsp" />
+	</definition>
+	<definition name="base.definition"
+		template="/WEB-INF/jsp/template/layout.jsp">
+		<put-attribute name="title" value="" />
+		<put-attribute name="navbar" value="/WEB-INF/jsp/template/navbar.jsp" />
+		<put-attribute name="notify" value="/WEB-INF/jsp/template/notify.jsp" />
+		<put-attribute name="body" value="" />
+		<put-attribute name="footer" value="/WEB-INF/jsp/template/footer.jsp" />
+	</definition>
+
+	<definition name="base.booking"
+				template="/WEB-INF/jsp/template/layout_booking.jsp">
+		<put-attribute name="title" value="" />
+		<put-attribute name="navbar" value="/WEB-INF/jsp/template/navbar.jsp" />
+		<put-attribute name="notify" value="/WEB-INF/jsp/template/notify.jsp" />
+		<put-attribute name="body" value="" />
+		<put-attribute name="footer" value="/WEB-INF/jsp/template/footer.jsp" />
+	</definition>
+
+	<definition name="login" extends="base.login">
+		<put-attribute name="title" value="Login" />
+	</definition>
+
+	<definition name="news" extends="base.definition">
+		<put-attribute name="title" value="News" />
+		<put-attribute name="body" value="/WEB-INF/jsp/news/view.jsp" />
+	</definition>
+	<definition name="complaint" extends="base.definition">
+		<put-attribute name="title" value="Complaint" />
+		<put-attribute name="body" value="/WEB-INF/jsp/complaint/view.jsp" />
+	</definition>
+	<definition name="complaint/history" extends="base.definition">
+		<put-attribute name="title" value="Complaint History" />
+		<put-attribute name="body" value="/WEB-INF/jsp/complaint/view_history.jsp" />
+	</definition>
+
+	<definition name="request_booking" extends="base.booking">
+		<put-attribute name="title" value="Request Booking" />
+		<put-attribute name="body" value="/WEB-INF/jsp/request_booking/view.jsp" />
+	</definition>
+	<definition name="building" extends="base.definition">
+		<put-attribute name="title" value="Building" />
+		<put-attribute name="body" value="/WEB-INF/jsp/building/view.jsp" />
+	</definition>
+	<definition name="asset" extends="base.definition">
+		<put-attribute name="title" value="Asset" />
+		<put-attribute name="body" value="/WEB-INF/jsp/asset/view.jsp" />
+	</definition>
+
+	<definition name="userRoomHistory" extends="base.definition">
+		<put-attribute name="title" value="History" />
+		<put-attribute name="body" value="/WEB-INF/jsp/userRoomHistory/list_userRoomHistory.jsp" />
+	</definition>
+	<definition name="user" extends="base.definition">
+		<put-attribute name="title" value="User" />
+		<put-attribute name="body" value="/WEB-INF/jsp/user/view.jsp" />
+	</definition>
+	<definition name="service" extends="base.definition">
+		<put-attribute name="title" value="Service" />
+		<put-attribute name="body" value="/WEB-INF/jsp/service/view.jsp" />
+	</definition>
+</tiles-definitions>

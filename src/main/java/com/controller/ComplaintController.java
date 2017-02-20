@@ -48,7 +48,7 @@ public class ComplaintController {
 		model.addAttribute("complaintDto", complaintDto);
 		//model.addAttribute("newsDtoList", newsService.findAll());
 		//return form view
-		return "complaint/view";
+		return "complaint";
 	}
 
 	@ModelAttribute("tmComplaintList")
@@ -96,11 +96,11 @@ public class ComplaintController {
 		//customerValidator.validate(customer, result);
 		if (result.hasErrors()) {
 			//if validator failed
-			return "complaint/view";
+			return "complaint";
 		} else {
 			status.setComplete();
 			//form success
-			return "complaint/view";
+			return "complaint";
 		}
 	}
 	@RequestMapping(method = RequestMethod.POST, params = "add")

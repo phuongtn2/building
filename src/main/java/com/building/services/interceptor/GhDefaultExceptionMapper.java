@@ -1,3 +1,4 @@
+/*
 package com.building.services.interceptor;
 
 import com.building.dto.JsonErrorDto;
@@ -20,13 +21,21 @@ import java.util.Locale;
 @Provider
 @Component
 public class GhDefaultExceptionMapper implements ExceptionMapper<Throwable> {
-	/** ログ出力(APIサーバ汎用) */
+	*/
+/** ログ出力(APIサーバ汎用) *//*
+
 	private static final Logger log = Logger.getLogger(GhDefaultExceptionMapper.class);
-	/** エラー内容出力 */
+	*/
+/** エラー内容出力 *//*
+
 	private static final MessageFormat mf = new MessageFormat("API実行でエラーが発生しました。HTTP:{0} コード:{1} メッセージ:{2}");
-	/** パラメータ引数なし定数 */
+	*/
+/** パラメータ引数なし定数 *//*
+
 	public static final Object[] NO_ARGUMENT = new Object[0];
-	/** リソースメッセージ */
+	*/
+/** リソースメッセージ *//*
+
 	@Autowired
 	private ResourceBundleMessageSource messageSource;
 
@@ -85,3 +94,4 @@ public class GhDefaultExceptionMapper implements ExceptionMapper<Throwable> {
 		return Response.status(status).type(MediaType.APPLICATION_JSON).entity(dto).build();
 	}
 }
+*/

@@ -1,3 +1,5 @@
+<div id="schedule" name="schedule" style=" height: 100%;"></div>
+
 <!DOCTYPE html>
 <%@page language="java" contentType="text/html;charset=UTF-8"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
@@ -50,9 +52,7 @@
     <%@include file="../template/navbar.jsp" %>
     <%@include file="../template/notify.jsp" %>
     <div id="page-wrapper" class="gray-bg" style="height: 100%;">
-        <div class="wrapper wrapper-content animated fadeInRight" style=" height: 100%;">
-            <div id="schedule" name="schedule" style=" height: 100%;"></div>
-        </div>
+
         <%@include file="../template/footer.jsp" %>
     </div>
 </div>

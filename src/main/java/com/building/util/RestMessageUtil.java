@@ -1,3 +1,4 @@
+/*
 package com.building.util;
 
 import com.building.dto.JsonErrorDto;
@@ -10,23 +11,33 @@ import javax.ws.rs.core.Response.ResponseBuilder;
 import java.util.Locale;
 
 public class RestMessageUtil {
-	/** メッセージリソースからエラーコードを指定する後置文字列 */
+	*/
+/** メッセージリソースからエラーコードを指定する後置文字列 *//*
+
 	private static final String CODE_POSTFIX = ".code";
-	/** メッセージリソースからエラーメッセージを指定する後置文字列 */
+	*/
+/** メッセージリソースからエラーメッセージを指定する後置文字列 *//*
+
 	private static final String MESSAGE_POSTFIX = ".message";
-	/** メッセージリソースからエラーメッセージを指定する後置文字列 */
+	*/
+/** メッセージリソースからエラーメッセージを指定する後置文字列 *//*
+
 	private static final String STATUS_POSTFIX = ".status";
 
-	/** メッセージリソース引数なし */
+	*/
+/** メッセージリソース引数なし *//*
+
 	private static final Object[] NO_ARGUMENT = new Object[] {};
 
-	/**
+	*/
+/**
 	 * エラーコードを再作成するためのユーティリティ.
 	 * @param e 上位発生例外（null可能)
 	 * @param errorCode 新しいエラーコード
 	 * @param arguments 新しいエラーメッセージ引数
 	 * @return 新たな例外
-	 */
+	 *//*
+
 	public static ServiceException repack(Throwable e, String errorCode, Object ... arguments) {
 		final ServiceException ne = e==null ? //
 				new ServiceException(errorCode) : new ServiceException(errorCode, e);
@@ -47,11 +58,13 @@ public class RestMessageUtil {
 		rb.entity(errorDto);
 		return rb.build();
 	}
-	/**
+	*/
+/**
 	 * メッセージリソースの引数で数字は、カンマ成形されると困るので文字列に置き換える
 	 * @param srcs
 	 * @return
-	 */
+	 *//*
+
 	public static Object[] formatObjectArray(final Object[] srcs) {
 		if(srcs==null || srcs.length==0) {
 			return GhDefaultExceptionMapper.NO_ARGUMENT;
@@ -70,3 +83,4 @@ public class RestMessageUtil {
 	}
 
 }
+*/

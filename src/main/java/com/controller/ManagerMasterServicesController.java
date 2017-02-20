@@ -41,7 +41,7 @@ public class ManagerMasterServicesController {
             //command object
             model.addAttribute("masterServiceDto", masterServicesDto);
             //return form view
-            return "service/view";
+            return "service";
         }
 
         @ModelAttribute("masterServicesDtoList")
@@ -57,11 +57,11 @@ public class ManagerMasterServicesController {
 
             if (result.hasErrors()) {
                 //if validator failed
-                return "service/view";
+                return "service";
             } else {
                 status.setComplete();
                 //form success
-                return "service/view";
+                return "service";
             }
         }
 
@@ -80,7 +80,7 @@ public class ManagerMasterServicesController {
             MasterServicesDto masterServicesDto = managerMasterServicesService.findById(id);
             masterServicesDto.setUpdateId(aui.getUserId());
             model.addAttribute("masterServiceDto",masterServicesDto);
-            return "service/view";
+            return "service";
         }
 
         @RequestMapping(value = "/edit/{id}", method = RequestMethod.POST)

@@ -44,7 +44,7 @@ public class ManagerUserController {
         //command object
         model.addAttribute("userRoleRoomDto", userRoleRoomDto);
         //return form view
-        return "user/view";
+        return "user";
     }
 
     @ModelAttribute("userDtoList")
@@ -60,11 +60,11 @@ public class ManagerUserController {
 
         if (result.hasErrors()) {
             //if validator failed
-            return "user/view";
+            return "user";
         } else {
             status.setComplete();
             //form success
-            return "user/view";
+            return "user";
         }
     }
 
@@ -103,7 +103,7 @@ public class ManagerUserController {
         userRoleRoomDto.setUserRoleGroupDto(userRoleGroupDto);
 //        userRoleRoomDto.setUserRoomDto(managerUserService.findUserRoomById(id));
         model.addAttribute("userRoleRoomDto",userRoleRoomDto);
-        return "user/view";
+        return "user";
     }
 
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.POST)
@@ -141,7 +141,7 @@ public class ManagerUserController {
         model.addAttribute("userDto",managerUserService.findUserById(id));
         model.addAttribute("userRoleGroupDto",managerUserService.findUserRoleGroupById(id));
         model.addAttribute("userRoomDto",managerUserService.findUserRoomByUserId(id));
-        return "user/view_detail";
+        return "user_detail";
     }
 
     //find building

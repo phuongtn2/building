@@ -1,3 +1,4 @@
+/*
 package com.building.services.interceptor;
 
 import com.building.dto.AuthorizedUserInfo;
@@ -30,32 +31,43 @@ import java.util.List;
 @PermissionBinding
 @Component
 public class AuthorizedPreProcessFilter implements ContainerRequestFilter, ContainerResponseFilter {
-	/**
+	*/
+/**
 	 * ログ出力(認証フィルター用)
-	 */
+	 *//*
+
 	private static final Logger log = Logger.getLogger(AuthorizedPreProcessFilter.class);
 
-	/**
+	*/
+/**
 	 * ロール確認用のアノテーションクラス
-	 */
+	 *//*
+
 	private static final Class<AllowRoles> ALLOW_ANN = AllowRoles.class;
-	/**
+	*/
+/**
 	 * ロール確認用のアノテーションクラス(パラメータの内容も評価対象)
-	 */
+	 *//*
+
 	private static final Class<ParameterTokenSupport> PARAM_ANN = ParameterTokenSupport.class;
 
-	/**
+	*/
+/**
 	 * 認証サービス
-	 */
+	 *//*
+
 	@Autowired
 	private AuthorizedUserTokenService authService;
-	/**
+	*/
+/**
 	 * リソースメッセージ
-	 */
+	 *//*
+
 	@Autowired
 	private ResourceBundleMessageSource messageSource;
 
-	/**
+	*/
+/**
 	 * 認証用フィルター(リクエスト時).
 	 * <p>
 	 * 1. 手動認証RESTリソースの場合は認証処理を行わない
@@ -67,7 +79,8 @@ public class AuthorizedPreProcessFilter implements ContainerRequestFilter, Conta
 	 *
 	 * @param req Request information.
 	 * @throws IOException 処理時IO例外
-	 */
+	 *//*
+
 	@Override
 	public void filter(ContainerRequestContext req) throws IOException {
 
@@ -119,7 +132,8 @@ public class AuthorizedPreProcessFilter implements ContainerRequestFilter, Conta
 		}
 	}
 
-	/**
+	*/
+/**
 	 * 認証用フィルター(レスポンス時).
 	 * <p>
 	 * 読み込みフィルター保持されたトークンの情報を応答ヘッダーで返す(DB検索直後のみ設定)
@@ -127,7 +141,8 @@ public class AuthorizedPreProcessFilter implements ContainerRequestFilter, Conta
 	 * @param req リクエストコンテキスト
 	 * @param res レスポンスコンテキスト
 	 * @throws IOException 処理時IO例外
-	 */
+	 *//*
+
 	@Override
 	public void filter(ContainerRequestContext req, ContainerResponseContext res)
 			throws IOException {
@@ -139,13 +154,15 @@ public class AuthorizedPreProcessFilter implements ContainerRequestFilter, Conta
 		}
 	}
 
-	/**
+	*/
+/**
 	 * 指定されたアノテーションクラスがアノテーション配列に含まれるかを確認する.
 	 *
 	 * @param annons メソッドまたはクラスに付加されたアノテーション配列
 	 * @param target 存在するかを確認する対象のアノテーションクラス
 	 * @return 存在した場合は、最初に発見したアノテーション。存在しない場合はnull
-	 */
+	 *//*
+
 	protected static <T> T findMethodAllowRole(Annotation[] annons, Class<T> target) {
 		if (annons != null) {
 			final T ar = ClassUtil.lookupAnnotation(annons, target);
@@ -167,24 +184,28 @@ public class AuthorizedPreProcessFilter implements ContainerRequestFilter, Conta
 		return null;
 	}
 
-	/**
+	*/
+/**
 	 * 認証エラー時のレスポンス内容.
 	 *
 	 * @param crc         リクエストコンテキスト
 	 * @param messageCode メッセージコード
-	 */
+	 *//*
+
 	protected void abortResponse(ContainerRequestContext crc, String messageCode) {
 		final Response r = RestMessageUtil.makeResponse(messageSource, messageCode);
 		crc.abortWith(r);
 	}
 
-	/**
+	*/
+/**
 	 * 社員ロールに、APIの要求ロールのいずれかが一致するかの確認する.
 	 *
 	 * @param aui          社員ロール情報
 	 * @param requireRoles 実行要求されるロール(ロール指定が空の場合は誰も実行できない)
 	 * @return 実行要求されるロール群のいずれかのロールが社員ロールに含まれる場合にtrue/含まれない場合false
-	 */
+	 *//*
+
 	protected static boolean hasRequireRole(AuthorizedUserInfo aui, Role[] requireRoles) {
 		if (requireRoles != null) {
 			for (final Role role : requireRoles) {
@@ -197,3 +218,4 @@ public class AuthorizedPreProcessFilter implements ContainerRequestFilter, Conta
 	}
 
 }
+*/

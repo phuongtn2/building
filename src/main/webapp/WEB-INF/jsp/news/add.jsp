@@ -1,9 +1,11 @@
 <%@page language="java" contentType="text/html;charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <div class="row">
     <div class="col-lg-12">
         <div class="ibox float-e-margins">
             <div class="ibox-title">
+                <h3><spring:message code="building.welcome" text="default text" /> </h3>
                 <h5>Quản Lý Tòa Nhà</h5>
                 <div class="ibox-tools">
                     <a class="collapse-link">

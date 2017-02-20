@@ -26,8 +26,8 @@
     <context:component-scan base-package="com.">
         <context:include-filter type="regex"
                                 expression="services.impl.*" />
-        <context:include-filter type="regex"
-                                expression="services.interceptor.*" />
+        <!--<context:include-filter type="regex"
+                                expression="services.interceptor.*" />-->
         <context:include-filter type="regex"
                                 expression="cache.impl.*" />
         <context:include-filter type="regex"
@@ -35,46 +35,43 @@
 
     </context:component-scan>
 
-    <bean id="messageSource"
-          class="org.springframework.context.support.ResourceBundleMessageSource">
-        <property name="basenames">
-            <list>
-                <value>com.building.rest_messages</value>
-                <value>com.building.messages_vn</value>
-                <value>com.building.messages</value>
-            </list>
-        </property>
-        <property name="defaultEncoding" value="UTF-8" />
-    </bean>
-    <!--<bean id="messageSource"
-                class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
-        <property name="basename" value="classpath:messages" />
-        <property name="defaultEncoding" value="UTF-8" />
-    </bean>-->
-
-    <bean id="localeResolver"
-                class="org.springframework.web.servlet.i18n.CookieLocaleResolver">
-        <property name="defaultLocale" value="en" />
-        <property name="cookieName" value="Building"></property>
-        <property name="cookieMaxAge" value="3600"></property>
-    </bean>
-    <!--<bean id="localeResolver"
-          class="org.springframework.web.servlet.i18n.SessionLocaleResolver">
-        <property name="defaultLocale" value="en" />
-    </bean>-->
-
     <mvc:annotation-driven />
-    <!--<mvc:default-servlet-handler/>-->
-    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <property name="cache" value="false"/>
-        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
-        <property name="prefix" value="/WEB-INF/jsp/"></property>
-        <property name="suffix" value=".jsp"></property>
-    </bean>
     <mvc:resources mapping="/resources/**" location="/resources/"
                    cache-period="31556926"/>
 
-    <mvc:annotation-driven />
+    <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+        <property name="useCodeAsDefaultMessage" value="true" />
+        <property name="basename" value="messages" />
+        <property name="cacheSeconds" value="0" />
+        <property name="defaultEncoding" value="UTF-8"></property>
+    </bean>
+
+    <bean id="localeResolver" class="org.springframework.web.servlet.i18n.SessionLocaleResolver">
+        <property name="defaultLocale" value="en" />
+    </bean>
+
+    <mvc:interceptors>
+        <bean id="localeChangeInterceptor"
+              class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor"
+              p:paramName="locale"/>
+    </mvc:interceptors>
+
+    <bean id="tilesViewResolver"
+          class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+        <property name="viewClass">
+            <value>
+                org.springframework.web.servlet.view.tiles3.TilesView
+            </value>
+        </property>
+    </bean>
+    <bean id="tilesConfigurer"
+          class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
+        <property name="definitions">
+            <list>
+                <value>/WEB-INF/tiles.xml</value>
+            </list>
+        </property>
+    </bean>
 
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
           destroy-method="close">

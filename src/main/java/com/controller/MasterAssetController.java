@@ -37,7 +37,7 @@ public class MasterAssetController {
 		model.addAttribute("MasterAssetDto", masterAssetDto);
 		//model.addAttribute("newsDtoList", newsService.findAll());
 		//return form view
-		return "asset/view";
+		return "asset";
 	}
 
 	@ModelAttribute("masterAssetDtoList")
@@ -51,11 +51,11 @@ public class MasterAssetController {
 		//customerValidator.validate(customer, result);
 		if (result.hasErrors()) {
 			//if validator failed
-			return "asset/view";
+			return "asset";
 		} else {
 			status.setComplete();
 			//form success
-			return "asset/view";
+			return "asset";
 		}
 	}
 	@RequestMapping(method = RequestMethod.POST, params = "add")
@@ -73,7 +73,7 @@ public class MasterAssetController {
 		MasterAssetDto masterAssetDto = masterAssetService.findById(id);
 		masterAssetDto.setUpdateId(aui.getUserId());
 		model.addAttribute("masterAssetDto",masterAssetDto);
-		return "asset/view";
+		return "asset";
 	}
 	@RequestMapping(value = "/edit/{id}", method = RequestMethod.POST)
 	public String saveEdit(@ModelAttribute("masterAssetDto") MasterAssetDto masterAssetDto, @PathVariable long id) throws ServerException {

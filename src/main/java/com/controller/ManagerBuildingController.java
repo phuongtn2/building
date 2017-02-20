@@ -39,7 +39,7 @@ public class ManagerBuildingController {
 		//command object
 		model.addAttribute("buildingDto", buildingDto);
 		//return form view
-		return "building/view";
+		return "building";
 	}
 
 	@ModelAttribute("buildingDtoList")
@@ -55,11 +55,11 @@ public class ManagerBuildingController {
 
 		if (result.hasErrors()) {
 			//if validator failed
-			return "building/view";
+			return "building";
 		} else {
 			status.setComplete();
 			//form success
-			return "building/view";
+			return "building";
 		}
 	}
 
@@ -78,7 +78,7 @@ public class ManagerBuildingController {
 		BuildingDto buildingDto = managerBuildingService.findById(id);
 		buildingDto.setUpdateId(aui.getUserId());
 		model.addAttribute("buildingDto",buildingDto);
-		return "building/view";
+		return "building";
 	}
 
 	@RequestMapping(value = "/edit/{id}", method = RequestMethod.POST)

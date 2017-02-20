@@ -37,7 +37,7 @@ public class RequestBookController {
 		//command object
 //		model.addAttribute("bookServiceDto", bookServiceDto);
 
-		return "request_booking/view";
+		return "request_booking";
 	}
 
 	@RequestMapping(value = "/list/self",method = RequestMethod.GET, headers = "Accept=application/json", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -72,11 +72,11 @@ public class RequestBookController {
 //		//customerValidator.validate(customer, result);
 //		if (result.hasErrors()) {
 //			//if validator failed
-//			return "request_booking/view";
+//			return "request_booking";
 //		} else {
 //			status.setComplete();
 //			//form success
-//			return "request_booking/view";
+//			return "request_booking";
 //		}
 //	}
 //	@RequestMapping(method = RequestMethod.POST, params = "add")
@@ -94,7 +94,7 @@ public class RequestBookController {
 //		BookServiceDto bookServiceDto = requestBookService.findById(id);
 //		bookServiceDto.setUpdateId(aui.getUserId());
 //		model.addAttribute("bookServiceDto",bookServiceDto);
-//		return "request_booking/view";
+//		return "request_booking";
 //	}
 //	@RequestMapping(value = "/edit/{id}", method = RequestMethod.POST)
 //	public String saveEdit(@ModelAttribute("bookServiceDto") BookServiceDto bookServiceDto, @PathVariable long id) throws ServerException {

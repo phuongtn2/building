@@ -25,7 +25,9 @@
         <div>
             <h1 class="logo-name">B</h1>
         </div>
-        <h3>Welcome to Manager Building </h3>
+        Language : <a href="${pageContext.request.contextPath}?locale=en">English</a>|<a href="${pageContext.request.contextPath}?locale=vi">Viet Nam</a>
+
+        <h3><spring:message code="building.welcome" text="default text" /> </h3>
 
         <p>Đăng Nhập</p>
         <form:form class="m-t" role="form" action="/login" name="submitForm" method="post">

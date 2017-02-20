@@ -39,7 +39,7 @@ public class UserRoomHistoryController {
 		//command object
 //		model.addAttribute("buildingDto", buildingDto);
 		//return form view
-		return "userRoomHistory/view";
+		return "userRoomHistory";
 	}
 
 	@ModelAttribute("buildingDtoList")
@@ -55,11 +55,11 @@ public class UserRoomHistoryController {
 //
 //		if (result.hasErrors()) {
 //			//if validator failed
-//			return "userRoomHistory/view";
+//			return "userRoomHistory";
 //		} else {
 //			status.setComplete();
 //			//form success
-//			return "userRoomHistory/view";
+//			return "userRoomHistory";
 //		}
 //	}
 
