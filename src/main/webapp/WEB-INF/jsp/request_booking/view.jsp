@@ -1,61 +1,63 @@
+<%--<%@include file="add.jsp" %>--%>
+<%--<%@include file="list_request_booking.jsp" %>--%>
 <div id="schedule" name="schedule" style=" height: 100%;"></div>
 
-<!DOCTYPE html>
-<%@page language="java" contentType="text/html;charset=UTF-8"%>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
-<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-<html>
-<head>
-    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<%--<!DOCTYPE html>--%>
+<%--<%@page language="java" contentType="text/html;charset=UTF-8"%>--%>
+<%--<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>--%>
+<%--<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>--%>
+<%--<html>--%>
+<%--<head>--%>
+    <%--<meta http-equiv="content-type" content="text/html; charset=utf-8"/>--%>
+    <%--<meta name="viewport" content="width=device-width, initial-scale=1.0">--%>
 
-    <title>Building | Home</title>
-    <spring:url value="/resources/css/bootstrap.min.css" var="bootsTrapCss"/>
-    <spring:url value="/resources/css/plugins/toastr/toastr.min.css" var="toastrCss" />
-    <spring:url value="/resources/font-awesome/css/font-awesome.css" var="awesomeFontCss" />
-    <spring:url value="/resources/css/animate.css" var="animateCss" />
-    <spring:url value="/resources/css/style.css" var="styleCss" />
-    <spring:url value="/resources/js/plugins/gritter/jquery.gritter.css" var="gritterCss" />
+    <%--<title>Building | Home</title>--%>
+    <%--<spring:url value="/resources/css/bootstrap.min.css" var="bootsTrapCss"/>--%>
+    <%--<spring:url value="/resources/css/plugins/toastr/toastr.min.css" var="toastrCss" />--%>
+    <%--<spring:url value="/resources/font-awesome/css/font-awesome.css" var="awesomeFontCss" />--%>
+    <%--<spring:url value="/resources/css/animate.css" var="animateCss" />--%>
+    <%--<spring:url value="/resources/css/style.css" var="styleCss" />--%>
+    <%--<spring:url value="/resources/js/plugins/gritter/jquery.gritter.css" var="gritterCss" />--%>
 
-    <link href="${bootsTrapCss}" rel="stylesheet" type="text/css"/>
-    <link href="${toastrCss}" rel="stylesheet" type="text/css"/>
-    <link href="${awesomeFontCss}" rel="stylesheet" type="text/css"/>
-    <link href="${animateCss}" rel="stylesheet" type="text/css"/>
-    <link href="${styleCss}" rel="stylesheet" type="text/css"/>
-    <link href="${gritterCss}" rel="stylesheet" type="text/css"/>
+    <%--<link href="${bootsTrapCss}" rel="stylesheet" type="text/css"/>--%>
+    <%--<link href="${toastrCss}" rel="stylesheet" type="text/css"/>--%>
+    <%--<link href="${awesomeFontCss}" rel="stylesheet" type="text/css"/>--%>
+    <%--<link href="${animateCss}" rel="stylesheet" type="text/css"/>--%>
+    <%--<link href="${styleCss}" rel="stylesheet" type="text/css"/>--%>
+    <%--<link href="${gritterCss}" rel="stylesheet" type="text/css"/>--%>
 
-    <spring:url value="/resources/WebContent/codebase/schedule_all.css" var="scheduleCss"/>
-    <link href="${scheduleCss}" rel="stylesheet" type="text/css"/>
-    <spring:url value="/resources/WebContent/codebase/schedule.js" var="scheduleJs" />
-    <script src="${scheduleJs}" type="text/javascript" charset="utf-8"></script>
-    <spring:url value="/resources/WebContent/codebase/locale/locale_en.js" var="localeJs" />
-    <spring:url value="/resources/WebContent/codebase/ext/dhtmlxscheduler_tooltip.js" var="dhtmlxschedulerTooltipJs" />
-    <script src="${localeJs}"></script>
-    <script src="${dhtmlxschedulerTooltipJs}"></script>
-    <script>
-        function change(id) {
-            var listId = ["news", "complaint", "request", "building" , "service", "user"
-                , "history", "asset", "complaint_history", "complaintUL", "complaintLi"];
-            for (i = 0; i <=  listId.length; i++) {
-                if(id === listId[i]){
-                    $('#'+listId[i]).addClass( "active" );
-                }else{
-                    $('#'+listId[i]).removeClass( "active" )
-                }
-            }
-        }
-    </script>
-</head>
+    <%--<spring:url value="/resources/WebContent/codebase/schedule_all.css" var="scheduleCss"/>--%>
+    <%--<link href="${scheduleCss}" rel="stylesheet" type="text/css"/>--%>
+    <%--<spring:url value="/resources/WebContent/codebase/schedule.js" var="scheduleJs" />--%>
+    <%--<script src="${scheduleJs}" type="text/javascript" charset="utf-8"></script>--%>
+    <%--<spring:url value="/resources/WebContent/codebase/locale/locale_en.js" var="localeJs" />--%>
+    <%--<spring:url value="/resources/WebContent/codebase/ext/dhtmlxscheduler_tooltip.js" var="dhtmlxschedulerTooltipJs" />--%>
+    <%--<script src="${localeJs}"></script>--%>
+    <%--<script src="${dhtmlxschedulerTooltipJs}"></script>--%>
+    <%--<script>--%>
+        <%--function change(id) {--%>
+            <%--var listId = ["news", "complaint", "request", "building" , "service", "user"--%>
+                <%--, "history", "asset", "complaint_history", "complaintUL", "complaintLi"];--%>
+            <%--for (i = 0; i <=  listId.length; i++) {--%>
+                <%--if(id === listId[i]){--%>
+                    <%--$('#'+listId[i]).addClass( "active" );--%>
+                <%--}else{--%>
+                    <%--$('#'+listId[i]).removeClass( "active" )--%>
+                <%--}--%>
+            <%--}--%>
+        <%--}--%>
+    <%--</script>--%>
+<%--</head>--%>
 
-<body onload="change('request');">
-<div id="wrapper" style=" height: 100%;background-color: #293846;">
-    <%@include file="../template/navbar.jsp" %>
-    <%@include file="../template/notify.jsp" %>
-    <div id="page-wrapper" class="gray-bg" style="height: 100%;">
+<%--<body onload="change('request');">--%>
+<%--<div id="wrapper" style=" height: 100%;background-color: #293846;">--%>
+    <%--<%@include file="../template/navbar.jsp" %>--%>
+    <%--<%@include file="../template/notify.jsp" %>--%>
+    <%--<div id="page-wrapper" class="gray-bg" style="height: 100%;">--%>
 
-        <%@include file="../template/footer.jsp" %>
-    </div>
-</div>
+        <%--<%@include file="../template/footer.jsp" %>--%>
+    <%--</div>--%>
+<%--</div>--%>
 
 <!-- Mainly scripts -->
 <spring:url value="/resources/js/jquery-2.1.1.js" var="jqueryJs" />
@@ -120,5 +122,5 @@
         });
     }
 </script>
-</body>
-</html>
+<%--</body>--%>
+<%--</html>--%>
