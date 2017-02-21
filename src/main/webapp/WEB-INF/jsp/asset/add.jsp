@@ -1,11 +1,13 @@
 <%@page language="java" contentType="text/html;charset=UTF-8"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="spring" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="locale" uri="http://www.springframework.org/tags"%>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <div class="row">
     <div class="col-lg-12">
         <div class="ibox float-e-margins">
             <div class="ibox-title">
-                <h5>Tài Sản Chung</h5>
+                <h5><locale:message code="asset.title" text="default text" /></h5>
                 <div class="ibox-tools">
                     <a class="collapse-link">
                         <i class="fa fa-chevron-up"></i>
@@ -17,7 +19,7 @@
                     <div class="row">
                         <div class="col-sm-4">
                             <div class="form-group">
-                                <label class="control-label" >Tên tài sản</label>
+                                <label class="control-label" ><locale:message code="asset.name" text="default text" /></label>
                                 <input type="hidden" id="assetCode" name="assetCode" value="<c:if test="${masterAssetDto.assetCode!= null}">${masterAssetDto.assetCode}</c:if>"  class="form-control">
                                 <input type="text" id="assetName" name="assetName" value="<c:if test="${masterAssetDto.assetName!= null}">${masterAssetDto.assetName}</c:if>" placeholder="Tên dịch vụ" class="form-control">
                             </div>

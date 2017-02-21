@@ -1,11 +1,11 @@
 <%@page language="java" contentType="text/html;charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <div class="row">
     <div class="col-lg-12">
         <div class="ibox float-e-margins">
             <div class="ibox-title">
-                <h3><spring:message code="building.welcome" text="default text" /> </h3>
                 <h5>Quản Lý Tòa Nhà</h5>
                 <div class="ibox-tools">
                     <a class="collapse-link">
@@ -59,7 +59,7 @@
                         <div class="text-center">
                             <br>
                             <button name="add" class="btn btn-primary" type="submit"><i class="fa fa-check"></i>&nbsp;Submit</button>
-                            <input name="reset" class="btn btn-danger" placeholder="Nhập lại" type="reset" ></input>
+                            <input name="reset" class="btn btn-danger" placeholder="Nhập lại" type="reset" />
                         </div>
                     </div>
                 </form:form>

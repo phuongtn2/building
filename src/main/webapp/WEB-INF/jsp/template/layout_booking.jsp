@@ -103,24 +103,12 @@
     <spring:url value="/resources/js/plugins/jquery-ui/jquery-ui.min.js" var="uiMinJs" />
     <script src="${uiMinJs}"></script>
 
-    <!-- GITTER -->
-    <%--<spring:url value="/resources/js/plugins/gritter/jquery.gritter.min.js" var="gritterJs" />
-    <script src="${gritterJs}"></script>--%>
-
-    <!-- Sparkline -->
-    <%--<spring:url value="/resources/js/plugins/sparkline/jquery.sparkline.min.js" var="sparklineMinJs" />
-    <script src="${sparklineMinJs}"></script>--%>
-
-    <!-- Sparkline demo data  -->
-    <%--<spring:url value="/resources/js/demo/sparkline-demo.js" var="sparklineJs" />
-    <script src="${sparklineJs}"></script>--%>
-
-    <!-- ChartJS-->
-    <%--<spring:url value="/resources/js/plugins/chartJs/Chart.min.js" var="chartJs" />
-    <script src="${chartJs}"></script>--%>
-
-    <!-- Toastr -->
-    <%--<spring:url value="/resources/js/plugins/toastr/toastr.min.js" var="toastrJs" />
-    <script src="${toastrJs}"></script>--%>
+    <script>
+        function customLayout(){
+            $( window ).load(function() {
+                $(".dhxlayout_cont").css({"left": "235px","top": "75px"});
+            });
+        }
+    </script>
 </body>
 </html>

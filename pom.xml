@@ -9,6 +9,9 @@
   <url>http://maven.apache.org</url>
     <properties>
         <org.jboss.resteasy.version>3.0.10.Final</org.jboss.resteasy.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <resource.directory>src/main/resources</resource.directory>
     </properties>
   <dependencies>
     <dependency>
