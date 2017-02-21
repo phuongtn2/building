@@ -19,9 +19,6 @@
                         {"type": "newcolumn"},
                         {"type": "select", "name": "status", "labelWidth": 50, "inputWidth": 75}
                     ]}
-                ]},
-                {"type": "fieldset", "label": "Status color", "offsetLeft": 5, "offsetTop": 0,"inputWidth": 290, "list": [
-                    {"type": "container", "name": "eventLabelContainer", "label": "", "inputWidth": 238, "inputHeight": 80}
                 ]}
             ]}
         ]},
