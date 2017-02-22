@@ -34,9 +34,25 @@
 		<put-attribute name="title" value="News" />
 		<put-attribute name="body" value="/WEB-INF/jsp/news/view.jsp" />
 	</definition>
+
+	<definition name="news/view" extends="base.definition">
+		<put-attribute name="title" value="News" />
+		<put-attribute name="body" value="/WEB-INF/jsp/news/view.jsp" />
+	</definition>
+
+	<definition name="news/news_detail/view" extends="base.definition">
+		<put-attribute name="title" value="NewsDetails" />
+		<put-attribute name="body" value="/WEB-INF/jsp/news/news_detail/view.jsp" />
+	</definition>
+
 	<definition name="complaint" extends="base.definition">
 		<put-attribute name="title" value="Complaint" />
 		<put-attribute name="body" value="/WEB-INF/jsp/complaint/view.jsp" />
+	</definition>
+
+	<definition name="complaint/view_history" extends="base.definition">
+		<put-attribute name="title" value="Complaint" />
+		<put-attribute name="body" value="/WEB-INF/jsp/complaint/view_history.jsp" />
 	</definition>
 	<definition name="complaint/history" extends="base.definition">
 		<put-attribute name="title" value="Complaint History" />
