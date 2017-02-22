@@ -21,49 +21,36 @@
                             <div class="form-group">
                                 <label class="control-label" ><locale:message code="asset.name" text="default text" /></label>
                                 <input type="hidden" id="assetCode" name="assetCode" value="<c:if test="${masterAssetDto.assetCode!= null}">${masterAssetDto.assetCode}</c:if>"  class="form-control">
-                                <input type="text" id="assetName" name="assetName" value="<c:if test="${masterAssetDto.assetName!= null}">${masterAssetDto.assetName}</c:if>" placeholder="Tên dịch vụ" class="form-control">
+                                <input type="text" id="assetName" name="assetName" value="<c:if test="${masterAssetDto.assetName!= null}">${masterAssetDto.assetName}</c:if>" class="form-control">
                             </div>
                         </div>
-                        <div class="col-sm-4">
+                        <div class="col-sm-2">
                             <div class="form-group">
-                                <label class="control-label">Loại tài sản</label>
+                                <label class="control-label"><locale:message code="asset.type" text="default text" /></label>
                                 <select name="assetType" class="form-control m-b">
-                                    <option <c:if test="${masterAssetDto.assetType==1}" >selected</c:if> value="1">assetType 1</option>
-                                    <option <c:if test="${masterAssetDto.assetType==2}" >selected</c:if> value="2">assetType 2</option>
-                                    <option <c:if test="${masterAssetDto.assetType==3}" >selected</c:if> value="3">assetType 3</option>
+                                    <option <c:if test="${masterAssetDto.assetType==1}" >selected</c:if> value="1"><locale:message code="asset.type.general" text="default text" /></option>
+                                    <option <c:if test="${masterAssetDto.assetType==2}" >selected</c:if> value="2"><locale:message code="asset.type.personal" text="default text" /></option>
                                 </select>
                             </div>
                         </div>
                         <div class="col-sm-4">
                             <div class="form-group">
-                                <label class="control-label">Tòa nhà</label>
-                                <input  type="text" id="buildingCode" name="buildingCode" value="<c:if test="${masterAssetDto.buildingCode!= null}">${masterAssetDto.buildingCode}</c:if>" placeholder="Giá dịch vụ" class="form-control">
+                                <label class="control-label"><locale:message code="asset.building" text="default text" /></label>
+                                <input  type="text" id="buildingCode" name="buildingCode" value="<c:if test="${masterAssetDto.buildingCode!= null}">${masterAssetDto.buildingCode}</c:if>" class="form-control">
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-6">
+                        <div class="col-sm-2">
                             <div class="form-group">
-                                <label class="control-label">Bắt đầu</label>
-                                <div class="input-group date">
-                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input id="dateFrom" name="dateFrom" type="text" class="form-control" value="<c:if test="${masterAssetDto.dateFrom!= null}"><fmt:formatDate pattern="MM/dd/yyyy" value="${masterAssetDto.dateFrom}" /></c:if>">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="form-group">
-                                <label class="control-label">Kết thúc</label>
-                                <div class="input-group ">
-                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input id="dateTo" name="dateTo" type="text" class="form-control"  value="<c:if test="${masterAssetDto.dateTo!= null}"><fmt:formatDate pattern="MM/dd/yyyy" value="${masterAssetDto.dateTo}" /></c:if>">
-                                </div>
+                                <label class="control-label"><locale:message code="asset.price" text="default text" /></label>
+                                <input  type="text" id="assetPrice" name="assetPrice" value="<c:if test="${masterAssetDto.buildingCode!= null}">${masterAssetDto.buildingCode}</c:if>" class="form-control">
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group">
                             <div class="text-center">
-                                <button name="add" class="btn btn-primary" type="submit"><i class="fa fa-check"></i>&nbsp;Submit</button>
-                                <input name="reset" class="btn btn-danger" placeholder="Nhập lại" type="reset">
+                                <button name="add" class="btn btn-primary" type="submit"><i class="fa fa-check"></i>&nbsp;<locale:message code="button.save" text="default text" /></button>
+                                <button name="reset" class="btn btn-danger" type="button"><i class="fa fa-refresh"></i>&nbsp;<locale:message code="button.reset" text="default text" /></button>
                             </div>
                         </div>
                     </div>
