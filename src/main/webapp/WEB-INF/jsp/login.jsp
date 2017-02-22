@@ -4,6 +4,7 @@
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <html>
 <head>
+    <meta name="google-site-verification" content="PFIaMxdD94R6zfMJeT9ZsevTIjpgW924MgmF1nmEtv0" />
     <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
