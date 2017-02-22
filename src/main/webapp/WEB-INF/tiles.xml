@@ -67,6 +67,17 @@
 		<put-attribute name="title" value="Building" />
 		<put-attribute name="body" value="/WEB-INF/jsp/building/view.jsp" />
 	</definition>
+
+	<definition name="building/floor/view" extends="base.definition">
+		<put-attribute name="title" value="Building" />
+		<put-attribute name="body" value="/WEB-INF/jsp/building/floor/view.jsp" />
+	</definition>
+
+	<definition name="building/room/view" extends="base.definition">
+		<put-attribute name="title" value="Building" />
+		<put-attribute name="body" value="/WEB-INF/jsp/building/room/view.jsp" />
+	</definition>
+
 	<definition name="asset" extends="base.definition">
 		<put-attribute name="title" value="Asset" />
 		<put-attribute name="body" value="/WEB-INF/jsp/asset/view.jsp" />
