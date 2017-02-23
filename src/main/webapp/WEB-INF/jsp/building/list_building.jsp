@@ -1,6 +1,6 @@
 <%@page language="java" contentType="text/html;charset=UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib prefix="spring1" uri="http://www.springframework.org/tags"%>
+
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -20,11 +20,11 @@
                     <table class="footable emp-sales table table-striped table-bordered table-hover dataTables-example" data-page-size="10">
                         <thead>
                             <tr>
-                                <th class="text-center">Tên tòa nhà </th>
-                                <th data-hide="phone,tablet" class="text-center">Tổng số tầng</th>
-                                <th data-hide="phone,tablet" class="text-center">Tổng số phòng</th>
-                                <th data-hide="phone,tablet" class="text-center">Mô tả</th>
-                                <th data-hide="phone,tablet" class="text-center">Action</th>
+                                <th class="text-center" ><spring1:message code="building.list.name" text="default text"></spring1:message></th>
+                                <th data-hide="phone,tablet" class="text-center"><spring1:message code="building.list.floor.count" text="default text"></spring1:message></th>
+                                <th data-hide="phone,tablet" class="text-center"><spring1:message code="building.list.room.count" text="default text"></spring1:message></th>
+                                <th data-hide="phone,tablet" class="text-center"><spring1:message code="building.list.description" text="default text"></spring1:message></th>
+                                <th data-hide="phone,tablet" class="text-center"><spring1:message code="building.action" text="default text"></spring1:message></th>
                             </tr>
                         </thead>
                         <tbody>
