@@ -38,7 +38,7 @@
 		<put-attribute name="title" value="Complaint" />
 		<put-attribute name="body" value="/WEB-INF/jsp/complaint/view.jsp" />
 	</definition>
-	<definition name="complaint/history" extends="base.definition">
+	<definition name="complaint/view_history" extends="base.definition">
 		<put-attribute name="title" value="Complaint History" />
 		<put-attribute name="body" value="/WEB-INF/jsp/complaint/view_history.jsp" />
 	</definition>

@@ -5,6 +5,7 @@ import com.building.services.AuthorizedUserTokenService;
 import com.building.services.error.ServiceException;
 import com.building.util.str.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.ResourceBundle;
 
 @Controller
 @SessionAttributes
@@ -30,7 +32,7 @@ public class LoginController {
 	public ModelAndView login(HttpSession session, HttpServletRequest request, HttpServletResponse response) throws ServiceException {
 		String userName=request.getParameter("userName");
 		String password=request.getParameter("password");
-		String message;
+		ResourceBundle bundle = ResourceBundle.getBundle( "messages", LocaleContextHolder.getLocale());
 		if(!StringUtil.isEmpty(userName) && !StringUtil.isEmpty(password)){
 			AuthorizedUserInfo authenticationInfo = authorizedUserTokenService.doLogin(userName, password);
 			if(authenticationInfo != null){
@@ -38,12 +40,10 @@ public class LoginController {
 				session.setAttribute("token", authenticationInfo.getToken());
 				return new ModelAndView("redirect:/news", "aui", authenticationInfo);
 			}else{
-				message = "Chưa có tài khoản.";
-				return new ModelAndView("login", "error", message);
+				return new ModelAndView("login", "error", bundle.getString("login.error"));
 			}
 		}else{
-			message = "Sai tên đăng nhập/mật khẩu.";
-			return new ModelAndView("login", "error", message);
+			return new ModelAndView("login", "error", bundle.getString("login.error"));
 		}
 	}
 	@RequestMapping("/logout")

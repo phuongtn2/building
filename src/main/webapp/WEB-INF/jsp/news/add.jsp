@@ -6,7 +6,7 @@
     <div class="col-lg-12">
         <div class="ibox float-e-margins">
             <div class="ibox-title">
-                <h5>Quản Lý Tòa Nhà</h5>
+                <h5><spring:message code="news.add.buildingmanagement" text="default text" /></h5>
                 <div class="ibox-tools">
                     <a class="collapse-link">
                         <i class="fa fa-chevron-up"></i>
@@ -15,28 +15,28 @@
             </div>
             <div class="ibox-content">
                 <form:form modelAttribute="newsDto " method="post">
-                    <p>Tin tức</p>
+                    <p><spring:message code="news.add.news" text="default text" /></p>
                     <div class="row">
                         <div class="form-group">
                             <input name="newCode" type="hidden" class="form-control" value="<c:if test="${newsDto.newCode!= null}">${newsDto.newCode}</c:if>">
                             <div class="col-sm-7">
-                                <label class="control-label">Tiêu đề</label>
-                                <input name="newHeader" type="text" placeholder="Tiêu đề" class="form-control" required=true value="<c:if test="${newsDto.newHeader!= null}">${newsDto.newHeader}</c:if>">
+                                <label class="control-label"><spring:message code="news.add.title" text="default text" /></label>
+                                <input name="newHeader" type="text" placeholder="<spring:message code="news.add.title" text="default text" />" class="form-control" required=true value="<c:if test="${newsDto.newHeader!= null}">${newsDto.newHeader}</c:if>">
                             </div>
                             <div class="col-sm-5">
-                                <label class="control-label">NewsShorter</label>
-                                <input name="newShorter" type="text" placeholder="NewsShorter" class="form-control" required=true value="<c:if test="${newsDto.newShorter!= null}">${newsDto.newShorter}</c:if>">
+                                <label class="control-label"><spring:message code="news.add.newsshoter" text="default text" /></label>
+                                <input name="newShorter" type="text" placeholder="<spring:message code="news.add.newsshoter" text="default text" />" class="form-control" required=true value="<c:if test="${newsDto.newShorter!= null}">${newsDto.newShorter}</c:if>">
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group">
                             <div class="col-sm-7">
-                                <label class="control-label">refNewCode</label>
-                                <input type="text" name="refNewCode" placeholder="RefNewCode" class="form-control" value="<c:if test="${newsDto.refNewCode!= null}">${newsDto.refNewCode}</c:if>" >
+                                <label class="control-label"><spring:message code="news.add.newscode" text="default text" /></label>
+                                <input type="text" name="refNewCode" placeholder="<spring:message code="news.add.newscode" text="default text" />" class="form-control" value="<c:if test="${newsDto.refNewCode!= null}">${newsDto.refNewCode}</c:if>" >
                             </div>
                             <div class="col-sm-5">
-                                <label class="control-label">newType</label>
+                                <label class="control-label"><spring:message code="news.add.newstype" text="default text" /></label>
                                 <select class="form-control m-b" name="newType">
                                     <option <c:if test="${newsDto.newType==1}">selected</c:if> value="1">newsType 1</option>
                                     <option <c:if test="${newsDto.newType==2}">selected</c:if> value="2">newsType 2</option>
@@ -49,8 +49,8 @@
                     <div class="row">
                         <div class="form-group">
                             <div class="col-sm-12">
-                                <label class=" control-label">Nội dung</label>
-                                <textarea  name="newContent" placeholder="Nội dung" class="form-control" rows="4" required=true value="<c:if test="${newsDto.newContent!= null}">${newsDto.newContent}</c:if>"></textarea>
+                                <label class=" control-label"><spring:message code="news.add.content" text="default text" /></label>
+                                <textarea  name="newContent" placeholder="<spring:message code="news.add.content" text="default text" />" class="form-control" rows="4" required=true value="<c:if test="${newsDto.newContent!= null}">${newsDto.newContent}</c:if>"></textarea>
                                     <%--<textarea  name="newContent" placeholder="Nội dung" class="form-control" rows="4" required=true ><c:if test="${newsDetailDto.newContent!= null}">${newsDetailDto.newContent}</c:if></textarea>--%>
                             </div>
                         </div>
@@ -58,8 +58,8 @@
                     <div class="form-group">
                         <div class="text-center">
                             <br>
-                            <button name="add" class="btn btn-primary" type="submit"><i class="fa fa-check"></i>&nbsp;Submit</button>
-                            <input name="reset" class="btn btn-danger" placeholder="Nhập lại" type="reset" />
+                            <button name="add" class="btn btn-primary" type="submit"><i class="fa fa-check"></i><spring:message code="common.button.save" text="default text" /></button>
+                            <input name="reset" class="btn btn-danger" placeholder="<spring:message code="common.button.reset" text="default text" />" type="reset" />
                         </div>
                     </div>
                 </form:form>

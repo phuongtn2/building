@@ -1,4 +1,6 @@
 <%@page language="java" contentType="text/html;charset=UTF-8"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <spring:url value="/resources/img/building.jpg" var="building"/>
@@ -25,8 +27,8 @@
                             <input name="followStatus" type="hidden" class="form-control" value="${tmComplaint.mComplaint.followStatus}">
                             <input name="complaintCode" type="hidden" class="form-control" value="${tmComplaint.mComplaint.complaintCode}">
                             <button name="follow" type="submit" id="follow_${tmComplaint.mComplaint.complaintCode}" class="btn btn-white btn-xs" <%--onclick="changeStyle('follow_${tmComplaint.mComplaint.complaintCode}', ${tmComplaint.mComplaint.followStatus}, 'nameButton_${tmComplaint.mComplaint.complaintCode}')"--%>>
-                                <i id="nameButton_${tmComplaint.mComplaint.complaintCode}" class="fa fa-thumbs-up"></i> <c:if test="${tmComplaint.mComplaint.followStatus == 0}">Follow</c:if> <c:if test="${tmComplaint.mComplaint.followStatus == 1}">UnFollow</c:if></button>
-                            <button class="btn btn-white btn-xs"><i class="fa fa-comments"></i> Comment</button>
+                                <i id="nameButton_${tmComplaint.mComplaint.complaintCode}" class="fa fa-thumbs-up"></i> <c:if test="${tmComplaint.mComplaint.followStatus == 0}"><spring:message code="common.button.follow" text="default text" /></c:if> <c:if test="${tmComplaint.mComplaint.followStatus == 1}"><spring:message code="common.button.unfollow" text="default text" /></c:if></button>
+                            <button class="btn btn-white btn-xs"><i class="fa fa-comments"></i><spring:message code="common.button.comment" text="default text" /></button>
                         </form:form>
                     </div>
                 </div>

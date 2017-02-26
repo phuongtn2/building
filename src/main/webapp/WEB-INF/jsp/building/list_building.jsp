@@ -6,7 +6,7 @@
     <div class="col-lg-12">
         <div class="ibox float-e-margins">
             <div class="ibox-title">
-                <h5>Danh sách tòa nhà</h5>
+                <h5><spring:message code="building.list" text="default text" /></h5>
                 <div class="ibox-tools">
                     <a class="collapse-link">
                         <i class="fa fa-chevron-up"></i>
@@ -18,11 +18,11 @@
                     <table class="footable emp-sales table table-striped table-bordered table-hover dataTables-example" data-page-size="10">
                         <thead>
                             <tr>
-                                <th class="text-center">Tên tòa nhà </th>
-                                <th data-hide="phone,tablet" class="text-center">Tổng số tầng</th>
-                                <th data-hide="phone,tablet" class="text-center">Tổng số phòng</th>
-                                <th data-hide="phone,tablet" class="text-center">Mô tả</th>
-                                <th data-hide="phone,tablet" class="text-center">Action</th>
+                                <th class="text-center"><spring:message code="building.name" text="default text" /></th>
+                                <th data-hide="phone,tablet" class="text-center"><spring:message code="building.floor.count" text="default text" /></th>
+                                <th data-hide="phone,tablet" class="text-center"><spring:message code="building.room.count" text="default text" /></th>
+                                <th data-hide="phone,tablet" class="text-center"><spring:message code="common.description" text="default text" /></th>
+                                <th data-hide="phone,tablet" class="text-center"><spring:message code="common.action" text="default text" /></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -36,9 +36,9 @@
                                         <td data-hide="phone,tablet" class="col-sm-5">${building.description}</td>
                                         <td data-hide="phone,tablet" class="col-sm-3 text-center">
                                             <div class="btn-group">
-                                                <a class="btn btn-success btn btn-xs" href="/building/edit/${building.buildingCode}" >&nbsp;&nbsp;Edit&nbsp;&nbsp;</a>
-                                                <a class="btn btn-danger btn btn-xs" href="/building/delete/${building.buildingCode}">&nbsp;&nbsp;Delete&nbsp;&nbsp;</a>
-                                                <a class="btn btn-warning btn btn-xs" href="/building/floor/${building.buildingCode}">&nbsp;&nbsp;Add Floor&nbsp;&nbsp;</a>
+                                                <a class="btn btn-success btn btn-xs" href="/building/edit/${building.buildingCode}" ><spring:message code="common.button.edit" text="default text" /></a>
+                                                <a class="btn btn-danger btn btn-xs" href="/building/delete/${building.buildingCode}"><spring:message code="common.button.delete" text="default text" /></a>
+                                                <a class="btn btn-warning btn btn-xs" href="/building/floor/${building.buildingCode}"><spring:message code="building.addfloor" text="default text" /></a>
                                             </div>
                                         </td>
                                     </tr>
