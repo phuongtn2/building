@@ -145,6 +145,30 @@
                 calendarWeeks: true,
                 autoclose: true
             });
+
+            $('#serviceStart').datepicker({
+                todayBtn: "linked",
+                keyboardNavigation: false,
+                forceParse: true,
+                calendarWeeks: true,
+                autoclose: true
+            });
+
+            $('#serviceEnd').datepicker({
+                todayBtn: "linked",
+                keyboardNavigation: false,
+                forceParse: true,
+                calendarWeeks: true,
+                autoclose: true
+            });
+
+            $('#birthday').datepicker({
+                todayBtn: "linked",
+                keyboardNavigation: false,
+                forceParse: true,
+                calendarWeeks: true,
+                autoclose: true
+            });
         });
 
     </script>
