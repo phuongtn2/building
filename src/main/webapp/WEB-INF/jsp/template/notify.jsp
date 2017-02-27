@@ -1,4 +1,6 @@
 <%@page language="java" contentType="text/html;charset=UTF-8"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <spring:url value="/resources/img/flags/16/United-States.png" var="EN"/>
 <spring:url value="/resources/img/flags/16/Vietnam.png" var="VN"/>
 
@@ -12,6 +14,7 @@
 
         <ul class="nav navbar-top-links navbar-right">
             <li>
+                <span><a href="${pageContext.request.contextPath}?locale=en"><spring:message code="building.langgue.english" text="default text" /></a>|<a href="${pageContext.request.contextPath}?locale=vi"><spring:message code="building.langgue.vietnamese" text="default text" /></a></span>
                 <span class="m-r-sm text-muted welcome-message">${aui.fullName}.</span>
             </li>
             <li>
@@ -47,7 +50,7 @@
                     <li>
                         <div class="text-center link-block">
                             <a href="notifications.html">
-                                <strong>See All Alerts</strong>
+                                <strong><spring:message code="notify.alert" text="default text" /></strong>
                                 <i class="fa fa-angle-right"></i>
                             </a>
                         </div>
@@ -56,7 +59,7 @@
             </li>
             <li>
                 <a href="/logout">
-                    <i class="fa fa-sign-out"></i> Đăng Xuất
+                    <i class="fa fa-sign-out"></i> <spring:message code="nav.logout" text="default text" />
                 </a>
             </li>
             <%--<li>

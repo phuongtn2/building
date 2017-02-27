@@ -8,7 +8,7 @@
     <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Building | Login</title>
+    <title><spring:message code="login.title" text="default text" /></title>
     <spring:url value="/resources/css/bootstrap.min.css" var="bootsTrapCss"/>
     <spring:url value="/resources/font-awesome/css/font-awesome.css" var="awesomeFontCss" />
     <spring:url value="/resources/css/animate.css" var="animateCss" />
@@ -26,23 +26,22 @@
         <div>
             <h1 class="logo-name">B</h1>
         </div>
-        Language : <a href="${pageContext.request.contextPath}?locale=en">English</a>|<a href="${pageContext.request.contextPath}?locale=vi">Viet Nam</a>
+        <spring:message code="building.langgue" text="default text" />
+        <a href="${pageContext.request.contextPath}?locale=en"><spring:message code="building.langgue.english" text="default text" /></a>|<a href="${pageContext.request.contextPath}?locale=vi"><spring:message code="building.langgue.vietnamese" text="default text" /></a>
 
         <h3><spring:message code="building.welcome" text="default text" /> </h3>
 
-        <p>Đăng Nhập</p>
         <form:form class="m-t" role="form" action="/login" name="submitForm" method="post">
             <div class="form-group">
-                <input name="userName" type="text" class="form-control" placeholder="Username" required="">
+                <input name="userName" type="text" class="form-control" placeholder="<spring:message code="login.username" text="default text" />" required="">
             </div>
             <div class="form-group">
-                <input name="password" type="password" class="form-control" placeholder="Password" required="">
+                <input name="password" type="password" class="form-control" placeholder="<spring:message code="login.password" text="default text" />" required="">
             </div>
-            <button type="submit" class="btn btn-primary block full-width m-b">Đăng Nhập</button>
+            <button type="submit" class="btn btn-primary block full-width m-b"><spring:message code="login.login" text="default text" /></button>
             <div style="color: red">${error}</div>
-            <a href="#"><small>Quên Mật Khẩu?</small></a>
+            <a href="#"><small><spring:message code="login.forgotpassword" text="default text" /></small></a>
         </form:form>
-        <p class="m-t"> <small>chuchuot12a15tnp@gmail.com</small> </p>
     </div>
 </div>
 

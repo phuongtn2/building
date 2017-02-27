@@ -34,27 +34,11 @@
 		<put-attribute name="title" value="News" />
 		<put-attribute name="body" value="/WEB-INF/jsp/news/view.jsp" />
 	</definition>
-
-	<definition name="news/view" extends="base.definition">
-		<put-attribute name="title" value="News" />
-		<put-attribute name="body" value="/WEB-INF/jsp/news/view.jsp" />
-	</definition>
-
-	<definition name="news/news_detail/view" extends="base.definition">
-		<put-attribute name="title" value="NewsDetails" />
-		<put-attribute name="body" value="/WEB-INF/jsp/news/news_detail/view.jsp" />
-	</definition>
-
 	<definition name="complaint" extends="base.definition">
 		<put-attribute name="title" value="Complaint" />
 		<put-attribute name="body" value="/WEB-INF/jsp/complaint/view.jsp" />
 	</definition>
-
 	<definition name="complaint/view_history" extends="base.definition">
-		<put-attribute name="title" value="Complaint" />
-		<put-attribute name="body" value="/WEB-INF/jsp/complaint/view_history.jsp" />
-	</definition>
-	<definition name="complaint/history" extends="base.definition">
 		<put-attribute name="title" value="Complaint History" />
 		<put-attribute name="body" value="/WEB-INF/jsp/complaint/view_history.jsp" />
 	</definition>
@@ -67,17 +51,6 @@
 		<put-attribute name="title" value="Building" />
 		<put-attribute name="body" value="/WEB-INF/jsp/building/view.jsp" />
 	</definition>
-
-	<definition name="building/floor/view" extends="base.definition">
-		<put-attribute name="title" value="Building" />
-		<put-attribute name="body" value="/WEB-INF/jsp/building/floor/view.jsp" />
-	</definition>
-
-	<definition name="building/room/view" extends="base.definition">
-		<put-attribute name="title" value="Building" />
-		<put-attribute name="body" value="/WEB-INF/jsp/building/room/view.jsp" />
-	</definition>
-
 	<definition name="asset" extends="base.definition">
 		<put-attribute name="title" value="Asset" />
 		<put-attribute name="body" value="/WEB-INF/jsp/asset/view.jsp" />
@@ -85,29 +58,12 @@
 
 	<definition name="userRoomHistory" extends="base.definition">
 		<put-attribute name="title" value="History" />
-		<!--<put-attribute name="body" value="/WEB-INF/jsp/userRoomHistory/list_userRoomHistory.jsp" />-->
-		<put-attribute name="body" value="/WEB-INF/jsp/userRoomHistory/view.jsp" />
+		<put-attribute name="body" value="/WEB-INF/jsp/userRoomHistory/list_userRoomHistory.jsp" />
 	</definition>
-	<definition name="userRoomHistory/floor/view" extends="base.definition">
-		<put-attribute name="title" value="History" />
-		<!--<put-attribute name="body" value="/WEB-INF/jsp/userRoomHistory/list_userRoomHistory.jsp" />-->
-		<put-attribute name="body" value="/WEB-INF/jsp/userRoomHistory/floor/view.jsp" />
-	</definition>
-	<definition name="userRoomHistory/room/view" extends="base.definition">
-		<put-attribute name="title" value="History" />
-		<!--<put-attribute name="body" value="/WEB-INF/jsp/userRoomHistory/list_userRoomHistory.jsp" />-->
-		<put-attribute name="body" value="/WEB-INF/jsp/userRoomHistory/room/view.jsp" />
-	</definition>
-
 	<definition name="user" extends="base.definition">
 		<put-attribute name="title" value="User" />
 		<put-attribute name="body" value="/WEB-INF/jsp/user/view.jsp" />
 	</definition>
-	<definition name="user_detail" extends="base.definition">
-		<put-attribute name="title" value="User" />
-		<put-attribute name="body" value="/WEB-INF/jsp/user/view_detail.jsp" />
-	</definition>
-
 	<definition name="service" extends="base.definition">
 		<put-attribute name="title" value="Service" />
 		<put-attribute name="body" value="/WEB-INF/jsp/service/view.jsp" />

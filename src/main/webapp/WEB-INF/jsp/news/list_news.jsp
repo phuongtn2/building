@@ -5,7 +5,7 @@
     <div class="col-lg-12">
         <div class="ibox float-e-margins">
             <div class="ibox-title">
-                <h5>Thong tin noi bo</h5>
+                <h5><spring:message code="news.list.internalnews" text="default text" /></h5>
                 <div class="ibox-tools">
                     <a class="collapse-link">
                         <i class="fa fa-chevron-up"></i>
@@ -33,9 +33,9 @@
                                     </div>
                                     <div class="col-lg-3">
                                         <div class="btn-group">
-                                            <a class="btn btn-success btn btn-xs" href="/news/${news.newCode}" >&nbsp;&nbsp;View&nbsp;&nbsp;</a>
-                                            <a class="btn btn-success btn btn-xs" href="/news/edit/${news.newCode}" >&nbsp;&nbsp;Edit&nbsp;&nbsp;</a>
-                                            <a class="btn btn-danger btn btn-xs" href="/news/delete/${news.newCode}">&nbsp;&nbsp;Delete&nbsp;&nbsp;</a>
+                                            <a class="btn btn-success btn btn-xs" href="/news/${news.newCode}" ><spring:message code="common.button.view" text="default text" /></a>
+                                            <a class="btn btn-success btn btn-xs" href="/news/edit/${news.newCode}" ><spring:message code="common.button.edit" text="default text" /></a>
+                                            <a class="btn btn-danger btn btn-xs" href="/news/delete/${news.newCode}"><spring:message code="common.button.delete" text="default text" /></a>
                                         </div>
                                     </div>
                                 </div>
