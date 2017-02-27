@@ -71,11 +71,20 @@
                             </div>
                         </div>
                     </div>
+                    <%--<div class="row">--%>
+                        <%--<div class="form-group">--%>
+                            <%--<div class="text-center">--%>
+                                <%--<button name="add" class="btn btn-primary" type="submit"><i class="fa fa-check"></i><spring:message code="common.button.save" text="default text" /></button>--%>
+                                <%--<button name="reset" class="btn btn-danger"type="reset"><spring:message code="common.button.reset" text="default text" /></button>--%>
+                            <%--</div>--%>
+                        <%--</div>--%>
+                    <%--</div>--%>
                     <div class="row">
                         <div class="form-group">
                             <div class="text-center">
-                                <button name="add" class="btn btn-primary" type="submit"><i class="fa fa-check"></i><spring:message code="common.button.save" text="default text" /></button>
-                                <button name="reset" class="btn btn-danger"type="reset"><spring:message code="common.button.reset" text="default text" /></button>
+                                <input type="hidden" id="add" name="add">
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addButton"><i class="fa fa-check"></i><spring:message code="common.button.save" text="default text" /></button>
+                                <button name="reset" class="btn btn-danger" type="reset"><spring:message code="common.button.reset" text="default text" /></button>
                             </div>
                         </div>
                     </div>
