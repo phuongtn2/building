@@ -36,7 +36,7 @@
                                             <div class="btn-group">
                                                 <a class="btn btn-success btn btn-xs" href="/building/floor/room/${room.floorCode}/edit/${room.roomCode}">&nbsp;&nbsp;Edit&nbsp;&nbsp;</a>
                                                 <a class="btn btn-danger btn btn-xs" href="/building/floor/room/${room.floorCode}/delete/${room.roomCode}">&nbsp;&nbsp;Delete&nbsp;&nbsp;</a>
-                                                <a class="btn btn-warning btn btn-xs" href="/building/floor">&nbsp;&nbsp;Quay lại&nbsp;&nbsp;</a>
+                                                <a onclick="goBack()" class="btn btn-warning btn btn-xs" href="/building/floor">&nbsp;&nbsp;Quay lại&nbsp;&nbsp;</a>
                                             </div>
                                         </td>
                                     </tr>

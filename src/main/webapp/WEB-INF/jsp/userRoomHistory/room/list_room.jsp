@@ -34,7 +34,7 @@
                                         <td data-hide="phone,tablet" class="col-sm-2">${room.status}</td>
                                         <td data-hide="phone,tablet" class="col-sm-4 text-center">
                                             <div class="btn-group">
-                                                <a class="btn btn-warning btn btn-xs" href="/history/floor">&nbsp;&nbsp;Quay lại&nbsp;&nbsp;</a>
+                                                <a class="btn btn-warning btn btn-xs" href="/history/floor/room/details/${room.roomCode}">&nbsp;&nbsp;View Room&nbsp;&nbsp;</a>
                                             </div>
                                         </td>
                                     </tr>

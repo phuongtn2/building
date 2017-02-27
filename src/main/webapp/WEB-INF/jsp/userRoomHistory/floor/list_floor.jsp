@@ -36,7 +36,7 @@
                                         <td data-hide="phone,tablet" class="col-sm-1">${floor.floorType}</td>
                                         <td data-hide="phone,tablet" class="col-sm-3 text-center">
                                             <div class="btn-group">
-                                                <a class="btn btn-warning btn btn-xs" href="/history/floor/room/${floor.floorCode}">&nbsp;&nbsp;Add Room&nbsp;&nbsp;</a>
+                                                <a class="btn btn-warning btn btn-xs" href="/history/floor/room/${floor.floorCode}">&nbsp;&nbsp;View Room&nbsp;&nbsp;</a>
                                             </div>
                                         </td>
                                     </tr>
