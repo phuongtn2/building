@@ -47,8 +47,8 @@
                             <div class="form-group">
                                 <label class="control-label"><spring:message code="common.status" text="default text" /></label>
                                 <select id="status" name="status" class="form-control m-b">
-                                    <option <c:if test="${masterAssetDto.status==1}" >selected</c:if> value="1"><spring:message code="status.active" text="default text" /></option>
-                                    <option <c:if test="${masterAssetDto.status==0}" >selected</c:if> value="2"><spring:message code="status.disable" text="default text" /></option>
+                                    <option <c:if test="${masterAssetDto.status==1}" >selected</c:if> value="1"><spring:message code="common.active" text="default text" /></option>
+                                    <option <c:if test="${masterAssetDto.status==0}" >selected</c:if> value="0"><spring:message code="common.deactive" text="default text" /></option>
                                 </select>
                             </div>
                         </div>

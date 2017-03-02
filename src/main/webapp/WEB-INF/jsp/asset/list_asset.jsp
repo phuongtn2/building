@@ -41,8 +41,8 @@
                                 </c:forEach>
                             </td>
                             <td data-hide="phone,tablet">
-                                <c:if test="${masterAsset.status==1}" ><spring:message code="status.active" text="default text" /></c:if>
-                                <c:if test="${masterAsset.status==0}" ><spring:message code="status.disable" text="default text" /></c:if>
+                                <c:if test="${masterAsset.status==1}" > <span class="label label-success"><spring:message code="common.active" text="default text" /></span></c:if>
+                                <c:if test="${masterAsset.status==0}" ><span class="label label-danger"><spring:message code="common.deactive" text="default text" /></span></c:if>
                             </td>
                             <td data-hide="phone,tablet">${masterAsset.price} $</td>
                             <td class="text-center">
