@@ -30,7 +30,7 @@
 		<typeAlias alias="serviceAsset" type="com.building.dto.ServiceAsset"/>
 		<typeAlias alias="bookingServiceGroup" type="com.building.dto.BookingServiceGroup"/>
 		<!-- end booking service -->
-		<typeAlias alias="news_detail" type="com.building.dto.NewsDetailDto"/>
+		<typeAlias alias="newsDetail" type="com.building.dto.NewsDetailDto"/>
 		<typeAlias alias="t_asset" type="com.building.dto.TransferAssetDto"/>
 		<typeAlias alias="tComplaint" type="com.building.dto.TransferComplaintDto"/>
 		<typeAlias alias="tReply" type="com.building.dto.TransferReplyDto"/>
