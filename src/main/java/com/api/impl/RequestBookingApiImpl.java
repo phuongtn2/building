@@ -1,7 +1,7 @@
 package com.api.impl;
 
 import com.api.RequestBookingApi;
-import com.building.dto.AuthorizedUserInfo;
+import com.building.dto.login.AuthorizedUserInfo;
 import com.building.dto.BookServiceDto;
 import com.building.services.RequestBookService;
 import com.building.services.error.ServiceException;

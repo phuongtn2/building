@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * Created by PhuongTN1 on 11/4/2016.
  */
-public interface MasterAssetService {
+public interface AssetService {
     long insertMasterAsset(MasterAssetDto masterAssetDto) throws ServerException;
     List<MasterAssetDto> findAll() throws ServerException;
     MasterAssetDto findById(long id) throws ServerException;

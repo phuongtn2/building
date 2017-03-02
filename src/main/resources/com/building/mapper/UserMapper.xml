@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.building.mapper.ManagerUserMapper">
+<mapper namespace="com.building.mapper.UserMapper">
 
     <insert id="insertUser" useGeneratedKeys="true" keyProperty="dto.userId">
         INSERT INTO T_USER(

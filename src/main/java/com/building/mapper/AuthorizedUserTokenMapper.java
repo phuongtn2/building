@@ -1,6 +1,6 @@
 package com.building.mapper;
 
-import com.building.dto.AuthorizedUserInfo;
+import com.building.dto.login.AuthorizedUserInfo;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;

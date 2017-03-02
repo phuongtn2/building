@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * Created by PhuongTN1 on 11/4/2016.
  */
-public interface ManagerBuildingMapper {
+public interface BuildingMapper {
     long insertBuilding(@Param("dto")MasterBuildingDto buildingDto);
     List<MasterBuildingDto> findAll();
     MasterBuildingDto findById(@Param("id") long id);

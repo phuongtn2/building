@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * Created by Giang.DaoTu on 11/11/2016.
  */
-public interface ManagerUserMapper {
+public interface UserMapper {
     int insertUser(@Param("dto") UserDto userDto);
     List<UserDto> findAllUser();
     UserDto findUserById(@Param("id") long id);

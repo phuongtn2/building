@@ -1,8 +1,11 @@
 package com.controller;
 
 import com.building.dto.*;
+import com.building.dto.login.AuthorizedUserInfo;
+import com.building.dto.master.MasterComplaintDto;
+import com.building.dto.master.MasterServicesDto;
 import com.building.services.ComplaintService;
-import com.building.services.ManagerMasterServicesService;
+import com.building.services.ServicesService;
 import com.building.services.Role;
 import com.dropbox.core.ServerException;
 import org.apache.commons.io.IOUtils;
@@ -11,7 +14,6 @@ import org.codehaus.jettison.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -26,7 +28,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 @Controller
 @RequestMapping("/complaint")
@@ -34,7 +35,7 @@ public class ComplaintController {
 	@Autowired
 	private ComplaintService complaintService;
 	@Autowired
-	private ManagerMasterServicesService managerMasterServicesService;
+	private ServicesService managerMasterServicesService;
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
@@ -43,7 +44,7 @@ public class ComplaintController {
 
 	@RequestMapping(method = RequestMethod.GET)
 	public String initForm(ModelMap model) throws ServerException {
-		ComplaintDto complaintDto = new ComplaintDto();
+		MasterComplaintDto complaintDto = new MasterComplaintDto();
 		//command object
 		model.addAttribute("complaintDto", complaintDto);
 		//model.addAttribute("newsDtoList", newsService.findAll());
@@ -54,10 +55,10 @@ public class ComplaintController {
 	@ModelAttribute("tmComplaintList")
 	public List<TMComplaintDto> populateTMComplaintList() throws ServerException {
 		List<TMComplaintDto> tmComplaintList = new ArrayList<TMComplaintDto>();
-		List<ComplaintDto> listComplaint = complaintService.findAllComplaint();
+		List<MasterComplaintDto> listComplaint = complaintService.findAllComplaint();
 		List<Long> complaintCodeList = new ArrayList<Long>();
 		if (listComplaint.size() > 0){
-			for (ComplaintDto complaintDto : listComplaint) {
+			for (MasterComplaintDto complaintDto : listComplaint) {
 				complaintCodeList.add(complaintDto.getComplaintCode());
 			}
 			//Find TComplaint
@@ -67,7 +68,7 @@ public class ComplaintController {
 				parentComplaintCodeList.add(transferComplaintDto.getParentComplaintCode());
 			}
 			List<TransferReplyDto> tReply = complaintService.findAllTReply(parentComplaintCodeList);
-			for (ComplaintDto complaintDto : listComplaint) {
+			for (MasterComplaintDto complaintDto : listComplaint) {
 				TMComplaintDto tmComplaintDto = new TMComplaintDto();
 				List<TransferComplaintDto> tComplaintListTemp = new ArrayList<TransferComplaintDto>();
 				for (TransferComplaintDto transferComplaintDto: tComplaintList) {
@@ -91,7 +92,7 @@ public class ComplaintController {
 	}
 	@RequestMapping(method = RequestMethod.POST)
 	public String processSubmit(
-			@ModelAttribute("complaintDto") ComplaintDto complaintDto,
+			@ModelAttribute("complaintDto") MasterComplaintDto complaintDto,
 			BindingResult result, SessionStatus status) {
 		//customerValidator.validate(customer, result);
 		if (result.hasErrors()) {
@@ -104,7 +105,7 @@ public class ComplaintController {
 		}
 	}
 	@RequestMapping(method = RequestMethod.POST, params = "add")
-	public String addComplaint(@ModelAttribute("complaintDto") ComplaintDto complaintDto, HttpServletRequest request) throws ServerException {
+	public String addComplaint(@ModelAttribute("complaintDto") MasterComplaintDto complaintDto, HttpServletRequest request) throws ServerException {
 		AuthorizedUserInfo aui = (AuthorizedUserInfo) request.getSession().getAttribute("aui");
 		complaintDto.setCreateId(aui.getUserId());
 		complaintService.insertComplaint(complaintDto);
@@ -135,13 +136,13 @@ public class ComplaintController {
 
 
 	@RequestMapping(method = RequestMethod.POST, params = "reply")
-	public String addTReply(@ModelAttribute("complaintDto") ComplaintDto complaintDto) throws ServerException {
+	public String addTReply(@ModelAttribute("complaintDto") MasterComplaintDto complaintDto) throws ServerException {
 		complaintService.insertComplaint(complaintDto);
 		return "redirect:/complaint";
 	}
 
 	@RequestMapping(method = RequestMethod.POST, params = "follow")
-	public String follow(@ModelAttribute("complaintDto") ComplaintDto complaintDto) throws ServerException {
+	public String follow(@ModelAttribute("complaintDto") MasterComplaintDto complaintDto) throws ServerException {
 		if(complaintDto.getFollowStatus() == 0){
 			complaintDto.setFollowStatus((byte) 1);
 		}else{
@@ -156,7 +157,7 @@ public class ComplaintController {
 	public String listComplaintHistory(Model model, HttpServletRequest request) throws ServerException {
 		AuthorizedUserInfo aui = (AuthorizedUserInfo) request.getSession().getAttribute("aui");
 		boolean per = aui.getRoleSet().contains(Role.ADMIN);
-		List<ComplaintDto> listComplaintHistory = complaintService.findAllComplaintHistory(aui,per);
+		List<MasterComplaintDto> listComplaintHistory = complaintService.findAllComplaintHistory(aui,per);
 		/*if(aui.getRoleSet().contains(Role.ADMIN)){
 			listComplaintHistory = complaintService.findAllComplaint();
 		}else{

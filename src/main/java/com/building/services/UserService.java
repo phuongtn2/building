@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * Created by Giang.DaoTu on 11/11/2016.
  */
-public interface ManagerUserService {
+public interface UserService {
     int insertUser(UserDto userDto) throws ServerException;
     List<UserDto> findAllUser() throws ServerException;
     UserDto findUserById(long id) throws ServerException;

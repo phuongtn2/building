@@ -1,6 +1,5 @@
 package com.building.mapper;
 
-import com.building.dto.AuthorizedUserInfo;
 import com.building.dto.BookServiceDto;
 import com.building.dto.TransferComplaintDto;
 import com.building.dto.TransferReplyDto;

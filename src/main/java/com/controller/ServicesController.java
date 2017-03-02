@@ -1,9 +1,9 @@
 package com.controller;
 
-import com.building.dto.*;
-import com.building.dto.AuthorizedUserInfo;
-import com.building.dto.MasterServicesDto;
-import com.building.services.ManagerMasterServicesService;
+import com.building.dto.login.AuthorizedUserInfo;
+import com.building.dto.master.MasterBuildingDto;
+import com.building.dto.master.MasterServicesDto;
+import com.building.services.ServicesService;
 import com.dropbox.core.ServerException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
@@ -25,10 +25,10 @@ import java.util.List;
  */
 @Controller
 @RequestMapping("/service")
-public class ManagerMasterServicesController {
+public class ServicesController {
 
         @Autowired
-        private ManagerMasterServicesService managerMasterServicesService;
+        private ServicesService managerMasterServicesService;
         @InitBinder
         public void initBinder(WebDataBinder binder) {
             SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
@@ -96,7 +96,7 @@ public class ManagerMasterServicesController {
         }
 
         @ModelAttribute("buildingDtoList")
-        public List<BuildingDto> populateBuildingDtoList() throws ServerException {
+        public List<MasterBuildingDto> populateBuildingDtoList() throws ServerException {
             return managerMasterServicesService.findAllBuilding();
         }
 }

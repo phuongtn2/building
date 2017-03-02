@@ -1,8 +1,8 @@
 package com.controller;
 
-import com.building.dto.MasterAssetDto;
-import com.building.dto.AuthorizedUserInfo;
-import com.building.services.MasterAssetService;
+import com.building.dto.master.MasterAssetDto;
+import com.building.dto.login.AuthorizedUserInfo;
+import com.building.services.AssetService;
 import com.dropbox.core.ServerException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
@@ -21,9 +21,9 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/asset")
-public class MasterAssetController {
+public class AssetController {
 	@Autowired
-	private MasterAssetService masterAssetService;
+	private AssetService masterAssetService;
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");

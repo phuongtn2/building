@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * Created by PhuongTN1 on 11/4/2016.
  */
-public interface MasterAssetMapper {
+public interface AssetMapper {
     long insertMasterAsset(@Param("dto") MasterAssetDto masterAssetDto);
     List<MasterAssetDto> findAll();
     MasterAssetDto findById(@Param("id") long id);

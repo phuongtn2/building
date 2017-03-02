@@ -11,7 +11,7 @@ import java.util.List;
  * Created by Giang.DaoTu on 11/15/2016.
  */
 
-public interface ManagerMasterServicesService {
+public interface ServicesService {
     long insertMasterServices(MasterServicesDto masterServicesDto) throws ServerException;
     List<MasterServicesDto> findAll() throws ServerException;
     MasterServicesDto findById(long id) throws ServerException;

@@ -3,8 +3,8 @@ package com.building.services.impl;
 import com.building.dto.login.UserDto;
 import com.building.dto.login.UserRoleGroupDto;
 import com.building.dto.UserRoomDto;
-import com.building.mapper.ManagerUserMapper;
-import com.building.services.ManagerUserService;
+import com.building.mapper.UserMapper;
+import com.building.services.UserService;
 import com.dropbox.core.ServerException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,10 +15,10 @@ import java.util.List;
  * Created by Giang.DaoTu on 11/11/2016.
  */
 @Service
-public class ManagerUserServiceImp implements ManagerUserService {
+public class UserServiceImp implements UserService {
 
     @Autowired
-    private ManagerUserMapper managerUserMapper;
+    private UserMapper managerUserMapper;
 
     @Override
     public int insertUser(UserDto userDto) throws ServerException {

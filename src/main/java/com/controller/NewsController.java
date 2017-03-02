@@ -1,7 +1,7 @@
 package com.controller;
 
-import com.building.dto.AuthorizedUserInfo;
-import com.building.dto.NewsDto;
+import com.building.dto.login.AuthorizedUserInfo;
+import com.building.dto.master.MasterNewsDto;
 import com.building.services.NewsService;
 import com.building.services.error.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +32,7 @@ public class NewsController {
 
 	@RequestMapping(method = RequestMethod.GET)
 	public String initForm(ModelMap model) throws ServiceException {
-		NewsDto newsDto = new NewsDto();
+		MasterNewsDto newsDto = new MasterNewsDto();
 		//command object
 		model.addAttribute("newsDto", newsDto);
 		//model.addAttribute("newsDtoList", newsService.findAll());
@@ -41,12 +41,12 @@ public class NewsController {
 	}
 
 	@ModelAttribute("newsDtoList")
-	public List<NewsDto> populateNewsList() throws ServiceException {
+	public List<MasterNewsDto> populateNewsList() throws ServiceException {
 		return newsService.findAll();
 	}
 	@RequestMapping(method = RequestMethod.POST)
 	public String processSubmit(
-			@ModelAttribute("newsDto") NewsDto newsDto,
+			@ModelAttribute("newsDto") MasterNewsDto newsDto,
 			BindingResult result, SessionStatus status) {
 		//customerValidator.validate(customer, result);
 		if (result.hasErrors()) {
@@ -59,7 +59,7 @@ public class NewsController {
 		}
 	}
 	@RequestMapping(method = RequestMethod.POST, params = "add")
-	public String addNews(@ModelAttribute("newsDto") NewsDto newsDto) throws ServiceException {
+	public String addNews(@ModelAttribute("newsDto") MasterNewsDto newsDto) throws ServiceException {
 		AuthorizedUserInfo aui = new AuthorizedUserInfo();
 		newsDto.setCreateId(aui.getUserId());
 		newsDto.setUpdateId(aui.getUserId());
@@ -70,13 +70,13 @@ public class NewsController {
 	@RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
 	public String getEdit(@PathVariable long id, Model model, HttpServletRequest request)  throws ServiceException{
 		AuthorizedUserInfo aui = (AuthorizedUserInfo) request.getSession().getAttribute("aui");
-		NewsDto newsDto = newsService.findById(id);
+		MasterNewsDto newsDto = newsService.findById(id);
 		newsDto.setUpdateId(aui.getUserId());
 		model.addAttribute("newsDto",newsDto);
 		return "news/view";
 	}
 	@RequestMapping(value = "/edit/{id}", method = RequestMethod.POST)
-	public String saveEdit(@ModelAttribute("newsDto") NewsDto newsDto, @PathVariable long id) throws ServiceException {
+	public String saveEdit(@ModelAttribute("newsDto") MasterNewsDto newsDto, @PathVariable long id) throws ServiceException {
 		newsService.update(newsDto);
 		return "redirect:/news";
 	}
@@ -90,7 +90,7 @@ public class NewsController {
 	@RequestMapping(value = "/{id}" , method = RequestMethod.GET)
 	public String viewNewsDetail(@PathVariable long id, HttpServletRequest request, Model model) throws ServiceException{
 		AuthorizedUserInfo aui = (AuthorizedUserInfo) request.getSession().getAttribute("aui");
-		NewsDto newsDto = newsService.findById(id);
+		MasterNewsDto newsDto = newsService.findById(id);
 		model.addAttribute("newsDto",newsDto);
 		return "news/news_detail/view";
 	}

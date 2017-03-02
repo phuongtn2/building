@@ -2,8 +2,8 @@ package com.building.services.impl;
 
 import com.building.dto.master.MasterBuildingDto;
 import com.building.dto.master.MasterServicesDto;
-import com.building.mapper.ManagerMasterServicesMapper;
-import com.building.services.ManagerMasterServicesService;
+import com.building.mapper.ServicesMapper;
+import com.building.services.ServicesService;
 
 import com.dropbox.core.ServerException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,9 +16,9 @@ import java.util.List;
  * Created by Giang.DaoTu on 11/15/2016.
  */
 @Service
-public class ManagerMasterServicesImp implements ManagerMasterServicesService {
+public class ServicesServiceImp implements ServicesService {
     @Autowired
-    private ManagerMasterServicesMapper managerMasterServicesMapper;
+    private ServicesMapper managerMasterServicesMapper;
 
     @Override
     public long insertMasterServices(MasterServicesDto masterServicesDto) throws ServerException {

@@ -1,10 +1,13 @@
 package com.controller;
 
 import com.building.dto.*;
+import com.building.dto.login.AuthorizedUserInfo;
 import com.building.dto.login.UserDto;
 import com.building.dto.login.UserRoleGroupDto;
-import com.building.services.ManagerBuildingService;
-import com.building.services.ManagerUserService;
+import com.building.dto.master.MasterBuildingDto;
+import com.building.dto.master.MasterFloorDto;
+import com.building.services.BuildingService;
+import com.building.services.UserService;
 import com.dropbox.core.ServerException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
@@ -28,11 +31,11 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/user")
-public class ManagerUserController {
+public class UserController {
     @Autowired
-    private ManagerUserService managerUserService;
+    private UserService managerUserService;
     @Autowired
-    private ManagerBuildingService managerBuildingService;
+    private BuildingService managerBuildingService;
     @InitBinder
     public void initBinder(WebDataBinder binder) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
@@ -147,14 +150,14 @@ public class ManagerUserController {
 
     //find building
     @ModelAttribute("buildingDtoList")
-    public List<BuildingDto> populateBuildingList() throws ServerException {
+    public List<MasterBuildingDto> populateBuildingList() throws ServerException {
         return managerBuildingService.findAll();
     }
 
     //find Floor by buildingCode
     @RequestMapping(value = "/findFlorByBuildingCode/{id}", method = RequestMethod.GET, headers = "Accept=application/json", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public List<FloorDto> findFlorByBuildingCode(@PathVariable long id)  throws ServerException{
+    public List<MasterFloorDto> findFlorByBuildingCode(@PathVariable long id)  throws ServerException{
         return managerBuildingService.findAllFloorByBuildingId(id);
     }
 

@@ -1,6 +1,6 @@
 package com.building.validator;
 
-import com.building.dto.BuildingDto;
+import com.building.dto.master.MasterBuildingDto;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
@@ -13,7 +13,7 @@ public class BuildingValidator implements Validator {
     @Override
     public boolean supports(Class clazz) {
         //just validate the Customer instances
-        return BuildingDto.class.isAssignableFrom(clazz);
+        return MasterBuildingDto.class.isAssignableFrom(clazz);
 
     }
 

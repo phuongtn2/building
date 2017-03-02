@@ -3,8 +3,8 @@ package com.building.services.impl;
 import com.building.dto.master.MasterBuildingDto;
 import com.building.dto.master.MasterFloorDto;
 import com.building.dto.master.MasterRoomDto;
-import com.building.mapper.ManagerBuildingMapper;
-import com.building.services.ManagerBuildingService;
+import com.building.mapper.BuildingMapper;
+import com.building.services.BuildingService;
 import com.dropbox.core.ServerException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,9 +15,9 @@ import java.util.List;
  * Created by PhuongTN1 on 11/4/2016.
  */
 @Service
-public class ManagerBuildingServiceImpl implements ManagerBuildingService {
+public class BuildingServiceImpl implements BuildingService {
     @Autowired
-    private ManagerBuildingMapper managerBuildingMapper;
+    private BuildingMapper managerBuildingMapper;
     @Override
     public long insertBuilding(MasterBuildingDto buildingDto) throws ServerException {
         return managerBuildingMapper.insertBuilding(buildingDto);

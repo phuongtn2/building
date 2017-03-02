@@ -46,10 +46,10 @@
         </property>
     </bean>
     <!-- request booking job-->
-    <bean id="queueEmailSendTaskRunner" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+    <!--<bean id="queueEmailSendTaskRunner" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
         <property name="targetObject" ref="requestBookingScheduler" />
         <property name="targetMethod" value="getRequestBookingList"  />
-    </bean>
+    </bean>-->
 
     <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
         <property name="useCodeAsDefaultMessage" value="true" />

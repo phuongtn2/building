@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * Created by PhuongTN1 on 11/4/2016.
  */
-public interface ManagerBuildingService {
+public interface BuildingService {
     long insertBuilding(MasterBuildingDto buildingDto) throws ServerException;
     List<MasterBuildingDto> findAll() throws ServerException;
     MasterBuildingDto findById(long id) throws ServerException;

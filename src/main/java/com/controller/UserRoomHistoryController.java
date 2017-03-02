@@ -1,24 +1,21 @@
 package com.controller;
 
-import com.building.dto.AuthorizedUserInfo;
-import com.building.dto.BuildingDto;
-import com.building.dto.FloorDto;
-import com.building.dto.RoomDto;
-import com.building.services.ManagerBuildingService;
+import com.building.dto.login.AuthorizedUserInfo;
+import com.building.dto.master.MasterBuildingDto;
+import com.building.dto.master.MasterFloorDto;
+import com.building.dto.master.MasterRoomDto;
+import com.building.services.BuildingService;
 import com.dropbox.core.ServerException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.bind.support.SessionStatus;
 
 import javax.servlet.http.HttpServletRequest;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -26,7 +23,7 @@ import java.util.List;
 @RequestMapping("/history")
 public class UserRoomHistoryController {
 	@Autowired
-	private ManagerBuildingService managerBuildingService;
+	private BuildingService managerBuildingService;
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
@@ -43,7 +40,7 @@ public class UserRoomHistoryController {
 	}
 
 	@ModelAttribute("buildingDtoList")
-	public List<BuildingDto> populateBuildingList() throws ServerException {
+	public List<MasterBuildingDto> populateBuildingList() throws ServerException {
 		return managerBuildingService.findAll();
 	}
 //	@RequestMapping(method = RequestMethod.POST)
@@ -68,7 +65,7 @@ public class UserRoomHistoryController {
 	@RequestMapping(value = "/floor/{id}", method = RequestMethod.GET)
 	public String getListFloor(@PathVariable long id, Model model, HttpServletRequest request)  throws ServerException{
 		AuthorizedUserInfo aui = (AuthorizedUserInfo) request.getSession().getAttribute("aui");
-		List<FloorDto> listFloor = managerBuildingService.findAllFloorByBuildingId(id);
+		List<MasterFloorDto> listFloor = managerBuildingService.findAllFloorByBuildingId(id);
 		model.addAttribute("floorDtoList",listFloor);
 		return "userRoomHistory/floor/view";
 	}
@@ -76,7 +73,7 @@ public class UserRoomHistoryController {
 	// Room
 	@RequestMapping(value = "/floor/room/{id}", method = RequestMethod.GET)
 	public String getListRoom(@PathVariable long id, Model model, HttpServletRequest request)  throws ServerException{
-		List<RoomDto> listRoom = managerBuildingService.findAllRoomByFloorId(id);
+		List<MasterRoomDto> listRoom = managerBuildingService.findAllRoomByFloorId(id);
 		model.addAttribute("roomDtoList",listRoom);
 		return "userRoomHistory/room/view";
 	}
@@ -84,7 +81,7 @@ public class UserRoomHistoryController {
 	// Room history
 	@RequestMapping(value = "/floor/room/detail{id}", method = RequestMethod.GET)
 	public String getRoomHistory(@PathVariable long id, Model model, HttpServletRequest request)  throws ServerException{
-		List<RoomDto> listRoom = managerBuildingService.findAllRoomByFloorId(id);
+		List<MasterRoomDto> listRoom = managerBuildingService.findAllRoomByFloorId(id);
 		model.addAttribute("roomDtoList",listRoom);
 		return "userRoomHistory/room/view";
 	}

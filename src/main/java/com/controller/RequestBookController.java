@@ -1,6 +1,6 @@
 package com.controller;
 
-import com.building.dto.AuthorizedUserInfo;
+import com.building.dto.login.AuthorizedUserInfo;
 import com.building.dto.BookServiceDto;
 import com.building.services.RequestBookService;
 import com.dropbox.core.ServerException;

@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.building.mapper.ManagerMasterServicesMapper">
+<mapper namespace="com.building.mapper.ServicesMapper">
 
     <insert id="insertMasterServices" useGeneratedKeys="true" keyProperty="dto.serviceCode">
         INSERT INTO M_SERVICE (

@@ -1,10 +1,10 @@
 package com.controller;
 
-import com.building.dto.AuthorizedUserInfo;
-import com.building.dto.BuildingDto;
-import com.building.dto.FloorDto;
-import com.building.dto.RoomDto;
-import com.building.services.ManagerBuildingService;
+import com.building.dto.login.AuthorizedUserInfo;
+import com.building.dto.master.MasterBuildingDto;
+import com.building.dto.master.MasterFloorDto;
+import com.building.dto.master.MasterRoomDto;
+import com.building.services.BuildingService;
 import com.dropbox.core.ServerException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
@@ -24,9 +24,9 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/building")
-public class ManagerBuildingController {
+public class BuildingController {
 	@Autowired
-	private ManagerBuildingService managerBuildingService;
+	private BuildingService managerBuildingService;
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
@@ -35,7 +35,7 @@ public class ManagerBuildingController {
 
 	@RequestMapping(method = RequestMethod.GET)
 	public String initForm(ModelMap model){
-		BuildingDto buildingDto = new BuildingDto();
+		MasterBuildingDto buildingDto = new MasterBuildingDto();
 		//command object
 		model.addAttribute("buildingDto", buildingDto);
 		//return form view
@@ -43,12 +43,12 @@ public class ManagerBuildingController {
 	}
 
 	@ModelAttribute("buildingDtoList")
-	public List<BuildingDto> populateBuildingList() throws ServerException {
+	public List<MasterBuildingDto> populateBuildingList() throws ServerException {
 		return managerBuildingService.findAll();
 	}
 	@RequestMapping(method = RequestMethod.POST)
 	public String processSubmit(
-			@ModelAttribute("buildingDto") BuildingDto buildingDto,
+			@ModelAttribute("buildingDto") MasterBuildingDto buildingDto,
 			BindingResult result, SessionStatus status) {
 
 		//customerValidator.validate(customer, result);
@@ -64,7 +64,7 @@ public class ManagerBuildingController {
 	}
 
 	@RequestMapping(method = RequestMethod.POST, params = "add")
-	public String addBuilding(@ModelAttribute("buildingDto") BuildingDto buildingDto) throws ServerException {
+	public String addBuilding(@ModelAttribute("buildingDto") MasterBuildingDto buildingDto) throws ServerException {
 		AuthorizedUserInfo aui = new AuthorizedUserInfo();
 		buildingDto.setCreateId(aui.getUserId());
 		buildingDto.setUpdateId(aui.getUserId());
@@ -75,14 +75,14 @@ public class ManagerBuildingController {
 	@RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
 	public String getEdit(@PathVariable long id, Model model, HttpServletRequest request)  throws ServerException{
 		AuthorizedUserInfo aui = (AuthorizedUserInfo) request.getSession().getAttribute("aui");
-		BuildingDto buildingDto = managerBuildingService.findById(id);
+		MasterBuildingDto buildingDto = managerBuildingService.findById(id);
 		buildingDto.setUpdateId(aui.getUserId());
 		model.addAttribute("buildingDto",buildingDto);
 		return "building";
 	}
 
 	@RequestMapping(value = "/edit/{id}", method = RequestMethod.POST)
-	public String saveEdit(@ModelAttribute("buildingDto") BuildingDto buildingDto, @PathVariable long id) throws ServerException {
+	public String saveEdit(@ModelAttribute("buildingDto") MasterBuildingDto buildingDto, @PathVariable long id) throws ServerException {
 		managerBuildingService.update(buildingDto);
 		return "redirect:/building";
 	}
@@ -102,13 +102,13 @@ public class ManagerBuildingController {
 	// Floor
 	@RequestMapping(value = "/floor/{id}", method = RequestMethod.GET)
 	public String getListFloor(@PathVariable long id, Model model, HttpServletRequest request)  throws ServerException{
-		List<FloorDto> listFloor = managerBuildingService.findAllFloorByBuildingId(id);
+		List<MasterFloorDto> listFloor = managerBuildingService.findAllFloorByBuildingId(id);
 		model.addAttribute("floorDtoList",listFloor);
 		return "building/floor/view";
 	}
 
 	@RequestMapping(value = "/floor/{id}", method = RequestMethod.POST, params = "add")
-	public String addFloor(@PathVariable long id, @ModelAttribute("floorDto") FloorDto floorDto, HttpServletRequest request) throws ServerException {
+	public String addFloor(@PathVariable long id, @ModelAttribute("floorDto") MasterFloorDto floorDto, HttpServletRequest request) throws ServerException {
 		AuthorizedUserInfo aui = (AuthorizedUserInfo) request.getSession().getAttribute("aui");
 		floorDto.setCreateId(aui.getUserId());
 		floorDto.setUpdateId(aui.getUserId());
@@ -119,16 +119,16 @@ public class ManagerBuildingController {
 	@RequestMapping(value = "/floor/{buildingId}/edit/{id}", method = RequestMethod.GET)
 	public String getEditFloor(@PathVariable long buildingId, @PathVariable long id, Model model, HttpServletRequest request)  throws ServerException{
 		AuthorizedUserInfo aui = (AuthorizedUserInfo) request.getSession().getAttribute("aui");
-		FloorDto floorDto = managerBuildingService.findFloorById(id);
+		MasterFloorDto floorDto = managerBuildingService.findFloorById(id);
 		floorDto.setUpdateId(aui.getUserId());
 		model.addAttribute("floorDto",floorDto);
-		List<FloorDto> listFloor = managerBuildingService.findAllFloorByBuildingId(buildingId);
+		List<MasterFloorDto> listFloor = managerBuildingService.findAllFloorByBuildingId(buildingId);
 		model.addAttribute("floorDtoList",listFloor);
 		return "building/floor/view";
 	}
 
 	@RequestMapping(value = "/floor/{buildingId}/edit/{id}", method = RequestMethod.POST)
-	public String saveEditFloor(@ModelAttribute("floorDto") FloorDto floorDto, @PathVariable long buildingId, @PathVariable long id) throws ServerException {
+	public String saveEditFloor(@ModelAttribute("floorDto") MasterFloorDto floorDto, @PathVariable long buildingId, @PathVariable long id) throws ServerException {
 		managerBuildingService.updateFloor(floorDto);
 		return "redirect:/building/floor/"+ buildingId;
 	}
@@ -147,13 +147,13 @@ public class ManagerBuildingController {
 	// Room
 	@RequestMapping(value = "/floor/room/{id}", method = RequestMethod.GET)
 	public String getListRoom(@PathVariable long id, Model model, HttpServletRequest request)  throws ServerException{
-		List<RoomDto> listRoom = managerBuildingService.findAllRoomByFloorId(id);
+		List<MasterRoomDto> listRoom = managerBuildingService.findAllRoomByFloorId(id);
 		model.addAttribute("roomDtoList",listRoom);
 		return "building/room/view";
 	}
 
 	@RequestMapping(value = "/floor/room/{id}", method = RequestMethod.POST, params = "add")
-	public String addRoom(@PathVariable long id, @ModelAttribute("roomDto") RoomDto roomDto, HttpServletRequest request) throws ServerException {
+	public String addRoom(@PathVariable long id, @ModelAttribute("roomDto") MasterRoomDto roomDto, HttpServletRequest request) throws ServerException {
 		AuthorizedUserInfo aui = (AuthorizedUserInfo) request.getSession().getAttribute("aui");
 		roomDto.setCreateId(aui.getUserId());
 		roomDto.setUpdateId(aui.getUserId());
@@ -164,16 +164,16 @@ public class ManagerBuildingController {
 	@RequestMapping(value = "/floor/room/{floorId}/edit/{id}", method = RequestMethod.GET)
 	public String getEditRoom(@PathVariable long floorId,@PathVariable long id, Model model, HttpServletRequest request)  throws ServerException{
 		AuthorizedUserInfo aui = (AuthorizedUserInfo) request.getSession().getAttribute("aui");
-		RoomDto roomDto = managerBuildingService.findRoomById(id);
+		MasterRoomDto roomDto = managerBuildingService.findRoomById(id);
 		roomDto.setUpdateId(aui.getUserId());
 		model.addAttribute("roomDto",roomDto);
-		List<RoomDto> listRoom = managerBuildingService.findAllRoomByFloorId(floorId);
+		List<MasterRoomDto> listRoom = managerBuildingService.findAllRoomByFloorId(floorId);
 		model.addAttribute("roomDtoList",listRoom);
 		return "building/room/view";
 	}
 
 	@RequestMapping(value = "/floor/room/{floorId}/edit/{id}", method = RequestMethod.POST)
-	public String saveEditRoom(@ModelAttribute("roomDto") RoomDto roomDto, @PathVariable long floorId, @PathVariable long id) throws ServerException {
+	public String saveEditRoom(@ModelAttribute("roomDto") MasterRoomDto roomDto, @PathVariable long floorId, @PathVariable long id) throws ServerException {
 		managerBuildingService.updateRoom(roomDto);
 		return "redirect:/building/floor/room/"+floorId;
 	}
