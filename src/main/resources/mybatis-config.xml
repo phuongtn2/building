@@ -19,10 +19,10 @@
 		<typeAlias alias="service" type="com.building.dto.master.MasterServicesDto"/>
 		<!-- end master -->
 		<!-- user -->
-		<typeAlias alias="empAuth" type="com.building.dto.AuthorizedUserInfo" />
-		<typeAlias alias="user" type="com.building.dto.UserDto"/>
-		<typeAlias alias="roleGroup" type="com.building.dto.RoleGroupDto" />
-		<typeAlias alias="userRoleGroup" type="com.building.dto.UserRoleGroupDto" />
+		<typeAlias alias="empAuth" type="com.building.dto.login.AuthorizedUserInfo" />
+		<typeAlias alias="user" type="com.building.dto.login.UserDto"/>
+		<typeAlias alias="roleGroup" type="com.building.dto.login.RoleGroupDto" />
+		<typeAlias alias="userRoleGroup" type="com.building.dto.login.UserRoleGroupDto" />
 		<typeAlias alias="userRoom" type="com.building.dto.UserRoomDto" />
 		<!-- end user -->
 		<!-- booking service -->
