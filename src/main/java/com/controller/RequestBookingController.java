@@ -1,19 +1,15 @@
 package com.controller;
 
-import com.building.dto.login.AuthorizedUserInfo;
-import com.building.dto.BookServiceDto;
-import com.building.services.RequestBookService;
+import com.building.dto.BookingServiceDto;
+import com.building.services.RequestBookingService;
 import com.dropbox.core.ServerException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.bind.support.SessionStatus;
 
 import javax.servlet.http.HttpServletRequest;
 import java.text.SimpleDateFormat;
@@ -22,9 +18,9 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/request_booking")
-public class RequestBookController {
+public class RequestBookingController {
 	@Autowired
-	private RequestBookService requestBookService;
+	private RequestBookingService requestBookingService;
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
@@ -42,7 +38,7 @@ public class RequestBookController {
 
 	@RequestMapping(value = "/list/self",method = RequestMethod.GET, headers = "Accept=application/json", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	public List<BookServiceDto> findAllBooking( HttpServletRequest request) throws ServerException {
+	public List<BookingServiceDto> findAllBooking(HttpServletRequest request) throws ServerException {
 		//try {
 			//String inputJson = IOUtils.toString(request.getReader());
 			//JSONObject jsonObj = new JSONObject(inputJson);
@@ -55,7 +51,7 @@ public class RequestBookController {
 			//transferComplaintDto.setUserId(aui.getUserId());
 			//transferComplaintDto.setUserName(aui.getFullName());
 			//complaintService.insertTComplaint(transferComplaintDto);
-			return requestBookService.findAllBook();
+			return null;
 		//} catch (IOException e) {
 		//	e.printStackTrace();
 		//}
@@ -63,7 +59,7 @@ public class RequestBookController {
 	}
 //	@ModelAttribute("bookServiceDtoList")
 //	public List<BookServiceDto> populateBookServiceList() throws ServerException {
-//		return requestBookService.findAllBook();
+//		return requestBookingService.findAllBook();
 //	}
 //	@RequestMapping(method = RequestMethod.POST)
 //	public String processSubmit(
@@ -84,27 +80,27 @@ public class RequestBookController {
 //		AuthorizedUserInfo aui = (AuthorizedUserInfo) request.getSession().getAttribute("aui");
 //		bookServiceDto.setUserId(aui.getUserId());
 //		bookServiceDto.setFollowStatus((byte) 0);
-//		requestBookService.insertBook(bookServiceDto);
+//		requestBookingService.insertBook(bookServiceDto);
 //		return "redirect:/request_booking";
 //	}
 //
 //	@RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
 //	public String getEdit(@PathVariable long id, Model model, HttpServletRequest request)  throws ServerException{
 //		AuthorizedUserInfo aui = (AuthorizedUserInfo) request.getSession().getAttribute("aui");
-//		BookServiceDto bookServiceDto = requestBookService.findById(id);
+//		BookServiceDto bookServiceDto = requestBookingService.findById(id);
 //		bookServiceDto.setUpdateId(aui.getUserId());
 //		model.addAttribute("bookServiceDto",bookServiceDto);
 //		return "request_booking";
 //	}
 //	@RequestMapping(value = "/edit/{id}", method = RequestMethod.POST)
 //	public String saveEdit(@ModelAttribute("bookServiceDto") BookServiceDto bookServiceDto, @PathVariable long id) throws ServerException {
-//		requestBookService.updateBook(bookServiceDto);
+//		requestBookingService.updateBook(bookServiceDto);
 //		return "redirect:/request_booking";
 //	}
 //
 //	@RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
 //	public String delete(@PathVariable long id, Model model, HttpServletRequest request)  throws ServerException{
-//		requestBookService.deleteById(id);
+//		requestBookingService.deleteById(id);
 //		return "redirect:/request_booking";
 //	}
 

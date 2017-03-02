@@ -7,31 +7,34 @@ import java.util.Date;
 /**
  * Created by Giang.DaoTu on 11/15/2016.
  */
-public class BookServiceDto extends DefaultObjectDto {
-    private Long bookServiceCode;
+public class BookingServiceDto extends DefaultObjectDto {
+    private Long bookingServiceCode;
     private Integer userId;
     private Date bookFrom;
     private Date bookTo;
     private Byte status;
     private Byte followStatus;
-    private String totalPrice;
-    private String memo;
+    private Float totalPrice;
 
-    public Long getBookServiceCode() {
-        return bookServiceCode;
-    }
-
-    public void setBookServiceCode(Long bookServiceCode) {
-        this.bookServiceCode = bookServiceCode;
-    }
-
-    public String getTotalPrice() {
+    public Float getTotalPrice() {
         return totalPrice;
     }
 
-    public void setTotalPrice(String totalPrice) {
+    public void setTotalPrice(Float totalPrice) {
         this.totalPrice = totalPrice;
     }
+
+    private String memo;
+
+    public Long getBookingServiceCode() {
+        return bookingServiceCode;
+    }
+
+    public void setBookingServiceCode(Long bookServiceCode) {
+        this.bookingServiceCode = bookingServiceCode;
+    }
+
+
 
     public String getText(){
         return memo;

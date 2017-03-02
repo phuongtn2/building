@@ -28,11 +28,11 @@
 		)
 	</insert>
 
-	<select id="findAll" resultType="m_asset">
+	<select id="findAll" resultType="asset">
 		SELECT * FROM M_ASSET ORDER BY created
 	</select>
 
-	<select id="findById" resultType="m_asset">
+	<select id="findById" resultType="asset">
 		SELECT * FROM M_ASSET WHERE assetCode=#{id}
 	</select>
 

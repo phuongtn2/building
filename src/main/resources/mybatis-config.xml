@@ -26,7 +26,7 @@
 		<typeAlias alias="userRoom" type="com.building.dto.UserRoomDto" />
 		<!-- end user -->
 		<!-- booking service -->
-		<typeAlias alias="bookService" type="com.building.dto.BookServiceDto"/>
+		<typeAlias alias="bookService" type="com.building.dto.BookingServiceDto"/>
 		<typeAlias alias="serviceAsset" type="com.building.dto.ServiceAsset"/>
 		<typeAlias alias="bookingServiceGroup" type="com.building.dto.BookingServiceGroup"/>
 		<!-- end booking service -->
