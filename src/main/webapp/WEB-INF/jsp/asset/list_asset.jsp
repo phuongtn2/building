@@ -48,7 +48,7 @@
                             <td class="text-center">
                                 <div class="btn-group">
                                     <a class="btn-success btn btn-xs" href="/asset/edit/${masterAsset.assetCode}"><spring:message code="common.button.edit" text="default text" /></a>
-                                    <a class="btn-danger btn btn-xs" href="/asset/delete/${masterAsset.assetCode}"><spring:message code="common.button.delete" text="default text" /></a>
+                                    <a type="button" data-toggle="modal" data-target="#deleteButton" class="btn-danger btn btn-xs" onclick="setUrl('/asset/delete/${masterAsset.assetCode}')"><spring:message code="common.button.delete" text="default text" /></a>
                                 </div>
                             </td>
                         </tr>
