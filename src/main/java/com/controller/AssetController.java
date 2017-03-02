@@ -35,7 +35,6 @@ public class AssetController {
 		MasterAssetDto masterAssetDto = new MasterAssetDto();
 		//command object
 		model.addAttribute("MasterAssetDto", masterAssetDto);
-		//model.addAttribute("newsDtoList", newsService.findAll());
 		//return form view
 		return "asset";
 	}

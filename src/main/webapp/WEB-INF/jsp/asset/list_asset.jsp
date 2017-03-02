@@ -22,8 +22,7 @@
                         <th><spring:message code="asset.name" text="default text" /></th>
                         <th data-hide="phone,tablet"><spring:message code="asset.type" text="default text" /></th>
                         <th data-hide="phone,tablet"><spring:message code="asset.building" text="default text" /></th>
-                        <th data-hide="phone,tablet"><spring:message code="common.fromdate" text="default text" /></th>
-                        <th data-hide="phone,tablet"><spring:message code="common.todate" text="default text" /></th>
+                        <th data-hide="phone,tablet"><spring:message code="common.status" text="default text" /></th>
                         <th data-hide="phone,tablet" class=T"text-center"><spring:message code="common.action" text="default text" /></th>
                     </tr>
                     </thead>
@@ -32,13 +31,14 @@
                         <tr class="gradeC" >
                             <td>${masterAsset.assetName}</td>
                             <td data-hide="phone,tablet">
-                                <c:if test="${masterAsset.assetType==1}" >assetType 1 </c:if>
-                                <c:if test="${masterAsset.assetType==2}" >assetType 2 </c:if>
-                                <c:if test="${masterAsset.assetType==3}" >assetType 3 </c:if>
+                                <c:if test="${masterAsset.assetType==1}" ><spring:message code="asset.type.general" text="default text" /></c:if>
+                                <c:if test="${masterAsset.assetType==2}" ><spring:message code="asset.type.personal" text="default text" /></c:if>
                             </td>
                             <td data-hide="phone,tablet">${masterAsset.buildingCode}</td>
-                            <td data-hide="phone,tablet"><fmt:formatDate pattern="MM/dd/yyyy" value="${masterAsset.dateFrom}" /></td>
-                            <td data-hide="phone,tablet"><fmt:formatDate pattern="MM/dd/yyyy" value="${masterAsset.dateTo}" /></td>
+                            <td data-hide="phone,tablet">
+                                <c:if test="${masterAsset.status==1}" ><spring:message code="status.active" text="default text" /></c:if>
+                                <c:if test="${masterAsset.status==0}" ><spring:message code="status.disable" text="default text" /></c:if>
+                            </td>
                             <td class="text-center">
                                 <div class="btn-group">
                                     <a class="btn-success btn btn-xs" href="/asset/edit/${masterAsset.assetCode}"><spring:message code="common.button.edit" text="default text" /></a>

@@ -14,6 +14,8 @@ public class MasterAssetDto extends DefaultObjectDto{
     private String assetName;
     private Date dateFrom;
     private Date dateTo;
+    private Float price;
+    private Byte status;
 
     public Long getBuildingCode() {
         return buildingCode;
@@ -61,5 +63,21 @@ public class MasterAssetDto extends DefaultObjectDto{
 
     public void setDateTo(Date dateTo) {
         this.dateTo = dateTo;
+    }
+
+    public Float getPrice() {
+        return price;
+    }
+
+    public void setPrice(Float price) {
+        this.price = price;
+    }
+
+    public Byte getStatus() {
+        return status;
+    }
+
+    public void setStatus(Byte status) {
+        this.status = status;
     }
 }
