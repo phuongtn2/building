@@ -2,7 +2,9 @@ package com.controller;
 
 import com.building.dto.master.MasterAssetDto;
 import com.building.dto.login.AuthorizedUserInfo;
+import com.building.dto.master.MasterBuildingDto;
 import com.building.services.AssetService;
+import com.building.services.BuildingService;
 import com.dropbox.core.ServerException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
@@ -24,6 +26,8 @@ import java.util.List;
 public class AssetController {
 	@Autowired
 	private AssetService masterAssetService;
+	@Autowired
+	private BuildingService buildingService;
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
@@ -37,6 +41,11 @@ public class AssetController {
 		model.addAttribute("MasterAssetDto", masterAssetDto);
 		//return form view
 		return "asset";
+	}
+
+	@ModelAttribute("buildingDtoDtoList")
+	public List<MasterBuildingDto> populateMasterBuildingList() throws ServerException {
+		return buildingService.findAll();
 	}
 
 	@ModelAttribute("masterAssetDtoList")

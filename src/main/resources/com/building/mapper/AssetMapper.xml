@@ -9,6 +9,8 @@
 		buildingCode
 		, assetType
 		, assetName
+		, price
+		, status
 		, dateFrom
 		, dateTo
 		, created
@@ -19,6 +21,8 @@
 		#{dto.buildingCode}
 		, #{dto.assetType}
 		, #{dto.assetName}
+		, #{dto.price}
+		, #{dto.status}
 		, #{dto.dateFrom}
 		, #{dto.dateTo}
 		,  NOW()
@@ -41,6 +45,8 @@
 		buildingCode = #{dto.buildingCode}
 		, assetType = #{dto.assetType}
 		, assetName = #{dto.assetName}
+		, price = #{dto.price}
+		, status = #{dto.status}
 		, dateFrom = #{dto.dateFrom}
 		, dateTo = #{dto.dateTo}
 		, updateId = #{dto.updateId}

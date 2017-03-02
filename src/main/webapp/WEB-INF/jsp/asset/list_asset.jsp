@@ -23,6 +23,7 @@
                         <th data-hide="phone,tablet"><spring:message code="asset.type" text="default text" /></th>
                         <th data-hide="phone,tablet"><spring:message code="asset.building" text="default text" /></th>
                         <th data-hide="phone,tablet"><spring:message code="common.status" text="default text" /></th>
+                        <th data-hide="phone,tablet"><spring:message code="asset.price" text="default text" /></th>
                         <th data-hide="phone,tablet" class=T"text-center"><spring:message code="common.action" text="default text" /></th>
                     </tr>
                     </thead>
@@ -34,11 +35,16 @@
                                 <c:if test="${masterAsset.assetType==1}" ><spring:message code="asset.type.general" text="default text" /></c:if>
                                 <c:if test="${masterAsset.assetType==2}" ><spring:message code="asset.type.personal" text="default text" /></c:if>
                             </td>
-                            <td data-hide="phone,tablet">${masterAsset.buildingCode}</td>
+                            <td data-hide="phone,tablet">
+                                <c:forEach items="${buildingDtoDtoList}" var="building">
+                                    <c:if test="${masterAsset.buildingCode==building.buildingCode}" >${building.buildingName}</c:if>
+                                </c:forEach>
+                            </td>
                             <td data-hide="phone,tablet">
                                 <c:if test="${masterAsset.status==1}" ><spring:message code="status.active" text="default text" /></c:if>
                                 <c:if test="${masterAsset.status==0}" ><spring:message code="status.disable" text="default text" /></c:if>
                             </td>
+                            <td data-hide="phone,tablet">${masterAsset.price} $</td>
                             <td class="text-center">
                                 <div class="btn-group">
                                     <a class="btn-success btn btn-xs" href="/asset/edit/${masterAsset.assetCode}"><spring:message code="common.button.edit" text="default text" /></a>
