@@ -1,0 +1,11 @@
+[
+    { "type" : "block", "inputWidth" : "auto", "list" : [
+        {"type":"input","name":"searchBuildingName","label":"Building Name","value":"", "offsetLeft":
+        10}
+    ]},
+    { "type" : "block", "inputWidth" : "auto", "list" : [
+        { "type" : "block", "inputWidth" : "auto", "list" : [
+             {"id":"leftGrid" , "name":"leftGrid" ,"type":"container", "label":"", "inputHeight":"300" }
+        ]}
+    ]}
+]

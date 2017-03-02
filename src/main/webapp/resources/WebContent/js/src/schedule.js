@@ -264,10 +264,10 @@ function ohgHIREScheduleObject() {
             schdForm.updateValues();
             // 絞込フォームから必要な物を取得する。
             var fd = schdForm.getFormData();
-            if (fd.buildingInput) {
+            if (fd.buildingCode) {
                 // 入力欄をデリミタで分割し、その中に対象となる物件が含まれているかをチェック
-                var preSelectArea = fd.buildingInput.split(FILTER_DELIMITER);
-                var targetValue = event.divisionSubName;
+                var preSelectArea = fd.buildingCode.split(FILTER_DELIMITER);
+                var targetValue = event.buildingName;
                 if (_.indexOf(preSelectArea, targetValue) == -1) {
                     return false;
                 }
@@ -340,25 +340,26 @@ function ohgHIREScheduleObject() {
         schdForm = layoutCell.attachForm();
         var def = $.Deferred();
         schdForm.loadStruct(getTemplatePath(_GH.DATA_PATH.SCHD_FORM_JSON), "json", function() {
+            schdForm.reloadOptions("status", _prop.getOptionsWithEmpty(_GH.CODE_DEF.STATUS));
             that.setMiniCalendar(schdForm.getContainer("miniCalendarContainer"));
             def.resolve();
         });
         // ボタンクリックイベント
         schdForm.attachEvent('onButtonClick', function(name, command){
             switch(name) {
-                case "filteringResetBtn": // 絞り込みリセットボタン
+                case "reset": // 絞り込みリセットボタン
                     // 検索内容をリセットする。
                     resetDhxFormItemValues(schdForm);
                     scheduler.updateView();
                     break;
-                case "showAllSchedBtn": // 全案内・来場予約表示ボタン
+                case "filter": // 全案内・来場予約表示ボタン
                     scheduler.clearAll();
                     resetDhxFormItemValues(schdForm);
                     scheduler.load(_GHAPI.SERVER + URI.ALL, "json");
                     scheduler.updateView();
                     break;
-                case "printPDFBtn": // PDF出力ボタン
-                    var filename = "ohHireSchedule" + getStrDate(new Date()) + ".pdf";
+                case "printPDFBtn":
+                    var filename = "Request Booking" + getStrDate(new Date()) + ".pdf";
                     var minDate = scheduler.getState().min_date;
                     var maxDate = scheduler.getState().max_date;
                     maxDate.setHours(maxDate.getHours() - 1);
@@ -368,22 +369,22 @@ function ohgHIREScheduleObject() {
                         format:"A4",
                         orientation:"portrait",
                         zoom:1,
-                        header:"<h1>OHG HIRE " + getStrDate(minDate, format) + " - " + getStrDate(maxDate, format) + "</h1>",
+                        header:"<h1>Building " + getStrDate(minDate, format) + " - " + getStrDate(maxDate, format) + "</h1>",
                         footer:"<h4>" + _ghUser.getName() + " " + getStrDate(new Date(), format) + "</h4>"
                     });
                     break;
             }
         });
-        // フォーカスイベント
         schdForm.attachEvent('onFocus', function(name, command){
             switch(name) {
-                case "buildingInput": // 組織 / 物件
-                    that.doBuildingWin(this.getInput("buildingInput"));
+                //phuongtn2
+                case "buildingName":
+                    _ghWins.doBuilding(schdForm.getInput("buildingCode"), schdForm.getInput("buildingName"), schdForm)
+
                     break;
             }
         });
         schdForm.attachEvent("onChange", function (name, value){
-            // 絞り込みエリアが返納されたら、表示内容をリフレッシュする。
             scheduler.updateView();
        });
         return def;
@@ -448,8 +449,8 @@ function ohgHIREScheduleObject() {
         schdForm.getContainer("eventLabelContainer").innerHTML = tableHtml;
     };
     this.doBuildingWin = function(targetInput) {
-        var win = _ghWins.ghWins.createWindow("buildingWin", 20, 30, 350, 450);
-        win.setText("絞込ウィンドウ");
+        var win = _ghWins.ghWins.createWindow("buildingWin", 30, 100, 350, 450);
+        win.setText("Select building");
         win.button("park").hide();
         win.button("minmax1").hide();
         win.button("close").attachEvent("onClick", function(){
@@ -462,7 +463,6 @@ function ohgHIREScheduleObject() {
         });
         var buildingForm = win.attachForm();
         buildingForm.loadStruct(FILTER_WIN_FORM, "json", function() {
-            // すでに選択されている場合の処理
             var inpVal = targetInput.value;
             if (_.isString(inpVal) && inpVal.length > 0) {
                 var preSelectArea = inpVal.split(FILTER_DELIMITER);
@@ -477,7 +477,6 @@ function ohgHIREScheduleObject() {
                 buildingForm.setFormData(dataset);
             }
         });
-        // ボタンクリック
         buildingForm.attachEvent("onButtonClick", function(name){
             if (name == "selectBtn") {
                 var text = "";
@@ -491,14 +490,12 @@ function ohgHIREScheduleObject() {
                 win.setModal(false);
                 win.close();
             } else if (name == "allCheck") {
-                // すべて選択
                 var dataset = {};
                 _.forEach(buildingForm.getFormData(), function(value, key, object) {
                     dataset[key] = true;
                 });
                 buildingForm.setFormData(dataset);
             } else if (name == "allUncheck") {
-                // チェックをはずす
                 var dataset = {};
                 _.forEach(buildingForm.getFormData(), function(value, key, object) {
                     dataset[key] = false;

@@ -21,7 +21,7 @@
                             <div class="form-group">
                                 <label class="control-label" ><spring:message code="asset.name" text="default text" /></label>
                                 <input type="hidden" id="assetCode" name="assetCode" value="<c:if test="${masterAssetDto.assetCode!= null}">${masterAssetDto.assetCode}</c:if>"  class="form-control">
-                                <input type="text" id="assetName" name="assetName" value="<c:if test="${masterAssetDto.assetName!= null}">${masterAssetDto.assetName}</c:if>" class="form-control">
+                                <input type="text" id="assetName" name="assetName" value="<c:if test="${masterAssetDto.assetName!= null}">${masterAssetDto.assetName}</c:if>" class="form-control" required>
                             </div>
                         </div>
                         <div class="col-sm-2">
@@ -55,7 +55,7 @@
                         <div class="col-sm-2">
                             <div class="form-group">
                                 <label class="control-label"><spring:message code="asset.price" text="default text" /></label>
-                                <input  type="text" id="price" name="price" value="${masterAssetDto.price}" class="form-control">
+                                <input  type="text" id="price" name="price" value="${masterAssetDto.price}" class="form-control" required>
                             </div>
                         </div>
                     </div>

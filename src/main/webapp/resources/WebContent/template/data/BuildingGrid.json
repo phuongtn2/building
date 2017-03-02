@@ -1,0 +1,7 @@
+{
+    "head":[
+        {"id":"buildingCode","width":"50","type":"ro","align":"right","sort":"int","value":"buildingCode"}
+        ,{"id":"buildingName","width":"*","type":"ro","align":"left","sort":"str","value":"Building Name"}
+     ],
+"rows":[]
+}

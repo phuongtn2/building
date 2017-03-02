@@ -17,96 +17,101 @@ import java.util.List;
 @Service
 public class BuildingServiceImpl implements BuildingService {
     @Autowired
-    private BuildingMapper managerBuildingMapper;
+    private BuildingMapper buildingMapper;
     @Override
     public long insertBuilding(MasterBuildingDto buildingDto) throws ServerException {
-        return managerBuildingMapper.insertBuilding(buildingDto);
+        return buildingMapper.insertBuilding(buildingDto);
     }
     @Override
     public List<MasterBuildingDto> findAll() throws ServerException {
-        return managerBuildingMapper.findAll();
+        return buildingMapper.findAll();
     }
 
     @Override
     public MasterBuildingDto findById(long id) throws ServerException {
-        return managerBuildingMapper.findById(id);
+        return buildingMapper.findById(id);
     }
 
     @Override
     public void update(MasterBuildingDto buildingDto) throws ServerException {
-        managerBuildingMapper.update(buildingDto);
+        buildingMapper.update(buildingDto);
     }
 
     @Override
     public void deleteById(long id) throws ServerException {
-        managerBuildingMapper.deleteById(id);
+        buildingMapper.deleteById(id);
     }
 
     //Floor
     @Override
     public List<MasterFloorDto> findAllFloorByBuildingId(long buildingId) throws ServerException {
-        return managerBuildingMapper.findAllFloorByBuildingId(buildingId);
+        return buildingMapper.findAllFloorByBuildingId(buildingId);
     }
 
     @Override
     public List<Long> findAllFloorIdByBuildingId(long buildingId) throws ServerException {
-        return managerBuildingMapper.findAllFloorIdByBuildingId(buildingId);
+        return buildingMapper.findAllFloorIdByBuildingId(buildingId);
     }
 
     @Override
     public long insertFloor(MasterFloorDto floorDto) throws ServerException {
-        return managerBuildingMapper.insertFloor(floorDto);
+        return buildingMapper.insertFloor(floorDto);
     }
 
     @Override
     public MasterFloorDto findFloorById(long id) throws ServerException {
-        return managerBuildingMapper.findFloorById(id);
+        return buildingMapper.findFloorById(id);
     }
 
     @Override
     public void updateFloor(MasterFloorDto floorDto) throws ServerException {
-        managerBuildingMapper.updateFloor(floorDto);
+        buildingMapper.updateFloor(floorDto);
     }
 
     @Override
     public void deleteFloorById(long id) throws ServerException {
-        managerBuildingMapper.deleteFloorById(id);
+        buildingMapper.deleteFloorById(id);
     }
 
     @Override
     public void deleteFloorByBuildingId(long id) throws ServerException {
-        managerBuildingMapper.deleteFloorByBuildingId(id);
+        buildingMapper.deleteFloorByBuildingId(id);
     }
 
     //Room
 
     @Override
     public void deleteRoomById(long id) throws ServerException {
-        managerBuildingMapper.deleteRoomById(id);
+        buildingMapper.deleteRoomById(id);
     }
 
     @Override
     public void deleteRoomByFloorId(List<Long> listFloorId) throws ServerException {
-        managerBuildingMapper.deleteRoomByFloorId(listFloorId);
+        buildingMapper.deleteRoomByFloorId(listFloorId);
+    }
+
+    @Override
+    public List<MasterBuildingDto> findByBuildingName(String buildingName) throws ServerException {
+        return buildingMapper.findByBuildingName(buildingName);
     }
 
     @Override
     public List<MasterRoomDto> findAllRoomByFloorId(long floorId) throws ServerException {
-        return managerBuildingMapper.findAllRoomByFloorId(floorId);
+        return buildingMapper.findAllRoomByFloorId(floorId);
     }
 
     @Override
     public long insertRoom(MasterRoomDto roomDto) throws ServerException {
-        return managerBuildingMapper.insertRoom(roomDto);
+        return buildingMapper.insertRoom(roomDto);
     }
 
     @Override
     public MasterRoomDto findRoomById(long id) throws ServerException {
-        return managerBuildingMapper.findRoomById(id);
+        return buildingMapper.findRoomById(id);
     }
 
     @Override
     public void updateRoom(MasterRoomDto roomDto) throws ServerException {
-        managerBuildingMapper.updateRoom(roomDto);
+        buildingMapper.updateRoom(roomDto);
     }
 }

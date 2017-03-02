@@ -119,6 +119,83 @@ function CommonWindows() {
 
     };
 
+    this.doBuilding = function(buildingCodeInput, buildingNameInput, formObject){
+        var winName = "BuildingWin";
+        var MODE =  _GH.WINS.EVENT_MODE.EVENT;
+        //var DEPT = (_ghUser.isNon())? _GH.WINS.EVENT_POS.KD: _GH.WINS.EVENT_POS.MS;
+        var win = this.ghWins.window(winName);
+        if (win == null) {
+            var winWidth = MODE.width;
+            win = this.ghWins.createWindow(winName, 20, 30, winWidth, MODE.height);
+            win.setText("Select Building");
+            win.hide();
+            win.attachEvent("onClose", function (/*win*/) {
+                if (!_.isEmpty(formObject)) formObject.updateValues();
+                return true;
+            });
+        }
+        var bukkenForm = win.attachForm();
+        bukkenForm.loadStruct(loadJSON(getTemplatePath(_GH.DATA_PATH.WIN_BUILDING_FORM_JSON)), "json", function() {
+        if (MODE.isEvent) {
+                this.hideItem("arrow");
+                this.hideItem("info");
+            }
+        });
+        var gridDataLogicFunc = function (data, id/*, rowIdx*/) {
+            var val;
+            switch (id) {
+                case "buildingName":
+                    val = _.isEmpty(data[id])? data["buildingName"]: data[id];
+                    break;
+                default:
+                    val = data[id];
+                    break;
+            }
+            return val;
+        };
+        var leftGrid = new dhtmlXGridObject(bukkenForm.getContainer("leftGrid"));
+        leftGrid.setImagePath(_GH.PATH_TYPE.DHX_IMGS);
+        leftGrid.setSkin(_GH.PATH_TYPE.SKIN);
+        leftGrid.attachEvent("onDataReady",function(){
+            leftGrid.setColumnHidden(0, true);
+        });
+
+        var searchBuilding = function(doSearchAll) {
+            var buildingName = bukkenForm.getItemValue("searchBuildingName");
+            var query = "";
+            if (!_.isEmpty(buildingName)) {
+                query += "buildingName=" + buildingName + "&";
+            }
+            if (_.isEmpty(query) && !doSearchAll) return;
+            if (leftGrid) leftGrid.clearAll();
+            loadGridByGet(leftGrid, _GH.DATA_PATH.BUILDING_GIRD, "building/list?" + query, "buildingCode", gridDataLogicFunc);
+        };
+
+        bukkenForm.attachEvent("onChange", function (name/*, value*/) {
+            switch (name) {
+                case "searchBuildingName":
+                    searchBuilding();
+                    break;
+            }
+        });
+        bukkenForm.attachEvent("onKeyDown",function (inp, ev, name/*, value*/) {
+            switch (name) {
+                case "searchBuildingName":
+                    if (ev.keyCode == _GH.KEY_CODE.ENTER) searchBuilding();
+                    break;
+            }
+        });
+
+        var previousEventId = 0;
+        searchBuilding(true);
+        leftGrid.attachEvent("onRowDblClicked", function (selectBuildingCode/*, cInd*/) {
+            if (buildingCodeInput !== null) buildingCodeInput.value = leftGrid.cells(selectBuildingCode, 0).getValue();
+            if (buildingNameInput !== null) buildingNameInput.value = leftGrid.cells(selectBuildingCode, 1).getValue();
+            win.close();
+        });
+        win.show();
+    };
+
     /**
      * 担当者選択ダイアログを開く
      * @param tantoIdInput {Object} 担当者IDを設定するためのInputオブジェクト
@@ -2026,98 +2103,6 @@ function CommonWindows() {
      * @param {Object} eventNameInput 物件名をセットするINPUTオブジェクト
      * @param {Object} formObject フォームオブジェクト
      * */
-    this.doEvent = function(eventIdInput, eventNameInput, formObject){
-        var winName = "eventWin";
-        // 表示モードの判定（部屋ID入力があればモード２（部屋）、そうでなければモード１（物件）
-        var MODE =  _GH.WINS.EVENT_MODE.EVENT;
-        var DEPT = (_ghUser.isNon())? _GH.WINS.EVENT_POS.KD: _GH.WINS.EVENT_POS.MS;
-        var win = this.ghWins.window(winName);
-        if (win == null) {
-            var winWidth = MODE.width + DEPT.addWidth; // MSは表示項目が多いので、幅を増やす。
-            win = this.ghWins.createWindow(winName, 20, 30, winWidth, MODE.height);
-            win.setText("物件ウィンドウ");
-            win.hide();
-            win.attachEvent("onClose", function (/*win*/) {
-                if (!_.isEmpty(formObject)) formObject.updateValues();
-                return true;
-            });
-        }
-        //フォームの作成
-        var bukkenForm = win.attachForm();
-        bukkenForm.loadStruct(loadJSON(getTemplatePath(_GH.DATA_PATH.WIN_EVENT_FORM_JSON)), "json", function() {
-            if (MODE.isEvent) {
-                // 物件だけの場合、不要な入力項目は隠す
-                this.hideItem("arrow");
-                this.hideItem("info");
-            }
-        });
-
-        // Grid表示用にデータを振り分けるロジック
-        var gridDataLogicFunc = function (data, id/*, rowIdx*/) {
-            var val;
-            switch (id) {
-                case "eventName":
-                    val = _.isEmpty(data[id])? data["eventName"]: data[id];
-                    break;
-                case "place":
-                    //住所情報
-                    val = data["place"];
-                    break;
-                case "hideFlg":
-                    //有効無効フラグ
-                    val = _prop.getPropName(_GH.CODE_DEF.ENABLE_DISABLE_FLG,data[id]);
-                    break;
-              default:
-                  val = data[id];
-                  break;
-            }
-            return val;
-        };
-
-        // 左の物件Gridの初期化
-        var leftGrid = new dhtmlXGridObject(bukkenForm.getContainer("leftGrid"));
-        leftGrid.setImagePath(_GH.PATH_TYPE.DHX_IMGS);
-        leftGrid.setSkin(_GH.PATH_TYPE.SKIN);
-        leftGrid.attachEvent("onDataReady",function(){
-            leftGrid.setColumnHidden(0, true); // 物件ID
-            leftGrid.setColumnHidden(3, true); // 有効
-        });
-
-        var searchEvent = function(doSearchAll) {
-            var eventName = bukkenForm.getItemValue("searchEventName");
-            var query = "";
-            if (!_.isEmpty(eventName)) {
-                query += "eventName=" + eventName + "&";
-            }
-            if (_.isEmpty(query) && !doSearchAll) return;
-            if (leftGrid) leftGrid.clearAll();
-            loadGridByGet(leftGrid, _GH.DATA_PATH.WIN_EVENT_LEFT_GRID_JSON, "event/list?" + query, "eventId", gridDataLogicFunc);
-        };
-
-        bukkenForm.attachEvent("onChange", function (name/*, value*/) {
-            switch (name) {
-                case "searchEventName":
-                    searchEvent();
-                    break;
-            }
-        });
-        bukkenForm.attachEvent("onKeyDown",function (inp, ev, name/*, value*/) {
-            switch (name) {
-                case "searchEventName":
-                    if (ev.keyCode == _GH.KEY_CODE.ENTER) searchEvent();
-                    break;
-            }
-        });
-
-        var previousEventId = 0;
-        searchEvent(true);
-        leftGrid.attachEvent("onRowDblClicked", function (selectEventId/*, cInd*/) {
-            if (eventIdInput !== null) eventIdInput.value = leftGrid.cells(selectEventId, DEPT.eventId).getValue();
-            if (eventNameInput !== null) eventNameInput.value = leftGrid.cells(selectEventId, DEPT.eventName).getValue();
-            win.close();
-        });
-        win.show();
-    };
 
     /**
      * 郵便番号ウィンドウ

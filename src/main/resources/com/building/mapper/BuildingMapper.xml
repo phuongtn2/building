@@ -150,6 +150,13 @@
 			#{id}
 		</foreach>
 	</delete>
+
+	<select id="findByBuildingName" resultType="building">
+		SELECT *
+		FROM M_BUILDING b
+		<if test="buildingName != null"> WHERE b.buildingName LIKE #{buildingName}</if>
+		ORDER BY b.buildingCode desc
+	</select>
 </mapper>
 
 

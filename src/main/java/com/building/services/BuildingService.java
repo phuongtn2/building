@@ -31,4 +31,5 @@ public interface BuildingService {
     void updateRoom(MasterRoomDto roomDto) throws ServerException;
     void deleteRoomById(long id) throws ServerException;
     void deleteRoomByFloorId(List<Long> listFloorId) throws ServerException;
+    List<MasterBuildingDto> findByBuildingName(String buildingName) throws ServerException;
 }

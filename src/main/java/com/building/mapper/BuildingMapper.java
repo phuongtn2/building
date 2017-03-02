@@ -30,4 +30,5 @@ public interface BuildingMapper {
     void updateRoom(@Param("dto") MasterRoomDto roomDto);
     void deleteRoomById(@Param("id") long id);
     void deleteRoomByFloorId(@Param("listId") List<Long> listId);
+    List<MasterBuildingDto> findByBuildingName(@Param("buildingName") String buildingName);
 }
