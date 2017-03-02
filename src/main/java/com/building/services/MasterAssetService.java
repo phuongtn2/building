@@ -1,8 +1,7 @@
 package com.building.services;
 
 
-import com.building.dto.MasterAssetDto;
-import com.building.dto.MasterServicesDto;
+import com.building.dto.master.MasterAssetDto;
 import com.dropbox.core.ServerException;
 
 import java.util.List;

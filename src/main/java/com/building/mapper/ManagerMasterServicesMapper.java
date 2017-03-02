@@ -1,7 +1,7 @@
 package com.building.mapper;
 
-import com.building.dto.BuildingDto;
-import com.building.dto.MasterServicesDto;
+import com.building.dto.master.MasterBuildingDto;
+import com.building.dto.master.MasterServicesDto;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -15,5 +15,5 @@ public interface ManagerMasterServicesMapper {
     MasterServicesDto findById(@Param("id") long id);
     void update(@Param("dto") MasterServicesDto masterServicesDto);
     void deleteById(@Param("id") long id);
-    List<BuildingDto> findAllBuilding();
+    List<MasterBuildingDto> findAllBuilding();
 }

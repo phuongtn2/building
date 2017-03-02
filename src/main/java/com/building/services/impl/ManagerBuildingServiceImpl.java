@@ -1,9 +1,8 @@
 package com.building.services.impl;
 
-import com.building.dto.BuildingDto;
-
-import com.building.dto.FloorDto;
-import com.building.dto.RoomDto;
+import com.building.dto.master.MasterBuildingDto;
+import com.building.dto.master.MasterFloorDto;
+import com.building.dto.master.MasterRoomDto;
 import com.building.mapper.ManagerBuildingMapper;
 import com.building.services.ManagerBuildingService;
 import com.dropbox.core.ServerException;
@@ -20,21 +19,21 @@ public class ManagerBuildingServiceImpl implements ManagerBuildingService {
     @Autowired
     private ManagerBuildingMapper managerBuildingMapper;
     @Override
-    public long insertBuilding(BuildingDto buildingDto) throws ServerException {
+    public long insertBuilding(MasterBuildingDto buildingDto) throws ServerException {
         return managerBuildingMapper.insertBuilding(buildingDto);
     }
     @Override
-    public List<BuildingDto> findAll() throws ServerException {
+    public List<MasterBuildingDto> findAll() throws ServerException {
         return managerBuildingMapper.findAll();
     }
 
     @Override
-    public BuildingDto findById(long id) throws ServerException {
+    public MasterBuildingDto findById(long id) throws ServerException {
         return managerBuildingMapper.findById(id);
     }
 
     @Override
-    public void update(BuildingDto buildingDto) throws ServerException {
+    public void update(MasterBuildingDto buildingDto) throws ServerException {
         managerBuildingMapper.update(buildingDto);
     }
 
@@ -45,7 +44,7 @@ public class ManagerBuildingServiceImpl implements ManagerBuildingService {
 
     //Floor
     @Override
-    public List<FloorDto> findAllFloorByBuildingId(long buildingId) throws ServerException {
+    public List<MasterFloorDto> findAllFloorByBuildingId(long buildingId) throws ServerException {
         return managerBuildingMapper.findAllFloorByBuildingId(buildingId);
     }
 
@@ -55,17 +54,17 @@ public class ManagerBuildingServiceImpl implements ManagerBuildingService {
     }
 
     @Override
-    public long insertFloor(FloorDto floorDto) throws ServerException {
+    public long insertFloor(MasterFloorDto floorDto) throws ServerException {
         return managerBuildingMapper.insertFloor(floorDto);
     }
 
     @Override
-    public FloorDto findFloorById(long id) throws ServerException {
+    public MasterFloorDto findFloorById(long id) throws ServerException {
         return managerBuildingMapper.findFloorById(id);
     }
 
     @Override
-    public void updateFloor(FloorDto floorDto) throws ServerException {
+    public void updateFloor(MasterFloorDto floorDto) throws ServerException {
         managerBuildingMapper.updateFloor(floorDto);
     }
 
@@ -92,22 +91,22 @@ public class ManagerBuildingServiceImpl implements ManagerBuildingService {
     }
 
     @Override
-    public List<RoomDto> findAllRoomByFloorId(long floorId) throws ServerException {
+    public List<MasterRoomDto> findAllRoomByFloorId(long floorId) throws ServerException {
         return managerBuildingMapper.findAllRoomByFloorId(floorId);
     }
 
     @Override
-    public long insertRoom(RoomDto roomDto) throws ServerException {
+    public long insertRoom(MasterRoomDto roomDto) throws ServerException {
         return managerBuildingMapper.insertRoom(roomDto);
     }
 
     @Override
-    public RoomDto findRoomById(long id) throws ServerException {
+    public MasterRoomDto findRoomById(long id) throws ServerException {
         return managerBuildingMapper.findRoomById(id);
     }
 
     @Override
-    public void updateRoom(RoomDto roomDto) throws ServerException {
+    public void updateRoom(MasterRoomDto roomDto) throws ServerException {
         managerBuildingMapper.updateRoom(roomDto);
     }
 }

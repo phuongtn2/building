@@ -1,6 +1,6 @@
 package com.building.mapper;
 
-import com.building.dto.MasterAssetDto;
+import com.building.dto.master.MasterAssetDto;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;

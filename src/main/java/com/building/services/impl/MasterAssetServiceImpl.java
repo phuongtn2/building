@@ -1,6 +1,6 @@
 package com.building.services.impl;
 
-import com.building.dto.MasterAssetDto;
+import com.building.dto.master.MasterAssetDto;
 import com.building.mapper.MasterAssetMapper;
 import com.building.services.MasterAssetService;
 import com.dropbox.core.ServerException;

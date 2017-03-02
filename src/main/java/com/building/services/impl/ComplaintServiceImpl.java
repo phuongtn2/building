@@ -1,9 +1,9 @@
 package com.building.services.impl;
 
-import com.building.dto.AuthorizedUserInfo;
-import com.building.dto.ComplaintDto;
 import com.building.dto.TransferComplaintDto;
 import com.building.dto.TransferReplyDto;
+import com.building.dto.login.AuthorizedUserInfo;
+import com.building.dto.master.MasterComplaintDto;
 import com.building.mapper.ComplaintMapper;
 import com.building.services.ComplaintService;
 import com.dropbox.core.ServerException;
@@ -20,12 +20,12 @@ public class ComplaintServiceImpl implements ComplaintService {
     @Autowired
     private ComplaintMapper complaintMapper;
     @Override
-    public long insertComplaint(ComplaintDto complaintDto) throws ServerException {
+    public long insertComplaint(MasterComplaintDto complaintDto) throws ServerException {
         return complaintMapper.insertComplaint(complaintDto);
     }
 
     @Override
-    public List<ComplaintDto> findAllComplaint() throws ServerException {
+    public List<MasterComplaintDto> findAllComplaint() throws ServerException {
         return complaintMapper.findAllComplaint();
     }
 
@@ -40,18 +40,18 @@ public class ComplaintServiceImpl implements ComplaintService {
     }
 
     @Override
-    public long updateFollowStatus(ComplaintDto complaintDto) throws ServerException {
+    public long updateFollowStatus(MasterComplaintDto complaintDto) throws ServerException {
         complaintMapper.updateFollowStatus(complaintDto);
         return 1L;
     }
 
     @Override
-    public ComplaintDto findById(long id) throws ServerException {
+    public MasterComplaintDto findById(long id) throws ServerException {
         return complaintMapper.findById(id);
     }
 
     @Override
-    public List<ComplaintDto> findAllComplaintHistory(AuthorizedUserInfo aui, boolean per) throws ServerException {
+    public List<MasterComplaintDto> findAllComplaintHistory(AuthorizedUserInfo aui, boolean per) throws ServerException {
         return complaintMapper.findAllComplaintHistory(aui,per);
     }
 

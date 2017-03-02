@@ -1,8 +1,8 @@
 package com.building.mapper;
 
-import com.building.dto.BuildingDto;
-import com.building.dto.FloorDto;
-import com.building.dto.RoomDto;
+import com.building.dto.master.MasterBuildingDto;
+import com.building.dto.master.MasterFloorDto;
+import com.building.dto.master.MasterRoomDto;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -10,24 +10,24 @@ import java.util.List;
  * Created by PhuongTN1 on 11/4/2016.
  */
 public interface ManagerBuildingMapper {
-    long insertBuilding(@Param("dto")BuildingDto buildingDto);
-    List<BuildingDto> findAll();
-    BuildingDto findById(@Param("id") long id);
-    void update(@Param("dto") BuildingDto buildingDto);
+    long insertBuilding(@Param("dto")MasterBuildingDto buildingDto);
+    List<MasterBuildingDto> findAll();
+    MasterBuildingDto findById(@Param("id") long id);
+    void update(@Param("dto") MasterBuildingDto buildingDto);
     void deleteById(@Param("id") long id);
     //Floor
-    List<FloorDto> findAllFloorByBuildingId(@Param("id") long buildingId);
-    long insertFloor(@Param("dto") FloorDto floorDto);
-    FloorDto findFloorById(@Param("id") long id);
-    void updateFloor(@Param("dto") FloorDto floorDto);
+    List<MasterFloorDto> findAllFloorByBuildingId(@Param("id") long buildingId);
+    long insertFloor(@Param("dto") MasterFloorDto floorDto);
+    MasterFloorDto findFloorById(@Param("id") long id);
+    void updateFloor(@Param("dto") MasterFloorDto floorDto);
     void deleteFloorById(@Param("id") long id);
     List<Long> findAllFloorIdByBuildingId(@Param("id") long id);
     void deleteFloorByBuildingId(@Param("id") long id);
     //Room
-    List<RoomDto> findAllRoomByFloorId(@Param("id") long floorId);
-    long insertRoom(@Param("dto") RoomDto roomDto);
-    RoomDto findRoomById(@Param("id") long id);
-    void updateRoom(@Param("dto") RoomDto roomDto);
+    List<MasterRoomDto> findAllRoomByFloorId(@Param("id") long floorId);
+    long insertRoom(@Param("dto") MasterRoomDto roomDto);
+    MasterRoomDto findRoomById(@Param("id") long id);
+    void updateRoom(@Param("dto") MasterRoomDto roomDto);
     void deleteRoomById(@Param("id") long id);
     void deleteRoomByFloorId(@Param("listId") List<Long> listId);
 }

@@ -1,7 +1,6 @@
 package com.building.services;
 
 import com.building.dto.BookServiceDto;
-import com.building.dto.NewsDto;
 import com.dropbox.core.ServerException;
 
 import java.util.List;

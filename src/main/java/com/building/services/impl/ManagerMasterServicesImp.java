@@ -1,7 +1,7 @@
 package com.building.services.impl;
 
-import com.building.dto.BuildingDto;
-import com.building.dto.MasterServicesDto;
+import com.building.dto.master.MasterBuildingDto;
+import com.building.dto.master.MasterServicesDto;
 import com.building.mapper.ManagerMasterServicesMapper;
 import com.building.services.ManagerMasterServicesService;
 
@@ -46,7 +46,7 @@ public class ManagerMasterServicesImp implements ManagerMasterServicesService {
     }
 
     @Override
-    public List<BuildingDto> findAllBuilding() throws ServerException {
+    public List<MasterBuildingDto> findAllBuilding() throws ServerException {
         return managerMasterServicesMapper.findAllBuilding();
     }
 }
