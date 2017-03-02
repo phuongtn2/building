@@ -1,5 +1,6 @@
 package com.building.services.impl;
 
+import com.building.dto.NewsDetailDto;
 import com.building.dto.master.MasterNewsDto;
 import com.building.mapper.NewsMapper;
 import com.building.services.NewsService;
@@ -24,6 +25,11 @@ public class NewsServiceImpl implements NewsService {
     @Override
     public List<MasterNewsDto> findAll() throws ServiceException {
         return newsMapper.findAll();
+    }
+
+    @Override
+    public List<NewsDetailDto> findByNewsId(long id) throws ServiceException {
+        return newsMapper.findByNewsId(id);
     }
 
     @Override

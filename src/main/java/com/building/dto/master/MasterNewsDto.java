@@ -6,51 +6,49 @@ import com.building.dto.common.DefaultObjectDto;
  * Created by PhuongTN1 on 11/4/2016.
  */
 public class MasterNewsDto extends DefaultObjectDto {
-    private Long newCode;
-    private Byte newType;
-    private String newHeader;
-    private String newShorter;
-    private String newContent;
+    private Long newsCode;
+    private Byte newsType;
+    private String newsHeader;
+    private String newsShorter;
+    private String newsContent;
 
-    public String getNewContent() {
-        return newContent;
+    public Long getNewsCode() {
+        return newsCode;
     }
 
-    public void setNewContent(String newContent) {
-        this.newContent = newContent;
+    public void setNewsCode(Long newsCode) {
+        this.newsCode = newsCode;
     }
 
-    public Long getNewCode() {
-        return newCode;
+    public Byte getNewsType() {
+        return newsType;
     }
 
-    public void setNewCode(Long newCode) {
-        this.newCode = newCode;
+    public void setNewsType(Byte newsType) {
+        this.newsType = newsType;
     }
 
-    public Byte getNewType() {
-        return newType;
+    public String getNewsHeader() {
+        return newsHeader;
     }
 
-    public void setNewType(Byte newType) {
-        this.newType = newType;
+    public void setNewsHeader(String newsHeader) {
+        this.newsHeader = newsHeader;
     }
 
-    public String getNewHeader() {
-        return newHeader;
+    public String getNewsShorter() {
+        return newsShorter;
     }
 
-    public void setNewHeader(String newHeader) {
-        this.newHeader = newHeader;
+    public void setNewsShorter(String newsShorter) {
+        this.newsShorter = newsShorter;
     }
 
-    public String getNewShorter() {
-        return newShorter;
+    public String getNewsContent() {
+        return newsContent;
     }
 
-    public void setNewShorter(String newShorter) {
-        this.newShorter = newShorter;
+    public void setNewsContent(String newsContent) {
+        this.newsContent = newsContent;
     }
-
-
 }

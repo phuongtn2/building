@@ -1,6 +1,7 @@
 package com.building.services;
 
 
+import com.building.dto.NewsDetailDto;
 import com.building.dto.master.MasterNewsDto;
 import com.building.services.error.ServiceException;
 import java.util.List;
@@ -11,6 +12,7 @@ import java.util.List;
 public interface NewsService {
     long insertNews(MasterNewsDto newsDto) throws ServiceException;
     List<MasterNewsDto> findAll() throws ServiceException;
+    List<NewsDetailDto> findByNewsId(long id) throws ServiceException;
     MasterNewsDto findById(long id) throws ServiceException;
     void update(MasterNewsDto newsDto) throws ServiceException;
     void deleteById(long id) throws ServiceException;
