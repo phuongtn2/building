@@ -1,6 +1,8 @@
 package com.controller;
 
 import com.building.dto.*;
+import com.building.dto.login.UserDto;
+import com.building.dto.login.UserRoleGroupDto;
 import com.building.services.ManagerBuildingService;
 import com.building.services.ManagerUserService;
 import com.dropbox.core.ServerException;
@@ -17,7 +19,6 @@ import org.springframework.web.bind.support.SessionStatus;
 
 import javax.servlet.http.HttpServletRequest;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 

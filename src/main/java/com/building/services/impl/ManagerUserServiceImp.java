@@ -1,7 +1,7 @@
 package com.building.services.impl;
 
-import com.building.dto.UserDto;
-import com.building.dto.UserRoleGroupDto;
+import com.building.dto.login.UserDto;
+import com.building.dto.login.UserRoleGroupDto;
 import com.building.dto.UserRoomDto;
 import com.building.mapper.ManagerUserMapper;
 import com.building.services.ManagerUserService;

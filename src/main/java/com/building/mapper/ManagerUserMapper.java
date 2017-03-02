@@ -1,7 +1,7 @@
 package com.building.mapper;
 
-import com.building.dto.UserDto;
-import com.building.dto.UserRoleGroupDto;
+import com.building.dto.login.UserDto;
+import com.building.dto.login.UserRoleGroupDto;
 import com.building.dto.UserRoomDto;
 import org.apache.ibatis.annotations.Param;
 

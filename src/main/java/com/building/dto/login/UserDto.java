@@ -1,4 +1,4 @@
-package com.building.dto;
+package com.building.dto.login;
 
 import com.building.dto.common.DefaultObjectDto;
 

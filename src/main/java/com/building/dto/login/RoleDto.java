@@ -1,4 +1,4 @@
-package com.building.dto;
+package com.building.dto.login;
 
 /**
  * T_ROLEのDTO
