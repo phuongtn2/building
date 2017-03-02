@@ -6,28 +6,33 @@
 <configuration>
 	<settings>
 		<setting name="lazyLoadingEnabled" value="false" />
-		<!-- <setting name="mapUnderscoreToCamelCase" value="true"/> -->
 		<setting name="logImpl" value="LOG4J" />
 	</settings>
 	<typeAliases>
+		<!-- master -->
+		<typeAlias alias="building" type="com.building.dto.master.MasterBuildingDto"/>
+		<typeAlias alias="floor" type="com.building.dto.master.MasterFloorDto"/>
+		<typeAlias alias="room" type="com.building.dto.master.MasterRoomDto"/>
+		<typeAlias alias="asset" type="com.building.dto.master.MasterAssetDto"/>
+		<typeAlias alias="news" type="com.building.dto.master.MasterNewsDto"/>
+		<typeAlias alias="complaint" type="com.building.dto.master.MasterComplaintDto"/>
+		<typeAlias alias="service" type="com.building.dto.master.MasterServicesDto"/>
+		<!-- end master -->
+		<!-- user -->
 		<typeAlias alias="empAuth" type="com.building.dto.AuthorizedUserInfo" />
+		<typeAlias alias="user" type="com.building.dto.UserDto"/>
 		<typeAlias alias="roleGroup" type="com.building.dto.RoleGroupDto" />
 		<typeAlias alias="userRoleGroup" type="com.building.dto.UserRoleGroupDto" />
 		<typeAlias alias="userRoom" type="com.building.dto.UserRoomDto" />
-		<typeAlias alias="building" type="com.building.dto.BuildingDto"/>
-		<typeAlias alias="news" type="com.building.dto.NewsDto"/>
+		<!-- end user -->
+		<!-- booking service -->
+		<typeAlias alias="bookService" type="com.building.dto.BookServiceDto"/>
+		<typeAlias alias="serviceAsset" type="com.building.dto.ServiceAsset"/>
+		<typeAlias alias="bookingServiceGroup" type="com.building.dto.BookingServiceGroup"/>
+		<!-- end booking service -->
 		<typeAlias alias="news_detail" type="com.building.dto.NewsDetailDto"/>
-		<typeAlias alias="m_asset" type="com.building.dto.MasterAssetDto"/>
 		<typeAlias alias="t_asset" type="com.building.dto.TransferAssetDto"/>
-		<typeAlias alias="user" type="com.building.dto.UserDto"/>
-		<typeAlias alias="service" type="com.building.dto.MasterServicesDto"/>
-		<typeAlias alias="book_service" type="com.building.dto.BookServiceDto"/>
-		<typeAlias alias="complaint" type="com.building.dto.ComplaintDto"/>
-		<typeAlias alias="floor" type="com.building.dto.FloorDto"/>
-		<typeAlias alias="room" type="com.building.dto.RoomDto"/>
 		<typeAlias alias="tComplaint" type="com.building.dto.TransferComplaintDto"/>
 		<typeAlias alias="tReply" type="com.building.dto.TransferReplyDto"/>
-		<typeAlias alias="bookingServiceService" type="com.building.dto.BookingServiceGroup"/>
-		<typeAlias alias="serviceAsset" type="com.building.dto.ServiceAsset"/>
 	</typeAliases>
 </configuration>
