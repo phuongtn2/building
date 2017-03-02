@@ -4,17 +4,8 @@ package com.building.dto;
  * Created by Giang.DaoTu on 1/10/2017.
  */
 public class ServiceAsset {
-    private Integer serviceAssetCode;
     private Integer serviceCode;
     private Integer assetCode;
-
-    public Integer getServiceAssetCode() {
-        return serviceAssetCode;
-    }
-
-    public void setServiceAssetCode(Integer serviceAssetCode) {
-        this.serviceAssetCode = serviceAssetCode;
-    }
 
     public Integer getServiceCode() {
         return serviceCode;

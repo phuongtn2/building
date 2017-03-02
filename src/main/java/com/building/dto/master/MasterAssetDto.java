@@ -1,4 +1,6 @@
-package com.building.dto;
+package com.building.dto.master;
+
+import com.building.dto.common.DefaultObjectDto;
 
 import java.util.Date;
 

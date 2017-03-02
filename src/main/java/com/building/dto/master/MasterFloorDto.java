@@ -1,9 +1,11 @@
-package com.building.dto;
+package com.building.dto.master;
+
+import com.building.dto.common.DefaultObjectDto;
 
 /**
  * Created by Giang.DaoTu on 11/15/2016.
  */
-public class FloorDto extends DefaultObjectDto{
+public class MasterFloorDto extends DefaultObjectDto{
     private Long floorCode;
     private Integer floorSeq;
     private String floorAlias;

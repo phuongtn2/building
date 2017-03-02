@@ -1,11 +1,11 @@
-package com.building.dto;
+package com.building.dto.master;
 
-import java.util.Date;
+import com.building.dto.common.DefaultObjectDto;
 
 /**
  * Created by PhuongTN1 on 11/4/2016.
  */
-public class BuildingDto extends DefaultObjectDto{
+public class MasterBuildingDto extends DefaultObjectDto{
     private Long buildingCode;
     private String buildingName;
     private Integer totalFloor;

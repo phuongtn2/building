@@ -1,17 +1,16 @@
-package com.building.dto;
+package com.building.dto.master;
 
-import java.util.Date;
+import com.building.dto.common.DefaultObjectDto;
 
 /**
  * Created by PhuongTN1 on 11/4/2016.
  */
-public class NewsDto extends DefaultObjectDto {
+public class MasterNewsDto extends DefaultObjectDto {
     private Long newCode;
     private Byte newType;
     private String newHeader;
     private String newShorter;
     private Long refNewCode;
-    private String newContent;
 
     public Long getNewCode() {
         return newCode;
@@ -53,11 +52,4 @@ public class NewsDto extends DefaultObjectDto {
         this.refNewCode = refNewCode;
     }
 
-    public String getNewContent() {
-        return newContent;
-    }
-
-    public void setNewContent(String newContent) {
-        this.newContent = newContent;
-    }
 }

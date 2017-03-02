@@ -1,9 +1,11 @@
-package com.building.dto;
+package com.building.dto.master;
+
+import com.building.dto.common.DefaultObjectDto;
 
 /**
  * Created by Giang.DaoTu on 11/15/2016.
  */
-public class ComplaintDto extends DefaultObjectDto{
+public class MasterComplaintDto extends DefaultObjectDto{
     private long complaintCode;
     private String title;
     private byte followStatus;

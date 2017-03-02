@@ -1,5 +1,7 @@
 package com.building.dto;
 
+import com.building.dto.common.DefaultObjectDto;
+
 /**
  * Created by Giang.DaoTu on 11/15/2016.
  */

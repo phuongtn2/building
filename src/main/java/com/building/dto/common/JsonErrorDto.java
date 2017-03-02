@@ -1,4 +1,4 @@
-package com.building.dto;
+package com.building.dto.common;
 
 public class JsonErrorDto {
 	private String statusCode;

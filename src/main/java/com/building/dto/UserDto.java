@@ -1,12 +1,13 @@
 package com.building.dto;
 
-import java.io.Serializable;
+import com.building.dto.common.DefaultObjectDto;
+
 import java.util.Date;
 
 /**
  * Created by phuongtn2 on 7/11/2016.
  */
-public class UserDto extends DefaultObjectDto{
+public class UserDto extends DefaultObjectDto {
 
 	private Integer userId;
 	private String adId;

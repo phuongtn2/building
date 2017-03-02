@@ -1,5 +1,7 @@
 package com.building.dto;
 
+import com.building.dto.common.DefaultObjectDto;
+
 import java.util.List;
 
 /**

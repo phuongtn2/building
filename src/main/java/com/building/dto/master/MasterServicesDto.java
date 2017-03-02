@@ -1,4 +1,6 @@
-package com.building.dto;
+package com.building.dto.master;
+
+import com.building.dto.common.DefaultObjectDto;
 
 import java.util.Date;
 
@@ -6,7 +8,7 @@ import java.util.Date;
  * Created by Giang.DaoTu on 11/15/2016.
  */
 public class MasterServicesDto extends DefaultObjectDto{
-    private String serviceCode;
+    private Long serviceCode;
 
     private Byte serviceType;
     private String serviceName;
@@ -16,12 +18,11 @@ public class MasterServicesDto extends DefaultObjectDto{
     private Integer buildingCode;
 
 
-
-    public String getServiceCode() {
+    public Long getServiceCode() {
         return serviceCode;
     }
 
-    public void setServiceCode(String serviceCode) {
+    public void setServiceCode(Long serviceCode) {
         this.serviceCode = serviceCode;
     }
 

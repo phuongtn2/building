@@ -1,56 +1,48 @@
 package com.building.dto;
 
+import com.building.dto.common.DefaultObjectDto;
+
 import java.util.Date;
 
 /**
  * Created by Giang.DaoTu on 11/15/2016.
  */
 public class BookServiceDto extends DefaultObjectDto {
-    private Long t_bookServiceCode;
-    private Long serviceCode;
+    private Long bookServiceCode;
     private Integer userId;
-    private Long assetCode;
     private Date bookFrom;
     private Date bookTo;
     private Byte status;
     private Byte followStatus;
-    private String servicePrice;
+    private String totalPrice;
     private String memo;
 
-    public int getId(){
-        return Integer.valueOf(t_bookServiceCode.toString());
+    public Long getBookServiceCode() {
+        return bookServiceCode;
     }
+
+    public void setBookServiceCode(Long bookServiceCode) {
+        this.bookServiceCode = bookServiceCode;
+    }
+
+    public String getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(String totalPrice) {
+        this.totalPrice = totalPrice;
+    }
+
     public String getText(){
         return memo;
     }
+
     public Date getStart_date(){
         return bookFrom;
     }
+
     public Date getEnd_date(){
         return bookTo;
-    }
-    public String getServicePrice() {
-        return servicePrice;
-    }
-
-    public void setServicePrice(String servicePrice) {
-        this.servicePrice = servicePrice;
-    }
-
-    public Long getT_bookServiceCode() {
-        return t_bookServiceCode;
-    }
-
-    public void setT_bookServiceCode(Long t_bookServiceCode) {
-        this.t_bookServiceCode = t_bookServiceCode;
-    }
-
-    public Long getServiceCode() {
-        return serviceCode;
-    }
-
-    public void setServiceCode(Long serviceCode) {
-        this.serviceCode = serviceCode;
     }
 
     public Integer getUserId() {
@@ -59,14 +51,6 @@ public class BookServiceDto extends DefaultObjectDto {
 
     public void setUserId(Integer userId) {
         this.userId = userId;
-    }
-
-    public Long getAssetCode() {
-        return assetCode;
-    }
-
-    public void setAssetCode(Long assetCode) {
-        this.assetCode = assetCode;
     }
 
     public Date getBookFrom() {
