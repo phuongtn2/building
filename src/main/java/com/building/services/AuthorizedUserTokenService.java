@@ -1,6 +1,6 @@
 package com.building.services;
 
-import com.building.dto.AuthorizedUserInfo;
+import com.building.dto.login.AuthorizedUserInfo;
 import com.building.services.error.ServiceException;
 
 import javax.ws.rs.core.MultivaluedMap;

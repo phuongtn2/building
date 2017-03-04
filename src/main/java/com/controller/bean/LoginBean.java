@@ -1,7 +1,7 @@
 package com.controller.bean;
 
 
-import com.building.dto.AuthorizedUserInfo;
+import com.building.dto.login.AuthorizedUserInfo;
 import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.support.RequestContextUtils;
@@ -24,7 +24,11 @@ public class LoginBean implements Filter{
 		HttpSession session = req.getSession();
 		AuthorizedUserInfo aui = (AuthorizedUserInfo) session.getAttribute("aui");
 		if (aui == null && !req.getRequestURI().contains("/login")){
-			RequestDispatcher rd = req.getRequestDispatcher("/");
+			RequestDispatcher rd;
+			if(req.getRequestURI().contains("/forgotpassword"))
+				rd = req.getRequestDispatcher("/forgotpassword");
+			else
+				rd = req.getRequestDispatcher("/");
 			rd.forward(servletRequest, servletResponse);
 			return;
 		}

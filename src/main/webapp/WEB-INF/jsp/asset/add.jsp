@@ -21,7 +21,7 @@
                             <div class="form-group">
                                 <label class="control-label" ><spring:message code="asset.name" text="default text" /></label>
                                 <input type="hidden" id="assetCode" name="assetCode" value="<c:if test="${masterAssetDto.assetCode!= null}">${masterAssetDto.assetCode}</c:if>"  class="form-control">
-                                <input type="text" id="assetName" name="assetName" value="<c:if test="${masterAssetDto.assetName!= null}">${masterAssetDto.assetName}</c:if>" class="form-control">
+                                <input type="text" id="assetName" name="assetName" value="<c:if test="${masterAssetDto.assetName!= null}">${masterAssetDto.assetName}</c:if>" class="form-control" required>
                             </div>
                         </div>
                         <div class="col-sm-2">
@@ -33,16 +33,29 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="col-sm-4">
+                        <div class="col-sm-2">
                             <div class="form-group">
                                 <label class="control-label"><spring:message code="asset.building" text="default text" /></label>
-                                <input  type="text" id="buildingCode" name="buildingCode" value="<c:if test="${masterAssetDto.buildingCode!= null}">${masterAssetDto.buildingCode}</c:if>" class="form-control">
+                                <select id="buildingCode" name="buildingCode" class="form-control m-b">
+                                    <c:forEach items="${buildingDtoDtoList}" var="building">
+                                        <option <c:if test="${masterServiceDto.buildingCode==building.buildingCode}" >selected</c:if> value="${building.buildingCode}">${building.buildingName}</option>
+                                    </c:forEach>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <div class="form-group">
+                                <label class="control-label"><spring:message code="common.status" text="default text" /></label>
+                                <select id="status" name="status" class="form-control m-b">
+                                    <option <c:if test="${masterAssetDto.status==1}" >selected</c:if> value="1"><spring:message code="common.active" text="default text" /></option>
+                                    <option <c:if test="${masterAssetDto.status==0}" >selected</c:if> value="0"><spring:message code="common.deactive" text="default text" /></option>
+                                </select>
                             </div>
                         </div>
                         <div class="col-sm-2">
                             <div class="form-group">
                                 <label class="control-label"><spring:message code="asset.price" text="default text" /></label>
-                                <input  type="text" id="assetPrice" name="assetPrice" value="<c:if test="${masterAssetDto.buildingCode!= null}">${masterAssetDto.buildingCode}</c:if>" class="form-control">
+                                <input  type="text" id="price" name="price" value="${masterAssetDto.price}" class="form-control" required>
                             </div>
                         </div>
                     </div>

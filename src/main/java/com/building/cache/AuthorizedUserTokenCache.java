@@ -1,7 +1,7 @@
 package com.building.cache;
 
 
-import com.building.dto.AuthorizedUserInfo;
+import com.building.dto.login.AuthorizedUserInfo;
 
 public interface AuthorizedUserTokenCache {
 	public AuthorizedUserInfo findToken(String token);

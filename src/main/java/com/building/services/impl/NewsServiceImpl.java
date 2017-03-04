@@ -1,6 +1,7 @@
 package com.building.services.impl;
 
-import com.building.dto.NewsDto;
+import com.building.dto.NewsDetailDto;
+import com.building.dto.master.MasterNewsDto;
 import com.building.mapper.NewsMapper;
 import com.building.services.NewsService;
 import com.building.services.error.ServiceException;
@@ -17,22 +18,27 @@ public class NewsServiceImpl implements NewsService {
     @Autowired
     private NewsMapper newsMapper;
     @Override
-    public long insertNews(NewsDto newsDto) throws ServiceException {
+    public long insertNews(MasterNewsDto newsDto) throws ServiceException {
         return newsMapper.insertNews(newsDto);
     }
 
     @Override
-    public List<NewsDto> findAll() throws ServiceException {
+    public List<MasterNewsDto> findAll() throws ServiceException {
         return newsMapper.findAll();
     }
 
     @Override
-    public NewsDto findById(long id) throws ServiceException {
+    public List<NewsDetailDto> findByNewsId(long id) throws ServiceException {
+        return newsMapper.findByNewsId(id);
+    }
+
+    @Override
+    public MasterNewsDto findById(long id) throws ServiceException {
         return newsMapper.findById(id);
     }
 
     @Override
-    public void update(NewsDto newsDto) throws ServiceException {
+    public void update(MasterNewsDto newsDto) throws ServiceException {
         newsMapper.update(newsDto);
     }
 

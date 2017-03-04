@@ -50,7 +50,9 @@ var _GH = (function(){
             SCHD_FORM_JSON : {filename: "FilterRequest.json", common: true},
             SCHD_LIGHT_FORM_JSON : {filename: "BookingForm.json", common: true},
             SERVICES_ASSETS_WIN : {filename: "ServicesAssetsWin.json", common: true},
-            SERVICES_ASSETS_GRID : {filename: "ServicesAssetsGrid.json", common: true}
+            SERVICES_ASSETS_GRID : {filename: "ServicesAssetsGrid.json", common: true},
+            WIN_BUILDING_FORM_JSON : {filename: "BuildingWinForm.json", common: true},
+            BUILDING_GIRD : {filename: "BuildingGrid.json", common: true}
         },
         FORMAT : {
             YMD : "%Y/%m/%d",

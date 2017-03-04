@@ -1,6 +1,6 @@
 package com.controller;
 
-import com.building.dto.AuthorizedUserInfo;
+import com.building.dto.login.AuthorizedUserInfo;
 import com.building.services.AuthorizedUserTokenService;
 import com.building.services.error.ServiceException;
 import com.building.util.str.StringUtil;

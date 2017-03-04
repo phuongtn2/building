@@ -1,6 +1,6 @@
 package com.building.util;
 
-import com.building.dto.AuthorizedUserInfo;
+import com.building.dto.login.AuthorizedUserInfo;
 import com.building.services.ApiDefs;
 import com.building.services.Role;
 import com.building.services.error.ServiceException;

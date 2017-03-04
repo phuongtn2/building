@@ -1,8 +1,11 @@
 package com.building.dto;
 
+import com.building.dto.common.DefaultObjectDto;
+import com.building.dto.login.UserDto;
+import com.building.dto.login.UserRoleGroupDto;
+
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 
 /**
  * Created by phuongtn2 on 7/11/2016.

@@ -5,7 +5,7 @@ package com.building.dto;
  */
 public class TranferBookServiceDto {
     private String servicePrice;
-    private BookServiceDto bookServiceDto;
+    private BookingServiceDto bookServiceDto;
 
     public String getServicePrice() {
         return servicePrice;
@@ -15,11 +15,11 @@ public class TranferBookServiceDto {
         this.servicePrice = servicePrice;
     }
 
-    public BookServiceDto getBookServiceDto() {
+    public BookingServiceDto getBookServiceDto() {
         return bookServiceDto;
     }
 
-    public void setBookServiceDto(BookServiceDto bookServiceDto) {
+    public void setBookServiceDto(BookingServiceDto bookServiceDto) {
         this.bookServiceDto = bookServiceDto;
     }
 }

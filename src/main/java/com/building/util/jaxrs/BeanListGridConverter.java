@@ -1,6 +1,6 @@
 package com.building.util.jaxrs;
 
-import com.building.dto.GridRowEntry;
+import com.building.dto.common.GridRowEntry;
 import com.building.util.core.ClassUtil;
 
 import java.lang.reflect.Method;

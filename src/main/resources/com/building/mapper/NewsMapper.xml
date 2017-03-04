@@ -4,23 +4,40 @@
 
 <mapper namespace="com.building.mapper.NewsMapper">
 
-	<insert id="insertNews" useGeneratedKeys="true" keyProperty="dto.newCode">
+	<insert id="insertNews" useGeneratedKeys="true" keyProperty="dto.newsCode">
 		INSERT INTO M_NEWS(
-		newType
-		, newHeader
-		, newShorter
-		, newContent
-		, refNewCode
+		newsType
+		, newsHeader
+		, newsShorter
+		, newsContent
 		, created
 		, lastUpdate
 		, createId
 		, updateId
 		)VALUES(
-		#{dto.newType}
-		, #{dto.newHeader}
-		, #{dto.newShorter}
-		, #{dto.newContent}
-		, #{dto.refNewCode}
+		#{dto.newsType}
+		, #{dto.newsHeader}
+		, #{dto.newsShorter}
+		, #{dto.newsContent}
+		,  NOW()
+		,  NOW()
+		, #{dto.createId}
+		, #{dto.updateId}
+		)
+	</insert>
+
+	<insert id="insertNewsDetail" useGeneratedKeys="true" keyProperty="dto.newsDetailCode">
+		INSERT INTO T_NEWS_DETAIL(
+		newsType
+		, newsCode
+		, refNewsCode
+		, created
+		, lastUpdate
+		, createId
+		, updateId
+		)VALUES(
+		#{dto.newsCode}
+		, #{dto.refNewsCode}
 		,  NOW()
 		,  NOW()
 		, #{dto.createId}
@@ -31,25 +48,25 @@
 	<select id="findAll" resultType="news">
 		SELECT * FROM M_NEWS ORDER BY created
 	</select>
-
+	<select id="findByNewsId" resultType="newsDetail">
+		SELECT * FROM T_NEWS_DETAIL WHERE newsCode=#{id} ORDER BY created
+	</select>
 	<select id="findById" resultType="news">
-		SELECT * FROM M_NEWS WHERE newCode=#{id}
+		SELECT * FROM M_NEWS WHERE newsCode=#{id}
 	</select>
 
 	<update id="update">
 		UPDATE M_NEWS SET
-		newType = #{dto.newType}
-		,newHeader = #{dto.newHeader}
-		,newShorter = #{dto.newShorter}
-		,newContent = #{dto.newContent}
-		,refNewCode = #{dto.refNewCode}
+		newsType = #{dto.newsType}
+		,newsHeader = #{dto.newsHeader}
+		,newsShorter = #{dto.newsShorter}
+		,refNewsCode = #{dto.refNewsCode}
 		,updateId = #{dto.updateId}
 		,lastUpdate= NOW()
-		WHERE newCode= #{dto.newCode}
+		WHERE newsCode= #{dto.newsCode}
 	</update>
 	<delete id="deleteById">
-		DELETE FROM M_NEWS WHERE newCode = #{id}
+		DELETE FROM M_NEWS WHERE newsCode = #{id}
 	</delete>
-
 
 </mapper>

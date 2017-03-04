@@ -1,7 +1,7 @@
 package com.building.cache.impl;
 
 import com.building.cache.AuthorizedUserTokenCache;
-import com.building.dto.AuthorizedUserInfo;
+import com.building.dto.login.AuthorizedUserInfo;
 import com.building.services.Role;
 import org.springframework.stereotype.Service;
 

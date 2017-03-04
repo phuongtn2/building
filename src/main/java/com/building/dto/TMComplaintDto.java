@@ -1,19 +1,22 @@
 package com.building.dto;
 
+import com.building.dto.common.DefaultObjectDto;
+import com.building.dto.master.MasterComplaintDto;
+
 import java.util.List;
 
 /**
  * Created by phuongtn2 on 11/15/2016.
  */
 public class TMComplaintDto extends DefaultObjectDto {
-    ComplaintDto mComplaint ;
+    MasterComplaintDto mComplaint ;
     List<TransferComplaintDto> tComplaintList;
 
-    public ComplaintDto getmComplaint() {
+    public MasterComplaintDto getmComplaint() {
         return mComplaint;
     }
 
-    public void setmComplaint(ComplaintDto mComplaint) {
+    public void setmComplaint(MasterComplaintDto mComplaint) {
         this.mComplaint = mComplaint;
     }
 

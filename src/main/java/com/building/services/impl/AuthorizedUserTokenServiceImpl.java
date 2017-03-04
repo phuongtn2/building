@@ -1,7 +1,7 @@
 package com.building.services.impl;
 
 import com.building.cache.AuthorizedUserTokenCache;
-import com.building.dto.AuthorizedUserInfo;
+import com.building.dto.login.AuthorizedUserInfo;
 import com.building.mapper.AuthorizedUserTokenMapper;
 import com.building.services.ApiDefs;
 import com.building.services.AuthorizedUserTokenService;

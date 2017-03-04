@@ -1,6 +1,6 @@
 package com.api;
 
-import com.building.dto.BookServiceDto;
+import com.building.dto.BookingServiceDto;
 import com.building.services.annotation.PermissionBinding;
 import com.building.services.error.ServiceException;
 import com.dropbox.core.ServerException;
@@ -27,5 +27,5 @@ public interface RequestBookingApi {
 
     @GET
     @Path("/list/self")
-    List<BookServiceDto> findAllBooking(@Context HttpServletRequest request,@QueryParam("from") String from,@QueryParam("to") String to) throws ServerException;
+    List<BookingServiceDto> findAllBooking(@Context HttpServletRequest request, @QueryParam("from") String from, @QueryParam("to") String to) throws ServerException;
 }

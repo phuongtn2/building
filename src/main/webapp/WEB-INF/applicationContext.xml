@@ -13,7 +13,6 @@
     http://www.springframework.org/schema/context
     http://www.springframework.org/schema/context/spring-context-3.0.xsd
     http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
-
     http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring.xsd
     http://www.springframework.org/schema/jdbc
     http://www.springframework.org/schema/jdbc/spring-jdbc.xsd
@@ -26,8 +25,8 @@
     <context:component-scan base-package="com.">
         <context:include-filter type="regex"
                                 expression="services.impl.*" />
-        <!--<context:include-filter type="regex"
-                                expression="services.interceptor.*" />-->
+        <context:include-filter type="regex"
+                                expression="schedule.impl.*" />
         <context:include-filter type="regex"
                                 expression="cache.impl.*" />
         <context:include-filter type="regex"
@@ -38,6 +37,19 @@
     <mvc:annotation-driven />
     <mvc:resources mapping="/resources/**" location="/resources/"
                    cache-period="31556926"/>
+
+    <bean id="setting" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+        <property name="locations">
+            <list>
+                <value>/WEB-INF/setting.properties</value>
+            </list>
+        </property>
+    </bean>
+    <!-- request booking job-->
+    <!--<bean id="queueEmailSendTaskRunner" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <property name="targetObject" ref="requestBookingScheduler" />
+        <property name="targetMethod" value="getRequestBookingList"  />
+    </bean>-->
 
     <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
         <property name="useCodeAsDefaultMessage" value="true" />

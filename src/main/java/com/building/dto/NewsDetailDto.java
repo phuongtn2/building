@@ -1,43 +1,46 @@
 package com.building.dto;
 
+import com.building.dto.common.DefaultObjectDto;
+import com.building.dto.master.MasterNewsDto;
+
 /**
  * Created by Giang.DaoTu on 11/15/2016.
  */
 public class NewsDetailDto extends DefaultObjectDto {
-    private Long newDetailCode;
-    private Long newCode;
-    private Long refNewCode;
-    private String newContent;
+    private Long newsDetailCode;
+    private Long newsCode;
+    private Long refNewsCode;
+    private MasterNewsDto masterNewsDto;
 
-    public Long getNewDetailCode() {
-        return newDetailCode;
+    public Long getNewsDetailCode() {
+        return newsDetailCode;
     }
 
-    public void setNewDetailCode(Long newDetailCode) {
-        this.newDetailCode = newDetailCode;
+    public void setNewsDetailCode(Long newsDetailCode) {
+        this.newsDetailCode = newsDetailCode;
     }
 
-    public Long getNewCode() {
-        return newCode;
+    public Long getNewsCode() {
+        return newsCode;
     }
 
-    public void setNewCode(Long newCode) {
-        this.newCode = newCode;
+    public void setNewsCode(Long newsCode) {
+        this.newsCode = newsCode;
     }
 
-    public Long getRefNewCode() {
-        return refNewCode;
+    public Long getRefNewsCode() {
+        return refNewsCode;
     }
 
-    public void setRefNewCode(Long refNewCode) {
-        this.refNewCode = refNewCode;
+    public void setRefNewsCode(Long refNewsCode) {
+        this.refNewsCode = refNewsCode;
     }
 
-    public String getNewContent() {
-        return newContent;
+    public MasterNewsDto getMasterNewsDto() {
+        return masterNewsDto;
     }
 
-    public void setNewContent(String newContent) {
-        this.newContent = newContent;
+    public void setMasterNewsDto(MasterNewsDto masterNewsDto) {
+        this.masterNewsDto = masterNewsDto;
     }
 }

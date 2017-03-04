@@ -1,9 +1,10 @@
+/*
 package com.api.impl;
 
 import com.api.RequestBookingApi;
-import com.building.dto.AuthorizedUserInfo;
-import com.building.dto.BookServiceDto;
-import com.building.services.RequestBookService;
+import com.building.dto.login.AuthorizedUserInfo;
+import com.building.dto.BookingServiceDto;
+import com.building.services.RequestBookingService;
 import com.building.services.error.ServiceException;
 import com.building.util.AuthorizeUtil;
 import com.building.util.jaxrs.MultivaluedMapBeanConverter;
@@ -17,25 +18,31 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MultivaluedMap;
 import java.util.List;
 
+*/
 /**
  * Created by Giang.DaoTu on 1/3/2017.
- */
+ *//*
+
 @Component
 public class RequestBookingApiImpl implements RequestBookingApi {
     @Autowired
-    RequestBookService requestBookService;
+    RequestBookingService requestBookingService;
     @Override
     public long addRequestBooking(@Context HttpServletRequest request, MultivaluedMap<String, String> form) throws SerialException, ServiceException {
         final AuthorizedUserInfo authorizedUserInfo = AuthorizeUtil.requireAuthorizedUserInfo(request);
-        final BookServiceDto bookServiceDto = MultivaluedMapBeanConverter.convert(BookServiceDto.class, form);
+        final BookingServiceDto bookServiceDto = MultivaluedMapBeanConverter.convert(BookingServiceDto.class, form);
         bookServiceDto.setUserId(authorizedUserInfo.getUserId());
         bookServiceDto.setCreateId(authorizedUserInfo.getUserId());
         bookServiceDto.setUpdateId(authorizedUserInfo.getUserId());
-        return requestBookService.insertBook(bookServiceDto);
+        */
+/*return requestBookingService.insertBook(bookServiceDto);*//*
+
+        return 1;
     }
 
     @Override
-    public List<BookServiceDto> findAllBooking(@Context HttpServletRequest request, String from, String to) throws ServerException {
-        return requestBookService.findAllBook();
+    public List<BookingServiceDto> findAllBooking(@Context HttpServletRequest request, String from, String to) throws ServerException {
+        return requestBookingService.findAllBook();
     }
 }
+*/

@@ -38,10 +38,11 @@
                             <div class="col-sm-5">
                                 <label class="control-label"><spring:message code="news.add.newstype" text="default text" /></label>
                                 <select class="form-control m-b" name="newType">
-                                    <option <c:if test="${newsDto.newType==1}">selected</c:if> value="1">newsType 1</option>
-                                    <option <c:if test="${newsDto.newType==2}">selected</c:if> value="2">newsType 2</option>
-                                    <option <c:if test="${newsDto.newType==3}">selected</c:if> value="3">newsType 3</option>
-                                    <option <c:if test="${newsDto.newType==4}">selected</c:if> value="4">newsType 4</option>
+                                    <%--<c:forEach items="${newTypes}" var="newType">
+                                        <option <c:if test="${newsDto.newType==newType.id}">selected</c:if> value="1">newType.name</option>
+                                    </c:forEach>--%>
+                                    <option <c:if test="${newsDto.newType==1}">selected</c:if> value="1">Nội Bộ</option>
+                                    <option <c:if test="${newsDto.newType==2}">selected</c:if> value="2">Chung</option>
                                 </select>
                             </div>
                         </div>

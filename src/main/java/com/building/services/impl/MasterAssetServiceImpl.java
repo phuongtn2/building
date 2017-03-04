@@ -1,8 +1,8 @@
 package com.building.services.impl;
 
-import com.building.dto.MasterAssetDto;
-import com.building.mapper.MasterAssetMapper;
-import com.building.services.MasterAssetService;
+import com.building.dto.master.MasterAssetDto;
+import com.building.mapper.AssetMapper;
+import com.building.services.AssetService;
 import com.dropbox.core.ServerException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,9 +13,9 @@ import java.util.List;
  * Created by PhuongTN1 on 11/4/2016.
  */
 @Service
-public class MasterAssetServiceImpl implements MasterAssetService {
+public class MasterAssetServiceImpl implements AssetService {
     @Autowired
-    private MasterAssetMapper masterAssetMapper;
+    private AssetMapper masterAssetMapper;
 
     @Override
     public long insertMasterAsset(MasterAssetDto masterAssetDto) throws ServerException {
