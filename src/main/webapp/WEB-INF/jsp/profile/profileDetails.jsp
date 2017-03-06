@@ -1,5 +1,6 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<div class="col-lg-6 centered"  >
+
+<div class="col-lg-6 centered" id="wrapper" style="text-align: center" >
     <a items="${profileDto}" var="profileDto">
     <div class="widget-head-color-box navy-bg p-lg text-center">
         <div class="m-b-md">
