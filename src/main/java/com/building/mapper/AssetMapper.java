@@ -14,4 +14,5 @@ public interface AssetMapper {
     MasterAssetDto findById(@Param("id") long id);
     void update(@Param("dto") MasterAssetDto masterAssetDto);
     void deleteById(@Param("id") long id);
+    List<MasterAssetDto>findAssetsByBuildingCode(@Param("id") long id);
 }

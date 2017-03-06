@@ -37,14 +37,8 @@
                             </div>
                             <div class="col-sm-4">
                                 <div class="form-group">
-                                    <label class="control-label"><spring:message code="service.price" text="default text" /></label>
-                                    <input  type="text" id="servicePrice" name="servicePrice" value="<c:if test="${masterServiceDto.servicePrice!= null}">${masterServiceDto.servicePrice}</c:if>" placeholder="<spring:message code="service.price" text="default text" />" class="form-control">
-                                </div>
-                            </div>
-                            <div class="col-sm-4">
-                                <div class="form-group">
                                     <label class="control-label"><spring:message code="common.building" text="default text" /></label>
-                                    <select name="buildingCode" class="form-control m-b" >
+                                    <select id ="buildingCode" name="buildingCode" class="form-control m-b" >
                                         <c:forEach items="${buildingDtoList}" var="building">
                                             <option value="${building.buildingCode}">${building.buildingName}</option>
                                         </c:forEach>
@@ -84,3 +78,38 @@
         </div>
     </div>
 </div>
+<spring:url value="/resources/js/jquery-2.1.1.js" var="jqueryJs" />
+<spring:url value="/resources/js/bootstrap.min.js" var="bootstrapJs" />
+<script src="${jqueryJs}"></script>
+<script src="${bootstrapJs}"></script>
+<script>
+    $(document).ready(function() {
+
+        $("#buildingCode").change(function(){
+            var buildingCode = this.value;
+            $.ajax({
+                type : "GET",
+                contentType : "application/json",
+                url : "/asset/findAssetsByBuildingCode/" + buildingCode,
+                dataType : 'json',
+                timeout : 100000,
+                success : function(data) {
+                    console.log("SUCCESS: ", data);
+                    display(data);
+                },
+                error : function(e) {
+                    console.log("ERROR: ", e);
+                    display(e);
+                },
+                done : function(e) {
+                    console.log("DONE");
+                }
+            });
+        });
+        function display(data) {
+            var json = "<h4>Ajax Response</h4><pre>"
+                    + JSON.stringify(data, null, 4) + "</pre>";
+            $('#feedback').html(json);
+        }
+    });
+</script>

@@ -15,5 +15,5 @@ public interface AssetService {
     MasterAssetDto findById(long id) throws ServerException;
     void update(MasterAssetDto masterAssetDto) throws ServerException;
     void deleteById(long id) throws ServerException;
-
+    List<MasterAssetDto> findAssetsByBuildingCode(long id) throws ServerException;
 }

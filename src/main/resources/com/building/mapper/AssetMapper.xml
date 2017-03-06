@@ -40,6 +40,10 @@
 		SELECT * FROM M_ASSET WHERE assetCode=#{id}
 	</select>
 
+	<select id="findAssetsByBuildingCode" resultType="asset">
+		SELECT * FROM M_ASSET WHERE buildingCode=#{id}
+	</select>
+
 	<update id="update">
 		UPDATE M_ASSET SET
 		buildingCode = #{dto.buildingCode}

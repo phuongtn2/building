@@ -30,7 +30,6 @@
                     <tr>
                         <th><spring:message code="service.name" text="default text" /></th>
                         <th data-hide="phone,tablet"><spring:message code="service.type" text="default text" /></th>
-                        <th data-hide="phone,tablet"><spring:message code="service.price" text="default text" /></th>
                         <th data-hide="phone,tablet"><spring:message code="common.start" text="default text" /></th>
                         <th data-hide="phone,tablet"><spring:message code="common.end" text="default text" /></th>
                         <th data-hide="phone,tablet" class="text-center"><spring:message code="common.action" text="default text" /></th>
@@ -69,4 +68,5 @@
         </div>
     </div>
 </div>
+
 

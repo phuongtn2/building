@@ -1,6 +1,7 @@
 package com.controller;
 
 import com.building.dto.login.AuthorizedUserInfo;
+import com.building.dto.master.MasterAssetDto;
 import com.building.dto.master.MasterBuildingDto;
 import com.building.dto.master.MasterServicesDto;
 import com.building.services.ServicesService;

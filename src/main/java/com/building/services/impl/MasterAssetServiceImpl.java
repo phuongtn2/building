@@ -41,4 +41,9 @@ public class MasterAssetServiceImpl implements AssetService {
     public void deleteById(long id) throws ServerException {
         masterAssetMapper.deleteById(id);
     }
+
+    @Override
+    public List<MasterAssetDto> findAssetsByBuildingCode(long id) throws ServerException {
+        return masterAssetMapper.findAssetsByBuildingCode(id);
+    }
 }
