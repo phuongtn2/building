@@ -1,5 +1,5 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <div class="col-lg-6 centered" id="wrapper" style="text-align: center" >
     <a items="${profileDto}" var="profileDto">
     <div class="widget-head-color-box navy-bg p-lg text-center">
@@ -12,24 +12,31 @@
     </div>
     <div class="widget-text-box text-center">
         <div class="row">
+            <a class="control-label"><spring:message code="profile.userDto.birthday" text="default text" /></a>
             <a style="word-break: break-all" ><fmt:formatDate pattern="MM/dd/yyyy" value="${profileDto.userDto.birthday}"></fmt:formatDate></a>
         </div>
         <div class="row">
+            <a class="control-label"><spring:message code="profile.userDto.address" text="default text" /></a>
             <a style="word-break: break-all" >${profileDto.userDto.address}</a>
         </div>
         <div class="row">
+            <a class="control-label"><spring:message code="profile.userDto.mail" text="default text" /></a>
             <a style="word-break: break-all" >${profileDto.userDto.mail}</a>
         </div>
         <div class="row">
+            <a class="control-label"><spring:message code="profile.userDto.memo" text="default text" /></a>
             <a style="word-break: break-all" >${profileDto.userDto.memo}</a>
         </div>
         <div class="row">
+            <a class="control-label"><spring:message code="profile.buildingName" text="default text" /></a>
             <a style="word-break: break-all" >${profileDto.buildingName}</a>
         </div>
         <div class="row">
+            <a class="control-label"><spring:message code="profile.floorAlias" text="default text" /></a>
             <a style="word-break: break-all" >${profileDto.floorAlias}</a>
         </div>
         <div class="row">
+            <a class="control-label"><spring:message code="profile.roomAlias" text="default text" /></a>
             <a style="word-break: break-all" >${profileDto.roomAlias}</a>
         </div>
     </div>
