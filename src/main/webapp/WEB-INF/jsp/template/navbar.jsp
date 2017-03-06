@@ -13,7 +13,7 @@
                             <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">${aui.fullName}</strong>
                              </span> <span class="text-muted text-xs block"><spring:message code="nav.member" text="default text" /><b class="caret"></b></span> </span> </a>
                     <ul class="dropdown-menu animated fadeInRight m-t-xs">
-                        <li><a href="profile.html"><spring:message code="nav.profile" text="default text" /></a></li>
+                        <li><a href="profile"><spring:message code="nav.profile" text="default text" /></a></li>
                         <li class="divider"></li>
                         <li><a href="/changepass"><spring:message code="nav.changepassword" text="default text" /></a></li>
                         <li class="divider"></li>

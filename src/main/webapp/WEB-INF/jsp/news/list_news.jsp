@@ -28,7 +28,7 @@
                                         <p class="m-b-xs" style="word-break: break-all"><strong>${news.masterNewsDto.newsHeader}</strong></p>
                                         <c:if test="${news.newsDetailDtoList!=null}">
                                             <c:forEach items="${news.newsDetailDtoList}" var="newsDetail">
-                                                <a style="word-break: break-all" href="/news/${newsDetail.refNewsCode}">${newsDetail.masterNewsDto.newsHeader}</a>
+                                                <a style="word-break: break-all" href="/news/${newsDetail.refNewsCode}">${newsDetail.masterNewsDto.newsHeader}</a><BR>
                                             </c:forEach>
                                         </c:if>
                                         <p style="word-break: break-all">${news.masterNewsDto.newsShorter}</p>
