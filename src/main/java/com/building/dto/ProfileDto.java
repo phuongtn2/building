@@ -9,8 +9,8 @@ public class ProfileDto {
 
 	private UserDto userDto;
 	private String roomAlias;
-	private Long floorAlias;
-	private Long buildingName;
+	private String floorAlias;
+	private String buildingName;
 
 	public UserDto getUserDto() {
 		return userDto;
@@ -28,19 +28,19 @@ public class ProfileDto {
 		this.roomAlias = roomAlias;
 	}
 
-	public Long getFloorAlias() {
+	public String getFloorAlias() {
 		return floorAlias;
 	}
 
-	public void setFloorAlias(Long floorAlias) {
+	public void setFloorAlias(String floorAlias) {
 		this.floorAlias = floorAlias;
 	}
 
-	public Long getBuildingName() {
+	public String getBuildingName() {
 		return buildingName;
 	}
 
-	public void setBuildingName(Long buildingName) {
+	public void setBuildingName(String buildingName) {
 		this.buildingName = buildingName;
 	}
 }

@@ -15,6 +15,7 @@ public interface BuildingMapper {
     MasterBuildingDto findById(@Param("id") long id);
     void update(@Param("dto") MasterBuildingDto buildingDto);
     void deleteById(@Param("id") long id);
+
     //Floor
     List<MasterFloorDto> findAllFloorByBuildingId(@Param("id") long buildingId);
     long insertFloor(@Param("dto") MasterFloorDto floorDto);
@@ -31,4 +32,9 @@ public interface BuildingMapper {
     void deleteRoomById(@Param("id") long id);
     void deleteRoomByFloorId(@Param("listId") List<Long> listId);
     List<MasterBuildingDto> findByBuildingName(@Param("buildingName") String buildingName);
+
+    //For Profile
+    String findBuildingNameByBuildingId (@Param("id")long id);
+    String findFloorNameByFloorId (@Param("id")long id);
+    String findRoomNameByRoomId (@Param("id")long id);
 }

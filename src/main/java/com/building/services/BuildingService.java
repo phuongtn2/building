@@ -32,4 +32,8 @@ public interface BuildingService {
     void deleteRoomById(long id) throws ServerException;
     void deleteRoomByFloorId(List<Long> listFloorId) throws ServerException;
     List<MasterBuildingDto> findByBuildingName(String buildingName) throws ServerException;
+    //For Profile
+    String findBuildingNameByBuildingId (long id) throws ServerException;
+    String findFloorNameByFloorId (long id) throws ServerException;
+    String findRoomNameByRoomId (long id) throws ServerException;
 }

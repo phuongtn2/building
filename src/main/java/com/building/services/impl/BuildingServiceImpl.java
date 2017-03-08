@@ -114,4 +114,19 @@ public class BuildingServiceImpl implements BuildingService {
     public void updateRoom(MasterRoomDto roomDto) throws ServerException {
         buildingMapper.updateRoom(roomDto);
     }
+
+    @Override
+    public String findBuildingNameByBuildingId(long id) throws ServerException {
+        return buildingMapper.findBuildingNameByBuildingId(id);
+    }
+
+    @Override
+    public String findFloorNameByFloorId(long id) throws ServerException {
+        return buildingMapper.findFloorNameByFloorId(id);
+    }
+
+    @Override
+    public String findRoomNameByRoomId(long id) throws ServerException {
+        return buildingMapper.findRoomNameByRoomId(id);
+    }
 }

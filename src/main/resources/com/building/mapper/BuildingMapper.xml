@@ -157,6 +157,22 @@
 		<if test="buildingName != null"> WHERE b.buildingName LIKE #{buildingName}</if>
 		ORDER BY b.buildingCode desc
 	</select>
+
+
+	<!--For Profile-->
+	<select id="findBuildingNameByBuildingId" resultType="String">
+		SELECT  buildingName
+		 FROM M_BUILDING WHERE buildingCode=#{id}
+	</select>
+	<select id="findFloorNameByFloorId" resultType="String">
+		SELECT  floorAlias
+		FROM M_FLOOR WHERE floorCode = #{id}
+	</select>
+	<select id="findRoomNameByRoomId" resultType="String">
+		SELECT  roomAlias
+		 FROM M_ROOM WHERE roomCode = #{id}
+	</select>
+
 </mapper>
 
 
