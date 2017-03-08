@@ -8,6 +8,8 @@
 <%@page language="java" contentType="text/html;charset=UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <div class="row">
     <div class="col-lg-12">
         <div class="ibox float-e-margins">
@@ -74,14 +76,15 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="form-group">
-                        <div class="text-center">
-                            <input type="hidden" id="add" name="add">
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addButton"><i class="fa fa-check"></i><spring:message code="common.button.save" text="default text" /></button>
-                            <button name="reset" class="btn btn-danger" type="reset"><spring:message code="common.button.reset" text="default text" /></button>
+                    <div class="row">
+                        <div class="form-group">
+                            <div class="text-center">
+                                <input type="hidden" id="add" name="add">
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addButton"><i class="fa fa-check"></i><spring:message code="common.button.save" text="default text" /></button>
+                                <button name="reset" class="btn btn-danger" type="reset"><spring:message code="common.button.reset" text="default text" /></button>
+                            </div>
                         </div>
                     </div>
-                </div>
             </form:form>
             </div>
         </div>

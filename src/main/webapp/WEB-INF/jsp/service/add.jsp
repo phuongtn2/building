@@ -17,15 +17,15 @@
             <div class="ibox-content">
                 <form:form modelAttribute="masterServiceDto" method="post" id="userForm">
                     <div class="row">
-                        <div class="col-sm-4">
+                        <div class="col-sm-5">
                             <div class="form-group">
                                 <label class="control-label"><spring:message code="service.name" text="default text" /></label>
                                 <input type="hidden" id="serviceCode" name="serviceCode" value="<c:if test="${masterServiceDto.serviceCode!= null}">${masterServiceDto.serviceCode}</c:if>" class="form-control">
                                 <input type="text" id="serviceName" name="serviceName" value="<c:if test="${masterServiceDto.serviceName!= null}">${masterServiceDto.serviceName}</c:if>" placeholder="<spring:message code="service.name" text="default text" />" class="form-control">
                             </div>
                         </div>
-                        <div class="col-sm-8">
-                            <div class="col-sm-4">
+                        <div class="col-sm-7">
+                            <div class="col-sm-6">
                                 <div class="form-group">
                                     <label class="control-label"><spring:message code="service.type" text="default text" /></label>
                                     <select name="serviceType" class="form-control m-b">
@@ -35,13 +35,13 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-sm-4">
-                                <div class="form-group">
-                                    <label class="control-label"><spring:message code="service.price" text="default text" /></label>
-                                    <input  type="text" id="servicePrice" name="servicePrice" value="<c:if test="${masterServiceDto.servicePrice!= null}">${masterServiceDto.servicePrice}</c:if>" placeholder="<spring:message code="service.price" text="default text" />" class="form-control">
-                                </div>
-                            </div>
-                            <div class="col-sm-4">
+                            <%--<div class="col-sm-4">--%>
+                                <%--<div class="form-group">--%>
+                                    <%--<label class="control-label"><spring:message code="service.price" text="default text" /></label>--%>
+                                    <%--<input  type="text" id="servicePrice" name="servicePrice" value="<c:if test="${masterServiceDto.servicePrice!= null}">${masterServiceDto.servicePrice}</c:if>" placeholder="<spring:message code="service.price" text="default text" />" class="form-control">--%>
+                                <%--</div>--%>
+                            <%--</div>--%>
+                            <div class="col-sm-6">
                                 <div class="form-group">
                                     <label class="control-label"><spring:message code="common.building" text="default text" /></label>
                                     <select name="buildingCode" class="form-control m-b" >

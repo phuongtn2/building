@@ -9,7 +9,6 @@
         serviceType
         , buildingCode
         , serviceName
-        , servicePrice
         , serviceStart
         , serviceEnd
         , created
@@ -20,7 +19,6 @@
         #{dto.serviceType}
         ,#{dto.buildingCode}
         , #{dto.serviceName}
-        , #{dto.servicePrice}
         , #{dto.serviceStart}
         , #{dto.serviceEnd}
         ,  NOW()
@@ -45,7 +43,6 @@
         serviceType = #{dto.serviceType}
         ,buildingCode = #{dto.buildingCode}
         , serviceName = #{dto.serviceName}
-        , servicePrice = #{dto.servicePrice}
         , serviceStart = #{dto.serviceStart}
         , serviceEnd = #{dto.serviceEnd}
         , updateId = #{dto.updateId}

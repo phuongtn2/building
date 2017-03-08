@@ -30,7 +30,7 @@
                     <tr>
                         <th><spring:message code="service.name" text="default text" /></th>
                         <th data-hide="phone,tablet"><spring:message code="service.type" text="default text" /></th>
-                        <th data-hide="phone,tablet"><spring:message code="service.price" text="default text" /></th>
+                        <%--<th data-hide="phone,tablet"><spring:message code="service.price" text="default text" /></th>--%>
                         <th data-hide="phone,tablet"><spring:message code="common.start" text="default text" /></th>
                         <th data-hide="phone,tablet"><spring:message code="common.end" text="default text" /></th>
                         <th data-hide="phone,tablet" class="text-center"><spring:message code="common.action" text="default text" /></th>
@@ -45,7 +45,7 @@
                                 <c:if test="${masterServices.serviceType==2}" >serviceType 2 </c:if>
                                 <c:if test="${masterServices.serviceType==3}" >serviceType 3 </c:if>
                             </td>
-                            <td data-hide="phone,tablet">${masterServices.servicePrice}</td>
+                            <%--<td data-hide="phone,tablet">${masterServices.servicePrice}</td>--%>
                             <td data-hide="phone,tablet"><fmt:formatDate pattern="MM/dd/yyyy" value="${masterServices.serviceStart}" /></td>
                             <td data-hide="phone,tablet"><fmt:formatDate pattern="MM/dd/yyyy" value="${masterServices.serviceEnd}" /></td>
                             <td class="text-center">
