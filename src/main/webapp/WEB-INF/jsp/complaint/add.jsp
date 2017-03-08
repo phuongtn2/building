@@ -14,7 +14,7 @@
                 </div>
             </div>
             <div class="ibox-content">
-                <form:form modelAttribute="complaintDto" method="post">
+                <form:form modelAttribute="complaintDto" method="post" id="userForm">
                     <p><spring:message code="nav.feedbackevaluation" text="default text" /></p>
                     <div class="row">
                         <div class="form-group">

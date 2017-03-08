@@ -2,6 +2,7 @@ package com.controller;
 
 import com.building.dto.ProfileDto;
 import com.building.dto.UserRoleRoomDto;
+import com.building.dto.UserRoomDto;
 import com.building.dto.login.AuthorizedUserInfo;
 import com.building.dto.login.UserDto;
 import com.building.dto.login.UserRoleGroupDto;
@@ -35,8 +36,6 @@ import java.util.List;
 public class ProfileController {
     @Autowired
     private UserService managerUserService;
-    @Autowired
-    private BuildingService managerBuildingService;
     @InitBinder
     public void initBinder(WebDataBinder binder) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
@@ -53,8 +52,9 @@ public class ProfileController {
         AuthorizedUserInfo aui = (AuthorizedUserInfo) request.getSession().getAttribute("aui");
         ProfileDto profileDto = new ProfileDto();
         profileDto.setUserDto(managerUserService.findUserById(aui.getUserId()));
-        //
-//        profileDto.roomAlias(managerUserService.findRoomByUserId(aui.getUserId()));
+
+//        profileDto.roomAlias(
+//                managerUserRoom.getRoomCode(managerUserService.findUserRoomById(aui.getUserId()));
 //        profileDto.floorAlias(managerUserService.fin(aui.getUserId()));
 //        profileDto.buildingName(managerUserService.findUserById(aui.getUserId()));
         return profileDto;

@@ -15,7 +15,7 @@
                 </div>
             </div>
             <div class="ibox-content">
-                <form:form modelAttribute="buildingDto" method="post">
+                <form:form modelAttribute="buildingDto" method="post" id="userForm">
                     <div class="row">
                         <div class="col-sm-4">
                             <div class="form-group">
@@ -39,10 +39,13 @@
                             </div>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <div class="text-center">
-                            <button name="add" class="btn btn-primary" type="submit"><i class="fa fa-check"></i><spring:message code="button.save" text="default text" /></button>
-                            <button name="reset" class="btn btn-danger" type="button"><i class="fa fa-refresh"></i><spring:message code="button.reset" text="default text" /></button>
+                    <div class="row">
+                        <div class="form-group">
+                            <div class="text-center">
+                                <input type="hidden" id="add" name="add">
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addButton"><i class="fa fa-check"></i><spring:message code="common.button.save" text="default text" /></button>
+                                <button name="reset" class="btn btn-danger" type="reset"><spring:message code="common.button.reset" text="default text" /></button>
+                            </div>
                         </div>
                     </div>
                 </form:form>

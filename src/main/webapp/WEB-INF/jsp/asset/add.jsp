@@ -15,7 +15,7 @@
                 </div>
             </div>
             <div class="ibox-content">
-                <form:form modelAttribute="masterAssetDto" method="post">
+                <form:form modelAttribute="masterAssetDto" method="post" id="userForm">
                     <div class="row">
                         <div class="col-sm-4">
                             <div class="form-group">
@@ -75,6 +75,7 @@
                                 <button name="reset" class="btn btn-danger" type="reset"><spring:message code="common.button.reset" text="default text" /></button>
                             </div>
                         </div>
+                    </div>
                     </div>
                 </form:form>
             </div>

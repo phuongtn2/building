@@ -14,7 +14,7 @@
                 </div>
             </div>
             <div class="ibox-content">
-                <form:form modelAttribute="newsDto " method="post">
+                <form:form modelAttribute="newsDto " method="post" id="userForm">
                     <p><spring:message code="news.add.news" text="default text" /></p>
                     <div class="row">
                         <div class="form-group">
@@ -48,19 +48,21 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="form-group">
-                            <div class="col-sm-12">
+                        <div class="col-sm-12">
+                            <div class="form-group">
                                 <label class=" control-label"><spring:message code="news.add.content" text="default text" /></label>
                                 <textarea  name="newContent" placeholder="<spring:message code="news.add.content" text="default text" />" class="form-control" rows="4" required=true value="<c:if test="${newsDto.newContent!= null}">${newsDto.newContent}</c:if>"></textarea>
-                                    <%--<textarea  name="newContent" placeholder="Nội dung" class="form-control" rows="4" required=true ><c:if test="${newsDetailDto.newContent!= null}">${newsDetailDto.newContent}</c:if></textarea>--%>
+                                <%--<textarea  name="newContent" placeholder="Nội dung" class="form-control" rows="4" required=true ><c:if test="${newsDetailDto.newContent!= null}">${newsDetailDto.newContent}</c:if></textarea>--%>
                             </div>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <div class="text-center">
-                            <br>
-                            <button name="add" class="btn btn-primary" type="submit"><i class="fa fa-check"></i><spring:message code="common.button.save" text="default text" /></button>
-                            <input name="reset" class="btn btn-danger" placeholder="<spring:message code="common.button.reset" text="default text" />" type="reset" />
+                    <div class="row">
+                        <div class="form-group">
+                            <div class="text-center">
+                                <input type="hidden" id="add" name="add">
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addButton"><i class="fa fa-check"></i><spring:message code="common.button.save" text="default text" /></button>
+                                <button name="reset" class="btn btn-danger" type="reset"><spring:message code="common.button.reset" text="default text" /></button>
+                            </div>
                         </div>
                     </div>
                 </form:form>

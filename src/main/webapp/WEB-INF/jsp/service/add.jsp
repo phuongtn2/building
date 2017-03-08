@@ -15,7 +15,7 @@
                 </div>
             </div>
             <div class="ibox-content">
-                <form:form modelAttribute="masterServiceDto" method="post">
+                <form:form modelAttribute="masterServiceDto" method="post" id="userForm">
                     <div class="row">
                         <div class="col-sm-4">
                             <div class="form-group">
