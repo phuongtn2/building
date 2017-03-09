@@ -116,4 +116,6 @@ public class NewsController {
 		model.addAttribute("newsDto",newsDto);
 		return "news/news_detail/view";
 	}
+
+
 }

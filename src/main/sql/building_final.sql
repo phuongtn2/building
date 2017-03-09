@@ -164,7 +164,7 @@ CREATE TABLE `m_news` (
   `createId` int(11) DEFAULT '0',
   `updateId` int(11) DEFAULT '0',
   PRIMARY KEY (`newsCode`),
-  UNIQUE KEY `newCode_UNIQUE` (`newsCode`)
+  UNIQUE KEY `newsCode_UNIQUE` (`newsCode`)
 ) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 

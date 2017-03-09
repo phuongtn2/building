@@ -25,13 +25,13 @@
                             <div class="col-xs-9 content no-top-border">
                                 <div class="row">
                                     <div class="col-lg-9">
-                                        <p class="m-b-xs" style="word-break: break-all"><strong>${news.masterNewsDto.newsHeader}</strong></p>
+                                        <p class="m-b-xs" style="word-break: break-word"><strong>${news.masterNewsDto.newsHeader}</strong></p>
                                         <c:if test="${news.newsDetailDtoList!=null}">
                                             <c:forEach items="${news.newsDetailDtoList}" var="newsDetail">
-                                                <a style="word-break: break-all" href="/news/${newsDetail.refNewsCode}">${newsDetail.masterNewsDto.newsHeader}</a><BR>
+                                                <a style="word-break: break-word" href="/news/${newsDetail.refNewsCode}">${newsDetail.masterNewsDto.newsHeader}</a><BR>
                                             </c:forEach>
                                         </c:if>
-                                        <p style="word-break: break-all">${news.masterNewsDto.newsShorter}</p>
+                                        <p style="word-break: break-word">${news.masterNewsDto.newsShorter}</p>
                                     </div>
                                     <div class="col-lg-3">
                                         <div class="btn-group">
