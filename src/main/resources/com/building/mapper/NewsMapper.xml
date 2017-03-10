@@ -9,7 +9,6 @@
 		newsType
 		, newsHeader
 		, newsShorter
-		, newsContent
 		, created
 		, lastUpdate
 		, createId
@@ -18,7 +17,6 @@
 		#{dto.newsType}
 		, #{dto.newsHeader}
 		, #{dto.newsShorter}
-		, #{dto.newsContent}
 		,  NOW()
 		,  NOW()
 		, #{dto.createId}

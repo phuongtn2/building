@@ -18,22 +18,22 @@
                     <p><spring:message code="news.add.news" text="default text" /></p>
                     <div class="row">
                         <div class="form-group">
-                            <input name="newCode" type="hidden" class="form-control" value="<c:if test="${newsDto.newsCode!= null}">${newsDto.newsCode}</c:if>">
-                            <div class="col-sm-7">
+                            <input name="newsCode" type="hidden" class="form-control" value="<c:if test="${newsDto.newsCode!= null}">${newsDto.newsCode}</c:if>">
+                            <div class="col-sm-12">
                                 <label class="control-label"><spring:message code="news.add.title" text="default text" /></label>
-                                <input name="newHeader" type="text" placeholder="<spring:message code="news.add.title" text="default text" />" class="form-control" required=true value="<c:if test="${newsDto.newHeader!= null}">${newsDto.newHeader}</c:if>">
+                                <input name="newsHeader" type="text" placeholder="<spring:message code="news.add.title" text="default text" />" class="form-control" required=true value="<c:if test="${newsDto.newHeader!= null}">${newsDto.newHeader}</c:if>">
                             </div>
-                            <div class="col-sm-5">
-                                <label class="control-label"><spring:message code="news.add.newsshoter" text="default text" /></label>
-                                <input name="newShorter" type="text" placeholder="<spring:message code="news.add.newsshoter" text="default text" />" class="form-control" required=true value="<c:if test="${newsDto.newsShorter!= null}">${newsDto.newsShorter}</c:if>">
-                            </div>
+                            <%--<div class="col-sm-5">--%>
+                                <%--<label class="control-label"><spring:message code="news.add.newsshoter" text="default text" /></label>--%>
+                                <%--<input name="newShorter" type="text" placeholder="<spring:message code="news.add.newsshoter" text="default text" />" class="form-control" required=true value="<c:if test="${newsDto.newsShorter!= null}">${newsDto.newsShorter}</c:if>">--%>
+                            <%--</div>--%>
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group">
                             <div class="col-sm-7">
                                 <label class="control-label"><spring:message code="news.add.newscode" text="default text" /></label>
-                                <input type="text" name="refNewCode" placeholder="<spring:message code="news.add.newscode" text="default text" />" class="form-control" value="<c:if test="${newsDto.refNewsCode!= null}">${newsDto.refNewsCode}</c:if>" >
+                                <input type="text" name="refNewsCode" placeholder="<spring:message code="news.add.newscode" text="default text" />" class="form-control" value="<c:if test="${newsDto.refNewsCode!= null}">${newsDto.refNewsCode}</c:if>" >
                             </div>
                             <div class="col-sm-5">
                                 <label class="control-label"><spring:message code="news.add.newstype" text="default text" /></label>
@@ -50,9 +50,11 @@
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="form-group">
-                                <label class=" control-label"><spring:message code="news.add.content" text="default text" /></label>
-                                <textarea  name="newsContent" placeholder="<spring:message code="news.add.content" text="default text" />" class="form-control" rows="4" required=true value="<c:if test="${newsDto.newsContent!= null}">${newsDto.newsContent}</c:if>"></textarea>
-                                <%--<textarea  name="newContent" placeholder="Nội dung" class="form-control" rows="4" required=true ><c:if test="${newsDetailDto.newContent!= null}">${newsDetailDto.newContent}</c:if></textarea>--%>
+                                <%--<label class=" control-label"><spring:message code="news.add.content" text="default text" /></label>--%>
+                                <%--<textarea  name="newsContent" placeholder="<spring:message code="news.add.content" text="default text" />" class="form-control" rows="4" required=true value="<c:if test="${newsDto.newsContent!= null}">${newsDto.newsContent}</c:if>"></textarea>--%>
+                                <%--&lt;%&ndash;<textarea  name="newContent" placeholder="Nội dung" class="form-control" rows="4" required=true ><c:if test="${newsDetailDto.newContent!= null}">${newsDetailDto.newContent}</c:if></textarea>&ndash;%&gt;--%>
+                                <label class="control-label"><spring:message code="news.add.newsshoter" text="default text" /></label>
+                                <textarea name="newsShorter" type="text" placeholder="<spring:message code="news.add.newsshoter" text="default text" />" class="form-control" required=true value="<c:if test="${newsDto.newsShorter!= null}">${newsDto.newsShorter}</c:if>"></textarea>
                             </div>
                         </div>
                     </div>

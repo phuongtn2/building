@@ -1,4 +1,5 @@
 <%@page language="java" contentType="text/html;charset=UTF-8"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
