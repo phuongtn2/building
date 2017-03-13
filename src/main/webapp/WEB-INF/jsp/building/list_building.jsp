@@ -19,10 +19,10 @@
                         <thead>
                             <tr>
                                 <th class="text-center"><spring:message code="building.name" text="default text" /></th>
-                                <th data-hide="phone,tablet" class="text-center"><spring:message code="building.floor.count" text="default text" /></th>
-                                <th data-hide="phone,tablet" class="text-center"><spring:message code="building.room.count" text="default text" /></th>
-                                <th data-hide="phone,tablet" class="text-center"><spring:message code="common.description" text="default text" /></th>
-                                <th data-hide="phone,tablet" class="text-center"><spring:message code="common.action" text="default text" /></th>
+                                <th data-hide="phone,tablet" class="text-center"><spring:message code="building.floor.count" text="default text"></spring:message></th>
+                                <th data-hide="phone,tablet" class="text-center"><spring:message code="building.room.count" text="default text"></spring:message></th>
+                                <th data-hide="phone,tablet" class="text-center"><spring:message code="common.description" text="default text" ></spring:message></th>
+                                <th data-hide="phone,tablet" class="text-center"><spring:message code="common.action" text="default text" ></spring:message></th>
                             </tr>
                         </thead>
                         <tbody>

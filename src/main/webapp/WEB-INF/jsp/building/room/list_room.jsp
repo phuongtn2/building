@@ -7,7 +7,7 @@
     <div class="col-lg-12">
         <div class="ibox float-e-margins">
             <div class="ibox-title">
-                <h5>Danh Sách Phòng</h5>
+                <h5><spring:message code="building.room.roomList" text="default text"></spring:message></h5>
                 <div class="ibox-tools">
                     <a class="collapse-link">
                         <i class="fa fa-chevron-up"></i>
@@ -19,10 +19,10 @@
                     <table class="footable emp-sales table table-striped table-bordered table-hover dataTables-example" data-page-size="10">
                         <thead>
                             <tr>
-                                <th class="text-center">Tên Phòng </th>
-                                <th data-hide="phone,tablet" class="text-center">count</th>
-                                <th data-hide="phone,tablet" class="text-center">status</th>
-                                <th data-hide="phone,tablet" class="text-center">Action</th>
+                                <th class="text-center"><spring:message code="building.room.roomName" text="default text"></spring:message></th>
+                                <th data-hide="phone,tablet" class="text-center"><spring:message code="building.room.countDetail" text="default text"></spring:message></th>
+                                <th data-hide="phone,tablet" class="text-center"><spring:message code="building.room.status" text="default text"></spring:message></th>
+                                <th data-hide="phone,tablet" class="text-center"><spring:message code="building.floor.action" text="default text"></spring:message></th>
                             </tr>
                         </thead>
                         <tbody>
