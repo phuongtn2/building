@@ -1,12 +1,12 @@
 <%@page language="java" contentType="text/html;charset=UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <div class="row">
     <div class="col-lg-12">
         <div class="ibox float-e-margins">
             <div class="ibox-title">
-                <h5><spring:message code="building.list" text="default text" /></h5>
+                <h5><spring:message code="building.list" text="default text" ></spring:message></h5>
                 <div class="ibox-tools">
                     <a class="collapse-link">
                         <i class="fa fa-chevron-up"></i>
@@ -36,9 +36,9 @@
                                         <td data-hide="phone,tablet" class="col-sm-5">${building.description}</td>
                                         <td data-hide="phone,tablet" class="col-sm-3 text-center">
                                             <div class="btn-group">
-                                                <a class="btn btn-success btn btn-xs" href="/building/edit/${building.buildingCode}" ><spring:message code="common.button.edit" text="default text" /></a>
-                                                <a class="btn btn-danger btn btn-xs" href="/building/delete/${building.buildingCode}"><spring:message code="common.button.delete" text="default text" /></a>
-                                                <a class="btn btn-warning btn btn-xs" href="/building/floor/${building.buildingCode}"><spring:message code="building.addfloor" text="default text" /></a>
+                                                <a class="btn btn-success btn btn-xs" href="/building/edit/${building.buildingCode}" ><spring:message code="common.button.edit" text="default text" ></spring:message></a>
+                                                <a class="btn btn-danger btn btn-xs" href="/building/delete/${building.buildingCode}"><spring:message code="common.button.delete" text="default text" ></spring:message></a>
+                                                <a class="btn btn-warning btn btn-xs" href="/building/floor/${building.buildingCode}"><spring:message code="building.addfloor" text="default text" ></spring:message></a>
                                             </div>
                                         </td>
                                     </tr>

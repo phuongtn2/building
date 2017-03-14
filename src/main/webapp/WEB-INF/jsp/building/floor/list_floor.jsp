@@ -36,9 +36,9 @@
                                         <td data-hide="phone,tablet" class="col-sm-1">${floor.floorType}</td>
                                         <td data-hide="phone,tablet" class="col-sm-3 text-center">
                                             <div class="btn-group">
-                                                <a class="btn btn-success btn btn-xs" href="/building/floor/${floor.buildingCode}/edit/${floor.floorCode}" >&nbsp;&nbsp;Edit&nbsp;&nbsp;</a>
-                                                <a class="btn btn-danger btn btn-xs" href="/building/floor/${floor.buildingCode}/delete/${floor.floorCode}">&nbsp;&nbsp;Delete&nbsp;&nbsp;</a>
-                                                <a class="btn btn-warning btn btn-xs" href="/building/floor/room/${floor.floorCode}">&nbsp;&nbsp;Add Room&nbsp;&nbsp;</a>
+                                                <a class="btn btn-success btn btn-xs" href="/building/floor/${floor.buildingCode}/edit/${floor.floorCode}" ><spring:message code="common.button.edit" text="default text" ></spring:message></a>
+                                                <a class="btn btn-danger btn btn-xs" href="/building/floor/${floor.buildingCode}/delete/${floor.floorCode}"><spring:message code="common.button.delete" text="default text" ></spring:message></a>
+                                                <a class="btn btn-warning btn btn-xs" href="/building/floor/room/${floor.floorCode}"><spring:message code="building.addroom" text="default text" ></spring:message></a>
                                             </div>
                                         </td>
                                     </tr>

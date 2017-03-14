@@ -1,12 +1,12 @@
 <%@page language="java" contentType="text/html;charset=UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <div class="row">
     <div class="col-lg-12">
         <div class="ibox float-e-margins">
             <div class="ibox-title">
-                <h5>Danh sách tòa nhà</h5>
+                <h5><spring:message code="building.list" text="default text" ></spring:message></h5>
                 <div class="ibox-tools">
                     <a class="collapse-link">
                         <i class="fa fa-chevron-up"></i>
