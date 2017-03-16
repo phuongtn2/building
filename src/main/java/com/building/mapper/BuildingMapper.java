@@ -1,5 +1,6 @@
 package com.building.mapper;
 
+import com.building.dto.ProfileDto;
 import com.building.dto.master.MasterBuildingDto;
 import com.building.dto.master.MasterFloorDto;
 import com.building.dto.master.MasterRoomDto;
@@ -34,7 +35,6 @@ public interface BuildingMapper {
     List<MasterBuildingDto> findByBuildingName(@Param("buildingName") String buildingName);
 
     //For Profile
-    String findBuildingNameByBuildingId (@Param("id")long id);
-    String findFloorNameByFloorId (@Param("id")long id);
-    String findRoomNameByRoomId (@Param("id")long id);
+    ProfileDto findAllName (@Param("buildingCode")long buildingCode, @Param("floorCode")long floorCode, @Param("roomCode")long roomCode);
+
 }

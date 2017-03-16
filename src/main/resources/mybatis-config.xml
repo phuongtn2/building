@@ -34,5 +34,6 @@
 		<typeAlias alias="t_asset" type="com.building.dto.TransferAssetDto"/>
 		<typeAlias alias="tComplaint" type="com.building.dto.TransferComplaintDto"/>
 		<typeAlias alias="tReply" type="com.building.dto.TransferReplyDto"/>
+		<typeAlias alias="profile" type="com.building.dto.ProfileDto"/>
 	</typeAliases>
 </configuration>

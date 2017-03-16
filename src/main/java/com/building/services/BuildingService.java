@@ -1,9 +1,11 @@
 package com.building.services;
 
+import com.building.dto.ProfileDto;
 import com.building.dto.master.MasterBuildingDto;
 import com.building.dto.master.MasterFloorDto;
 import com.building.dto.master.MasterRoomDto;
 import com.dropbox.core.ServerException;
+import sun.java2d.cmm.Profile;
 
 import java.util.List;
 
@@ -33,7 +35,6 @@ public interface BuildingService {
     void deleteRoomByFloorId(List<Long> listFloorId) throws ServerException;
     List<MasterBuildingDto> findByBuildingName(String buildingName) throws ServerException;
     //For Profile
-    String findBuildingNameByBuildingId (long id) throws ServerException;
-    String findFloorNameByFloorId (long id) throws ServerException;
-    String findRoomNameByRoomId (long id) throws ServerException;
+    ProfileDto findAllName (long buildingCode, long floorCode, long roomCode) throws ServerException;
+
 }
