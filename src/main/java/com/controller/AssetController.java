@@ -8,6 +8,7 @@ import com.building.services.BuildingService;
 import com.dropbox.core.ServerException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -93,5 +94,11 @@ public class AssetController {
 	public String delete(@PathVariable long id, Model model, HttpServletRequest request)  throws ServerException{
 		masterAssetService.deleteById(id);
 		return "redirect:/asset";
+	}
+
+	@RequestMapping(value = "/findAssetsByBuildingCode/{id}", method = RequestMethod.GET, headers = "Accept=application/json", produces = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
+	public List<MasterAssetDto> findAssetsByBuildingCode(@PathVariable long id) throws ServerException {
+		return masterAssetService.findAssetsByBuildingCode(id);
 	}
 }
