@@ -30,8 +30,16 @@
     <%--<link href="${gritterCss}" rel="stylesheet" type="text/css"/>--%>
     <spring:url value="/resources/WebContent/codebase/schedule_all.css" var="scheduleCss"/>
     <link href="${scheduleCss}" rel="stylesheet" type="text/css"/>
+    <%--<spring:url value="/resources/WebContent/codebase/dhtmlxscheduler.js" var="dhtmlxschedulerJs" />
+    <script src="${dhtmlxschedulerJs}"></script>
+    <spring:url value="/resources/WebContent/codebase/ext/dhtmlxscheduler_agenda_view.js" var="agendaJs" />
+    <script src="${agendaJs}"></script>--%>
+    <%--<spring:url value="/resources/WebContent/codebase/dhtmlxscheduler_glossy.css" var="glossyCss" />
+    <link href="${glossyCss}" rel="stylesheet" type="text/css"/>--%>
     <spring:url value="/resources/WebContent/codebase/schedule.js" var="scheduleJs" />
     <script src="${scheduleJs}" type="text/javascript" charset="utf-8"></script>
+
+
     <spring:url value="/resources/WebContent/codebase/locale/locale_en.js" var="localeJs" />
     <spring:url value="/resources/WebContent/codebase/ext/dhtmlxscheduler_tooltip.js" var="dhtmlxschedulerTooltipJs" />
     <script src="${localeJs}"></script>

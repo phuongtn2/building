@@ -2,6 +2,8 @@ require('dhtmlxvault');
 require('dhxScheduler');
 require('script!../../codebase/locale/locale_en.js');
 require('script!../../codebase/ext/dhtmlxscheduler_tooltip.js');
+//require('script!../../codebase/dhtmlxscheduler.js');
+require('script!../../codebase/ext/dhtmlxscheduler_agenda_view.js');
 require('script!../../codebase/scheduler.api.js');
 require('script!../../codebase/dhtmlxscheduler_minical.js');
 require('script!../../codebase/dhtmlxscheduler_timeline.js');
@@ -71,7 +73,7 @@ function ohgHIREScheduleObject() {
         // スケジュールの設定
         var def = that.setConfig();
         // Lightboxの設定
-        //scheduler.init('scheduler_here',new Date(),"day");
+        //scheduler.init('scheduler_here',new Date(),"agenda");
         scheduler.showLightbox = function(id) {
             that.setEvent();
             var ev = scheduler.getEvent(id);
@@ -130,6 +132,8 @@ function ohgHIREScheduleObject() {
         scheduler.config.default_date = "%Y %M %j"; // 年月日表示のデフォルト
         scheduler.config.api_date="%Y/%m/%d %H:%i";
         scheduler.config.dblclick_create = true;
+
+        //scheduler.locale.labels.agenda_tab="My Agenda";
 
         // イベントの編集バーは詳細ウィンドウだけ必要
         scheduler.config.icons_select = ["icon_details"];
@@ -396,10 +400,11 @@ function ohgHIREScheduleObject() {
     this.setCalendarArea = function(layoutCell) {
         //layoutCell.setWidth(1100);
         layoutCell.hideHeader();
-        layoutCell.attachScheduler(new Date(), "week", _CONST.HTML.CAL_BTN);
+        layoutCell.attachScheduler(new Date(), "agenda", _CONST.HTML.CAL_BTN);
         // Dynamic Loadingの設定を行う。
         scheduler.config.show_loading = false; // ロード時のスピナー設定
-        scheduler.setLoadMode("week");
+        //scheduler.init(_CONST.HTML.CAL_BTN, new Date(),  "agenda");
+        scheduler.setLoadMode("agenda");
         // イベントのロード
         that.loadSchedule();
     };

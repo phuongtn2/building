@@ -85,9 +85,10 @@ var _GH = (function(){
         S07F010Sche : {
             HTML: {
                 // カレンダー表示切り替えボタン用のソース
-                CAL_BTN : '<div class="dhx_cal_tab" name="day_tab" style="right:204px;"></div>' // 日表示
-                + '<div class="dhx_cal_tab" name="week_tab" style="right:140px;"></div>' // 週表示
-                + '<div class="dhx_cal_tab" name="month_tab" style="right:280px;"></div>' // 月表示
+                CAL_BTN : '<div class="dhx_cal_tab" name="day_tab" style="right:204px;"></div>'
+                                + '<div class="dhx_cal_tab" name="week_tab" style="right:140px;"></div>'
+                                + '<div class="dhx_cal_tab" name="month_tab" style="right:76px;"></div>'
+                                + '<div class="dhx_cal_tab" name="agenda_tab" style="right:280px;"></div>'
             },
             // イベントのカラー定義
             EVENT_COLOR: {
