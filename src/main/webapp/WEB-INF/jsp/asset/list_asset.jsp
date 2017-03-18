@@ -60,7 +60,7 @@
 									<a type="button" data-toggle="modal" data-target="#deleteButton"
 									   class="btn-danger btn btn-xs"
 									   onclick="setUrl('/asset/delete/${masterAsset.assetCode}')"><spring:message
-											code="common.button.delete" text="default text"/></a>
+											code="common.button.delete" text="default text"></spring:message></a>
 								</div>
 							</td>
 						</tr>

@@ -56,10 +56,10 @@
 								<div class="btn-group">
 									<a class="btn-success btn btn-xs"
 									   href="/service/edit/${masterServices.serviceCode}"><spring:message
-											code="common.button.edit" text="default text"/></a>
-									<a class="btn-danger btn btn-xs"
-									   href="/service/delete/${masterServices.serviceCode}"><spring:message
-											code="common.button.delete" text="default text"/></a>
+											code="common.button.edit" text="default text"></spring:message></a>
+									<a type="button" data-toggle="modal" data-target="#deleteButton"
+									   class="btn-danger btn btn-xs" onclick="setUrl('/service/delete/${masterServices.serviceCode}')"><spring:message
+											code="common.button.delete" text="default text"></spring:message></a>
 								</div>
 							</td>
 						</tr>
