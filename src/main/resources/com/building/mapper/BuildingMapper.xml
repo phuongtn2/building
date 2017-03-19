@@ -160,18 +160,23 @@
 
 
 	<!--For Profile-->
-	<select id="findBuildingNameByBuildingId" resultType="String">
-		SELECT  buildingName
-		 FROM M_BUILDING WHERE buildingCode=#{id}
+	<select id="findAllName" resultType="profile">
+		SELECT  b.buildingName buildingName,
+		f.floorAlias floorAlias,
+		r.roomAlias roomAlias
+		 FROM M_BUILDING b
+		 JOIN M_FLOOR f ON (f.floorCode = #{floorCode})
+		 JOIN M_ROOM r ON (r.roomCode = #{roomCode})
+		 WHERE b.buildingCode=#{buildingCode}
 	</select>
-	<select id="findFloorNameByFloorId" resultType="String">
+	<!--<select id="findFloorNameByFloorId" resultType="String">
 		SELECT  floorAlias
 		FROM M_FLOOR WHERE floorCode = #{id}
 	</select>
 	<select id="findRoomNameByRoomId" resultType="String">
 		SELECT  roomAlias
 		 FROM M_ROOM WHERE roomCode = #{id}
-	</select>
+	</select>-->
 
 </mapper>
 

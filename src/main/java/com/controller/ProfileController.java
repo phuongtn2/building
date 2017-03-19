@@ -57,18 +57,13 @@ public class ProfileController {
         UserRoomDto userRoomDto = new UserRoomDto();
         profileDto.setUserDto(managerUserService.findUserById(aui.getUserId()));
         userRoomDto = managerUserService.findUserRoomById(aui.getUserId());
-//        MasterBuildingDto buildingDto = new MasterBuildingDto();
-//        MasterFloorDto floorDto = new MasterFloorDto();
-//        MasterRoomDto roomDto = new MasterRoomDto();
-//        userRoomDto.setUserId(aui.getUserId());
 
+        ProfileDto profileDtoTem = new ProfileDto();
+        profileDtoTem = managerBuildingService.findAllName(userRoomDto.getBuildingCode(), userRoomDto.getFloorCode(), userRoomDto.getRoomCode());
+        profileDto.setRoomAlias(profileDtoTem.getRoomAlias());
+        profileDto.setFloorAlias(profileDtoTem.getFloorAlias());
+        profileDto.setBuildingName(profileDtoTem.getBuildingName());
 
-//        profileDto.setBuildingName(managerBuildingService.findBuildingNameByBuildingId(aui.getUserId()));
-//        profileDto.setFloorAlias(managerBuildingService.findFloorNameByFloorId(aui.getUserId()));
-//        profileDto.setRoomAlias(managerBuildingService.findRoomNameByRoomId(aui.getUserId()));
-        profileDto.setBuildingName(managerBuildingService.findBuildingNameByBuildingId(userRoomDto.getBuildingCode()));
-        profileDto.setFloorAlias(managerBuildingService.findFloorNameByFloorId(userRoomDto.getFloorCode()));
-        profileDto.setRoomAlias(managerBuildingService.findRoomNameByRoomId(userRoomDto.getRoomCode()));
         return profileDto;
     }
 

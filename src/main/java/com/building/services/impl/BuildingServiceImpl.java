@@ -1,5 +1,6 @@
 package com.building.services.impl;
 
+import com.building.dto.ProfileDto;
 import com.building.dto.master.MasterBuildingDto;
 import com.building.dto.master.MasterFloorDto;
 import com.building.dto.master.MasterRoomDto;
@@ -116,17 +117,8 @@ public class BuildingServiceImpl implements BuildingService {
     }
 
     @Override
-    public String findBuildingNameByBuildingId(long id) throws ServerException {
-        return buildingMapper.findBuildingNameByBuildingId(id);
+    public ProfileDto findAllName(long buildingCode, long floorCode, long roomCode) throws ServerException {
+        return buildingMapper.findAllName(buildingCode, floorCode, roomCode);
     }
 
-    @Override
-    public String findFloorNameByFloorId(long id) throws ServerException {
-        return buildingMapper.findFloorNameByFloorId(id);
-    }
-
-    @Override
-    public String findRoomNameByRoomId(long id) throws ServerException {
-        return buildingMapper.findRoomNameByRoomId(id);
-    }
 }
