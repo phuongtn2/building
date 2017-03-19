@@ -20,4 +20,9 @@ public class RequestBookingServiceImpl implements RequestBookingService {
     public void deleteById(long id) {
         requestBookingMapper.deleteById(id);
     }
+
+    @Override
+    public List<BookingServiceDto> findAllBooking() {
+        return requestBookingMapper.findAllBooking();
+    }
 }

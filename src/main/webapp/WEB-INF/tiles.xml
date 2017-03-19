@@ -62,6 +62,10 @@
 		<put-attribute name="title" value="Request Booking" />
 		<put-attribute name="body" value="/WEB-INF/jsp/request_booking/view.jsp" />
 	</definition>
+	<definition name="list_request_booking" extends="base.booking">
+		<put-attribute name="title" value="Request Booking" />
+		<put-attribute name="body" value="/WEB-INF/jsp/request_booking/list_request_booking.jsp" />
+	</definition>
 	<definition name="building" extends="base.definition">
 		<put-attribute name="title" value="Building" />
 		<put-attribute name="body" value="/WEB-INF/jsp/building/view.jsp" />

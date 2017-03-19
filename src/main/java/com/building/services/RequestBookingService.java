@@ -9,4 +9,5 @@ import java.util.List;
  */
 public interface RequestBookingService {
     void deleteById(long id);
+    List<BookingServiceDto> findAllBooking ();
 }

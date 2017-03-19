@@ -8,11 +8,12 @@
 <%@page language="java" contentType="text/html;charset=UTF-8" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <div class="row">
 	<div class="col-lg-12">
 		<div class="ibox float-e-margins">
 			<div class="ibox-title">
-				<h5>Danh sách dịch vụ</h5>
+				<h5><spring:message code="listReqest.listBooking" text="default text"></spring:message></h5>
 
 				<div class="ibox-tools">
 					<a class="collapse-link">
@@ -22,52 +23,39 @@
 			</div>
 			<div class="ibox-content">
 				<input type="text" class="form-control input-sm m-b-xs" id="filter"
-				       placeholder="Tìm kiếm dịch vụ">
+				       placeholder="<spring:message code="listReqest.search" text="default text"></spring:message>">
 
 				<table class="footable emp-sales table table-stripped table-bordered table-hover dataTables-example"
 				       data-page-size="8" data-filter=#filter>
 					<thead>
 					<tr>
-						<th>serviceCode</th>
-						<th data-hide="phone,tablet">servicePrice</th>
-						<th data-hide="phone,tablet">assetCode</th>
-						<th data-hide="phone,tablet">Trạng thái dịch vụ</th>
-						<th data-hide="phone,tablet">bookFrom</th>
-						<th data-hide="phone,tablet">bookTo</th>
-						<th data-hide="phone,tablet" class="text-center">Action</th>
+						<th><spring:message code="listReqest.adId" text="default text"></spring:message></th>
+						<th data-hide="phone,tablet"><spring:message code="listReqest.serviceName" text="default text"></spring:message></th>
+						<th data-hide="phone,tablet"><spring:message code="listReqest.assetName" text="default text"></spring:message></th>
+						<th data-hide="phone,tablet"><spring:message code="listReqest.price" text="default text"></spring:message></th>
+						<th data-hide="phone,tablet"><spring:message code="listReqest.bookFrom" text="default text"></spring:message></th>
+						<th data-hide="phone,tablet"><spring:message code="listReqest.bookTo" text="default text"></spring:message></th>
+						<th data-hide="phone,tablet"><spring:message code="listReqest.status" text="default text"></spring:message></th>
+						<th data-hide="phone,tablet"><spring:message code="listReqest.followStatus" text="default text"></spring:message></th>
+						<th data-hide="phone,tablet"><spring:message code="listReqest.memo" text="default text"></spring:message></th>
+						<th data-hide="phone,tablet"><spring:message code="listReqest.content" text="default text"></spring:message></th>
 					</tr>
 					</thead>
 					<tbody>
-					<c:forEach items="${bookServiceDtoList}" var="bookServiceDto">
+					<c:forEach items="${ListBookingServiceDto}" var="listBookingServiceDto">
 						<tr class="gradeC">
-							<td>
-								<c:if test="${bookServiceDto.serviceCode==1}">serviceCode 1 </c:if>
-								<c:if test="${bookServiceDto.serviceCode==2}">serviceCode 2 </c:if>
-								<c:if test="${bookServiceDto.serviceCode==3}">serviceCode 3 </c:if>
-							</td>
-							<td data-hide="phone,tablet">${bookServiceDto.servicePrice}</td>
-							<td data-hide="phone,tablet">
-								<c:if test="${bookServiceDto.assetCode==1}">assetCode 1 </c:if>
-								<c:if test="${bookServiceDto.assetCode==2}">assetCode 2 </c:if>
-								<c:if test="${bookServiceDto.assetCode==3}">assetCode 3 </c:if>
-							</td>
-							<td data-hide="phone,tablet">
-								<c:if test="${bookServiceDto.status==1}">status 1 </c:if>
-								<c:if test="${bookServiceDto.status==2}">status 2 </c:if>
-								<c:if test="${bookServiceDto.status==3}">status 3 </c:if>
-							</td>
+							<td>${listBookingServiceDto.bookingServiceDto.userId}</td>
+							<td data-hide="phone,tablet">Service Name</td>
+							<td data-hide="phone,tablet">Asset Name</td>
+							<td data-hide="phone,tablet">${listBookingServiceDto.bookingServiceDto.totalPrice}</td>
 							<td data-hide="phone,tablet"><fmt:formatDate pattern="MM/dd/yyyy"
-							                                             value="${bookServiceDto.bookFrom}"/></td>
+							                                             value="${listBookingServiceDto.bookingServiceDto.bookFrom}"></fmt:formatDate></td>
 							<td data-hide="phone,tablet"><fmt:formatDate pattern="MM/dd/yyyy"
-							                                             value="${bookServiceDto.bookTo}"/></td>
-							<td class="text-center">
-								<div class="btn-group">
-									<a class="btn-success btn btn-xs"
-									   href="/request_booking/edit/${bookServiceDto.t_bookServiceCode}">Edit</a>
-									<a class="btn-danger btn btn-xs"
-									   href="/request_booking/delete/${bookServiceDto.t_bookServiceCode}">Delete</a>
-								</div>
-							</td>
+							                                             value="${listBookingServiceDto.bookingServiceDto.bookTo}"></fmt:formatDate></td>
+							<td data-hide="phone,tablet">${listBookingServiceDto.bookingServiceDto.status}</td>
+							<td data-hide="phone,tablet">${listBookingServiceDto.bookingServiceDto.followStatus}</td>
+							<td data-hide="phone,tablet">${listBookingServiceDto.bookingServiceDto.memo}</td>
+							<td data-hide="phone,tablet">Content</td>
 						</tr>
 					</c:forEach>
 					</tbody>

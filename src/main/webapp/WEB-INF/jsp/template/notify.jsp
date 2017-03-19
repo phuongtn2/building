@@ -49,7 +49,7 @@
                     <li class="divider"></li>
                     <li>
                         <div class="text-center link-block">
-                            <a href="notifications.html">
+                            <a href="/notifications">
                                 <strong><spring:message code="notify.alert" text="default text" /></strong>
                                 <i class="fa fa-angle-right"></i>
                             </a>
