@@ -512,7 +512,7 @@ function ohgHIREScheduleObject() {
     };
     this.doScheduleWindow = function(event) {
         if (_ghWins.ghWins.window("scheduleWin") == null) {
-            var win = _ghWins.ghWins.createWindow("scheduleWin", 20, 30, 625, 660);
+            var win = _ghWins.ghWins.createWindow("scheduleWin", 20, 30, 600, 500);
             win.setText("Request Booking");
             win.hide();
             win.button("park").hide();
@@ -537,14 +537,14 @@ function ohgHIREScheduleObject() {
             scheduleForm.updateValues();
             switch(name) {
                 case "saveBookBtn":
-                    event.t_bookServiceCode = scheduleForm.getItemValue("t_bookServiceCode"); // スケジュールID
+                    event.bookServiceCode = scheduleForm.getItemValue("bookServiceCode"); // スケジュールID
                     event.serviceCode = scheduleForm.getItemValue("serviceCode"); // スケジュールID
                     event.assetCode = scheduleForm.getItemValue("assetCode"); // 顧客ID
                     event.start_date = scheduleForm.getItemValue("bookFrom");
                     event.end_date = scheduleForm.getItemValue("bookTo");
                     event.status = scheduleForm.getCheckedValue("status");
                     event.memo = scheduleForm.getItemValue("memo"); //
-                    var uri = (event.t_bookServiceCode)? URI.UPDATE: URI.REGIST;
+                    var uri = (event.bookServiceCode)? URI.UPDATE: URI.REGIST;
                     if (scheduleForm.validate()) {
                         if (!isDateInRange(scheduleForm.getItemValue("bookFrom"), 7)) {
                             if (!confirm(_MSG.S07F020.M_001)) return;
@@ -595,6 +595,9 @@ function ohgHIREScheduleObject() {
                         , null
                     );
                     servicesAssets.init();
+                    break;
+                case "assets":
+                    _ghWins.doServiceAsset(schdForm.getInput("code"), schdForm.getInput("name"), schdForm, "Assets");
                     break;
             }
         });

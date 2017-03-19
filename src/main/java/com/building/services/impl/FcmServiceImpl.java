@@ -8,6 +8,7 @@ import com.building.services.RequestBookingService;
 import com.building.services.UserService;
 import com.building.services.error.ServiceException;
 import com.building.util.fcm.FcmClient;
+import com.building.util.str.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,7 +36,7 @@ public class FcmServiceImpl implements FcmService {
                 String apiKey = "AAAAjr6ZX2Q:APA91bF0VTJRo-8jmXqT6hfiv9q13lGJk5JH77Cn_RSRcVgqmBYOF64ZUOAPXQlsgn-gmlio7DK8gH60Ep35KqCQwkX3qxDRfRArfp9rWAA487suX8aOvWr2GNHhYD0riqiw6SxLZXGQ";
                 for (BookingServiceDto bookingServiceDto : bookingServiceDtos) {
                     Map<String, String> data = buildData(bookingServiceDto, false);
-                    long ttl = ((new Date().getTime() + (60*60*60*24)) - new Date().getTime()) / 1000;
+                    long ttl = (bookingServiceDto.getBookTo().getTime() - new Date().getTime()) / 1000;
                     FcmClient.sendNotification(apiKey, data, fcmToken, ttl);
                 }
             }
@@ -63,7 +64,7 @@ public class FcmServiceImpl implements FcmService {
         for(int userId:bookingUserIds){
             List<String> fcmTokens = userService.getFcmToken(userId);
             if (!fcmTokens.isEmpty()) {
-                long ttl = ((new Date().getTime() + (60*60*60*24)) - new Date().getTime()) / 1000;
+                long ttl = (bookingServiceDto.getBookTo().getTime() - new Date().getTime()) / 1000;
                 for (String fcmToken : fcmTokens) {
                     try {
                         FcmClient.sendNotification(apiKey, data, fcmToken, ttl);
@@ -97,10 +98,12 @@ public class FcmServiceImpl implements FcmService {
         try {
             String content = "";
             List<BookingServiceGroup> serviceGroups = requestBookingService.searchServiceGroupById(bookingServiceDto.getBookingServiceCode(), true);
-            for (BookingServiceGroup serviceGroup : serviceGroups) {
-                String contentService = serviceGroup.getContent();
-                if (contentService != null && !contentService.isEmpty())
-                    content += (content == "" ? "" : "\r\n") + contentService;
+            if(serviceGroups != null && serviceGroups.size() > 0) {
+                for (BookingServiceGroup serviceGroup : serviceGroups) {
+                    String contentService = serviceGroup.getContent();
+                    if (contentService != null && !contentService.isEmpty())
+                        content += (content == "" ? "" : "\r\n") + contentService;
+                }
             }
             return content;
         } catch (ServiceException e) {
@@ -112,10 +115,13 @@ public class FcmServiceImpl implements FcmService {
     @Override
     public int storeToken(AuthorizedUserInfo userInfo, @FormParam("token") String fcmToken) throws ServiceException {
         String authToken = userInfo.getToken();
-        int effected = userService.updateFcmToken(userInfo.getUserId(), fcmToken);
-        if (effected > 0) {
-            sendNotification(userInfo.getUserId(), fcmToken);
-        }
+        //int effected = 0 ;
+        //if(StringUtil.isEmpty(authToken)) {
+            int effected = userService.updateFcmToken(userInfo.getUserId(), fcmToken);
+            if (effected > 0) {
+                sendNotification(userInfo.getUserId(), fcmToken);
+            }
+        //}
         return effected;
     }
 

@@ -54,6 +54,8 @@ var _GH = (function(){
             SCHD_LIGHT_FORM_JSON : {filename: "BookingForm.json", common: true},
             SERVICES_ASSETS_WIN : {filename: "ServicesAssetsWin.json", common: true},
             SERVICES_ASSETS_GRID : {filename: "ServicesAssetsGrid.json", common: true},
+            ASSETS_WIN : {filename: "AssetsWin.json", common: true},
+            ASSETS_GRID : {filename: "AssetsGrid.json", common: true},
             WIN_BUILDING_FORM_JSON : {filename: "BuildingWinForm.json", common: true},
             BUILDING_GIRD : {filename: "BuildingGrid.json", common: true}
         },

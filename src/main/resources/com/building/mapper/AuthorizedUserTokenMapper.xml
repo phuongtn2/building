@@ -10,12 +10,16 @@
 		, u.mail mail
 		, u.fullName fullName
 		, rg.roleGroupName roleGroupName
+		, ur.roomCode roomCode
+		, ur. floorCode floorCode
+		, ur.buildingCode buildingCode
 	</sql>
 	<sql id="empAuthTables">
 		FROM T_USER u
 		LEFT OUTER JOIN T_USERROLEGROUP urg on
 		(urg.userId=u.userId)
 		LEFT OUTER JOIN T_ROLEGROUP rg on (rg.roleGroupId=urg.roleGroupId)
+		JOIN T_USER_ROOM ur ON (ur.userId = u.userId)
 	</sql>
 
 	<select id="findAuthorizedUserInfoByAdId" resultType="empAuth">

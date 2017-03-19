@@ -1,5 +1,6 @@
 package com.building.dto.login;
 
+import com.building.dto.UserRoomDto;
 import com.building.services.Role;
 
 import java.io.Serializable;
@@ -12,6 +13,33 @@ public class AuthorizedUserInfo implements Serializable {
 	private String fullName;
 	private String mail;
 	private String roleGroupName;
+	private long roomCode;
+	private long floorCode;
+	private long buildingCode;
+
+	public long getRoomCode() {
+		return roomCode;
+	}
+
+	public void setRoomCode(long roomCode) {
+		this.roomCode = roomCode;
+	}
+
+	public long getFloorCode() {
+		return floorCode;
+	}
+
+	public void setFloorCode(long floorCode) {
+		this.floorCode = floorCode;
+	}
+
+	public long getBuildingCode() {
+		return buildingCode;
+	}
+
+	public void setBuildingCode(long buildingCode) {
+		this.buildingCode = buildingCode;
+	}
 
 	public int getUserId() {
 		return userId;

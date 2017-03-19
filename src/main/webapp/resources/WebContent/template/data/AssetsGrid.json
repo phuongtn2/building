@@ -1,0 +1,7 @@
+{
+    "head":[
+        {"id":"code","width":"50","type":"ch","align":"right","sort":"int","value":"code"}
+        ,{"id":"name","width":"*","type":"ro","align":"left","sort":"str","value":"Name"}
+    ],
+    "rows":[]
+}

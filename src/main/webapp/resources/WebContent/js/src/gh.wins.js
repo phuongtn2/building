@@ -196,166 +196,79 @@ function CommonWindows() {
         win.show();
     };
 
-    /**
-     * 担当者選択ダイアログを開く
-     * @param tantoIdInput {Object} 担当者IDを設定するためのInputオブジェクト
-     * @param tantoNameInput {Object} 担当者名を設定するためのInputオブジェクト
-     * @param divisionIdInput
-     * @param divisionName
-     * @param divisionSelectable
-     * @param initialEmp
-     * @param def
-     * @param doShowAll
-     * @param isCheckBox
-     * @param isGetName
-     */
-    this.doTantoWin = function(tantoIdInput, tantoNameInput, divisionIdInput, divisionName, divisionSelectable, initialEmp, def, doShowAll, isCheckBox, isGetName) {
-        var winName = "TantoWin";
+    this.doServiceAsset = function(codeInput, nameInput, formObject, winName){
+        var winName = winName;
+        var MODE =  _GH.WINS.EVENT_MODE.EVENT;
         var win = this.ghWins.window(winName);
         if (win == null) {
-            win = this.ghWins.createWindow(winName, 20, 30, 400, 380);
+            var winWidth = MODE.width;
+            win = this.ghWins.createWindow(winName, 20, 30, winWidth, MODE.height);
+            win.setText("Select " + winName);
             win.hide();
-            win.setText("担当者選択");
-        }
-        var tantoTree = null;
-        var tantoForm = win.attachForm();
-        var divisionId = !isCheckBox ? 0 : [];
-        var employeeId = !isCheckBox ? 0 : [];
-        tantoForm.loadStruct(getTemplatePath(_GH.DATA_PATH.TANTO_JSON), function() {
-            // TODO (confirm): only show cancel button in main screen (in SFA version: SFA page)
-            if (_ghUser.inMainScreen()) {
-                this.showItem("deleteTantoBtn");
-            }
-            tantoTree = new dhtmlXTreeObject(tantoForm.getContainer("tantoTree"),"100%","100%",0);
-            if(isCheckBox){
-            	tantoTree.enableCheckBoxes(true);
-                tantoTree.enableThreeStateCheckboxes(true);
-                this.hideItem("notice");
-                this.showItem("checkBoxBtn");
-            }            
-            tantoTree.setImagePath(_GH.PATH_TYPE.TREE_IMGS);
-            tantoTree.enableKeyboardNavigation(true);
-            //TODO ここはキャッシュで持たせたい
-            var uri = (doShowAll)? "0/3": _ghUser.getLoginType() + "/3";
-            tantoTree.parse(getJSONSync(_GHAPI.URL.TANTO + uri +"?quitFlg=0"), function () {
-                if (initialEmp) {
-                    // 引数で与えられた担当者IDを探す
-                    var allNodesIds = tantoTree.getAllSubItems(0);
-                    allNodesIds = allNodesIds.split(",");
-                    _.forEach(allNodesIds, function (id) {
-                        if(tantoTree.getUserData(id, "employeeId") === initialEmp){
-                            tantoTree.findItem(tantoTree.getItemText(id));
-                        }
-                    });
-                } else {
-                    tantoTree.findItem(_ghUser.getName());
-                }
-                // 何も選択されていなければ、ルートを開く
-                if (!tantoTree.getSelectedItemId()) {
-                    var rootId = safeCommaSplit(tantoTree.getAllItemsWithKids())[0];
-                    tantoTree.openItem(rootId);
-                }
-            }, "json");
-            // ダブルクリックイベント
-            if (!isCheckBox) {
-            	  tantoTree.attachEvent("onDblClick", function (/*id*/) {
-                    win.close();
-                });
-            }
-        });
-
-        // クリックイベント
-        tantoForm.attachEvent('onButtonClick', function(name/*, command*/){
-            switch(name) {
-                case "searchTantoBtn": // 検索ボタンクリック
-                    tantoTree.findItem(tantoForm.getItemValue("searchTanto"));
-                    break;
-                case "deleteTantoBtn": // 取消ボタンクリック
-                    if(tantoIdInput) tantoIdInput.value = 0;
-                    if(tantoNameInput) tantoNameInput.value = "";
-                    if(divisionIdInput) divisionIdInput.value = 0;
-                    if(divisionName) divisionName.value = "";
-                    win.close();
-                    break;
-                case "checkBoxBtn":
-                	win.close();
-                    break;
-            }
-        });
-
-        win.attachEvent("onClose", function(){
-            var selectedId = (!isCheckBox)? tantoTree.getSelectedItemId() : tantoTree.getAllChecked();
-            // 何も選択されていない場合、処理を終える
-            if(selectedId == 0){
+            win.attachEvent("onClose", function (/*win*/) {
+                if (!_.isEmpty(formObject)) formObject.updateValues();
                 return true;
+            });
+        }
+        var bukkenForm = win.attachForm();
+        bukkenForm.loadStruct(loadJSON(getTemplatePath(_GH.DATA_PATH.ASSETS_WIN)), "json", function() {
+            if (MODE.isEvent) {
+                this.hideItem("arrow");
+                this.hideItem("info");
             }
-            if(isCheckBox){
-        		var checkBoxId = _.words(selectedId, /[^, ]+/g);
-        		if(checkBoxId === "undefined"){
-        			return true;
-        		}
-        		var text = [];
-        		_.forOwn(checkBoxId, function(value/*, key*/) {
-        			if(tantoTree.getUserData(value, "employeeId") !== undefined){
-        				employeeId.push(tantoTree.getUserData(value, "employeeId"));
-        				if((divisionId.indexOf(tantoTree.getUserData(value, "divisionId")) == -1)){
-        					divisionId.push(tantoTree.getUserData(value, "divisionId"));
-        				}
-        				text.push(tantoTree.getItemText(value));
-        			}
-    			});
-        		if(tantoIdInput){
-                    tantoIdInput.value = employeeId;
-                }
-        		tantoNameInput.value = text.join(";");
-        	} else {
-        		if (tantoTree.getUserData(selectedId, "employeeId") !== undefined) {
-                    // 担当者が選択された場合
-                	
-                    employeeId = tantoTree.getUserData(selectedId, "employeeId");
-                    if(tantoIdInput){
-                        tantoIdInput.value = employeeId;
-                    }
-                    divisionId = tantoTree.getUserData(selectedId, "divisionId");
-                    if(divisionIdInput && !_.isEmpty(divisionId) && divisionId != 0){
-                        divisionIdInput.value = divisionId;
-                    }
+        });
+        var gridDataLogicFunc = function (data, id/*, rowIdx*/) {
+            var val;
+            switch (id) {
+                case "name":
+                    val = _.isEmpty(data[id])? data["assetName"]: data[id];
+                    break;
+                default:
+                    val = data[id];
+                    break;
+            }
+            return val;
+        };
+        var leftGrid = new dhtmlXGridObject(bukkenForm.getContainer("leftGrid"));
+        leftGrid.setImagePath(_GH.PATH_TYPE.DHX_IMGS);
+        leftGrid.setSkin(_GH.PATH_TYPE.SKIN);
+        /*leftGrid.attachEvent("onDataReady",function(){
+            leftGrid.setColumnHidden(0, true);
+        });*/
 
-                    // 担当者名に課名も付与
-                    var parentId = tantoTree.getParentId(selectedId);
-                    var division = tantoTree.getItemText(parentId);
-                    (isGetName) ? $(tantoNameInput).val(tantoTree.getSelectedItemText()).change() : $(tantoNameInput).val(division + " " + tantoTree.getSelectedItemText()).change();
-                    var selectedName = tantoTree.getSelectedItemText();
-                    if (divisionName && !_.isEmpty(selectedName) && selectedName != 0) {
-                        $(divisionName).val(selectedName).change();
-                    }
-                } else {
-                    // 組織が選択できない場合、組織がクリックされた場合は無視する
-                    if(!divisionSelectable){
-                        console.log("組織を選択したため、無視する");
-                        return;
-                    }
-                    divisionId = tantoTree.getUserData(selectedId, "divisionId");
-                    if(divisionIdInput && !_.isEmpty(divisionId) && divisionId != 0){
-                        divisionIdInput.value = divisionId;
-                    }
-                    var selectedName = tantoTree.getSelectedItemText();
-                    if (divisionName && !_.isEmpty(selectedName) && selectedName != 0) {
-                        $(divisionName).val(selectedName).change();
-                    }
-                    // 担当者情報があれば、空にする。
-                    if (tantoIdInput) {
-                        tantoIdInput.value = 0;
-                    }
-                }
-        	}            
-            // 主に値の受け渡し
-            if (def) {
-               def.resolve(divisionId, employeeId);
+        var searchBuilding = function(doSearchAll) {
+            var assetName = bukkenForm.getItemValue("searchName");
+            var query = "";
+            if (!_.isEmpty(buildingName)) {
+                query += "assetName=" + assetName + "&";
             }
-            return true;
+            if (_.isEmpty(query) && !doSearchAll) return;
+            if (leftGrid) leftGrid.clearAll();
+            loadGridByGet(leftGrid, _GH.DATA_PATH.ASSETS_GRID, "asset/list?" + query, "code", gridDataLogicFunc);
+        };
+
+        bukkenForm.attachEvent("onChange", function (name/*, value*/) {
+            switch (name) {
+                case "searchBuildingName":
+                    searchBuilding();
+                    break;
+            }
+        });
+        bukkenForm.attachEvent("onKeyDown",function (inp, ev, name/*, value*/) {
+            switch (name) {
+                case "searchBuildingName":
+                    if (ev.keyCode == _GH.KEY_CODE.ENTER) searchBuilding();
+                    break;
+            }
         });
 
+        var previousEventId = 0;
+        searchBuilding(true);
+        leftGrid.attachEvent("onRowDblClicked", function (selectBuildingCode/*, cInd*/) {
+            if (buildingCodeInput !== null) buildingCodeInput.value = leftGrid.cells(selectBuildingCode, 0).getValue();
+            if (buildingNameInput !== null) buildingNameInput.value = leftGrid.cells(selectBuildingCode, 1).getValue();
+            win.close();
+        });
         win.show();
     };
 
