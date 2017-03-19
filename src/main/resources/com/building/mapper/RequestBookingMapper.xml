@@ -7,6 +7,14 @@
 	<delete id="deleteById">
 		DELETE FROM T_BOOKING_SERVICE WHERE bookingServiceCode = #{id}
 	</delete>
-
+	<select id="findAllBooking" resultType="bookService">
+		SELECT * FROM T_BOOKING_SERVICE ORDER BY created
+	</select>
+	<select id="searchListByUserId" resultType="bookService">
+		SELECT * FROM T_BOOKING_SERVICE WHERE userId = #{userId} ORDER BY created
+	</select>
+	<select id="searchServiceGroupById" resultType="bookingServiceGroup">
+		SELECT * FROM T_BOOKING_SERVICE_GROUP WHERE bookingServiceCode = #{bookingServiceCode} ORDER BY bookingServiceCode
+	</select>
 
 </mapper>

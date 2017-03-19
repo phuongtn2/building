@@ -34,4 +34,19 @@ public interface UserMapper {
     void updateUserRoom(@Param("dto") UserRoomDto userRoomDto);
     void deleteUserRoomById(@Param("id") long id);
     void deleteUserRoomByUserId(@Param("id") long id);
+
+    /**
+     * Update Firebase Cloud Message token
+     * @param userId
+     * @param fcmToken
+     * @return
+     */
+    int updateFcmToken(@Param("userId") int userId, @Param("fcmToken") String fcmToken);
+
+    /**
+     * get FCM token of user
+     * @param userId
+     * @return
+     */
+    String getFcmToken(@Param("userId") int userId);
 }

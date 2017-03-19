@@ -15,7 +15,10 @@ var _GHAPI = {
     SERVER : window.location.protocol + "//" + window.location.host + "/",
     URL : {
         AUTH : "auth/login/"
-    }
+    },
+    FCM_PATH:{
+        SW_PATH:'/resources/WebContent/js/src/firebasejs/sw.js'
+    },
 };
 var _GH = (function(){
     "use strict"

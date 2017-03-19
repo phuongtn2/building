@@ -10,6 +10,10 @@
                     {"type": "newcolumn"},
                     {"type": "hidden", "name": "buildingCode", "labelWidth": 50, "inputWidth": 170},
                     {"type": "input", "name": "buildingName", "labelWidth": 50, "inputWidth": 170}
+                ]},
+                {"type": "block", "inputWidth": "auto", "blockOffset": 0, "offsetTop": 0, "offsetLeft": 0, "list": [
+                    {"name": "bookFrom", "type": "calendar", "value": "", "label": "From", "width": 130, "offsetLeft": 10, "dateFormat": "%Y/%m/%d %H:%i", "serverDateFormat": "%Y/%m/%d %H:%i:%s", "calendarPosition": "bottom", "validate": "NotEmpty", "enableTime": true, "minutesInterval": 15, "required":false},
+                    {"name": "bookTo", "type": "calendar", "value": "", "label": "To", "width": 130, "offsetLeft": 10, "dateFormat": "%Y/%m/%d %H:%i", "serverDateFormat": "%Y/%m/%d %H:%i:%s", "calendarPosition": "bottom", "validate": "NotEmpty", "enableTime": true, "minutesInterval": 15, "required":false}
                 ]}
             ]},
             {"type": "block", "inputWidth": "auto", "blockOffset": 0, "offsetTop": 0, "offsetLeft": 0, "list": [

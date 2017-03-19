@@ -9,6 +9,8 @@ import com.dropbox.core.ServerException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -113,5 +115,47 @@ public class UserServiceImp implements UserService {
     @Override
     public void deleteUserRoomByUserId(long id) throws ServerException {
         managerUserMapper.deleteUserRoomByUserId(id);
+    }
+
+    @Override
+    public int updateFcmToken(int userId, String fcmToken) {
+        String currentToken = managerUserMapper.getFcmToken(userId);
+        if(currentToken != null && !currentToken.isEmpty()){
+            if(currentToken.indexOf(fcmToken) < 0){
+                fcmToken = currentToken + "," + fcmToken;
+                return managerUserMapper.updateFcmToken(userId, fcmToken);
+            } else {
+                return 2;
+            }
+        } else {
+            return managerUserMapper.updateFcmToken(userId, fcmToken);
+        }
+    }
+
+    @Override
+    public List<String> getFcmToken(int userId) {
+        String fcmTokens =  managerUserMapper.getFcmToken(userId);
+        if(fcmTokens!=null && !fcmTokens.isEmpty()){
+            String[] tokens = fcmTokens.split(",");
+            if(tokens != null && tokens.length > 0)
+                return Arrays.asList(tokens);
+        }
+        return new ArrayList<String>();
+    }
+
+    @Override
+    public int removeFcmToken(int userId, String fcmToken) {
+        String currentToken = managerUserMapper.getFcmToken(userId);
+        if (currentToken != null && !currentToken.isEmpty()) {
+            if (currentToken.indexOf(fcmToken + ",") >= 0) {
+                currentToken = currentToken.replace(fcmToken + ",", "");
+            } else if (currentToken.indexOf("," + fcmToken) >= 0) {
+                currentToken = currentToken.replace("," + fcmToken, "");
+            }else if (currentToken.indexOf(fcmToken) >= 0) {
+                currentToken = currentToken.replace(fcmToken, "");
+            }
+            return managerUserMapper.updateFcmToken(userId, currentToken);
+        }
+        return 2;
     }
 }

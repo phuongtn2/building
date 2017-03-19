@@ -32,4 +32,10 @@ public interface UserService {
     void updateUserRoom(UserRoomDto userRoomDto) throws ServerException;
     void deleteUserRoomById(long id) throws ServerException;
     void deleteUserRoomByUserId(long id) throws ServerException;
+
+    int updateFcmToken(int userId, String fcmToken);
+
+    List<String> getFcmToken(int userId);
+
+    int removeFcmToken(int userId, String fcmToken);
 }

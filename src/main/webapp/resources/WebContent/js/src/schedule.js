@@ -29,18 +29,10 @@ function ohgHIREScheduleObject() {
             REGIST : "request_booking/regist",
             UPDATE : "request_booking/update"
     };
-
-    // 配色のマッピング配列
     var mappingArray = [];
-    var department = [];
-    // 区切り文字
     var FILTER_DELIMITER = "/";
-    // ミニカレンダー
     var miniCalendar = null;
-    // 絞込フォーム
     var schdForm = null;
-
-    // フォーマッタ
     var dateFormat=scheduler.date.date_to_str("%Y/%m/%d %H:%i");
 
     // ハッシュ変更のイベントリスナーの登録
@@ -85,6 +77,13 @@ function ohgHIREScheduleObject() {
             intervalID = setInterval(that.refresh, INTERVAL_TIME);
             //resetDhxFormItemValues(schdForm);
         });
+
+        //var sentTokenToServer = window.localStorage.getItem('sentFCMTokenToServer');
+        //console.log('sentTokenToServer = ' + sentTokenToServer);
+        //if(!(sentTokenToServer == 1)){
+            //console.log('call sendFCMTokenToServer()');
+            sendFCMTokenToServer();
+        //}
     };
     /**
      * スケジュールをロードする。

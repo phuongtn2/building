@@ -159,4 +159,15 @@
         DELETE FROM T_USER_ROOM WHERE userRoomId = #{id}
     </delete>
 
+    <update id="updateFcmToken">
+        UPDATE T_USER
+        SET fcmToken = #{fcmToken}
+        WHERE userId = #{userId}
+    </update>
+    <select id="getFcmToken" resultType="String">
+        SELECT fcmToken
+        FROM T_USER
+        WHERE userId = #{userId}
+    </select>
+
 </mapper>

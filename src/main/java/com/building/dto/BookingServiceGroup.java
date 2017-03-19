@@ -6,7 +6,8 @@ package com.building.dto;
 public class BookingServiceGroup {
     private Long bookServiceCode;
     private Long serviceCode;
-
+    private Long assetCode;
+    private String content;
 
     public Long getBookServiceCode() {
         return bookServiceCode;
@@ -22,5 +23,21 @@ public class BookingServiceGroup {
 
     public void setServiceCode(Long serviceCode) {
         this.serviceCode = serviceCode;
+    }
+
+    public Long getAssetCode() {
+        return assetCode;
+    }
+
+    public void setAssetCode(Long assetCode) {
+        this.assetCode = assetCode;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
     }
 }

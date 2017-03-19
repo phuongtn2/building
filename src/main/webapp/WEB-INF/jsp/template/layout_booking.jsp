@@ -44,6 +44,13 @@
     <spring:url value="/resources/WebContent/codebase/ext/dhtmlxscheduler_tooltip.js" var="dhtmlxschedulerTooltipJs" />
     <script src="${localeJs}"></script>
     <script src="${dhtmlxschedulerTooltipJs}"></script>
+
+    <spring:url value="/resources/WebContent/js/src/firebasejs/firebase.js" var="firebaseJs" />
+    <spring:url value="/resources/WebContent/js/src/firebasejs/fcm_client.js" var="fcmJs" />
+    <script src="${firebaseJs}"></script>
+    <script src="${fcmJs}"></script>
+
+
     <script>
         function change(id) {
             var listId = ["news", "complaint", "request", "building" , "service", "user"

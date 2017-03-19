@@ -1,6 +1,7 @@
 package com.controller;
 
 import com.building.dto.BookingServiceDto;
+import com.building.services.FcmService;
 import com.building.services.RequestBookingService;
 import com.dropbox.core.ServerException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -21,6 +23,8 @@ import java.util.List;
 public class RequestBookingController {
 	@Autowired
 	private RequestBookingService requestBookingService;
+	@Autowired
+	private FcmService fcmService;
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
@@ -39,23 +43,16 @@ public class RequestBookingController {
 	@RequestMapping(value = "/list/self",method = RequestMethod.GET, headers = "Accept=application/json", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	public List<BookingServiceDto> findAllBooking(HttpServletRequest request) throws ServerException {
-		//try {
-			//String inputJson = IOUtils.toString(request.getReader());
-			//JSONObject jsonObj = new JSONObject(inputJson);
-			//TransferComplaintDto transferComplaintDto = new TransferComplaintDto();
-			//transferComplaintDto.setComplaintCode(Long.parseLong(jsonObj.getString("complaintCode")));
-			//transferComplaintDto.setTranSeq(Integer.parseInt(jsonObj.getString("tranSeq")));
-			//transferComplaintDto.setMessage(jsonObj.getString("message"));
-			//transferComplaintDto.setParentComplaintCode(Long.parseLong(jsonObj.getString("parentComplaintCode")));
-			//AuthorizedUserInfo aui = (AuthorizedUserInfo) request.getSession().getAttribute("aui");
-			//transferComplaintDto.setUserId(aui.getUserId());
-			//transferComplaintDto.setUserName(aui.getFullName());
-			//complaintService.insertTComplaint(transferComplaintDto);
-			return null;
-		//} catch (IOException e) {
-		//	e.printStackTrace();
-		//}
-		//return null;
+		List<BookingServiceDto> bookingServiceDtos = requestBookingService.findAllBooking();
+		List<Integer> bookingUserIds = new ArrayList<Integer>();
+		String content = "";
+		for (BookingServiceDto bookingServiceDto: bookingServiceDtos) {
+			bookingUserIds.add(bookingServiceDto.getUserId());
+			content = content + bookingServiceDto.getMemo();
+		}
+
+		fcmService.sendNotification(bookingServiceDtos.get(0), bookingUserIds, content);
+		return bookingServiceDtos;
 	}
 //	@ModelAttribute("bookServiceDtoList")
 //	public List<BookServiceDto> populateBookServiceList() throws ServerException {
