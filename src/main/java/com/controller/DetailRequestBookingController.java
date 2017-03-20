@@ -2,7 +2,12 @@ package com.controller;
 
 import com.building.dto.BookingServiceDto;
 import com.building.dto.DetailBookingServiceDto;
+import com.building.dto.login.UserDto;
+import com.building.dto.master.MasterAssetDto;
+import com.building.services.AssetService;
 import com.building.services.RequestBookingService;
+import com.building.services.ServicesService;
+import com.building.services.UserService;
 import com.dropbox.core.ServerException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
@@ -21,6 +26,8 @@ import java.util.List;
 public class DetailRequestBookingController {
 	@Autowired
 	private RequestBookingService requestBookingService;
+	@Autowired
+	private UserService managerUserService;
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
@@ -38,7 +45,7 @@ public class DetailRequestBookingController {
 
 	@ModelAttribute("ListBookingServiceDto")
 	public List<DetailBookingServiceDto> populateListBookServiceList() throws ServerException {
-//		return requestBookingService.findAllBooking();
+
 		List<DetailBookingServiceDto> listBookingServiceDto = new ArrayList<DetailBookingServiceDto>();
 		List<BookingServiceDto> bookingServiceDto =  requestBookingService.findAllBooking();
 
@@ -46,8 +53,11 @@ public class DetailRequestBookingController {
 		if(bookingServiceDto != null){
 			for (BookingServiceDto bookingServiceDto1:bookingServiceDto) {
 				DetailBookingServiceDto detailBookingServiceDto = new DetailBookingServiceDto();
-//				List<String> serviceName = new ArrayList<String>();
-//				List<String> assetName = new ArrayList<String>();
+				List<String> serviceName = new ArrayList<String>();
+				List<String> assetName = new ArrayList<String>();
+
+				detailBookingServiceDto.setAssetName(assetName);
+				detailBookingServiceDto.setServiceName(serviceName);
 				detailBookingServiceDto.setBookingServiceDto(bookingServiceDto1);
 				listBookingServiceDto.add(detailBookingServiceDto);
 			}
@@ -72,6 +82,11 @@ public class DetailRequestBookingController {
 //			}
 //		}
 		return listBookingServiceDto;
+	}
+
+	@ModelAttribute("serviceUserDtoList")
+	public List<UserDto> populateUserList() throws ServerException {
+		return managerUserService.findAllUser();
 	}
 
 }

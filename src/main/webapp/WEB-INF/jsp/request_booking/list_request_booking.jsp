@@ -44,7 +44,11 @@
 					<tbody>
 					<c:forEach items="${ListBookingServiceDto}" var="listBookingServiceDto">
 						<tr class="gradeC">
-							<td>${listBookingServiceDto.bookingServiceDto.userId}</td>
+							<td>
+								<c:forEach items="${serviceUserDtoList}" var="user">
+									<c:if test="${listBookingServiceDto.bookingServiceDto.userId==user.userId}">${user.adId}</c:if>
+								</c:forEach>
+							</td>
 							<td data-hide="phone,tablet">Service Name</td>
 							<td data-hide="phone,tablet">Asset Name</td>
 							<td data-hide="phone,tablet">${listBookingServiceDto.bookingServiceDto.totalPrice}</td>

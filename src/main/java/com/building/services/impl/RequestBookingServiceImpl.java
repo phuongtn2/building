@@ -25,4 +25,14 @@ public class RequestBookingServiceImpl implements RequestBookingService {
     public List<BookingServiceDto> findAllBooking() {
         return requestBookingMapper.findAllBooking();
     }
+
+    @Override
+    public List<String> findAllServiceByBookingId(long id) {
+        return findAllServiceByBookingId(id);
+    }
+
+    @Override
+    public List<String> findAllAssetByBookingId(long id) {
+        return findAllAssetByBookingId(id);
+    }
 }
