@@ -53,12 +53,13 @@ public class DetailRequestBookingController {
 		if(bookingServiceDto != null){
 			for (BookingServiceDto bookingServiceDto1:bookingServiceDto) {
 				DetailBookingServiceDto detailBookingServiceDto = new DetailBookingServiceDto();
-				List<String> serviceName = new ArrayList<String>();
-				List<String> assetName = new ArrayList<String>();
-
-				detailBookingServiceDto.setAssetName(assetName);
-				detailBookingServiceDto.setServiceName(serviceName);
 				detailBookingServiceDto.setBookingServiceDto(bookingServiceDto1);
+				List<String> stringList = requestBookingService.findNameByBookingServiceCode(bookingServiceDto1.getBookingServiceCode(), bookingServiceDto1.getOption());
+				String serviceOrAsset = "";
+				for (String s:stringList) {
+					serviceOrAsset = serviceOrAsset + s + "<BR>";
+				}
+				detailBookingServiceDto.setServiceOrAssetName(serviceOrAsset);
 				listBookingServiceDto.add(detailBookingServiceDto);
 			}
 

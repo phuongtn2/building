@@ -31,14 +31,12 @@
 					<tr>
 						<th><spring:message code="listReqest.adId" text="default text"></spring:message></th>
 						<th data-hide="phone,tablet"><spring:message code="listReqest.serviceName" text="default text"></spring:message></th>
-						<th data-hide="phone,tablet"><spring:message code="listReqest.assetName" text="default text"></spring:message></th>
 						<th data-hide="phone,tablet"><spring:message code="listReqest.price" text="default text"></spring:message></th>
 						<th data-hide="phone,tablet"><spring:message code="listReqest.bookFrom" text="default text"></spring:message></th>
 						<th data-hide="phone,tablet"><spring:message code="listReqest.bookTo" text="default text"></spring:message></th>
 						<th data-hide="phone,tablet"><spring:message code="listReqest.status" text="default text"></spring:message></th>
 						<th data-hide="phone,tablet"><spring:message code="listReqest.followStatus" text="default text"></spring:message></th>
 						<th data-hide="phone,tablet"><spring:message code="listReqest.memo" text="default text"></spring:message></th>
-						<th data-hide="phone,tablet"><spring:message code="listReqest.content" text="default text"></spring:message></th>
 					</tr>
 					</thead>
 					<tbody>
@@ -49,8 +47,7 @@
 									<c:if test="${listBookingServiceDto.bookingServiceDto.userId==user.userId}">${user.adId}</c:if>
 								</c:forEach>
 							</td>
-							<td data-hide="phone,tablet">Service Name</td>
-							<td data-hide="phone,tablet">Asset Name</td>
+							<td data-hide="phone,tablet">${listBookingServiceDto.serviceOrAssetName}</td>
 							<td data-hide="phone,tablet">${listBookingServiceDto.bookingServiceDto.totalPrice}</td>
 							<td data-hide="phone,tablet"><fmt:formatDate pattern="MM/dd/yyyy"
 							                                             value="${listBookingServiceDto.bookingServiceDto.bookFrom}"></fmt:formatDate></td>
@@ -59,7 +56,6 @@
 							<td data-hide="phone,tablet">${listBookingServiceDto.bookingServiceDto.status}</td>
 							<td data-hide="phone,tablet">${listBookingServiceDto.bookingServiceDto.followStatus}</td>
 							<td data-hide="phone,tablet">${listBookingServiceDto.bookingServiceDto.memo}</td>
-							<td data-hide="phone,tablet">Content</td>
 						</tr>
 					</c:forEach>
 					</tbody>

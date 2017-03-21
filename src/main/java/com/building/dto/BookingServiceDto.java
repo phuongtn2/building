@@ -15,6 +15,7 @@ public class BookingServiceDto extends DefaultObjectDto {
     private Byte status;
     private Byte followStatus;
     private Float totalPrice;
+    private byte option;
 
     public Float getTotalPrice() {
         return totalPrice;
@@ -30,7 +31,7 @@ public class BookingServiceDto extends DefaultObjectDto {
         return bookingServiceCode;
     }
 
-    public void setBookingServiceCode(Long bookServiceCode) {
+    public void setBookingServiceCode(Long bookingServiceCode) {
         this.bookingServiceCode = bookingServiceCode;
     }
 
@@ -94,5 +95,13 @@ public class BookingServiceDto extends DefaultObjectDto {
 
     public void setMemo(String memo) {
         this.memo = memo;
+    }
+
+    public byte getOption() {
+        return option;
+    }
+
+    public void setOption(byte option) {
+        this.option = option;
     }
 }

@@ -10,8 +10,7 @@ import java.util.List;
  */
 public class DetailBookingServiceDto extends DefaultObjectDto {
     private BookingServiceDto bookingServiceDto;
-    private List <String> ServiceName;
-    private List <String> AssetName;
+    private String serviceOrAssetName;
 
     public BookingServiceDto getBookingServiceDto() {
         return bookingServiceDto;
@@ -21,19 +20,11 @@ public class DetailBookingServiceDto extends DefaultObjectDto {
         this.bookingServiceDto = bookingServiceDto;
     }
 
-    public List<String> getServiceName() {
-        return ServiceName;
+    public String getServiceOrAssetName() {
+        return serviceOrAssetName;
     }
 
-    public void setServiceName(List<String> serviceName) {
-        ServiceName = serviceName;
-    }
-
-    public List<String> getAssetName() {
-        return AssetName;
-    }
-
-    public void setAssetName(List<String> assetName) {
-        AssetName = assetName;
+    public void setServiceOrAssetName(String serviceOrAssetName) {
+        this.serviceOrAssetName = serviceOrAssetName;
     }
 }

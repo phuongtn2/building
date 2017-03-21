@@ -1,6 +1,8 @@
 package com.building.services.impl;
 
 import com.building.dto.BookingServiceDto;
+import com.building.dto.master.MasterAssetDto;
+import com.building.dto.master.MasterServicesDto;
 import com.building.mapper.RequestBookingMapper;
 import com.building.services.RequestBookingService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,12 +29,7 @@ public class RequestBookingServiceImpl implements RequestBookingService {
     }
 
     @Override
-    public List<String> findAllServiceByBookingId(long id) {
-        return findAllServiceByBookingId(id);
-    }
-
-    @Override
-    public List<String> findAllAssetByBookingId(long id) {
-        return findAllAssetByBookingId(id);
+    public List<String> findNameByBookingServiceCode(long id, byte option) {
+        return requestBookingMapper.findNameByBookingServiceCode(id, option);
     }
 }
