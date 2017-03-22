@@ -30,7 +30,7 @@
 					<thead>
 					<tr>
 						<th><spring:message code="listReqest.adId" text="default text"></spring:message></th>
-						<th data-hide="phone,tablet"><spring:message code="listReqest.serviceName" text="default text"></spring:message></th>
+						<th data-hide="phone,tablet"><spring:message code="listReqest.assetNameOrServiceName" text="default text"></spring:message></th>
 						<th data-hide="phone,tablet"><spring:message code="listReqest.price" text="default text"></spring:message></th>
 						<th data-hide="phone,tablet"><spring:message code="listReqest.bookFrom" text="default text"></spring:message></th>
 						<th data-hide="phone,tablet"><spring:message code="listReqest.bookTo" text="default text"></spring:message></th>

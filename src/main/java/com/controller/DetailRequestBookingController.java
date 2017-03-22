@@ -36,10 +36,6 @@ public class DetailRequestBookingController {
 
 	@RequestMapping(method = RequestMethod.GET)
 	public String initForm(ModelMap model) throws ServerException {
-//		BookServiceDto bookServiceDto = new BookServiceDto();
-		//command object
-//		model.addAttribute("bookServiceDto", bookServiceDto);
-
 		return "list_request_booking";
 	}
 
@@ -64,24 +60,6 @@ public class DetailRequestBookingController {
 			}
 
 		}
-
-//		if(newsDtos != null){
-//			for (MasterNewsDto newsDto:newsDtos) {
-//				NewsNewsDetailDto newsNewsDetailDto = new NewsNewsDetailDto();
-//				List<NewsDetailDto> newsDetailDtos = newsService.findByNewsId(newsDto.getNewsCode());
-//				List<NewsDetailDto> newsDetailDtos1 = new ArrayList<NewsDetailDto>();
-//				for (NewsDetailDto newsDetailDto:newsDetailDtos) {
-//					MasterNewsDto newsDto1 = newsService.findById(newsDetailDto.getRefNewsCode());
-//					NewsDetailDto newsDetailDto1 = new NewsDetailDto();
-//					newsDetailDto1 = newsDetailDto;
-//					newsDetailDto1.setMasterNewsDto(newsDto1);
-//					newsDetailDtos1.add(newsDetailDto1);
-//				}
-//				newsNewsDetailDto.setMasterNewsDto(newsDto);
-//				newsNewsDetailDto.setNewsDetailDtoList(newsDetailDtos1);
-//				newsNewsDetailDtoList.add(newsNewsDetailDto);
-//			}
-//		}
 		return listBookingServiceDto;
 	}
 

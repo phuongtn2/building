@@ -47,7 +47,11 @@
 								<c:if test="${masterServices.serviceType==2}">serviceType 2 </c:if>
 								<c:if test="${masterServices.serviceType==3}">serviceType 3 </c:if>
 							</td>
-							<td data-hide="phone,tablet">${building.buildingName}</td>
+							<td data-hide="phone,tablet">
+								<c:forEach items="${buildingDtoList}" var="building">
+									<c:if test="${masterServices.buildingCode == building.buildingCode}">${building.buildingName}</c:if>
+								</c:forEach>
+							</td>
 							<td data-hide="phone,tablet"><fmt:formatDate pattern="MM/dd/yyyy"
 							                                             value="${masterServices.serviceStart}"/></td>
 							<td data-hide="phone,tablet"><fmt:formatDate pattern="MM/dd/yyyy"
