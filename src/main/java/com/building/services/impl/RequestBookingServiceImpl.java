@@ -29,6 +29,11 @@ public class RequestBookingServiceImpl implements RequestBookingService {
     }
 
     @Override
+    public List<BookingServiceDto> findAllNewBooking() {
+        return requestBookingMapper.findAllNewBooking();
+    }
+
+    @Override
     public List<String> findNameByBookingServiceCode(long id, byte option) {
         return requestBookingMapper.findNameByBookingServiceCode(id, option);
     }

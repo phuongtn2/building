@@ -12,6 +12,10 @@
 		SELECT * FROM T_BOOKING_SERVICE ORDER BY userId
 	</select>
 
+	<select id="findAllNewBooking" resultType="bookService">
+		SELECT * FROM T_BOOKING_SERVICE WHERE status = 1
+	</select>
+
 	<select id="findNameByBookingServiceCode" resultType="String">
 		SELECT <if test="option == 1">
 					s.serviceName

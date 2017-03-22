@@ -12,7 +12,9 @@ import java.util.List;
 public interface RequestBookingService {
     void deleteById(long id);
     List<BookingServiceDto> findAllBooking ();
+    List<BookingServiceDto> findAllNewBooking ();
     //List<MasterServicesDto> findAllServiceByBookingId (long id);
     //List<MasterAssetDto> findAllAssetByBookingId (long id);
     List<String> findNameByBookingServiceCode (long id, byte option);
+
 }

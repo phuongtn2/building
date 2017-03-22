@@ -11,7 +11,7 @@ public interface RequestBookingMapper {
     void deleteById(@Param("id") long id);
 
     List<BookingServiceDto> findAllBooking();
-
+    List<BookingServiceDto> findAllNewBooking();
     //List<MasterServicesDto> findAllServiceByBookingId (@Param("id") long id);
     //List<MasterAssetDto> findAllAssetByBookingId (@Param("id") long id);
     List<String> findNameByBookingServiceCode (@Param("bookingServiceCode") long bookingServiceCode, @Param("option") byte option);
