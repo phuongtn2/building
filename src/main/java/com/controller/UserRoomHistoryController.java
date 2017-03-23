@@ -69,6 +69,12 @@ public class UserRoomHistoryController {
 		model.addAttribute("floorDtoList",listFloor);
 		return "userRoomHistory/floor/view";
 	}
+	@RequestMapping(value = "/findFloor/{id}", method = RequestMethod.GET)
+	public List<MasterFloorDto> getListFloor_Add(@PathVariable long id, HttpServletRequest request)  throws ServerException{
+		AuthorizedUserInfo aui = (AuthorizedUserInfo) request.getSession().getAttribute("aui");
+
+		return managerBuildingService.findAllFloorByBuildingId(id);
+	}
 
 	// Room
 	@RequestMapping(value = "/floor/room/{id}", method = RequestMethod.GET)
@@ -76,6 +82,11 @@ public class UserRoomHistoryController {
 		List<MasterRoomDto> listRoom = managerBuildingService.findAllRoomByFloorId(id);
 		model.addAttribute("roomDtoList",listRoom);
 		return "userRoomHistory/room/view";
+	}
+	@RequestMapping(value = "/findRoom/{id}", method = RequestMethod.GET)
+	public List<MasterRoomDto> getListRoom_Add(@PathVariable long id, HttpServletRequest request)  throws ServerException{
+
+		return managerBuildingService.findAllRoomByFloorId(id);
 	}
 
 	// Room history
