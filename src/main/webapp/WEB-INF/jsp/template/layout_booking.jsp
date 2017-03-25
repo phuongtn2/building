@@ -65,7 +65,7 @@
         }
     </script>
 </head>
-<body onload="change('request')">
+<body onload="change('request');loadBookingService();">
 <div id="wrapper" style=" height: 100%;background-color: #293846;">
         <%--<%@include file="../template/navbar.jsp" %>
         <%@include file="../template/notify.jsp" %>--%>
@@ -123,6 +123,43 @@
             $( window ).load(function() {
                 $(".dhxlayout_cont").css({"left": "235px","top": "75px"});
             });
+        };
+        function loadBookingService() {
+            $.ajax({
+                type: "GET",
+                contentType: "application/json",
+                url: "/notifications/NotifyListBookingServiceDto",
+                dataType: 'json',
+                timeout: 100000,
+                success: function (data) {
+                    console.log("SUCCESS: ", data);
+                    display(data);
+                },
+                error: function (e) {
+                    console.log("ERROR: ", e);
+                    display(e);
+                },
+                done: function (e) {
+                    console.log("DONE");
+                }
+            });
+            function display(data) {
+                var json = "<h4>Ajax Response</h4><pre>"
+                        + JSON.stringify(data, null, 4) + "</pre>";
+                var html = "";
+                for (var i = 0; i < data.length; i++) {
+                    var d = new Date(data[i].created);
+                    var created = d.toLocaleDateString();
+                    html = html + '<li class="divider"></li>' +
+                            '<li>' +
+                            '<div>' +
+                            '<i class="fa fa-twitter fa-fw"></i>' + data[i].memo +
+                            '<span class="pull-right text-muted small">' + created + '</span>' +
+                            '</div>' +
+                            '</li>';
+                }
+                $('#NotifyListBookingServiceDto').html(html);
+            };
         }
     </script>
 </body>

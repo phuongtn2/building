@@ -3,6 +3,8 @@
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <spring:url value="/resources/img/flags/16/United-States.png" var="EN"/>
 <spring:url value="/resources/img/flags/16/Vietnam.png" var="VN"/>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <div class="row border-bottom">
     <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
@@ -27,29 +29,12 @@
                     <i class="fa fa-bell"></i>  <span class="label label-primary">8</span>
                 </a>
                 <ul class="dropdown-menu dropdown-alerts">
-
-                    <li class="divider"></li>
-                    <li>
-                        <a href="profile.html">
-                            <div>
-                                <i class="fa fa-twitter fa-fw"></i> 3 New Followers
-                                <span class="pull-right text-muted small">12 minutes ago</span>
-                            </div>
-                        </a>
-                    </li>
-                    <li class="divider"></li>
-                    <li>
-                        <a href="grid_options.html">
-                            <div>
-                                <i class="fa fa-upload fa-fw"></i> Server Rebooted
-                                <span class="pull-right text-muted small">4 minutes ago</span>
-                            </div>
-                        </a>
-                    </li>
+                    <div id = "NotifyListBookingServiceDto">
+                    </div>
                     <li class="divider"></li>
                     <li>
                         <div class="text-center link-block">
-                            <a href="notifications.html">
+                            <a href="/notifications">
                                 <strong><spring:message code="notify.alert" text="default text" /></strong>
                                 <i class="fa fa-angle-right"></i>
                             </a>
@@ -73,4 +58,3 @@
 
     </nav>
 </div>
-

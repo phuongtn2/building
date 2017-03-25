@@ -40,6 +40,10 @@
 		<put-attribute name="body" value="/WEB-INF/jsp/news/view.jsp" />
 	</definition>
 
+	<definition name="news" extends="base.definition">
+		<put-attribute name="title" value="News" />
+		<put-attribute name="body" value="/WEB-INF/jsp/news/view.jsp" />
+	</definition>
 	<definition name="news/news_detail/view" extends="base.definition">
 		<put-attribute name="title" value="News" />
 		<put-attribute name="body" value="/WEB-INF/jsp/news/news_detail/view.jsp" />
@@ -61,6 +65,10 @@
 	<definition name="request_booking" extends="base.booking">
 		<put-attribute name="title" value="Request Booking" />
 		<put-attribute name="body" value="/WEB-INF/jsp/request_booking/view.jsp" />
+	</definition>
+	<definition name="list_request_booking" extends="base.booking">
+		<put-attribute name="title" value="Request Booking" />
+		<put-attribute name="body" value="/WEB-INF/jsp/request_booking/list_request_booking.jsp" />
 	</definition>
 	<definition name="building" extends="base.definition">
 		<put-attribute name="title" value="Building" />

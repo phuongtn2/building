@@ -43,9 +43,11 @@
 											<a class="btn btn-success btn btn-xs"
 											   href="/news/edit/${news.masterNewsDto.newsCode}"><spring:message
 													code="common.button.edit" text="default text"/></a>
-											<a class="btn btn-danger btn btn-xs"
-											   href="/news/delete/${news.masterNewsDto.newsCode}"><spring:message
-													code="common.button.delete" text="default text"/></a>
+											<a type="button" data-toggle="modal" data-target="#deleteButton"
+											   class="btn-danger btn btn-xs"
+											   onclick="setUrl('/news/delete/${news.masterNewsDto.newsCode}')"><spring:message
+													code="common.button.delete"
+													text="default text"></spring:message></a>
 										</div>
 									</div>
 								</div>

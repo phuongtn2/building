@@ -11,4 +11,9 @@ public interface RequestBookingMapper {
     List<BookingServiceDto> findAllBooking();
     List<BookingServiceGroup> searchServiceGroupById(@Param("bookingServiceCode") long bookingServiceCode, @Param("isNew") boolean isNew);
     List<BookingServiceDto> searchListByUserId(@Param("userId") long userId);
+    List<BookingServiceDto> findAllNewBooking();
+    //List<MasterServicesDto> findAllServiceByBookingId (@Param("id") long id);
+    //List<MasterAssetDto> findAllAssetByBookingId (@Param("id") long id);
+    List<String> findNameByBookingServiceCode (@Param("bookingServiceCode") long bookingServiceCode, @Param("option") byte option);
+
 }

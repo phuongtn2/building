@@ -7,8 +7,30 @@
 	<delete id="deleteById">
 		DELETE FROM T_BOOKING_SERVICE WHERE bookingServiceCode = #{id}
 	</delete>
+
 	<select id="findAllBooking" resultType="bookService">
-		SELECT * FROM T_BOOKING_SERVICE ORDER BY created
+		SELECT * FROM T_BOOKING_SERVICE ORDER BY userId
+	</select>
+
+	<select id="findAllNewBooking" resultType="bookService">
+		SELECT * FROM T_BOOKING_SERVICE WHERE status = 1
+	</select>
+
+	<select id="findNameByBookingServiceCode" resultType="String">
+		SELECT <if test="option == 1">
+					s.serviceName
+				</if>
+				<if test="option == 2">
+					a.assetName
+				</if>
+		FROM T_BOOKING_SERVICE_GROUP sg
+		<if test="option == 1">
+			JOIN M_SERVICE s ON (s.serviceCode = sg.serviceCode)
+		</if>
+		<if test="option == 2">
+			JOIN M_ASSET a ON (a.assetCode = sg.assetCode)
+		</if>
+		WHERE sg.bookingServiceCode = #{bookingServiceCode}
 	</select>
 	<select id="searchListByUserId" resultType="bookService">
 		SELECT * FROM T_BOOKING_SERVICE WHERE userId = #{userId} ORDER BY created

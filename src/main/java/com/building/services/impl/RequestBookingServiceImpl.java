@@ -2,6 +2,8 @@ package com.building.services.impl;
 
 import com.building.dto.BookingServiceDto;
 import com.building.dto.BookingServiceGroup;
+import com.building.dto.master.MasterAssetDto;
+import com.building.dto.master.MasterServicesDto;
 import com.building.mapper.RequestBookingMapper;
 import com.building.services.RequestBookingService;
 import com.building.services.error.ServiceException;
@@ -36,5 +38,15 @@ public class RequestBookingServiceImpl implements RequestBookingService {
     @Override
     public List<BookingServiceDto> searchListByUserId(long userId) throws ServiceException {
         return requestBookingMapper.searchListByUserId(userId);
+    }
+
+    @Override
+    public List<BookingServiceDto> findAllNewBooking() {
+        return requestBookingMapper.findAllNewBooking();
+    }
+
+    @Override
+    public List<String> findNameByBookingServiceCode(long id, byte option) {
+        return requestBookingMapper.findNameByBookingServiceCode(id, option);
     }
 }

@@ -39,8 +39,8 @@
 							<c:forEach items="${floorDtoList}" var="floor">
 								<tr
 										<c:if test="${count%2 == 0}"><% count ++;%>class="gradeX"
-										</c:if>
-											<c:if test="${count%2 != 0}"><% count ++;%>class="gradeC"
+								</c:if>
+										<c:if test="${count%2 != 0}"><% count ++;%>class="gradeC"
 								</c:if>   >
 									<td class="col-sm-2">${floor.floorSeq}</td>
 									<td data-hide="phone,tablet" class="col-sm-4">${floor.floorAlias}</td>
@@ -51,8 +51,9 @@
 											<a class="btn btn-success btn btn-xs"
 											   href="/building/floor/${floor.buildingCode}/edit/${floor.floorCode}"><spring:message
 													code="common.button.edit" text="default text"></spring:message></a>
-											<a class="btn btn-danger btn btn-xs"
-											   href="/building/floor/${floor.buildingCode}/delete/${floor.floorCode}"><spring:message
+											<a type="button" data-toggle="modal" data-target="#deleteButton"
+											   class="btn-danger btn btn-xs"
+											   onclick="setUrl('/building/floor/${floor.buildingCode}/delete/${floor.floorCode}')"><spring:message
 													code="common.button.delete"
 													text="default text"></spring:message></a>
 											<a class="btn btn-warning btn btn-xs"

@@ -36,8 +36,8 @@
 							<c:forEach items="${buildingDtoList}" var="building">
 								<tr
 										<c:if test="${count%2 == 0}"><% count ++;%>class="gradeX"
-										</c:if>
-											<c:if test="${count%2 != 0}"><% count ++;%>class="gradeC"
+								</c:if>
+										<c:if test="${count%2 != 0}"><% count ++;%>class="gradeC"
 								</c:if>   >
 									<td class="col-sm-2">${building.buildingName}</td>
 									<td data-hide="phone,tablet" class="col-sm-1">${building.totalFloor}</td>
@@ -48,13 +48,15 @@
 											<a class="btn btn-success btn btn-xs"
 											   href="/building/edit/${building.buildingCode}"><spring:message
 													code="common.button.edit" text="default text"></spring:message></a>
-											<a class="btn btn-danger btn btn-xs"
+											<a class="btn btn-danger btn btn-xs" data-toggle="modal"
+											   data-target="#deleteButton"
 											   href="/building/delete/${building.buildingCode}"><spring:message
 													code="common.button.delete"
 													text="default text"></spring:message></a>
-											<a class="btn btn-warning btn btn-xs"
+											<a type="button" class="btn btn-warning btn-xs"
 											   href="/building/floor/${building.buildingCode}"><spring:message
-													code="building.addfloor" text="default text"></spring:message></a>
+													code="building.addfloor"
+													text="default text"></spring:message></a>
 										</div>
 									</td>
 								</tr>

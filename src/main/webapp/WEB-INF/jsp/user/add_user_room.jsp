@@ -28,7 +28,7 @@
 						<div class="form-group">
 							<label class="control-label">Building</label>
 							<select class="form-control m-b" name="userRoomDto.buildingCode"
-							        onchange="findFloorByBuildingCode(7);">
+							        onchange="findFloorByBuildingCode(this.value);">
 								<option value="0">Chọn tòa nhà</option>
 								<c:forEach items="${buildingDtoList}" var="building">
 									<option value="${building.buildingCode}">${building.buildingName}</option>
@@ -39,7 +39,12 @@
 					<div class="col-sm-4">
 						<div class="form-group">
 							<label class="control-label">Floor</label>
-							<select class="form-control m-b" name="userRoomDto.floorCode" onchange="" id="floorSelect">
+							<%--<select class="form-control m-b" name="userRoomDto.floorCode" onchange="" id="floorList">--%>
+								<%--<option> ksjdksjdk</option>--%>
+							<select class="form-control m-b" name="userRoomDto.floorCode">
+								<option>chon tang</option>
+								<div id = "floorList">
+								</div>
 							</select>
 						</div>
 					</div>
@@ -97,3 +102,38 @@
 		</div>
 	</div>
 </div>
+
+<script>
+	function findFloorByBuildingCode(buildingId) {
+		$.ajax({
+			type: "GET",
+			contentType: "application/json",
+			url: "/history/findFloor/"+ buildingId,
+			dataType: 'json',
+			timeout: 100000,
+			success: function (data) {
+				console.log("SUCCESS: ", data);
+				display(data);
+			},
+			error: function (e) {
+				console.log("ERROR: ", e);
+				display(e);
+			},
+			done: function (e) {
+				console.log("DONE");
+			}
+		});
+		function display(data) {
+			var json = "<h4>Ajax Response</h4><pre>"
+					+ JSON.stringify(data, null, 4) + "</pre>";
+			var html = "";
+			for (var i = 0; i < data.length; i++) {
+				html = html +
+				'<option value="data[i].floorCode">'+ data[i].floorAlias +'</option>';
+
+			}
+			$('#floorList').html(html);
+		}
+	}
+	;
+</script>
