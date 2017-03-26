@@ -158,4 +158,9 @@ public class UserServiceImp implements UserService {
         }
         return 2;
     }
+
+    @Override
+    public void updatePassword(UserDto userDto){
+        managerUserMapper.updatePassword(userDto);
+    }
 }

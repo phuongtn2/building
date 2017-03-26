@@ -170,4 +170,9 @@
         WHERE userId = #{userId}
     </select>
 
+    <update id="updatePassword">
+        UPDATE T_USER
+        password = #{password}
+        WHERE userId = #{dto.userId}
+    </update>
 </mapper>

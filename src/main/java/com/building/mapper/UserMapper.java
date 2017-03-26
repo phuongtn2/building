@@ -49,4 +49,6 @@ public interface UserMapper {
      * @return
      */
     String getFcmToken(@Param("userId") int userId);
+
+    void updatePassword(@Param("dto") UserDto userDto);
 }

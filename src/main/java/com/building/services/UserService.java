@@ -38,4 +38,6 @@ public interface UserService {
     List<String> getFcmToken(int userId);
 
     int removeFcmToken(int userId, String fcmToken);
+
+    void updatePassword(UserDto userDto);
 }
