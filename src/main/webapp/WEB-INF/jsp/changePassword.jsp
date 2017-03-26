@@ -14,14 +14,17 @@
 
 		<h3><spring:message code="building.welcome" text="default text"/></h3>
 
-		<form:form class="m-t" role="form" action="/login" name="submitForm" method="post">
+		<form:form class="m-t" role="form" action="/changepass" name="submitForm" method="post">
+			<label ><spring:message code="changePassword.pass" text="default text" /></label>
 			<div class="form-group">
-				<input name="userName" type="text" class="form-control"
+				<input name="newPassword" type="password" class="form-control" id="newPassword"
 				       placeholder="<spring:message code="changePassword.pass" text="default text" />" required="">
 			</div>
+			<label ><spring:message code="changePassword.retypePass" text="default text" /></label>
 			<div class="form-group">
-				<input name="password" type="password" class="form-control"
+				<input name="verifyPassword" type="password" class="form-control" id="verifyPassword" onkeyup="checkValidPassword();"
 				       placeholder="<spring:message code="changePassword.retypePass" text="default text" />" required="">
+				<a id="warningMessage"></a>
 			</div>
 			<button type="button" class="btn btn-primary" data-toggle="modal"
 			        data-target="#changePassButton"><spring:message code="changePassword.changePassButton"
@@ -36,16 +39,16 @@
 		<!-- Modal content-->
 		<div class="modal-content">
 			<div class="modal-header">
-				<h4 class="modal-title text-center">Xác nhận thêm</h4>
+				<h4 class="modal-title text-center"><spring:message code="changePassButton.confirmLabel" text="default text"></spring:message></h4>
 			</div>
 			<div class="modal-body text-center">
-				<p>Bạn có muốn thêm</p>
-				<p>Chọn "Xác nhận" để đi tiếp</p>
-				<p>Chọn "Hủy" để quay lại</p>
+				<p><spring:message code="changePassButton.confirmMessage" text="default text"></spring:message></p>
+				<p><spring:message code="changePassButton.changeButtonMessage" text="default text"></spring:message></p>
+				<p><spring:message code="changePassButton.cancelButtonMessage" text="default text"></spring:message></p>
 			</div>
 			<div class="modal-header text-center">
-				<button onclick="changePassCheck()" name="addModel" class="btn btn-primary" type="submit">Xác nhận</button>
-				<button type="button" class="btn btn-default" data-dismiss="modal">Hủy</button>
+				<button onclick="changePasswordCheck()" name="addModel" class="btn btn-primary" type="submit"><spring:message code="changePassButton.countinuteButton" text="default text"></spring:message></button>
+				<button type="button" class="btn btn-default" data-dismiss="modal"><spring:message code="changePassButton.cancelButton" text="default text"></spring:message></button>
 			</div>
 		</div>
 
@@ -53,8 +56,17 @@
 </div>
 
 <script>
-	function submit(){
+	function changePasswordCheck(){
+
 
 	};
+	function checkValidPassword(){
+		var html ="";
+		var newPassword = $("#newPassword").val();
+		var verifyPassword = $("#verifyPassword").val();
+		if(newPassword != verifyPassword) html =  '<a style="color: red"><spring:message code="changePassButton.warningMessageNotMatch" text="default text"></spring:message></a>';
+		else html =  '<a style="color: blueviolet"><spring:message code="changePassButton.warningMessageMatch" text="default text"></spring:message></a>';
+		$('#warningMessage').html(html)
+	}
 
 </script>

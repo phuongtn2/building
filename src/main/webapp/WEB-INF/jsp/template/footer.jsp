@@ -16,16 +16,16 @@
         <!-- Modal content-->
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title text-center">Xác nhận thêm</h4>
+                <h4 class="modal-title text-center"><spring:message code="addButton.confirmLabel" text="default text"></spring:message></h4>
             </div>
             <div class="modal-body text-center">
-                <p>Bạn có muốn thêm</p>
-                <p>Chọn "Xác nhận" để đi tiếp</p>
-                <p>Chọn "Hủy" để quay lại</p>
+                <p><spring:message code="addButton.confirmMessage" text="default text"></spring:message></p>
+                <p><spring:message code="addButton.addButtonMessage" text="default text"></spring:message></p>
+                <p><spring:message code="addButton.cancelButtonMessage" text="default text"></spring:message></p>
             </div>
             <div class="modal-header text-center">
-                <button onclick="submit()" name="addModel" class="btn btn-primary" type="submit">Xác nhận</button>
-                <button type="button" class="btn btn-default" data-dismiss="modal">Hủy</button>
+                <button onclick="submit()" name="addModel" class="btn btn-primary" type="submit"><spring:message code="addButton.countinuteButton" text="default text"></spring:message></button>
+                <button type="button" class="btn btn-default" data-dismiss="modal"><spring:message code="addButton.cancelButton" text="default text"></spring:message></button>
             </div>
         </div>
 
@@ -38,16 +38,16 @@
         <!-- Modal content-->
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title text-center"><spring:message code="common.confirm.title" text="default text" /></h4>
+                <h4 class="modal-title text-center"><spring:message code="deleteButton.confirmLabel" text="default text"></spring:message></h4>
             </div>
             <div class="modal-body text-center">
-                <p><spring:message code="common.confirm.message_1" text="default text" /></p>
-                <p><spring:message code="common.confirm.message_2" text="default text" /></p>
-                <p><spring:message code="common.confirm.message_3" text="default text" /></p>
+                <p><spring:message code="deleteButton.confirmMessage" text="default text"></spring:message></p>
+                <p><spring:message code="deleteButton.deleteButtonMessage" text="default text"></spring:message></p>
+                <p><spring:message code="deleteButton.cancelButtonMessage" text="default text"></spring:message></p>
             </div>
             <div class="modal-header text-center">
-                <button onclick="deleteItem()" name="deleteModel" class="btn btn-primary" type="submit"><spring:message code="common.confirm" text="default text" /></button>
-                <button type="button" class="btn btn-default" data-dismiss="modal"><spring:message code="common.cancel" text="default text" /></button>
+                <button onclick="deleteItem()" name="addModel" class="btn btn-primary" type="submit"><spring:message code="deleteButton.countinuteButton" text="default text"></spring:message></button>
+                <button type="button" class="btn btn-default" data-dismiss="modal"><spring:message code="deleteButton.cancelButton" text="default text"></spring:message></button>
             </div>
         </div>
 
