@@ -39,5 +39,5 @@ public interface UserService {
 
     int removeFcmToken(int userId, String fcmToken);
 
-    void updatePassword(UserDto userDto);
+    void updatePassword(UserDto userDto) throws ServerException;
 }

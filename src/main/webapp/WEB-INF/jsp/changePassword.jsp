@@ -14,10 +14,11 @@
 
 		<h3><spring:message code="building.welcome" text="default text"/></h3>
 
-		<form:form class="m-t" role="form" modelAttribute="userDto" name="submitForm" method="post" id="userForm">
+		<%--<form:form class="m-t" role="form" modelAttribute="userDto" name="submitForm" method="post" id="userForm">--%>
+		<form:form modelAttribute="userChangePassDto" method="post" id="userForm" action= "/saveNewPassword" >
 			<label><spring:message code="changePassword.pass" text="default text"/></label>
 			<div class="form-group">
-				<input name="password" type="password" class="form-control" id="password"
+				<input name="userChangePassDto.password" type="password" class="form-control" id="password"
 				       onkeyup="checkValidPassword();"
 				       placeholder="<spring:message code="changePassword.pass" text="default text" />" required="true">
 			</div>
@@ -68,8 +69,8 @@
 		var password = $("#password").val();
 		var verifyPassword = $("#verifyPassword").val();
 		if (password == verifyPassword && password != '') {
-//			document.getElementById("userForm").submit();
-			window.location.assign("/changepass/saveNewPassword")
+			document.getElementById("userForm").submit();
+//			window.location.assign("/saveNewPassword")
 		} else    $('#popupWarning').html('<h3 style="color: red"><spring:message code="changePassButton.warningMessageRetype" text="default text"></spring:message></h3>');
 
 	}

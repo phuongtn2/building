@@ -173,6 +173,7 @@
     <update id="updatePassword">
         UPDATE T_USER
         password = #{password}
+        , lastUpdate= NOW()
         WHERE userId = #{dto.userId}
     </update>
 </mapper>

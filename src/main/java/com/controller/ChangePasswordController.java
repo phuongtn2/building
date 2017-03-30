@@ -9,15 +9,12 @@ import com.dropbox.core.ServerException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 
 import javax.servlet.http.HttpServletRequest;
 
 @Controller
-
 public class ChangePasswordController {
 	@Autowired
 	private AuthorizedUserTokenService authorizedUserTokenService;
@@ -31,12 +28,13 @@ public class ChangePasswordController {
 	}
 
 //	@RequestMapping(value ="/saveNewPassword", method = RequestMethod.POST)
-	@RequestMapping( value ="/changepass/saveNewPassword")
-	public String saveEdit(@ModelAttribute("userDto") UserDto userDto, HttpServletRequest request) throws ServerException {
+	@RequestMapping( value ="/saveNewPassword", method = RequestMethod.POST)
+	public String saveNewPassword(@ModelAttribute("userChangePassDto") UserDto userDto, HttpServletRequest request) throws ServerException {
 		AuthorizedUserInfo aui = (AuthorizedUserInfo) request.getSession().getAttribute("aui");
 		userDto.setUserId(aui.getUserId());
 		userService.updatePassword(userDto);
-		return "changePasswordSuccess";
+//		return "changePasswordSuccess";
+		return "redirect:/user";
 	}
 
 }
