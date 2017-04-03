@@ -171,8 +171,8 @@
     </select>
 
     <update id="updatePassword">
-        UPDATE T_USER
-        password = #{password}
+        UPDATE T_USER SET
+        password = #{dto.password}
         , lastUpdate= NOW()
         WHERE userId = #{dto.userId}
     </update>

@@ -1,5 +1,6 @@
 package com.controller;
 
+import com.building.dto.UserRoleRoomDto;
 import com.building.dto.login.AuthorizedUserInfo;
 import com.building.dto.login.UserDto;
 import com.building.services.AuthorizedUserTokenService;
@@ -29,12 +30,14 @@ public class ChangePasswordController {
 
 //	@RequestMapping(value ="/saveNewPassword", method = RequestMethod.POST)
 	@RequestMapping( value ="/saveNewPassword", method = RequestMethod.POST)
-	public String saveNewPassword(@ModelAttribute("userChangePassDto") UserDto userDto, HttpServletRequest request) throws ServerException {
+	public String saveNewPassword(@ModelAttribute("userRoleRoomDto") UserRoleRoomDto userRoleRoomDto, HttpServletRequest request) throws ServerException {
 		AuthorizedUserInfo aui = (AuthorizedUserInfo) request.getSession().getAttribute("aui");
+		UserDto userDto = userRoleRoomDto.getUserDto();
 		userDto.setUserId(aui.getUserId());
+
 		userService.updatePassword(userDto);
 //		return "changePasswordSuccess";
-		return "redirect:/user";
+		return "changePasswordSuccess";
 	}
 
 }

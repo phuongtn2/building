@@ -50,7 +50,7 @@
 	</definition>
 
 	<definition name="profile" extends="base.definition">
-		<put-attribute name="title" value="News" />
+		<put-attribute name="title" value="profile" />
 		<put-attribute name="body" value="/WEB-INF/jsp/profile/view.jsp" />
 	</definition>
 	<definition name="complaint" extends="base.definition">

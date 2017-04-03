@@ -15,10 +15,10 @@
 		<h3><spring:message code="building.welcome" text="default text"/></h3>
 
 		<%--<form:form class="m-t" role="form" modelAttribute="userDto" name="submitForm" method="post" id="userForm">--%>
-		<form:form modelAttribute="userChangePassDto" method="post" id="userForm" action= "/saveNewPassword" >
+		<form:form modelAttribute="userRoleRoomDto" method="post" id="userForm" action= "/saveNewPassword" >
 			<label><spring:message code="changePassword.pass" text="default text"/></label>
 			<div class="form-group">
-				<input name="userChangePassDto.password" type="password" class="form-control" id="password"
+				<input name="userDto.password" type="password" class="form-control" id="password"
 				       onkeyup="checkValidPassword();"
 				       placeholder="<spring:message code="changePassword.pass" text="default text" />" required="true">
 			</div>

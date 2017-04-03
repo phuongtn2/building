@@ -1,4 +1,5 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@page language="java" contentType="text/html;charset=UTF-8" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <div class="col-lg-6 centered" id="wrapper" style="text-align: center">
 	<a items="${profileDto}" var="profileDto">
