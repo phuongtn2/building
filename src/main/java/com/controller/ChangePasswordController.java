@@ -28,7 +28,6 @@ public class ChangePasswordController {
 		return "changePassword";
 	}
 
-//	@RequestMapping(value ="/saveNewPassword", method = RequestMethod.POST)
 	@RequestMapping( value ="/saveNewPassword", method = RequestMethod.POST)
 	public String saveNewPassword(@ModelAttribute("userRoleRoomDto") UserRoleRoomDto userRoleRoomDto, HttpServletRequest request) throws ServerException {
 		AuthorizedUserInfo aui = (AuthorizedUserInfo) request.getSession().getAttribute("aui");
@@ -36,8 +35,7 @@ public class ChangePasswordController {
 		userDto.setUserId(aui.getUserId());
 
 		userService.updatePassword(userDto);
-//		return "changePasswordSuccess";
-		return "changePasswordSuccess";
+		return "template/changePasswordSuccess";
 	}
 
 }

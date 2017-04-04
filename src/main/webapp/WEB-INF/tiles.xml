@@ -118,7 +118,7 @@
 		<put-attribute name="body" value="/WEB-INF/jsp/changePassword.jsp" />
 	</definition>
 
-	<definition name="changePasswordSuccess" extends="base.login">
+	<definition name="template/changePasswordSuccess" extends="base.login">
 		<put-attribute name="title" value="changePasswordSuccess" />
 		<put-attribute name="body" value="/WEB-INF/jsp/template/changePasswordSuccess.jsp" />
 	</definition>
