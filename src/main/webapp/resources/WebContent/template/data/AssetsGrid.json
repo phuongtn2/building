@@ -1,7 +1,8 @@
 {
     "head":[
-        {"id":"code","width":"50","type":"ch","align":"right","sort":"int","value":"code"}
-        ,{"id":"name","width":"*","type":"ro","align":"left","sort":"str","value":"Name"}
+        {"id":"assetCode","width":"50","type":"ch","align":"right","sort":"int","value":"assetCode"}
+        ,{"id":"assetName","width":"*","type":"ro","align":"left","sort":"str","value":"assetName"}
+        ,{"id":"assetPrice", "width":"*","type":"ro","align":"left","sort":"str","value":"assetPrice"}
     ],
     "rows":[]
 }

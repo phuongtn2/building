@@ -196,7 +196,7 @@ function CommonWindows() {
         win.show();
     };
 
-    this.doServiceAsset = function(codeInput, nameInput, formObject, winName){
+    this.doServiceAsset = function(assetCodeInput, assetNameInput, formObject, winName){
         var winName = winName;
         var MODE =  _GH.WINS.EVENT_MODE.EVENT;
         var win = this.ghWins.window(winName);
@@ -210,8 +210,8 @@ function CommonWindows() {
                 return true;
             });
         }
-        var bukkenForm = win.attachForm();
-        bukkenForm.loadStruct(loadJSON(getTemplatePath(_GH.DATA_PATH.ASSETS_WIN)), "json", function() {
+        var assetForm = win.attachForm();
+        assetForm.loadStruct(loadJSON(getTemplatePath(_GH.DATA_PATH.ASSETS_WIN)), "json", function() {
             if (MODE.isEvent) {
                 this.hideItem("arrow");
                 this.hideItem("info");
@@ -220,8 +220,11 @@ function CommonWindows() {
         var gridDataLogicFunc = function (data, id/*, rowIdx*/) {
             var val;
             switch (id) {
-                case "name":
+                case "assetName":
                     val = _.isEmpty(data[id])? data["assetName"]: data[id];
+                    break;
+                case "assetPrice":
+                    val = _.isEmpty(data[id])? data["price"]: data[id];
                     break;
                 default:
                     val = data[id];
@@ -229,49 +232,62 @@ function CommonWindows() {
             }
             return val;
         };
-        var leftGrid = new dhtmlXGridObject(bukkenForm.getContainer("leftGrid"));
+        var leftGrid = new dhtmlXGridObject(assetForm.getContainer("leftGrid"));
         leftGrid.setImagePath(_GH.PATH_TYPE.DHX_IMGS);
         leftGrid.setSkin(_GH.PATH_TYPE.SKIN);
         /*leftGrid.attachEvent("onDataReady",function(){
             leftGrid.setColumnHidden(0, true);
         });*/
 
-        var searchBuilding = function(doSearchAll) {
-            var assetName = bukkenForm.getItemValue("searchName");
+        var searchAsset = function(doSearchAll) {
+            var assetName = assetForm.getItemValue("searchName");
             var query = "";
-            if (!_.isEmpty(buildingName)) {
+            if (!_.isEmpty(assetForm)) {
                 query += "assetName=" + assetName + "&";
             }
             if (_.isEmpty(query) && !doSearchAll) return;
             if (leftGrid) leftGrid.clearAll();
-            loadGridByGet(leftGrid, _GH.DATA_PATH.ASSETS_GRID, "asset/list?" + query, "code", gridDataLogicFunc);
+            loadGridByGet(leftGrid, _GH.DATA_PATH.ASSETS_GRID, "asset/list?" + query, "assetCode", gridDataLogicFunc);
         };
 
-        bukkenForm.attachEvent("onChange", function (name/*, value*/) {
+        assetForm.attachEvent("onChange", function (name/*, value*/) {
             switch (name) {
-                case "searchBuildingName":
-                    searchBuilding();
+                case "searchName":
+                    searchAsset();
                     break;
             }
         });
-        bukkenForm.attachEvent("onKeyDown",function (inp, ev, name/*, value*/) {
+        assetForm.attachEvent("onKeyDown",function (inp, ev, name/*, value*/) {
             switch (name) {
-                case "searchBuildingName":
-                    if (ev.keyCode == _GH.KEY_CODE.ENTER) searchBuilding();
+                case "searchName":
+                    if (ev.keyCode == _GH.KEY_CODE.ENTER) searchAsset();
                     break;
             }
         });
 
         var previousEventId = 0;
-        searchBuilding(true);
-        leftGrid.attachEvent("onRowDblClicked", function (selectBuildingCode/*, cInd*/) {
-            if (buildingCodeInput !== null) buildingCodeInput.value = leftGrid.cells(selectBuildingCode, 0).getValue();
-            if (buildingNameInput !== null) buildingNameInput.value = leftGrid.cells(selectBuildingCode, 1).getValue();
+        searchAsset(true);
+        leftGrid.attachEvent("onRowDblClicked", function (selectAssetCode/*, cInd*/) {
+            if (assetCodeInput !== null) assetCodeInput.value = leftGrid.cells(selectAssetCode, 0).getValue();
+            if (assetNameInput !== null) assetNameInput.value = leftGrid.cells(selectAssetCode, 1).getValue();
             win.close();
         });
         win.show();
     };
 
+    this.doServiceAssetOptionService = function(){
+        var win = this.ghWins.window(winName);
+        that.win = this.ghWins.createWindow("servicesAssetsWindow", 320, 30, 300, 260);
+        that.win.setText("Services - Assets");
+        that.win.setDimension(520, 400);
+        that.win.button("minmax1").hide();
+        that.win.button("park").hide();
+        that.win.button("close").attachEvent("onClick", function(){
+            that.win.setModal(false);
+            that.win.close();
+        });
+        that.win.setModal(true);
+    };
     /**
      * 画像アップロードウィンドウを開く
      * @param ckEditor 画像アップロードで帰ってきたURLを設定するためのCKEditorオブジェクト

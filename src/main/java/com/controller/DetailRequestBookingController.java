@@ -6,7 +6,7 @@ import com.building.dto.login.UserDto;
 import com.building.services.RequestBookingService;
 
 import com.building.services.UserService;
-import com.dropbox.core.ServerException;
+import com.building.services.error.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
@@ -34,13 +34,13 @@ public class DetailRequestBookingController {
 	}
 
 	@RequestMapping(method = RequestMethod.GET)
-	public String initForm(ModelMap model) throws ServerException {
+	public String initForm(ModelMap model) throws ServiceException {
 		return "list_request_booking";
 	}
 
 
 	@ModelAttribute("ListBookingServiceDto")
-	public List<DetailBookingServiceDto> populateListBookServiceList() throws ServerException {
+	public List<DetailBookingServiceDto> populateListBookServiceList() throws ServiceException {
 
 		List<DetailBookingServiceDto> listBookingServiceDto = new ArrayList<DetailBookingServiceDto>();
 		List<BookingServiceDto> bookingServiceDto = requestBookingService.findAllBooking();
@@ -63,7 +63,7 @@ public class DetailRequestBookingController {
 
 	@RequestMapping(value = "/NotifyListBookingServiceDto", method = RequestMethod.GET)
     @ResponseBody
-	public List<BookingServiceDto> populateNotifyListBookServiceList( ) throws ServerException {
+	public List<BookingServiceDto> populateNotifyListBookServiceList( ) throws ServiceException {
 		List<BookingServiceDto> bookingServiceDto = requestBookingService.findAllNewBooking();
 //        bookingServiceDto = requestBookingService.findAllNewBooking();
 		return bookingServiceDto;
@@ -72,7 +72,7 @@ public class DetailRequestBookingController {
 
 
 	@ModelAttribute("serviceUserDtoList")
-	public List<UserDto> populateUserList() throws ServerException {
+	public List<UserDto> populateUserList() throws ServiceException {
 		return managerUserService.findAllUser();
 	}
 

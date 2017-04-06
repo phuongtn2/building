@@ -36,7 +36,7 @@ public class FcmServiceImpl implements FcmService {
                 String apiKey = "AAAAjr6ZX2Q:APA91bF0VTJRo-8jmXqT6hfiv9q13lGJk5JH77Cn_RSRcVgqmBYOF64ZUOAPXQlsgn-gmlio7DK8gH60Ep35KqCQwkX3qxDRfRArfp9rWAA487suX8aOvWr2GNHhYD0riqiw6SxLZXGQ";
                 for (BookingServiceDto bookingServiceDto : bookingServiceDtos) {
                     Map<String, String> data = buildData(bookingServiceDto, false);
-                    long ttl = (bookingServiceDto.getBookTo().getTime() - new Date().getTime()) / 1000;
+                    long ttl = (/*bookingServiceDto.getBookTo().getTime() */ (new Date().getTime() + 100) - new Date().getTime()) / 1000;
                     FcmClient.sendNotification(apiKey, data, fcmToken, ttl);
                 }
             }
@@ -64,7 +64,7 @@ public class FcmServiceImpl implements FcmService {
         for(int userId:bookingUserIds){
             List<String> fcmTokens = userService.getFcmToken(userId);
             if (!fcmTokens.isEmpty()) {
-                long ttl = (bookingServiceDto.getBookTo().getTime() - new Date().getTime()) / 1000;
+                long ttl = (/*bookingServiceDto.getBookTo().getTime() */ (new Date().getTime() + 100) - new Date().getTime()) / 1000;
                 for (String fcmToken : fcmTokens) {
                     try {
                         FcmClient.sendNotification(apiKey, data, fcmToken, ttl);

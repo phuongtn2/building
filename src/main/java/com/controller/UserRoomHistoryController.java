@@ -5,7 +5,7 @@ import com.building.dto.master.MasterBuildingDto;
 import com.building.dto.master.MasterFloorDto;
 import com.building.dto.master.MasterRoomDto;
 import com.building.services.BuildingService;
-import com.dropbox.core.ServerException;
+import com.building.services.error.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
@@ -40,7 +40,7 @@ public class UserRoomHistoryController {
 	}
 
 	@ModelAttribute("buildingDtoList")
-	public List<MasterBuildingDto> populateBuildingList() throws ServerException {
+	public List<MasterBuildingDto> populateBuildingList() throws ServiceException {
 		return managerBuildingService.findAll();
 	}
 //	@RequestMapping(method = RequestMethod.POST)
@@ -63,14 +63,14 @@ public class UserRoomHistoryController {
 
 	// Floor
 	@RequestMapping(value = "/floor/{id}", method = RequestMethod.GET)
-	public String getListFloor(@PathVariable long id, Model model, HttpServletRequest request)  throws ServerException{
+	public String getListFloor(@PathVariable long id, Model model, HttpServletRequest request)  throws ServiceException{
 		AuthorizedUserInfo aui = (AuthorizedUserInfo) request.getSession().getAttribute("aui");
 		List<MasterFloorDto> listFloor = managerBuildingService.findAllFloorByBuildingId(id);
 		model.addAttribute("floorDtoList",listFloor);
 		return "userRoomHistory/floor/view";
 	}
 	@RequestMapping(value = "/findFloor/{id}", method = RequestMethod.GET)
-	public List<MasterFloorDto> getListFloor_Add(@PathVariable long id, HttpServletRequest request)  throws ServerException{
+	public List<MasterFloorDto> getListFloor_Add(@PathVariable long id, HttpServletRequest request)  throws ServiceException{
 		AuthorizedUserInfo aui = (AuthorizedUserInfo) request.getSession().getAttribute("aui");
 
 		return managerBuildingService.findAllFloorByBuildingId(id);
@@ -78,20 +78,20 @@ public class UserRoomHistoryController {
 
 	// Room
 	@RequestMapping(value = "/floor/room/{id}", method = RequestMethod.GET)
-	public String getListRoom(@PathVariable long id, Model model, HttpServletRequest request)  throws ServerException{
+	public String getListRoom(@PathVariable long id, Model model, HttpServletRequest request)  throws ServiceException{
 		List<MasterRoomDto> listRoom = managerBuildingService.findAllRoomByFloorId(id);
 		model.addAttribute("roomDtoList",listRoom);
 		return "userRoomHistory/room/view";
 	}
 	@RequestMapping(value = "/findRoom/{id}", method = RequestMethod.GET)
-	public List<MasterRoomDto> getListRoom_Add(@PathVariable long id, HttpServletRequest request)  throws ServerException{
+	public List<MasterRoomDto> getListRoom_Add(@PathVariable long id, HttpServletRequest request)  throws ServiceException{
 
 		return managerBuildingService.findAllRoomByFloorId(id);
 	}
 
 	// Room history
 	@RequestMapping(value = "/floor/room/detail{id}", method = RequestMethod.GET)
-	public String getRoomHistory(@PathVariable long id, Model model, HttpServletRequest request)  throws ServerException{
+	public String getRoomHistory(@PathVariable long id, Model model, HttpServletRequest request)  throws ServiceException{
 		List<MasterRoomDto> listRoom = managerBuildingService.findAllRoomByFloorId(id);
 		model.addAttribute("roomDtoList",listRoom);
 		return "userRoomHistory/room/view";

@@ -61,4 +61,18 @@
 		DELETE FROM M_ASSET WHERE assetCode = #{id}
 	</delete>
 
+	<select id="findByAssetName" resultType="asset">
+		SELECT *
+		FROM M_ASSET a
+		<if test="assetName != ''"> WHERE a.assetName LIKE #{assetName}</if>
+		ORDER BY a.assetType desc
+	</select>
+	<select id="listByServiceCode" resultType="asset">
+		SELECT *
+		FROM M_ASSET a
+		<if test="serviceCode != ''">
+			JOIN T_SERVICE_ASSET sa ON (sa.serviceCode = #{serviceCode})</if>
+		ORDER BY a.assetType desc
+	</select>
+
 </mapper>

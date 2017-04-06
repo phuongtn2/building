@@ -4,7 +4,7 @@ import com.building.dto.ProfileDto;
 import com.building.dto.master.MasterBuildingDto;
 import com.building.dto.master.MasterFloorDto;
 import com.building.dto.master.MasterRoomDto;
-import com.dropbox.core.ServerException;
+import com.building.services.error.ServiceException;
 
 import java.util.List;
 
@@ -12,28 +12,28 @@ import java.util.List;
  * Created by PhuongTN1 on 11/4/2016.
  */
 public interface BuildingService {
-    long insertBuilding(MasterBuildingDto buildingDto) throws ServerException;
-    List<MasterBuildingDto> findAll() throws ServerException;
-    MasterBuildingDto findById(long id) throws ServerException;
-    void update(MasterBuildingDto buildingDto) throws ServerException;
-    void deleteById(long id) throws ServerException;
+    long insertBuilding(MasterBuildingDto buildingDto) throws ServiceException;
+    List<MasterBuildingDto> findAll() throws ServiceException;
+    MasterBuildingDto findById(long id) throws ServiceException;
+    void update(MasterBuildingDto buildingDto) throws ServiceException;
+    void deleteById(long id) throws ServiceException;
     //Floor
-    List<MasterFloorDto> findAllFloorByBuildingId(long buildingId) throws ServerException;
-    List<Long> findAllFloorIdByBuildingId(long buildingId) throws ServerException;
-    long insertFloor(MasterFloorDto floorDto) throws  ServerException;
-    MasterFloorDto findFloorById(long id) throws ServerException;
-    void updateFloor(MasterFloorDto floorDto) throws ServerException;
-    void deleteFloorById(long id) throws ServerException;
-    void deleteFloorByBuildingId(long id) throws ServerException;
+    List<MasterFloorDto> findAllFloorByBuildingId(long buildingId) throws ServiceException;
+    List<Long> findAllFloorIdByBuildingId(long buildingId) throws ServiceException;
+    long insertFloor(MasterFloorDto floorDto) throws  ServiceException;
+    MasterFloorDto findFloorById(long id) throws ServiceException;
+    void updateFloor(MasterFloorDto floorDto) throws ServiceException;
+    void deleteFloorById(long id) throws ServiceException;
+    void deleteFloorByBuildingId(long id) throws ServiceException;
     //Room
-    List<MasterRoomDto> findAllRoomByFloorId(long floorId) throws ServerException;
-    long insertRoom(MasterRoomDto roomDto) throws  ServerException;
-    MasterRoomDto findRoomById(long id) throws ServerException;
-    void updateRoom(MasterRoomDto roomDto) throws ServerException;
-    void deleteRoomById(long id) throws ServerException;
-    void deleteRoomByFloorId(List<Long> listFloorId) throws ServerException;
-    List<MasterBuildingDto> findByBuildingName(String buildingName) throws ServerException;
+    List<MasterRoomDto> findAllRoomByFloorId(long floorId) throws ServiceException;
+    long insertRoom(MasterRoomDto roomDto) throws  ServiceException;
+    MasterRoomDto findRoomById(long id) throws ServiceException;
+    void updateRoom(MasterRoomDto roomDto) throws ServiceException;
+    void deleteRoomById(long id) throws ServiceException;
+    void deleteRoomByFloorId(List<Long> listFloorId) throws ServiceException;
+    List<MasterBuildingDto> findByBuildingName(String buildingName) throws ServiceException;
     //For Profile
-    ProfileDto findAllName (long buildingCode, long floorCode, long roomCode) throws ServerException;
+    ProfileDto findAllName (long buildingCode, long floorCode, long roomCode) throws ServiceException;
 
 }

@@ -6,9 +6,10 @@ import com.building.dto.master.MasterBuildingDto;
 import com.building.dto.master.MasterServicesDto;
 import com.building.services.BuildingService;
 import com.building.services.ServicesService;
-import com.dropbox.core.ServerException;
+import com.building.services.error.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.ws.rs.QueryParam;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -50,7 +52,7 @@ public class ServicesController {
     }
 
     @ModelAttribute("masterServicesDtoList")
-    public List<MasterServicesDto> populateMasterServicesList() throws ServerException {
+    public List<MasterServicesDto> populateMasterServicesList() throws ServiceException {
         return managerMasterServicesService.findAll();
     }
 
@@ -72,7 +74,7 @@ public class ServicesController {
     }
 
     @RequestMapping(method = RequestMethod.POST, params = "add")
-    public String addMasterServices(@ModelAttribute("masterServiceDto") MasterServicesDto masterServicesDto) throws ServerException {
+    public String addMasterServices(@ModelAttribute("masterServiceDto") MasterServicesDto masterServicesDto) throws ServiceException {
         AuthorizedUserInfo aui = new AuthorizedUserInfo();
         masterServicesDto.setCreateId(aui.getUserId());
         masterServicesDto.setUpdateId(aui.getUserId());
@@ -81,7 +83,7 @@ public class ServicesController {
     }
 
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
-    public String getEdit(@PathVariable long id, Model model, HttpServletRequest request) throws ServerException {
+    public String getEdit(@PathVariable long id, Model model, HttpServletRequest request) throws ServiceException {
         AuthorizedUserInfo aui = (AuthorizedUserInfo) request.getSession().getAttribute("aui");
         MasterServicesDto masterServicesDto = managerMasterServicesService.findById(id);
         masterServicesDto.setUpdateId(aui.getUserId());
@@ -90,24 +92,30 @@ public class ServicesController {
     }
 
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.POST)
-    public String saveEdit(@ModelAttribute("masterServiceDto") MasterServicesDto masterServicesDto, @PathVariable long id) throws ServerException {
+    public String saveEdit(@ModelAttribute("masterServiceDto") MasterServicesDto masterServicesDto, @PathVariable long id) throws ServiceException {
         managerMasterServicesService.update(masterServicesDto);
         return "redirect:/service";
     }
 
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
-    public String delete(@PathVariable long id, Model model, HttpServletRequest request) throws ServerException {
+    public String delete(@PathVariable long id, Model model, HttpServletRequest request) throws ServiceException {
         managerMasterServicesService.deleteById(id);
         return "redirect:/service";
     }
 
     @ModelAttribute("buildingDtoList")
-    public List<MasterBuildingDto> populateBuildingDtoList() throws ServerException {
+    public List<MasterBuildingDto> populateBuildingDtoList() throws ServiceException {
         return managerMasterServicesService.findAllBuilding();
     }
 
     @ModelAttribute("buildingDtoList")
-    public List<MasterBuildingDto> populateBuildingList() throws ServerException {
+    public List<MasterBuildingDto> populateBuildingList() throws ServiceException {
         return buildingService.findAll();
+    }
+
+    @RequestMapping(value = "/list", method = RequestMethod.GET, headers = "Accept=application/json", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public List<MasterServicesDto> getListAsset(HttpServletRequest request) throws ServiceException {
+        return managerMasterServicesService.findAll();
     }
 }

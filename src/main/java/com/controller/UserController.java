@@ -8,7 +8,7 @@ import com.building.dto.master.MasterBuildingDto;
 import com.building.dto.master.MasterFloorDto;
 import com.building.services.BuildingService;
 import com.building.services.UserService;
-import com.dropbox.core.ServerException;
+import com.building.services.error.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.http.MediaType;
@@ -52,7 +52,7 @@ public class UserController {
     }
 
     @ModelAttribute("userDtoList")
-    public List<UserDto> populateUserList() throws ServerException {
+    public List<UserDto> populateUserList() throws ServiceException {
         return managerUserService.findAllUser();
     }
     @RequestMapping(method = RequestMethod.POST)
@@ -73,7 +73,7 @@ public class UserController {
     }
 
     @RequestMapping(method = RequestMethod.POST, params = "add")
-    public String addUser(@ModelAttribute("userRoleRoomDto") UserRoleRoomDto userRoleRoomDto, HttpServletRequest request) throws ServerException {
+    public String addUser(@ModelAttribute("userRoleRoomDto") UserRoleRoomDto userRoleRoomDto, HttpServletRequest request) throws ServiceException {
         AuthorizedUserInfo aui = (AuthorizedUserInfo) request.getSession().getAttribute("aui");
         //get user
         UserDto userDto = userRoleRoomDto.getUserDto();
@@ -95,7 +95,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
-    public String getEdit(@PathVariable long id, Model model, HttpServletRequest request)  throws ServerException{
+    public String getEdit(@PathVariable long id, Model model, HttpServletRequest request)  throws ServiceException{
         AuthorizedUserInfo aui = (AuthorizedUserInfo) request.getSession().getAttribute("aui");
         UserRoleRoomDto userRoleRoomDto = new UserRoleRoomDto();
         UserDto userDto = managerUserService.findUserById(id);
@@ -111,7 +111,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.POST)
-    public String saveEdit(@ModelAttribute("userRoleRoomDto") UserRoleRoomDto userRoleRoomDto, @PathVariable long id, HttpServletRequest request) throws ServerException {
+    public String saveEdit(@ModelAttribute("userRoleRoomDto") UserRoleRoomDto userRoleRoomDto, @PathVariable long id, HttpServletRequest request) throws ServiceException {
         AuthorizedUserInfo aui = (AuthorizedUserInfo) request.getSession().getAttribute("aui");
 //        //update user room
 //        managerUserService.updateUserRoom(userRoleRoomDto.getUserRoomDto());
@@ -129,7 +129,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
-    public String delete(@PathVariable long id, Model model, HttpServletRequest request)  throws ServerException{
+    public String delete(@PathVariable long id, Model model, HttpServletRequest request)  throws ServiceException{
         //delete user room
         managerUserService.deleteUserRoomByUserId(id);
         //delete user role
@@ -141,7 +141,7 @@ public class UserController {
 
 
     @RequestMapping(value = "/view/{id}", method = RequestMethod.GET)
-    public String viewUserRoleRoomDetail(@PathVariable long id, Model model, HttpServletRequest request) throws ServerException{
+    public String viewUserRoleRoomDetail(@PathVariable long id, Model model, HttpServletRequest request) throws ServiceException{
         model.addAttribute("userDto",managerUserService.findUserById(id));
         model.addAttribute("userRoleGroupDto",managerUserService.findUserRoleGroupById(id));
         model.addAttribute("userRoomDto",managerUserService.findUserRoomByUserId(id));
@@ -150,14 +150,14 @@ public class UserController {
 
     //find building
     @ModelAttribute("buildingDtoList")
-    public List<MasterBuildingDto> populateBuildingList() throws ServerException {
+    public List<MasterBuildingDto> populateBuildingList() throws ServiceException {
         return managerBuildingService.findAll();
     }
 
     //find Floor by buildingCode
     @RequestMapping(value = "/findFlorByBuildingCode/{id}", method = RequestMethod.GET, headers = "Accept=application/json", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public List<MasterFloorDto> findFlorByBuildingCode(@PathVariable long id)  throws ServerException{
+    public List<MasterFloorDto> findFlorByBuildingCode(@PathVariable long id)  throws ServiceException{
         return managerBuildingService.findAllFloorByBuildingId(id);
     }
 

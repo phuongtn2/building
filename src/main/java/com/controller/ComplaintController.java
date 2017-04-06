@@ -7,7 +7,7 @@ import com.building.dto.master.MasterServicesDto;
 import com.building.services.ComplaintService;
 import com.building.services.ServicesService;
 import com.building.services.Role;
-import com.dropbox.core.ServerException;
+import com.building.services.error.ServiceException;
 import org.apache.commons.io.IOUtils;
 import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
@@ -43,7 +43,7 @@ public class ComplaintController {
 	}
 
 	@RequestMapping(method = RequestMethod.GET)
-	public String initForm(ModelMap model) throws ServerException {
+	public String initForm(ModelMap model) throws ServiceException {
 		MasterComplaintDto complaintDto = new MasterComplaintDto();
 		//command object
 		model.addAttribute("complaintDto", complaintDto);
@@ -53,7 +53,7 @@ public class ComplaintController {
 	}
 
 	@ModelAttribute("tmComplaintList")
-	public List<TMComplaintDto> populateTMComplaintList() throws ServerException {
+	public List<TMComplaintDto> populateTMComplaintList() throws ServiceException {
 		List<TMComplaintDto> tmComplaintList = new ArrayList<TMComplaintDto>();
 		List<MasterComplaintDto> listComplaint = complaintService.findAllComplaint();
 		List<Long> complaintCodeList = new ArrayList<Long>();
@@ -105,7 +105,7 @@ public class ComplaintController {
 		}
 	}
 	@RequestMapping(method = RequestMethod.POST, params = "add")
-	public String addComplaint(@ModelAttribute("complaintDto") MasterComplaintDto complaintDto, HttpServletRequest request) throws ServerException {
+	public String addComplaint(@ModelAttribute("complaintDto") MasterComplaintDto complaintDto, HttpServletRequest request) throws ServiceException {
 		AuthorizedUserInfo aui = (AuthorizedUserInfo) request.getSession().getAttribute("aui");
 		complaintDto.setCreateId(aui.getUserId());
 		complaintService.insertComplaint(complaintDto);
@@ -114,7 +114,7 @@ public class ComplaintController {
 
 	@RequestMapping(value = "/comment",method = RequestMethod.POST, headers = "Accept=application/json", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	public TransferComplaintDto addTComplaint( HttpServletRequest request) throws ServerException, JSONException {
+	public TransferComplaintDto addTComplaint( HttpServletRequest request) throws ServiceException, JSONException {
 		try {
 			String inputJson = IOUtils.toString(request.getReader());
 			JSONObject jsonObj = new JSONObject(inputJson);
@@ -136,13 +136,13 @@ public class ComplaintController {
 
 
 	@RequestMapping(method = RequestMethod.POST, params = "reply")
-	public String addTReply(@ModelAttribute("complaintDto") MasterComplaintDto complaintDto) throws ServerException {
+	public String addTReply(@ModelAttribute("complaintDto") MasterComplaintDto complaintDto) throws ServiceException {
 		complaintService.insertComplaint(complaintDto);
 		return "redirect:/complaint";
 	}
 
 	@RequestMapping(method = RequestMethod.POST, params = "follow")
-	public String follow(@ModelAttribute("complaintDto") MasterComplaintDto complaintDto) throws ServerException {
+	public String follow(@ModelAttribute("complaintDto") MasterComplaintDto complaintDto) throws ServiceException {
 		if(complaintDto.getFollowStatus() == 0){
 			complaintDto.setFollowStatus((byte) 1);
 		}else{
@@ -154,7 +154,7 @@ public class ComplaintController {
 	}
 
 	@RequestMapping(value = "/history", method = RequestMethod.GET)
-	public String listComplaintHistory(Model model, HttpServletRequest request) throws ServerException {
+	public String listComplaintHistory(Model model, HttpServletRequest request) throws ServiceException {
 		AuthorizedUserInfo aui = (AuthorizedUserInfo) request.getSession().getAttribute("aui");
 		boolean per = aui.getRoleSet().contains(Role.ADMIN);
 		List<MasterComplaintDto> listComplaintHistory = complaintService.findAllComplaintHistory(aui,per);
@@ -169,7 +169,7 @@ public class ComplaintController {
 	}
 
 	@ModelAttribute("serviceDtoList")
-	public List<MasterServicesDto> populateServiceList() throws ServerException {
+	public List<MasterServicesDto> populateServiceList() throws ServiceException {
 		return managerMasterServicesService.findAll();
 	}
 }

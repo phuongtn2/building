@@ -11,7 +11,7 @@ import com.building.dto.master.MasterFloorDto;
 import com.building.dto.master.MasterRoomDto;
 import com.building.services.BuildingService;
 import com.building.services.UserService;
-import com.dropbox.core.ServerException;
+import com.building.services.error.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.http.MediaType;
@@ -51,7 +51,7 @@ public class ProfileController {
     }
 
     @ModelAttribute("profileDto")
-    public ProfileDto populateUserList(HttpServletRequest request) throws ServerException {
+    public ProfileDto populateUserList(HttpServletRequest request) throws ServiceException {
         AuthorizedUserInfo aui = (AuthorizedUserInfo) request.getSession().getAttribute("aui");
         ProfileDto profileDto = new ProfileDto();
         UserRoomDto userRoomDto = new UserRoomDto();
