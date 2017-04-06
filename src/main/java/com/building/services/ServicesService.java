@@ -3,7 +3,7 @@ package com.building.services;
 import com.building.dto.master.MasterAssetDto;
 import com.building.dto.master.MasterBuildingDto;
 import com.building.dto.master.MasterServicesDto;
-import com.dropbox.core.ServerException;
+import com.building.services.error.ServiceException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,10 +13,10 @@ import java.util.List;
  */
 
 public interface ServicesService {
-    long insertMasterServices(MasterServicesDto masterServicesDto) throws ServerException;
-    List<MasterServicesDto> findAll() throws ServerException;
-    MasterServicesDto findById(long id) throws ServerException;
-    void update(MasterServicesDto masterServicesDto) throws ServerException;
-    void deleteById(long id) throws ServerException;
-    List<MasterBuildingDto> findAllBuilding() throws ServerException;
+    long insertMasterServices(MasterServicesDto masterServicesDto) throws ServiceException;
+    List<MasterServicesDto> findAll() throws ServiceException;
+    MasterServicesDto findById(long id) throws ServiceException;
+    void update(MasterServicesDto masterServicesDto) throws ServiceException;
+    void deleteById(long id) throws ServiceException;
+    List<MasterBuildingDto> findAllBuilding() throws ServiceException;
 }

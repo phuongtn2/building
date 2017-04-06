@@ -1,10 +1,10 @@
 {
     "head":[
-        {"id":"serviceCode","width":"*","type":"ro","align":"left","sort":"int","value":"serviceCode"}
-        ,{"id":"serviceName", "width":"*","type":"ro","align":"left","sort":"str","value":"serviceName"}
-        ,{"id":"assetCode","width":"*","type":"ro","align":"left","sort":"int","value":"assetCode"}
-        ,{"id":"assetName", "width":"*","type":"ro","align":"left","sort":"str","value":"assetName"}
-        ,{"id":"assetPrice", "width":"*","type":"ro","align":"left","sort":"str","value":"assetPrice"}
+        {"id":"serviceCode","width":"50","type":"ch","align":"left","sort":"int","value":""}
+        ,{"id":"serviceName", "width":"100","type":"ro","align":"left","sort":"str","value":"Service Name"}
+        ,{"id":"assetCode","width":"50","type":"ro","align":"left","sort":"int","value":""}
+        ,{"id":"assetName", "width":"100","type":"ro","align":"left","sort":"str","value":"Asset Name"}
+        ,{"id":"assetPrice", "width":"90","type":"ro","align":"left","sort":"str","value":"Asset Price"}
      ],
 "rows":[]
 }

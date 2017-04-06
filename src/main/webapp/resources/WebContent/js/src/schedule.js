@@ -74,7 +74,7 @@ function ohgHIREScheduleObject() {
 
         // インターバル（定期実行）処理
         def.done(function(){
-            intervalID = setInterval(that.refresh, INTERVAL_TIME);
+            //intervalID = setInterval(that.refresh, INTERVAL_TIME);
             //resetDhxFormItemValues(schdForm);
         });
 
@@ -597,7 +597,7 @@ function ohgHIREScheduleObject() {
                     servicesAssets.init();
                     break;
                 case "assets":
-                    _ghWins.doServiceAsset(schdForm.getInput("code"), schdForm.getInput("name"), schdForm, "Assets");
+                    _ghWins.doServiceAsset(schdForm.getInput("assetCode"), schdForm.getInput("assetName"), schdForm, "Assets");
                     break;
             }
         });
